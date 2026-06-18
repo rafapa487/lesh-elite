@@ -1,0 +1,1119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f6f50">
+  <meta name="description" content="Lesh Elite Prediction System forecasts football outcomes, goals, corners, bookings and live match probabilities.">
+  <title>Lesh Elite Prediction System</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <style>
+    :root {
+      --ink: #151515;
+      --muted: #65645f;
+      --paper: #f6f3ec;
+      --panel: #fffdf7;
+      --line: #d7d0c0;
+      --green: #0f6f50;
+      --grass: #176b49;
+      --gold: #c79a22;
+      --red: #a63d35;
+      --blue: #27698d;
+      --shadow: 0 16px 36px rgba(38, 34, 26, .12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(21, 21, 21, .035) 1px, transparent 1px) 0 0 / 44px 44px,
+        linear-gradient(0deg, rgba(21, 21, 21, .035) 1px, transparent 1px) 0 0 / 44px 44px,
+        var(--paper);
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(320px, 400px) 1fr;
+    }
+
+    aside {
+      background: #fdfaf1;
+      border-right: 1px solid var(--line);
+      padding: 22px;
+      overflow-y: auto;
+      max-height: 100vh;
+    }
+
+    main {
+      padding: 22px;
+      overflow: hidden;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .crest {
+      width: 46px;
+      height: 46px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(from 130deg, var(--green), #1d9a68, var(--gold), var(--green));
+      color: white;
+      font-weight: 900;
+      letter-spacing: 0;
+      box-shadow: inset 0 0 0 3px rgba(255,255,255,.38);
+    }
+
+    h1 {
+      font-size: 1.14rem;
+      line-height: 1.1;
+      margin: 0;
+      letter-spacing: 0;
+    }
+
+    .subhead {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    .section {
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+      margin-top: 16px;
+    }
+
+    .section h2 {
+      margin: 0 0 12px;
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #57544f;
+    }
+
+    .team-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    label {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: .78rem;
+      margin-bottom: 12px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: white;
+      color: var(--ink);
+      padding: 8px 10px;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(15, 111, 80, .13);
+    }
+
+    .slider {
+      display: grid;
+      grid-template-columns: 1fr 54px;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .slider label { margin: 0; }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--green);
+    }
+
+    .value-pill {
+      min-height: 30px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: white;
+      font-weight: 800;
+      color: #2d2b28;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 44px;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .primary,
+    .icon-button {
+      border: 0;
+      border-radius: 6px;
+      background: var(--ink);
+      color: white;
+      min-height: 42px;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .icon-button {
+      background: var(--green);
+      font-size: 1.1rem;
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 18px;
+      height: calc(100vh - 44px);
+      min-height: 720px;
+    }
+
+    .left-stack,
+    .right-stack {
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .hero-panel {
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
+      border: 1px solid #0d4f39;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      background: var(--grass);
+      color: white;
+    }
+
+    .pitch {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at center, transparent 0 52px, rgba(255,255,255,.5) 53px 55px, transparent 56px),
+        linear-gradient(90deg, transparent 49.6%, rgba(255,255,255,.55) 49.7% 50.3%, transparent 50.4%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.06) 0 9%, rgba(0,0,0,.04) 9% 18%),
+        var(--grass);
+    }
+
+    .pitch::before,
+    .pitch::after {
+      content: "";
+      position: absolute;
+      top: 25%;
+      width: 13%;
+      height: 50%;
+      border: 2px solid rgba(255,255,255,.52);
+    }
+
+    .pitch::before {
+      left: -2px;
+      border-left: 0;
+    }
+
+    .pitch::after {
+      right: -2px;
+      border-right: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 22px;
+      display: grid;
+      gap: 20px;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(10, 30, 24, .75), rgba(10, 30, 24, .18));
+    }
+
+    .match-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .match-title h2 {
+      margin: 0;
+      font-size: clamp(1.45rem, 2.8vw, 2.8rem);
+      line-height: 1.02;
+      letter-spacing: 0;
+      max-width: 760px;
+    }
+
+    .confidence {
+      min-width: 112px;
+      border: 1px solid rgba(255,255,255,.36);
+      border-radius: 8px;
+      padding: 10px;
+      background: rgba(255,255,255,.13);
+      text-align: center;
+      backdrop-filter: blur(6px);
+    }
+
+    .confidence strong {
+      display: block;
+      font-size: 1.85rem;
+      line-height: 1;
+    }
+
+    .market-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      align-self: end;
+    }
+
+    .market {
+      border: 1px solid rgba(255,255,255,.3);
+      background: rgba(255,255,255,.14);
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 86px;
+    }
+
+    .market span {
+      display: block;
+      color: rgba(255,255,255,.78);
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .market strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 1.45rem;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+
+    .panel h3 {
+      margin: 0 0 14px;
+      font-size: .98rem;
+    }
+
+    .prob-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .prob {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      padding: 12px;
+      min-height: 92px;
+    }
+
+    .prob span,
+    .small {
+      display: block;
+      color: var(--muted);
+      font-size: .76rem;
+    }
+
+    .prob strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 1.7rem;
+    }
+
+    .bar {
+      height: 8px;
+      background: #ece6d8;
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .bar i {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: var(--green);
+      border-radius: inherit;
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+
+    .score-cell {
+      aspect-ratio: 1 / .74;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: white;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 4px;
+      font-size: .74rem;
+      color: var(--muted);
+    }
+
+    .score-cell b {
+      display: block;
+      color: var(--ink);
+      font-size: .95rem;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      padding: 12px;
+      min-height: 84px;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 1.38rem;
+    }
+
+    .insight-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .insight-list li {
+      display: grid;
+      grid-template-columns: 10px 1fr;
+      gap: 10px;
+      align-items: start;
+      font-size: .88rem;
+      line-height: 1.35;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 99px;
+      margin-top: 4px;
+      background: var(--gold);
+    }
+
+    .dot.red { background: var(--red); }
+    .dot.blue { background: var(--blue); }
+    .dot.green { background: var(--green); }
+
+    .weights {
+      display: grid;
+      gap: 10px;
+    }
+
+    .weight-row {
+      display: grid;
+      grid-template-columns: 112px 1fr 42px;
+      gap: 10px;
+      align-items: center;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .weight-track {
+      height: 9px;
+      background: #ece6d8;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .weight-track i {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: var(--blue);
+    }
+
+    .live-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    @media (max-width: 1040px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        max-height: none;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .dashboard {
+        height: auto;
+        min-height: 0;
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      aside,
+      main {
+        padding: 14px;
+      }
+
+      .team-row,
+      .prob-grid,
+      .market-strip,
+      .metrics,
+      .live-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .match-title {
+        display: grid;
+      }
+
+      .confidence {
+        width: 100%;
+      }
+
+      .score-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside>
+      <div class="brand">
+        <div class="crest" aria-hidden="true">LE</div>
+        <div>
+          <h1>Lesh Elite Prediction System</h1>
+          <p class="subhead">Outcome, goals, corners, bookings and live match probabilities.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Fixture</h2>
+        <div class="team-row">
+          <label>Country / region
+            <select id="countrySelect"></select>
+          </label>
+          <label>League
+            <select id="leagueSelect"></select>
+          </label>
+        </div>
+        <div class="team-row">
+          <label>Home team
+            <select id="homeSelect"></select>
+          </label>
+          <label>Away team
+            <select id="awaySelect"></select>
+          </label>
+        </div>
+        <input id="homeName" type="hidden" value="Arsenal">
+        <input id="awayName" type="hidden" value="Liverpool">
+        <input id="homeXg" type="hidden" value="1.85">
+        <input id="awayXg" type="hidden" value="1.78">
+        <input id="homeElo" type="hidden" value="1885">
+        <input id="awayElo" type="hidden" value="1875">
+      </div>
+
+      <div class="section">
+        <h2>Match Intelligence</h2>
+        <div class="slider"><label>Attacking pressure <input id="pressure" type="range" min="0" max="100" value="66"></label><div class="value-pill" data-for="pressure">66</div></div>
+        <div class="slider"><label>Defensive weakness <input id="weakness" type="range" min="0" max="100" value="42"></label><div class="value-pill" data-for="weakness">42</div></div>
+        <div class="slider"><label>Match tempo <input id="tempo" type="range" min="0" max="100" value="58"></label><div class="value-pill" data-for="tempo">58</div></div>
+        <div class="slider"><label>Aggression index <input id="aggression" type="range" min="0" max="100" value="54"></label><div class="value-pill" data-for="aggression">54</div></div>
+        <div class="slider"><label>Referee strictness <input id="referee" type="range" min="0" max="100" value="61"></label><div class="value-pill" data-for="referee">61</div></div>
+      </div>
+
+      <div class="section">
+        <h2>Live State</h2>
+        <div class="team-row">
+          <label>Minute
+            <input id="minute" type="number" min="0" max="120" step="1" value="0">
+          </label>
+          <label>Mode
+            <select id="mode">
+              <option value="pre">Pre-match</option>
+              <option value="live">Live probability</option>
+            </select>
+          </label>
+        </div>
+        <div class="team-row">
+          <label>Home goals
+            <input id="homeGoals" type="number" min="0" max="12" step="1" value="0">
+          </label>
+          <label>Away goals
+            <input id="awayGoals" type="number" min="0" max="12" step="1" value="0">
+          </label>
+        </div>
+        <div class="actions">
+          <button class="primary" id="runModel">Update Prediction</button>
+          <button class="icon-button" id="randomize" title="Load sample fixture" aria-label="Load sample fixture">R</button>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <div class="dashboard">
+        <div class="left-stack">
+          <section class="hero-panel">
+            <div class="pitch" aria-hidden="true"></div>
+            <div class="hero-content">
+              <div class="match-title">
+                <div>
+                  <p class="subhead" style="color:rgba(255,255,255,.8);margin-bottom:8px;">Lesh Elite match forecast</p>
+                  <h2 id="fixtureTitle">Lesh United vs Metro FC</h2>
+                </div>
+                <div class="confidence">
+                  <span class="small" style="color:rgba(255,255,255,.78);">Confidence</span>
+                  <strong id="confidence">74</strong>
+                </div>
+              </div>
+              <div class="market-strip">
+                <div class="market"><span>Model pick</span><strong id="modelPick">Home Win</strong></div>
+                <div class="market"><span>Goals line</span><strong id="goalsLine">Over 2.5</strong></div>
+                <div class="market"><span>Live tilt</span><strong id="liveTilt">Home +12%</strong></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <h3>Outcome Probabilities</h3>
+            <div class="prob-grid">
+              <div class="prob"><span id="homeProbLabel">Home</span><strong id="homeProb">48%</strong><div class="bar"><i id="homeBar"></i></div></div>
+              <div class="prob"><span>Draw</span><strong id="drawProb">25%</strong><div class="bar"><i id="drawBar"></i></div></div>
+              <div class="prob"><span id="awayProbLabel">Away</span><strong id="awayProb">27%</strong><div class="bar"><i id="awayBar"></i></div></div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <h3>Likely Scorelines</h3>
+            <div class="score-grid" id="scoreGrid"></div>
+          </section>
+        </div>
+
+        <div class="right-stack">
+          <section class="panel">
+            <h3>Goals, Corners and Bookings</h3>
+            <div class="metrics">
+              <div class="metric"><span class="small">Total goals projection</span><strong id="expectedGoals">2.97</strong></div>
+              <div class="metric"><span class="small">BTTS probability</span><strong id="btts">56%</strong></div>
+              <div class="metric"><span class="small">Expected corners</span><strong id="corners">10.2</strong></div>
+              <div class="metric"><span class="small">Expected bookings</span><strong id="bookings">4.8</strong></div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <h3>Live Football Probabilities</h3>
+            <div class="live-grid">
+              <div class="metric"><span class="small">Next goal home</span><strong id="nextHome">52%</strong></div>
+              <div class="metric"><span class="small">No more goals</span><strong id="noMore">21%</strong></div>
+              <div class="metric"><span class="small">Next goal away</span><strong id="nextAway">27%</strong></div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <h3>Prediction Notes</h3>
+            <ul class="insight-list" id="insights"></ul>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const team = (name, attack, strength) => ({ name, attack, strength });
+    const WORLD_LEAGUES = {
+      "England": {
+        "Premier League": [
+          team("Arsenal", 1.85, 1885), team("Aston Villa", 1.55, 1765), team("Bournemouth", 1.30, 1665),
+          team("Brentford", 1.24, 1645), team("Brighton", 1.50, 1720), team("Chelsea", 1.72, 1810),
+          team("Crystal Palace", 1.25, 1660), team("Everton", 1.08, 1605), team("Fulham", 1.22, 1640),
+          team("Liverpool", 1.78, 1875), team("Manchester City", 2.05, 1940), team("Manchester United", 1.52, 1760),
+          team("Newcastle United", 1.65, 1785), team("Nottingham Forest", 1.20, 1625), team("Tottenham Hotspur", 1.68, 1790),
+          team("West Ham United", 1.28, 1668), team("Wolverhampton", 1.16, 1620)
+        ],
+        "Championship": [
+          team("Leeds United", 1.58, 1705), team("Leicester City", 1.54, 1690), team("Southampton", 1.45, 1665),
+          team("Sunderland", 1.32, 1605), team("Middlesbrough", 1.28, 1585), team("West Bromwich Albion", 1.30, 1595),
+          team("Norwich City", 1.26, 1570), team("Coventry City", 1.24, 1560), team("Bristol City", 1.16, 1515),
+          team("Cardiff City", 1.08, 1485), team("Swansea City", 1.10, 1495), team("Stoke City", 1.12, 1500)
+        ]
+      },
+      "Spain": {
+        "La Liga": [
+          team("Real Madrid", 2.02, 1935), team("Barcelona", 1.94, 1905), team("Atletico Madrid", 1.70, 1840),
+          team("Athletic Club", 1.50, 1765), team("Real Sociedad", 1.44, 1740), team("Villarreal", 1.48, 1730),
+          team("Real Betis", 1.33, 1685), team("Sevilla", 1.22, 1640), team("Valencia", 1.20, 1635),
+          team("Celta Vigo", 1.16, 1605), team("Getafe", 0.98, 1550), team("Mallorca", 1.02, 1560)
+        ],
+        "Segunda Division": [
+          team("Real Valladolid", 1.34, 1605), team("Espanyol", 1.36, 1620), team("Eibar", 1.28, 1575),
+          team("Sporting Gijon", 1.20, 1545), team("Real Zaragoza", 1.16, 1520), team("Tenerife", 1.12, 1505)
+        ]
+      },
+      "Italy": {
+        "Serie A": [
+          team("Inter", 1.90, 1900), team("AC Milan", 1.68, 1835), team("Juventus", 1.62, 1815),
+          team("Napoli", 1.70, 1830), team("Atalanta", 1.78, 1845), team("Roma", 1.48, 1755),
+          team("Lazio", 1.42, 1735), team("Fiorentina", 1.40, 1715), team("Bologna", 1.34, 1695),
+          team("Torino", 1.12, 1610), team("Genoa", 1.08, 1585), team("Udinese", 1.04, 1565)
+        ]
+      },
+      "Germany": {
+        "Bundesliga": [
+          team("Bayern Munich", 2.15, 1945), team("Bayer Leverkusen", 1.98, 1910), team("Borussia Dortmund", 1.82, 1845),
+          team("RB Leipzig", 1.78, 1835), team("Stuttgart", 1.64, 1765), team("Eintracht Frankfurt", 1.42, 1700),
+          team("Wolfsburg", 1.24, 1635), team("Freiburg", 1.26, 1645), team("Mainz", 1.14, 1585),
+          team("Werder Bremen", 1.18, 1595), team("Union Berlin", 1.06, 1565), team("Augsburg", 1.08, 1570)
+        ]
+      },
+      "France": {
+        "Ligue 1": [
+          team("Paris Saint-Germain", 2.05, 1915), team("Marseille", 1.58, 1760), team("Monaco", 1.70, 1795),
+          team("Lille", 1.48, 1735), team("Lyon", 1.44, 1710), team("Nice", 1.30, 1685),
+          team("Rennes", 1.34, 1680), team("Lens", 1.28, 1665), team("Strasbourg", 1.12, 1585),
+          team("Nantes", 1.04, 1545), team("Montpellier", 1.06, 1540), team("Toulouse", 1.10, 1560)
+        ]
+      },
+      "Netherlands": {
+        "Eredivisie": [
+          team("PSV Eindhoven", 2.00, 1865), team("Ajax", 1.72, 1790), team("Feyenoord", 1.86, 1840),
+          team("AZ Alkmaar", 1.58, 1735), team("Twente", 1.46, 1705), team("Utrecht", 1.34, 1645),
+          team("Heerenveen", 1.18, 1575), team("Groningen", 1.12, 1545)
+        ]
+      },
+      "Portugal": {
+        "Primeira Liga": [
+          team("Benfica", 1.90, 1855), team("Porto", 1.82, 1835), team("Sporting CP", 1.95, 1870),
+          team("Braga", 1.55, 1740), team("Vitoria Guimaraes", 1.32, 1645), team("Boavista", 1.06, 1540)
+        ]
+      },
+      "Scotland": {
+        "Premiership": [
+          team("Celtic", 1.95, 1815), team("Rangers", 1.82, 1785), team("Aberdeen", 1.28, 1605),
+          team("Hearts", 1.30, 1610), team("Hibernian", 1.18, 1560), team("Dundee United", 1.04, 1500)
+        ]
+      },
+      "Turkey": {
+        "Super Lig": [
+          team("Galatasaray", 1.82, 1810), team("Fenerbahce", 1.86, 1820), team("Besiktas", 1.54, 1720),
+          team("Trabzonspor", 1.42, 1685), team("Basaksehir", 1.26, 1610), team("Adana Demirspor", 1.16, 1560)
+        ]
+      },
+      "Brazil": {
+        "Serie A": [
+          team("Flamengo", 1.78, 1815), team("Palmeiras", 1.72, 1805), team("Fluminense", 1.42, 1695),
+          team("Sao Paulo", 1.36, 1685), team("Corinthians", 1.20, 1625), team("Botafogo", 1.46, 1710),
+          team("Atletico Mineiro", 1.50, 1725), team("Gremio", 1.32, 1665), team("Internacional", 1.30, 1660),
+          team("Cruzeiro", 1.18, 1600), team("Santos", 1.22, 1605), team("Vasco da Gama", 1.10, 1555)
+        ]
+      },
+      "Argentina": {
+        "Primera Division": [
+          team("River Plate", 1.66, 1785), team("Boca Juniors", 1.48, 1745), team("Racing Club", 1.42, 1710),
+          team("Independiente", 1.22, 1620), team("San Lorenzo", 1.18, 1605), team("Estudiantes", 1.30, 1660),
+          team("Velez Sarsfield", 1.28, 1645), team("Rosario Central", 1.16, 1585)
+        ]
+      },
+      "United States": {
+        "MLS": [
+          team("Inter Miami", 1.74, 1735), team("Los Angeles FC", 1.62, 1715), team("LA Galaxy", 1.48, 1665),
+          team("Seattle Sounders", 1.42, 1655), team("Atlanta United", 1.30, 1610), team("New York City FC", 1.34, 1625),
+          team("New York Red Bulls", 1.28, 1605), team("Columbus Crew", 1.52, 1685), team("FC Cincinnati", 1.46, 1660),
+          team("Orlando City", 1.32, 1615), team("Portland Timbers", 1.30, 1600), team("Toronto FC", 1.10, 1535)
+        ]
+      },
+      "Mexico": {
+        "Liga MX": [
+          team("Club America", 1.70, 1765), team("Tigres UANL", 1.58, 1725), team("Monterrey", 1.62, 1735),
+          team("Cruz Azul", 1.50, 1705), team("Pumas UNAM", 1.32, 1630), team("Guadalajara", 1.34, 1640),
+          team("Toluca", 1.42, 1665), team("Pachuca", 1.36, 1650)
+        ]
+      },
+      "South Africa": {
+        "Premier Division": [
+          team("Mamelodi Sundowns", 1.72, 1745), team("Orlando Pirates", 1.42, 1655), team("Kaizer Chiefs", 1.30, 1625),
+          team("SuperSport United", 1.24, 1585), team("Cape Town City", 1.22, 1575), team("Stellenbosch", 1.28, 1605),
+          team("AmaZulu", 1.08, 1515), team("Sekhukhune United", 1.12, 1535)
+        ]
+      },
+      "Egypt": {
+        "Premier League": [
+          team("Al Ahly", 1.75, 1765), team("Zamalek", 1.50, 1685), team("Pyramids FC", 1.56, 1705),
+          team("Al Masry", 1.18, 1580), team("Ismaily", 1.06, 1515), team("ENPPI", 1.08, 1525)
+        ]
+      },
+      "Morocco": {
+        "Botola Pro": [
+          team("Wydad AC", 1.48, 1675), team("Raja CA", 1.46, 1670), team("FAR Rabat", 1.44, 1665),
+          team("RS Berkane", 1.32, 1625), team("FUS Rabat", 1.18, 1565), team("Moghreb Tetouan", 1.02, 1505)
+        ]
+      },
+      "Saudi Arabia": {
+        "Saudi Pro League": [
+          team("Al Hilal", 1.95, 1845), team("Al Nassr", 1.86, 1815), team("Al Ittihad", 1.62, 1745),
+          team("Al Ahli", 1.58, 1730), team("Al Shabab", 1.34, 1645), team("Al Ettifaq", 1.22, 1585)
+        ]
+      },
+      "Japan": {
+        "J1 League": [
+          team("Vissel Kobe", 1.54, 1695), team("Yokohama F. Marinos", 1.58, 1705), team("Kawasaki Frontale", 1.50, 1685),
+          team("Urawa Red Diamonds", 1.38, 1645), team("Sanfrecce Hiroshima", 1.46, 1675), team("Cerezo Osaka", 1.26, 1605)
+        ]
+      },
+      "South Korea": {
+        "K League 1": [
+          team("Ulsan HD", 1.54, 1700), team("Jeonbuk Hyundai Motors", 1.42, 1665), team("Pohang Steelers", 1.40, 1655),
+          team("FC Seoul", 1.26, 1605), team("Suwon FC", 1.14, 1545), team("Daegu FC", 1.10, 1535)
+        ]
+      },
+      "Australia": {
+        "A-League Men": [
+          team("Melbourne City", 1.52, 1665), team("Sydney FC", 1.42, 1640), team("Melbourne Victory", 1.38, 1625),
+          team("Western Sydney Wanderers", 1.24, 1575), team("Adelaide United", 1.34, 1605), team("Central Coast Mariners", 1.48, 1655)
+        ]
+      }
+    };
+
+    const ids = [
+      "countrySelect", "leagueSelect", "homeSelect", "awaySelect", "homeName", "awayName", "homeXg", "awayXg", "homeElo", "awayElo", "pressure",
+      "weakness", "tempo", "aggression", "referee", "minute", "mode", "homeGoals", "awayGoals"
+    ];
+
+    const state = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
+    const output = (id) => document.getElementById(id);
+    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+    const pct = (value) => `${Math.round(value * 100)}%`;
+
+    function poisson(lambda, k) {
+      let factorial = 1;
+      for (let i = 2; i <= k; i++) factorial *= i;
+      return Math.exp(-lambda) * Math.pow(lambda, k) / factorial;
+    }
+
+    function dixonColesAdjust(homeGoals, awayGoals, homeLambda, awayLambda, rho) {
+      if (homeGoals === 0 && awayGoals === 0) return 1 - homeLambda * awayLambda * rho;
+      if (homeGoals === 0 && awayGoals === 1) return 1 + homeLambda * rho;
+      if (homeGoals === 1 && awayGoals === 0) return 1 + awayLambda * rho;
+      if (homeGoals === 1 && awayGoals === 1) return 1 - rho;
+      return 1;
+    }
+
+    function seedFrom(values) {
+      let hash = 2166136261;
+      values.join("|").split("").forEach((char) => {
+        hash ^= char.charCodeAt(0);
+        hash = Math.imul(hash, 16777619);
+      });
+      return hash >>> 0;
+    }
+
+    function mulberry32(seed) {
+      return function random() {
+        let value = seed += 0x6D2B79F5;
+        value = Math.imul(value ^ value >>> 15, value | 1);
+        value ^= value + Math.imul(value ^ value >>> 7, value | 61);
+        return ((value ^ value >>> 14) >>> 0) / 4294967296;
+      };
+    }
+
+    function samplePoisson(lambda, random) {
+      const limit = Math.exp(-lambda);
+      let count = 0;
+      let product = 1;
+      do {
+        count++;
+        product *= random();
+      } while (product > limit);
+      return count - 1;
+    }
+
+    function setOptions(select, options, selectedValue) {
+      select.innerHTML = options.map((option) => `<option value="${option}">${option}</option>`).join("");
+      if (selectedValue && options.includes(selectedValue)) select.value = selectedValue;
+    }
+
+    function selectedLeagueTeams() {
+      return WORLD_LEAGUES[state.countrySelect.value][state.leagueSelect.value];
+    }
+
+    function applyTeamProfile(side, selectedName) {
+      const teams = selectedLeagueTeams();
+      const picked = teams.find((item) => item.name === selectedName) || teams[0];
+      state[`${side}Name`].value = picked.name;
+      state[`${side}Xg`].value = picked.attack;
+      state[`${side}Elo`].value = picked.strength;
+    }
+
+    function syncTeamProfiles() {
+      const teams = selectedLeagueTeams();
+      if (state.homeSelect.value === state.awaySelect.value && teams.length > 1) {
+        state.awaySelect.value = teams.find((item) => item.name !== state.homeSelect.value).name;
+      }
+      applyTeamProfile("home", state.homeSelect.value);
+      applyTeamProfile("away", state.awaySelect.value);
+    }
+
+    function loadLeague(country, league, homeTeam, awayTeam) {
+      const countries = Object.keys(WORLD_LEAGUES);
+      setOptions(state.countrySelect, countries, country || countries[0]);
+      const leagues = Object.keys(WORLD_LEAGUES[state.countrySelect.value]);
+      setOptions(state.leagueSelect, leagues, league || leagues[0]);
+      const teams = selectedLeagueTeams().map((item) => item.name);
+      setOptions(state.homeSelect, teams, homeTeam || teams[0]);
+      setOptions(state.awaySelect, teams, awayTeam || teams[1] || teams[0]);
+      syncTeamProfiles();
+      calculate();
+    }
+
+    function loadCountryLeagues() {
+      const leagues = Object.keys(WORLD_LEAGUES[state.countrySelect.value]);
+      setOptions(state.leagueSelect, leagues, leagues[0]);
+      loadLeague(state.countrySelect.value, state.leagueSelect.value);
+    }
+
+    function loadLeagueTeams() {
+      const teams = selectedLeagueTeams().map((item) => item.name);
+      setOptions(state.homeSelect, teams, teams[0]);
+      setOptions(state.awaySelect, teams, teams[1] || teams[0]);
+      syncTeamProfiles();
+      calculate();
+    }
+
+    function calculate() {
+      const homeName = state.homeName.value.trim() || "Home";
+      const awayName = state.awayName.value.trim() || "Away";
+      const homeXg = Number(state.homeXg.value) || 1.4;
+      const awayXg = Number(state.awayXg.value) || 1.1;
+      const homeElo = Number(state.homeElo.value) || 1500;
+      const awayElo = Number(state.awayElo.value) || 1500;
+      const pressure = Number(state.pressure.value) / 100;
+      const weakness = Number(state.weakness.value) / 100;
+      const tempo = Number(state.tempo.value) / 100;
+      const aggression = Number(state.aggression.value) / 100;
+      const referee = Number(state.referee.value) / 100;
+      const minute = clamp(Number(state.minute.value) || 0, 0, 120);
+      const live = state.mode.value === "live";
+      const homeGoals = live ? Math.max(0, Number(state.homeGoals.value) || 0) : 0;
+      const awayGoals = live ? Math.max(0, Number(state.awayGoals.value) || 0) : 0;
+      const remaining = live ? clamp((96 - minute) / 96, 0, 1) : 1;
+
+      const eloHomeWin = 1 / (1 + Math.pow(10, ((awayElo - (homeElo + 65)) / 400)));
+      const eloSwing = (eloHomeWin - 0.5) * 0.58;
+      const tempoBoost = 0.82 + tempo * 0.36;
+      const pressureBoost = 0.9 + pressure * 0.28;
+      const weaknessBoost = 0.9 + weakness * 0.34;
+      const disciplineDrag = 1 - aggression * referee * 0.08;
+      const baseHomeLambda = clamp(homeXg * tempoBoost * pressureBoost * (1 + eloSwing) * (0.96 + weakness * 0.14) * disciplineDrag, 0.05, 5.8);
+      const baseAwayLambda = clamp(awayXg * tempoBoost * weaknessBoost * (1 - eloSwing * 0.82) * (1.03 - pressure * 0.11) * disciplineDrag, 0.05, 5.8);
+      const homeLambda = baseHomeLambda * remaining;
+      const awayLambda = baseAwayLambda * remaining;
+      const rho = -0.09 + (tempo - 0.5) * 0.05;
+
+      let homeWin = 0, draw = 0, awayWin = 0, over25 = 0, btts = 0;
+      const scores = [];
+
+      for (let h = 0; h <= 8; h++) {
+        for (let a = 0; a <= 8; a++) {
+          const adjusted = Math.max(0.01, dixonColesAdjust(h, a, homeLambda, awayLambda, rho));
+          const probability = poisson(homeLambda, h) * poisson(awayLambda, a) * adjusted;
+          const finalHome = h + homeGoals;
+          const finalAway = a + awayGoals;
+          if (finalHome > finalAway) homeWin += probability;
+          else if (finalHome === finalAway) draw += probability;
+          else awayWin += probability;
+          if (finalHome + finalAway > 2.5) over25 += probability;
+          if (finalHome > 0 && finalAway > 0) btts += probability;
+          scores.push({ h: finalHome, a: finalAway, p: probability });
+        }
+      }
+
+      const total = homeWin + draw + awayWin;
+      homeWin /= total;
+      draw /= total;
+      awayWin /= total;
+      over25 = clamp(over25, 0, 1);
+      btts = clamp(btts, 0, 1);
+
+      const random = mulberry32(seedFrom([
+        homeName, awayName, homeXg, awayXg, homeElo, awayElo, pressure,
+        weakness, tempo, aggression, referee, minute, homeGoals, awayGoals, state.mode.value
+      ]));
+      const simulations = 30000;
+      const simulated = { home: 0, draw: 0, away: 0, over25: 0, btts: 0 };
+      for (let i = 0; i < simulations; i++) {
+        const simHome = homeGoals + samplePoisson(homeLambda, random);
+        const simAway = awayGoals + samplePoisson(awayLambda, random);
+        if (simHome > simAway) simulated.home++;
+        else if (simHome === simAway) simulated.draw++;
+        else simulated.away++;
+        if (simHome + simAway > 2.5) simulated.over25++;
+        if (simHome > 0 && simAway > 0) simulated.btts++;
+      }
+
+      const mcHome = simulated.home / simulations;
+      const mcDraw = simulated.draw / simulations;
+      const mcAway = simulated.away / simulations;
+      const mcOver25 = simulated.over25 / simulations;
+      const mcBtts = simulated.btts / simulations;
+      homeWin = homeWin * 0.72 + mcHome * 0.28;
+      draw = draw * 0.72 + mcDraw * 0.28;
+      awayWin = awayWin * 0.72 + mcAway * 0.28;
+      over25 = over25 * 0.72 + mcOver25 * 0.28;
+      btts = btts * 0.72 + mcBtts * 0.28;
+
+      const expectedGoals = homeGoals + awayGoals + homeLambda + awayLambda;
+      const expectedCorners = 7.1 + tempo * 2.2 + pressure * 1.7 + weakness * 1.15 + Math.abs(homeLambda - awayLambda) * 0.55;
+      const expectedBookings = 2.2 + aggression * 2.15 + referee * 1.7 + (1 - tempo) * 0.4 + (live && Math.abs(homeGoals - awayGoals) <= 1 ? 0.35 : 0);
+      const nextHome = remaining <= 0 ? 0 : homeLambda / (homeLambda + awayLambda + 0.0001) * (1 - Math.exp(-(homeLambda + awayLambda)));
+      const nextAway = remaining <= 0 ? 0 : awayLambda / (homeLambda + awayLambda + 0.0001) * (1 - Math.exp(-(homeLambda + awayLambda)));
+      const noMore = clamp(Math.exp(-(homeLambda + awayLambda)), 0, 1);
+      const probs = [
+        { label: `${homeName} win`, value: homeWin },
+        { label: "Draw", value: draw },
+        { label: `${awayName} win`, value: awayWin }
+      ];
+      const pick = [...probs].sort((a, b) => b.value - a.value)[0];
+      const confidence = clamp(54 + (pick.value - 0.34) * 74 + Math.abs(baseHomeLambda - baseAwayLambda) * 5, 48, 94);
+      const tilt = homeWin - awayWin;
+
+      scores.sort((a, b) => b.p - a.p);
+
+      output("fixtureTitle").textContent = `${homeName} vs ${awayName}`;
+      output("confidence").textContent = Math.round(confidence);
+      output("modelPick").textContent = pick.label;
+      output("goalsLine").textContent = over25 >= 0.52 ? "Over 2.5" : "Under 2.5";
+      output("liveTilt").textContent = `${tilt >= 0 ? "Home" : "Away"} +${Math.round(Math.abs(tilt) * 100)}%`;
+      output("homeProbLabel").textContent = homeName;
+      output("awayProbLabel").textContent = awayName;
+      output("homeProb").textContent = pct(homeWin);
+      output("drawProb").textContent = pct(draw);
+      output("awayProb").textContent = pct(awayWin);
+      output("homeBar").style.width = pct(homeWin);
+      output("drawBar").style.width = pct(draw);
+      output("awayBar").style.width = pct(awayWin);
+      output("expectedGoals").textContent = expectedGoals.toFixed(2);
+      output("btts").textContent = pct(btts);
+      output("corners").textContent = expectedCorners.toFixed(1);
+      output("bookings").textContent = expectedBookings.toFixed(1);
+      output("nextHome").textContent = pct(nextHome);
+      output("nextAway").textContent = pct(nextAway);
+      output("noMore").textContent = pct(noMore);
+
+      output("scoreGrid").innerHTML = scores.slice(0, 10).map((s) => `
+        <div class="score-cell"><div><b>${s.h}-${s.a}</b>${pct(s.p)}</div></div>
+      `).join("");
+
+      const insightData = [
+        { color: "green", text: `${pick.label} is the strongest match outcome at ${pct(pick.value)} confidence in the current forecast.` },
+        { color: "blue", text: `Goals market leans ${over25 >= 0.52 ? "Over 2.5" : "Under 2.5"} with BTTS at ${pct(btts)}.` },
+        { color: "red", text: `Cards projection is ${expectedBookings.toFixed(1)}, so booking risk is ${expectedBookings >= 5 ? "high" : "moderate"}.` },
+        { color: "gold", text: live ? `At minute ${minute}, the current score is ${homeGoals}-${awayGoals} and the forecast has been updated live.` : `Pre-match forecast is ready for outcome, goals, corners and bookings.` }
+      ];
+      output("insights").innerHTML = insightData.map((item) => `
+        <li><span class="dot ${item.color}"></span><span>${item.text}</span></li>
+      `).join("");
+    }
+
+    function randomFixture() {
+      const countries = Object.keys(WORLD_LEAGUES);
+      const country = countries[Math.floor(Math.random() * countries.length)];
+      const leagues = Object.keys(WORLD_LEAGUES[country]);
+      const league = leagues[Math.floor(Math.random() * leagues.length)];
+      const teams = WORLD_LEAGUES[country][league].map((item) => item.name);
+      const homeTeam = teams[Math.floor(Math.random() * teams.length)];
+      const awayPool = teams.filter((item) => item !== homeTeam);
+      const awayTeam = awayPool[Math.floor(Math.random() * awayPool.length)] || teams[0];
+      loadLeague(country, league, homeTeam, awayTeam);
+      state.pressure.value = Math.round(38 + Math.random() * 42);
+      state.weakness.value = Math.round(32 + Math.random() * 38);
+      state.tempo.value = Math.round(36 + Math.random() * 42);
+      state.aggression.value = Math.round(35 + Math.random() * 44);
+      state.referee.value = Math.round(38 + Math.random() * 42);
+      document.querySelectorAll(".value-pill").forEach((pill) => {
+        const input = state[pill.dataset.for];
+        pill.textContent = input.value;
+      });
+      calculate();
+    }
+
+    state.countrySelect.addEventListener("change", loadCountryLeagues);
+    state.leagueSelect.addEventListener("change", loadLeagueTeams);
+    state.homeSelect.addEventListener("change", () => {
+      syncTeamProfiles();
+      calculate();
+    });
+    state.awaySelect.addEventListener("change", () => {
+      syncTeamProfiles();
+      calculate();
+    });
+
+    document.querySelectorAll("input, select").forEach((element) => {
+      if (["countrySelect", "leagueSelect", "homeSelect", "awaySelect"].includes(element.id)) return;
+      element.addEventListener("input", calculate);
+      element.addEventListener("change", calculate);
+    });
+
+    document.querySelectorAll(".value-pill").forEach((pill) => {
+      const input = state[pill.dataset.for];
+      input.addEventListener("input", () => pill.textContent = input.value);
+    });
+
+    document.getElementById("runModel").addEventListener("click", calculate);
+    document.getElementById("randomize").addEventListener("click", randomFixture);
+    loadLeague("England", "Premier League", "Arsenal", "Liverpool");
+
+    if ("serviceWorker" in navigator && location.protocol !== "file:") {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js").catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
