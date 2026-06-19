@@ -483,6 +483,44 @@
       gap: 10px;
     }
 
+    .fixture-panel-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .fixture-panel-head h3 {
+      margin-bottom: 3px;
+    }
+
+    .fixture-status,
+    .fixture-empty {
+      margin: 0;
+      color: var(--muted);
+      font-size: .76rem;
+      line-height: 1.4;
+    }
+
+    .fixture-refresh {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: white;
+      color: var(--green);
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 900;
+    }
+
+    .fixture-refresh:disabled {
+      cursor: wait;
+      opacity: .55;
+    }
+
     .fixture-card {
       width: 100%;
       border: 1px solid var(--line);
@@ -704,7 +742,13 @@
           </section>
 
           <section class="panel">
-            <h3>Today's Matches</h3>
+            <div class="fixture-panel-head">
+              <div>
+                <h3>World Cup Fixtures</h3>
+                <p class="fixture-status" id="fixtureStatus">Connecting to live schedule...</p>
+              </div>
+              <button class="fixture-refresh" id="refreshFixtures" type="button" title="Refresh fixtures" aria-label="Refresh fixtures">&#8635;</button>
+            </div>
             <div class="fixture-list" id="todayFixtures"></div>
           </section>
 
@@ -997,27 +1041,109 @@
       calculate();
     }
 
-    const FEATURED_FIXTURES = [
-      { time: "12:00", country: "International", league: "FIFA World Cup", home: "Argentina", away: "France", tag: "World Cup" },
-      { time: "14:00", country: "England", league: "Premier League", home: "Arsenal", away: "Liverpool", tag: "Top match" },
-      { time: "15:30", country: "Spain", league: "La Liga", home: "Real Madrid", away: "Barcelona", tag: "Rivalry" },
-      { time: "16:00", country: "South Africa", league: "Premier Division", home: "Mamelodi Sundowns", away: "Orlando Pirates", tag: "Local focus" },
-      { time: "18:45", country: "Brazil", league: "Serie A", home: "Flamengo", away: "Palmeiras", tag: "High tempo" },
-      { time: "20:00", country: "Saudi Arabia", league: "Saudi Pro League", home: "Al Hilal", away: "Al Nassr", tag: "Goals watch" }
+    const FALLBACK_FIXTURES = [
+      { time: "12:00", country: "International", league: "FIFA World Cup", home: "Argentina", away: "France", tag: "World Cup example" }
     ];
+    const ESPN_WORLD_CUP_URL = "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard";
+    let activeFixtures = [];
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>'"]/g, (character) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;"
+      })[character]);
+    }
+
+    function localDateKey(date = new Date()) {
+      return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, "0"), String(date.getDate()).padStart(2, "0")].join("");
+    }
+
+    function ensureWorldCupTeam(name) {
+      const teams = WORLD_LEAGUES.International["FIFA World Cup"];
+      if (!teams.some((item) => item.name === name)) teams.push(team(name, 1.32, 1625));
+    }
 
     function renderTodayFixtures() {
-      output("todayFixtures").innerHTML = FEATURED_FIXTURES.map((fixture, index) => `
+      if (!activeFixtures.length) {
+        output("todayFixtures").innerHTML = '<p class="fixture-empty">No World Cup fixtures scheduled for today.</p>';
+        return;
+      }
+
+      output("todayFixtures").innerHTML = activeFixtures.map((fixture, index) => `
         <button class="fixture-card" type="button" data-fixture="${index}">
-          <span class="fixture-meta"><span>${fixture.time}</span><span>${fixture.country} - ${fixture.league}</span></span>
-          <span class="fixture-teams">${fixture.home} vs ${fixture.away}</span>
-          <span class="fixture-cta">${fixture.tag} · Predict match</span>
+          <span class="fixture-meta"><span>${escapeHtml(fixture.time)}</span><span>${escapeHtml(fixture.league)}</span></span>
+          <span class="fixture-teams">${escapeHtml(fixture.home)} vs ${escapeHtml(fixture.away)}</span>
+          <span class="fixture-cta">${escapeHtml(fixture.tag)} - Predict match</span>
         </button>
       `).join("");
     }
 
+    async function loadLiveFixtures() {
+      const refreshButton = document.getElementById("refreshFixtures");
+      refreshButton.disabled = true;
+      output("fixtureStatus").textContent = "Updating current schedule...";
+      output("todayFixtures").innerHTML = '<p class="fixture-empty">Loading current fixtures...</p>';
+
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 10000);
+        const response = await fetch(`${ESPN_WORLD_CUP_URL}?dates=${localDateKey()}`, {
+          cache: "no-store",
+          signal: controller.signal
+        });
+        clearTimeout(timeout);
+        if (!response.ok) throw new Error(`Fixture request failed: ${response.status}`);
+
+        const data = await response.json();
+        activeFixtures = (data.events || []).map((event) => {
+          const competition = event.competitions?.[0] || {};
+          const competitors = competition.competitors || [];
+          const home = competitors.find((item) => item.homeAway === "home");
+          const away = competitors.find((item) => item.homeAway === "away");
+          if (!home?.team?.displayName || !away?.team?.displayName) return null;
+
+          const homeName = home.team.displayName;
+          const awayName = away.team.displayName;
+          ensureWorldCupTeam(homeName);
+          ensureWorldCupTeam(awayName);
+
+          const matchState = competition.status?.type?.state || "pre";
+          const clock = competition.status?.displayClock || "";
+          const score = `${home.score || 0}-${away.score || 0}`;
+          const tag = matchState === "in"
+            ? `${clock || "Live"} LIVE`
+            : matchState === "post"
+              ? `Final ${score}`
+              : (competition.altGameNote || "Scheduled").replace("FIFA World Cup, ", "");
+
+          return {
+            time: new Date(event.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+            country: "International",
+            league: "FIFA World Cup",
+            home: homeName,
+            away: awayName,
+            tag,
+            matchState,
+            minute: matchState === "post" ? 96 : Number.parseInt(clock, 10) || 0,
+            homeScore: Number(home.score) || 0,
+            awayScore: Number(away.score) || 0
+          };
+        }).filter(Boolean);
+
+        output("fixtureStatus").textContent = activeFixtures.length
+          ? `Live schedule - ${activeFixtures.length} match${activeFixtures.length === 1 ? "" : "es"} today`
+          : "Live schedule - no matches today";
+      } catch (error) {
+        activeFixtures = FALLBACK_FIXTURES;
+        output("fixtureStatus").textContent = "Live feed unavailable - showing an example";
+      } finally {
+        refreshButton.disabled = false;
+        renderTodayFixtures();
+      }
+    }
+
     function applyFeaturedFixture(index) {
-      const fixture = FEATURED_FIXTURES[index] || FEATURED_FIXTURES[0];
+      const fixture = activeFixtures[index] || activeFixtures[0];
+      if (!fixture) return;
       loadLeague(fixture.country, fixture.league, fixture.home, fixture.away);
       const tempoBoost = fixture.tag === "Goals watch" || fixture.tag === "High tempo" ? 68 : 58;
       state.tempo.value = tempoBoost;
@@ -1025,6 +1151,11 @@
       state.weakness.value = fixture.tag === "Goals watch" ? 48 : 40;
       state.aggression.value = fixture.tag === "Rivalry" || fixture.tag === "Local focus" ? 68 : 54;
       state.referee.value = fixture.tag === "Rivalry" ? 66 : 58;
+      const matchHasStarted = fixture.matchState === "in" || fixture.matchState === "post";
+      state.mode.value = matchHasStarted ? "live" : "pre";
+      state.minute.value = matchHasStarted ? fixture.minute : 0;
+      state.homeGoals.value = matchHasStarted ? fixture.homeScore : 0;
+      state.awayGoals.value = matchHasStarted ? fixture.awayScore : 0;
       document.querySelectorAll(".value-pill").forEach((pill) => {
         const input = state[pill.dataset.for];
         pill.textContent = input.value;
@@ -1213,13 +1344,14 @@
 
     document.getElementById("runModel").addEventListener("click", calculate);
     document.getElementById("randomize").addEventListener("click", randomFixture);
+    document.getElementById("refreshFixtures").addEventListener("click", loadLiveFixtures);
     document.getElementById("todayFixtures").addEventListener("click", (event) => {
       const card = event.target.closest("[data-fixture]");
       if (!card) return;
       applyFeaturedFixture(Number(card.dataset.fixture));
     });
-    renderTodayFixtures();
     loadLeague("England", "Premier League", "Arsenal", "Liverpool");
+    loadLiveFixtures();
 
     if ("serviceWorker" in navigator && location.protocol !== "file:") {
       window.addEventListener("load", () => {
