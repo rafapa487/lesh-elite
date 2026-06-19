@@ -720,6 +720,26 @@
   <script>
     const team = (name, attack, strength) => ({ name, attack, strength });
     const WORLD_LEAGUES = {
+      "International": {
+        "FIFA World Cup": [
+          team("Argentina", 2.02, 1945), team("Brazil", 1.98, 1925), team("France", 2.04, 1940),
+          team("Spain", 2.00, 1930), team("England", 1.92, 1905), team("Germany", 1.88, 1885),
+          team("Portugal", 1.90, 1900), team("Netherlands", 1.82, 1865), team("Italy", 1.74, 1835),
+          team("Belgium", 1.78, 1845), team("Croatia", 1.66, 1805), team("Uruguay", 1.76, 1840),
+          team("Colombia", 1.70, 1825), team("Morocco", 1.62, 1800), team("Senegal", 1.52, 1745),
+          team("United States", 1.48, 1725), team("Mexico", 1.45, 1710), team("Canada", 1.42, 1695),
+          team("Japan", 1.56, 1760), team("South Korea", 1.48, 1720), team("Australia", 1.38, 1675),
+          team("Iran", 1.40, 1690), team("Saudi Arabia", 1.28, 1615), team("Ecuador", 1.54, 1765),
+          team("Switzerland", 1.55, 1770), team("Denmark", 1.52, 1755), team("Austria", 1.50, 1745),
+          team("Poland", 1.44, 1715), team("Serbia", 1.42, 1695), team("Ukraine", 1.44, 1710),
+          team("Turkey", 1.48, 1725), team("Norway", 1.58, 1750), team("Sweden", 1.42, 1690),
+          team("Scotland", 1.34, 1655), team("Wales", 1.30, 1635), team("Egypt", 1.44, 1700),
+          team("Algeria", 1.46, 1710), team("Tunisia", 1.32, 1650), team("Nigeria", 1.50, 1725),
+          team("Ghana", 1.38, 1665), team("Ivory Coast", 1.50, 1720), team("Cameroon", 1.42, 1685),
+          team("South Africa", 1.34, 1655), team("Costa Rica", 1.28, 1610), team("Panama", 1.30, 1625),
+          team("Jamaica", 1.24, 1585), team("Qatar", 1.26, 1600), team("New Zealand", 1.18, 1545)
+        ]
+      },
       "England": {
         "Premier League": [
           team("Arsenal", 1.85, 1885), team("Aston Villa", 1.55, 1765), team("Bournemouth", 1.30, 1665),
@@ -978,6 +998,7 @@
     }
 
     const FEATURED_FIXTURES = [
+      { time: "12:00", country: "International", league: "FIFA World Cup", home: "Argentina", away: "France", tag: "World Cup" },
       { time: "14:00", country: "England", league: "Premier League", home: "Arsenal", away: "Liverpool", tag: "Top match" },
       { time: "15:30", country: "Spain", league: "La Liga", home: "Real Madrid", away: "Barcelona", tag: "Rivalry" },
       { time: "16:00", country: "South Africa", league: "Premier Division", home: "Mamelodi Sundowns", away: "Orlando Pirates", tag: "Local focus" },
