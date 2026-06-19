@@ -478,6 +478,52 @@
       gap: 10px;
     }
 
+    .fixture-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .fixture-card {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      color: var(--ink);
+      padding: 12px;
+      cursor: pointer;
+      text-align: left;
+      display: grid;
+      gap: 8px;
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+    }
+
+    .fixture-card:hover,
+    .fixture-card:focus {
+      transform: translateY(-1px);
+      border-color: var(--green);
+      box-shadow: 0 10px 22px rgba(38, 34, 26, .1);
+      outline: none;
+    }
+
+    .fixture-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-size: .75rem;
+    }
+
+    .fixture-teams {
+      font-weight: 850;
+      line-height: 1.25;
+    }
+
+    .fixture-cta {
+      color: var(--green);
+      font-size: .78rem;
+      font-weight: 800;
+    }
+
     @media (max-width: 1040px) {
       .app {
         grid-template-columns: 1fr;
@@ -655,6 +701,11 @@
               <div class="metric"><span class="small">No more goals</span><strong id="noMore">21%</strong></div>
               <div class="metric"><span class="small">Next goal away</span><strong id="nextAway">27%</strong></div>
             </div>
+          </section>
+
+          <section class="panel">
+            <h3>Today's Matches</h3>
+            <div class="fixture-list" id="todayFixtures"></div>
           </section>
 
           <section class="panel">
@@ -926,6 +977,40 @@
       calculate();
     }
 
+    const FEATURED_FIXTURES = [
+      { time: "14:00", country: "England", league: "Premier League", home: "Arsenal", away: "Liverpool", tag: "Top match" },
+      { time: "15:30", country: "Spain", league: "La Liga", home: "Real Madrid", away: "Barcelona", tag: "Rivalry" },
+      { time: "16:00", country: "South Africa", league: "Premier Division", home: "Mamelodi Sundowns", away: "Orlando Pirates", tag: "Local focus" },
+      { time: "18:45", country: "Brazil", league: "Serie A", home: "Flamengo", away: "Palmeiras", tag: "High tempo" },
+      { time: "20:00", country: "Saudi Arabia", league: "Saudi Pro League", home: "Al Hilal", away: "Al Nassr", tag: "Goals watch" }
+    ];
+
+    function renderTodayFixtures() {
+      output("todayFixtures").innerHTML = FEATURED_FIXTURES.map((fixture, index) => `
+        <button class="fixture-card" type="button" data-fixture="${index}">
+          <span class="fixture-meta"><span>${fixture.time}</span><span>${fixture.country} - ${fixture.league}</span></span>
+          <span class="fixture-teams">${fixture.home} vs ${fixture.away}</span>
+          <span class="fixture-cta">${fixture.tag} · Predict match</span>
+        </button>
+      `).join("");
+    }
+
+    function applyFeaturedFixture(index) {
+      const fixture = FEATURED_FIXTURES[index] || FEATURED_FIXTURES[0];
+      loadLeague(fixture.country, fixture.league, fixture.home, fixture.away);
+      const tempoBoost = fixture.tag === "Goals watch" || fixture.tag === "High tempo" ? 68 : 58;
+      state.tempo.value = tempoBoost;
+      state.pressure.value = fixture.tag === "Top match" || fixture.tag === "Rivalry" ? 70 : 62;
+      state.weakness.value = fixture.tag === "Goals watch" ? 48 : 40;
+      state.aggression.value = fixture.tag === "Rivalry" || fixture.tag === "Local focus" ? 68 : 54;
+      state.referee.value = fixture.tag === "Rivalry" ? 66 : 58;
+      document.querySelectorAll(".value-pill").forEach((pill) => {
+        const input = state[pill.dataset.for];
+        pill.textContent = input.value;
+      });
+      calculate();
+    }
+
     function calculate() {
       const homeName = state.homeName.value.trim() || "Home";
       const awayName = state.awayName.value.trim() || "Away";
@@ -1107,6 +1192,12 @@
 
     document.getElementById("runModel").addEventListener("click", calculate);
     document.getElementById("randomize").addEventListener("click", randomFixture);
+    document.getElementById("todayFixtures").addEventListener("click", (event) => {
+      const card = event.target.closest("[data-fixture]");
+      if (!card) return;
+      applyFeaturedFixture(Number(card.dataset.fixture));
+    });
+    renderTodayFixtures();
     loadLeague("England", "Premier League", "Arsenal", "Liverpool");
 
     if ("serviceWorker" in navigator && location.protocol !== "file:") {
