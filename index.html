@@ -999,7 +999,7 @@
           <section class="panel">
             <div class="fixture-panel-head">
               <div>
-                <h3>Live Fixtures</h3>
+                <h3 id="fixtureHeading">Today's Games</h3>
                 <p class="fixture-status" id="fixtureStatus">Connecting to live schedule...</p>
               </div>
               <button class="fixture-refresh" id="refreshFixtures" type="button" title="Refresh fixtures" aria-label="Refresh fixtures">&#8635;</button>
@@ -1304,9 +1304,6 @@
       calculate();
     }
 
-    const FALLBACK_FIXTURES = [
-      { time: "12:00", country: "International", league: "FIFA World Cup", slug: "fifa.world", competitionKey: "International::FIFA World Cup", home: "Argentina", away: "France", homeForm: "", awayForm: "", tag: "World Cup example" }
-    ];
     const ESPN_SCOREBOARD_ROOT = "https://site.api.espn.com/apis/site/v2/sports/soccer";
     const LIVE_COMPETITIONS = [
       { country: "International", league: "FIFA World Cup", slug: "fifa.world" },
@@ -1631,6 +1628,10 @@
       const refreshButton = document.getElementById("refreshFixtures");
       const dateValue = document.getElementById("fixtureDate").value || localDateValue();
       const dateKey = dateValue.replaceAll("-", "");
+      const isToday = dateValue === localDateValue();
+      output("fixtureHeading").textContent = isToday
+        ? "Today's Games"
+        : `Games - ${new Date(`${dateValue}T12:00:00`).toLocaleDateString([], { day: "numeric", month: "short" })}`;
       refreshButton.disabled = true;
       output("fixtureStatus").textContent = "Updating current schedule...";
       output("todayFixtures").innerHTML = '<p class="fixture-empty">Loading current fixtures...</p>';
@@ -1653,6 +1654,7 @@
         const seenEvents = new Set();
         activeFixtures = successfulResults.flatMap(({ value: { source, data } }) =>
           (data.events || []).map((event) => {
+            if (localDateValue(new Date(event.date)) !== dateValue) return null;
             const eventKey = `${source.slug}:${event.id}`;
             if (seenEvents.has(eventKey)) return null;
             seenEvents.add(eventKey);
@@ -1709,8 +1711,8 @@
           ? `Live schedule - ${activeFixtures.length} match${activeFixtures.length === 1 ? "" : "es"} across ${competitionCount} competition${competitionCount === 1 ? "" : "s"}`
           : "Live schedule - no matches on this date";
       } catch (error) {
-        activeFixtures = FALLBACK_FIXTURES;
-        output("fixtureStatus").textContent = "Live feed unavailable - showing an example";
+        activeFixtures = [];
+        output("fixtureStatus").textContent = "Live games unavailable - tap refresh to retry";
       } finally {
         refreshButton.disabled = false;
         gradeHistoryFromFixtures(activeFixtures);
