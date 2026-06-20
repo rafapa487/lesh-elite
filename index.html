@@ -154,6 +154,11 @@
       accent-color: var(--green);
     }
 
+    input[type="range"]:disabled {
+      cursor: not-allowed;
+      opacity: .72;
+    }
+
     .value-pill {
       min-height: 30px;
       display: grid;
@@ -860,11 +865,11 @@
 
       <div class="section">
         <h2>Match Intelligence</h2>
-        <div class="slider"><label>Attacking pressure <input id="pressure" type="range" min="0" max="100" value="66"></label><div class="value-pill" data-for="pressure">66</div></div>
-        <div class="slider"><label>Defensive weakness <input id="weakness" type="range" min="0" max="100" value="42"></label><div class="value-pill" data-for="weakness">42</div></div>
-        <div class="slider"><label>Match tempo <input id="tempo" type="range" min="0" max="100" value="58"></label><div class="value-pill" data-for="tempo">58</div></div>
-        <div class="slider"><label>Aggression index <input id="aggression" type="range" min="0" max="100" value="54"></label><div class="value-pill" data-for="aggression">54</div></div>
-        <div class="slider"><label>Referee strictness <input id="referee" type="range" min="0" max="100" value="61"></label><div class="value-pill" data-for="referee">61</div></div>
+        <div class="slider"><label>Attacking pressure <input id="pressure" type="range" min="0" max="100" value="66" disabled></label><div class="value-pill" data-for="pressure">66</div></div>
+        <div class="slider"><label>Defensive weakness <input id="weakness" type="range" min="0" max="100" value="42" disabled></label><div class="value-pill" data-for="weakness">42</div></div>
+        <div class="slider"><label>Match tempo <input id="tempo" type="range" min="0" max="100" value="58" disabled></label><div class="value-pill" data-for="tempo">58</div></div>
+        <div class="slider"><label>Aggression index <input id="aggression" type="range" min="0" max="100" value="54" disabled></label><div class="value-pill" data-for="aggression">54</div></div>
+        <div class="slider"><label>Referee strictness <input id="referee" type="range" min="0" max="100" value="61" disabled></label><div class="value-pill" data-for="referee">61</div></div>
       </div>
 
       <div class="section">
@@ -1276,6 +1281,36 @@
       applyTeamProfile("away", state.awaySelect.value);
     }
 
+    function updateIntelligencePills() {
+      document.querySelectorAll(".value-pill").forEach((pill) => {
+        const input = state[pill.dataset.for];
+        pill.textContent = input.value;
+      });
+    }
+
+    function applyAutomaticMatchIntelligence(fixture = selectedFixture, homeStanding, awayStanding) {
+      const teams = selectedLeagueTeams();
+      const home = teams.find((item) => item.name === state.homeSelect.value) || teams[0];
+      const away = teams.find((item) => item.name === state.awaySelect.value) || teams[1] || teams[0];
+      const formEdge = fixture ? formStrength(fixture.homeForm) - formStrength(fixture.awayForm) : 0;
+      const homeRank = standingStat(homeStanding, "rank");
+      const awayRank = standingStat(awayStanding, "rank");
+      const tableEdge = Number.isFinite(homeRank) && Number.isFinite(awayRank)
+        ? clamp((awayRank - homeRank) / 20, -1, 1)
+        : 0;
+      const attackDifference = home.attack - away.attack;
+      const strengthDifference = home.strength - away.strength;
+      const averageStrength = (home.strength + away.strength) / 2;
+      const seeded = mulberry32(seedFrom([home.name, away.name, state.leagueSelect.value, fixture?.sourceId || "manual"]));
+
+      state.pressure.value = Math.round(clamp(54 + attackDifference * 15 + strengthDifference / 26 + formEdge * 10 + tableEdge * 7, 28, 84));
+      state.weakness.value = Math.round(clamp(47 + (1710 - averageStrength) / 24 + Math.max(0, away.attack - home.attack) * 10, 28, 74));
+      state.tempo.value = Math.round(clamp(48 + (home.attack + away.attack - 2.7) * 13 + Math.abs(formEdge) * 6, 34, 78));
+      state.aggression.value = Math.round(43 + seeded() * 23);
+      state.referee.value = Math.round(45 + seeded() * 20);
+      updateIntelligencePills();
+    }
+
     function loadLeague(country, league, homeTeam, awayTeam) {
       const countries = Object.keys(WORLD_LEAGUES);
       setOptions(state.countrySelect, countries, country || countries[0]);
@@ -1285,6 +1320,7 @@
       setOptions(state.homeSelect, teams, homeTeam || teams[0]);
       setOptions(state.awaySelect, teams, awayTeam || teams[1] || teams[0]);
       syncTeamProfiles();
+      applyAutomaticMatchIntelligence();
       calculate();
     }
 
@@ -1301,6 +1337,7 @@
       setOptions(state.homeSelect, teams, teams[0]);
       setOptions(state.awaySelect, teams, teams[1] || teams[0]);
       syncTeamProfiles();
+      applyAutomaticMatchIntelligence(null);
       calculate();
     }
 
@@ -1557,6 +1594,7 @@
         formEdge: formStrength(fixture.homeForm) - formStrength(fixture.awayForm),
         tableEdge: 0
       };
+      applyAutomaticMatchIntelligence(fixture);
       renderMatchContext(fixture, null, null, "Loading table positions...");
       calculate();
 
@@ -1582,6 +1620,7 @@
         predictionContext.tableEdge = Number.isFinite(homeRank) && Number.isFinite(awayRank)
           ? clamp((awayRank - homeRank) / Math.max(entries.length, 2), -1, 1)
           : 0;
+        applyAutomaticMatchIntelligence(fixture, homeStanding, awayStanding);
         renderMatchContext(fixture, homeStanding, awayStanding, "Live form and table loaded");
         calculate();
       } catch (error) {
@@ -1726,21 +1765,12 @@
       if (!fixture) return;
       selectedFixture = fixture;
       loadLeague(fixture.country, fixture.league, fixture.home, fixture.away);
-      const tempoBoost = fixture.tag === "Goals watch" || fixture.tag === "High tempo" ? 68 : 58;
-      state.tempo.value = tempoBoost;
-      state.pressure.value = fixture.tag === "Top match" || fixture.tag === "Rivalry" ? 70 : 62;
-      state.weakness.value = fixture.tag === "Goals watch" ? 48 : 40;
-      state.aggression.value = fixture.tag === "Rivalry" || fixture.tag === "Local focus" ? 68 : 54;
-      state.referee.value = fixture.tag === "Rivalry" ? 66 : 58;
+      applyAutomaticMatchIntelligence(fixture);
       const matchHasStarted = fixture.matchState === "in" || fixture.matchState === "post";
       state.mode.value = matchHasStarted ? "live" : "pre";
       state.minute.value = matchHasStarted ? fixture.minute : 0;
       state.homeGoals.value = matchHasStarted ? fixture.homeScore : 0;
       state.awayGoals.value = matchHasStarted ? fixture.awayScore : 0;
-      document.querySelectorAll(".value-pill").forEach((pill) => {
-        const input = state[pill.dataset.for];
-        pill.textContent = input.value;
-      });
       calculate();
       loadMatchContext(fixture);
     }
@@ -1908,15 +1938,7 @@
       const awayPool = teams.filter((item) => item !== homeTeam);
       const awayTeam = awayPool[Math.floor(Math.random() * awayPool.length)] || teams[0];
       loadLeague(country, league, homeTeam, awayTeam);
-      state.pressure.value = Math.round(38 + Math.random() * 42);
-      state.weakness.value = Math.round(32 + Math.random() * 38);
-      state.tempo.value = Math.round(36 + Math.random() * 42);
-      state.aggression.value = Math.round(35 + Math.random() * 44);
-      state.referee.value = Math.round(38 + Math.random() * 42);
-      document.querySelectorAll(".value-pill").forEach((pill) => {
-        const input = state[pill.dataset.for];
-        pill.textContent = input.value;
-      });
+      applyAutomaticMatchIntelligence(null);
       calculate();
     }
 
@@ -1925,11 +1947,13 @@
     state.homeSelect.addEventListener("change", () => {
       resetMatchContext();
       syncTeamProfiles();
+      applyAutomaticMatchIntelligence(null);
       calculate();
     });
     state.awaySelect.addEventListener("change", () => {
       resetMatchContext();
       syncTeamProfiles();
+      applyAutomaticMatchIntelligence(null);
       calculate();
     });
 
