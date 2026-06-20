@@ -521,6 +521,25 @@
       opacity: .55;
     }
 
+    .fixture-controls {
+      display: grid;
+      grid-template-columns: minmax(140px, .75fr) minmax(180px, 1.25fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .fixture-controls input,
+    .fixture-controls select {
+      width: 100%;
+      min-width: 0;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: white;
+      color: var(--ink);
+      padding: 0 10px;
+    }
+
     .fixture-card {
       width: 100%;
       border: 1px solid var(--line);
@@ -591,6 +610,10 @@
       .market-strip,
       .metrics,
       .live-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .fixture-controls {
         grid-template-columns: 1fr;
       }
 
@@ -744,10 +767,16 @@
           <section class="panel">
             <div class="fixture-panel-head">
               <div>
-                <h3>World Cup Fixtures</h3>
+                <h3>Live Fixtures</h3>
                 <p class="fixture-status" id="fixtureStatus">Connecting to live schedule...</p>
               </div>
               <button class="fixture-refresh" id="refreshFixtures" type="button" title="Refresh fixtures" aria-label="Refresh fixtures">&#8635;</button>
+            </div>
+            <div class="fixture-controls">
+              <input id="fixtureDate" type="date" aria-label="Fixture date">
+              <select id="fixtureCompetition" aria-label="Fixture competition">
+                <option value="all">All competitions</option>
+              </select>
             </div>
             <div class="fixture-list" id="todayFixtures"></div>
           </section>
@@ -1042,9 +1071,34 @@
     }
 
     const FALLBACK_FIXTURES = [
-      { time: "12:00", country: "International", league: "FIFA World Cup", home: "Argentina", away: "France", tag: "World Cup example" }
+      { time: "12:00", country: "International", league: "FIFA World Cup", competitionKey: "International::FIFA World Cup", home: "Argentina", away: "France", tag: "World Cup example" }
     ];
-    const ESPN_WORLD_CUP_URL = "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard";
+    const ESPN_SCOREBOARD_ROOT = "https://site.api.espn.com/apis/site/v2/sports/soccer";
+    const LIVE_COMPETITIONS = [
+      { country: "International", league: "FIFA World Cup", slug: "fifa.world" },
+      { country: "England", league: "Premier League", slug: "eng.1" },
+      { country: "England", league: "Championship", slug: "eng.2" },
+      { country: "Spain", league: "La Liga", slug: "esp.1" },
+      { country: "Spain", league: "Segunda Division", slug: "esp.2" },
+      { country: "Italy", league: "Serie A", slug: "ita.1" },
+      { country: "Germany", league: "Bundesliga", slug: "ger.1" },
+      { country: "France", league: "Ligue 1", slug: "fra.1" },
+      { country: "Netherlands", league: "Eredivisie", slug: "ned.1" },
+      { country: "Portugal", league: "Primeira Liga", slug: "por.1" },
+      { country: "Scotland", league: "Premiership", slug: "sco.1" },
+      { country: "Turkey", league: "Super Lig", slug: "tur.1" },
+      { country: "Brazil", league: "Serie A", slug: "bra.1" },
+      { country: "Argentina", league: "Primera Division", slug: "arg.1" },
+      { country: "United States", league: "MLS", slug: "usa.1" },
+      { country: "Mexico", league: "Liga MX", slug: "mex.1" },
+      { country: "South Africa", league: "Premier Division", slug: "rsa.1" },
+      { country: "Egypt", league: "Premier League", slug: "egy.1" },
+      { country: "Morocco", league: "Botola Pro", slug: "mar.1" },
+      { country: "Saudi Arabia", league: "Saudi Pro League", slug: "ksa.1" },
+      { country: "Japan", league: "J1 League", slug: "jpn.1" },
+      { country: "South Korea", league: "K League 1", slug: "kor.1" },
+      { country: "Australia", league: "A-League Men", slug: "aus.1" }
+    ];
     let activeFixtures = [];
 
     function escapeHtml(value) {
@@ -1053,90 +1107,128 @@
       })[character]);
     }
 
-    function localDateKey(date = new Date()) {
-      return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, "0"), String(date.getDate()).padStart(2, "0")].join("");
+    function localDateValue(date = new Date()) {
+      return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, "0"), String(date.getDate()).padStart(2, "0")].join("-");
     }
 
-    function ensureWorldCupTeam(name) {
-      const teams = WORLD_LEAGUES.International["FIFA World Cup"];
+    function ensureCompetitionTeam(country, league, name) {
+      const teams = WORLD_LEAGUES[country]?.[league];
+      if (!teams) return;
       if (!teams.some((item) => item.name === name)) teams.push(team(name, 1.32, 1625));
     }
 
     function renderTodayFixtures() {
-      if (!activeFixtures.length) {
-        output("todayFixtures").innerHTML = '<p class="fixture-empty">No World Cup fixtures scheduled for today.</p>';
+      const selectedCompetition = document.getElementById("fixtureCompetition").value;
+      const fixtures = activeFixtures
+        .map((fixture, index) => ({ fixture, index }))
+        .filter(({ fixture }) => selectedCompetition === "all" || fixture.competitionKey === selectedCompetition);
+
+      if (!fixtures.length) {
+        output("todayFixtures").innerHTML = '<p class="fixture-empty">No fixtures found for this date and competition.</p>';
         return;
       }
 
-      output("todayFixtures").innerHTML = activeFixtures.map((fixture, index) => `
+      output("todayFixtures").innerHTML = fixtures.map(({ fixture, index }) => `
         <button class="fixture-card" type="button" data-fixture="${index}">
-          <span class="fixture-meta"><span>${escapeHtml(fixture.time)}</span><span>${escapeHtml(fixture.league)}</span></span>
+          <span class="fixture-meta"><span>${escapeHtml(fixture.time)}</span><span>${escapeHtml(fixture.country)} - ${escapeHtml(fixture.league)}</span></span>
           <span class="fixture-teams">${escapeHtml(fixture.home)} vs ${escapeHtml(fixture.away)}</span>
           <span class="fixture-cta">${escapeHtml(fixture.tag)} - Predict match</span>
         </button>
       `).join("");
     }
 
+    function renderCompetitionFilter() {
+      const select = document.getElementById("fixtureCompetition");
+      const previousValue = select.value;
+      const competitions = [...new Map(activeFixtures.map((fixture) => [
+        fixture.competitionKey,
+        `${fixture.country} - ${fixture.league}`
+      ])).entries()].sort((a, b) => a[1].localeCompare(b[1]));
+
+      select.innerHTML = '<option value="all">All competitions</option>' + competitions.map(([value, label]) =>
+        `<option value="${escapeHtml(value)}">${escapeHtml(label)}</option>`
+      ).join("");
+      select.value = competitions.some(([value]) => value === previousValue) ? previousValue : "all";
+    }
+
     async function loadLiveFixtures() {
       const refreshButton = document.getElementById("refreshFixtures");
+      const dateValue = document.getElementById("fixtureDate").value || localDateValue();
+      const dateKey = dateValue.replaceAll("-", "");
       refreshButton.disabled = true;
       output("fixtureStatus").textContent = "Updating current schedule...";
       output("todayFixtures").innerHTML = '<p class="fixture-empty">Loading current fixtures...</p>';
 
       try {
         const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 10000);
-        const response = await fetch(`${ESPN_WORLD_CUP_URL}?dates=${localDateKey()}`, {
-          cache: "no-store",
-          signal: controller.signal
-        });
+        const timeout = setTimeout(() => controller.abort(), 14000);
+        const results = await Promise.allSettled(LIVE_COMPETITIONS.map(async (source) => {
+          const response = await fetch(`${ESPN_SCOREBOARD_ROOT}/${source.slug}/scoreboard?dates=${dateKey}`, {
+            cache: "no-store",
+            signal: controller.signal
+          });
+          if (!response.ok) throw new Error(`${source.slug}: ${response.status}`);
+          return { source, data: await response.json() };
+        }));
         clearTimeout(timeout);
-        if (!response.ok) throw new Error(`Fixture request failed: ${response.status}`);
+        const successfulResults = results.filter((result) => result.status === "fulfilled");
+        if (!successfulResults.length) throw new Error("All fixture feeds failed");
 
-        const data = await response.json();
-        activeFixtures = (data.events || []).map((event) => {
-          const competition = event.competitions?.[0] || {};
-          const competitors = competition.competitors || [];
-          const home = competitors.find((item) => item.homeAway === "home");
-          const away = competitors.find((item) => item.homeAway === "away");
-          if (!home?.team?.displayName || !away?.team?.displayName) return null;
+        const seenEvents = new Set();
+        activeFixtures = successfulResults.flatMap(({ value: { source, data } }) =>
+          (data.events || []).map((event) => {
+            const eventKey = `${source.slug}:${event.id}`;
+            if (seenEvents.has(eventKey)) return null;
+            seenEvents.add(eventKey);
 
-          const homeName = home.team.displayName;
-          const awayName = away.team.displayName;
-          ensureWorldCupTeam(homeName);
-          ensureWorldCupTeam(awayName);
+            const competition = event.competitions?.[0] || {};
+            const competitors = competition.competitors || [];
+            const home = competitors.find((item) => item.homeAway === "home");
+            const away = competitors.find((item) => item.homeAway === "away");
+            if (!home?.team?.displayName || !away?.team?.displayName) return null;
 
-          const matchState = competition.status?.type?.state || "pre";
-          const clock = competition.status?.displayClock || "";
-          const score = `${home.score || 0}-${away.score || 0}`;
-          const tag = matchState === "in"
-            ? `${clock || "Live"} LIVE`
-            : matchState === "post"
-              ? `Final ${score}`
-              : (competition.altGameNote || "Scheduled").replace("FIFA World Cup, ", "");
+            const homeName = home.team.displayName;
+            const awayName = away.team.displayName;
+            ensureCompetitionTeam(source.country, source.league, homeName);
+            ensureCompetitionTeam(source.country, source.league, awayName);
 
-          return {
-            time: new Date(event.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-            country: "International",
-            league: "FIFA World Cup",
-            home: homeName,
-            away: awayName,
-            tag,
-            matchState,
-            minute: matchState === "post" ? 96 : Number.parseInt(clock, 10) || 0,
-            homeScore: Number(home.score) || 0,
-            awayScore: Number(away.score) || 0
-          };
-        }).filter(Boolean);
+            const matchState = competition.status?.type?.state || "pre";
+            const clock = competition.status?.displayClock || "";
+            const score = `${home.score || 0}-${away.score || 0}`;
+            const tag = matchState === "in"
+              ? `${clock || "Live"} LIVE`
+              : matchState === "post"
+                ? `Final ${score}`
+                : (competition.altGameNote || competition.status?.type?.shortDetail || "Scheduled")
+                  .replace("FIFA World Cup, ", "");
 
+            return {
+              eventDate: event.date,
+              time: new Date(event.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+              country: source.country,
+              league: source.league,
+              competitionKey: `${source.country}::${source.league}`,
+              home: homeName,
+              away: awayName,
+              tag,
+              matchState,
+              minute: matchState === "post" ? 96 : Number.parseInt(clock, 10) || 0,
+              homeScore: Number(home.score) || 0,
+              awayScore: Number(away.score) || 0
+            };
+          }).filter(Boolean)
+        ).sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate));
+
+        const competitionCount = new Set(activeFixtures.map((fixture) => fixture.competitionKey)).size;
         output("fixtureStatus").textContent = activeFixtures.length
-          ? `Live schedule - ${activeFixtures.length} match${activeFixtures.length === 1 ? "" : "es"} today`
-          : "Live schedule - no matches today";
+          ? `Live schedule - ${activeFixtures.length} match${activeFixtures.length === 1 ? "" : "es"} across ${competitionCount} competition${competitionCount === 1 ? "" : "s"}`
+          : "Live schedule - no matches on this date";
       } catch (error) {
         activeFixtures = FALLBACK_FIXTURES;
         output("fixtureStatus").textContent = "Live feed unavailable - showing an example";
       } finally {
         refreshButton.disabled = false;
+        renderCompetitionFilter();
         renderTodayFixtures();
       }
     }
@@ -1345,11 +1437,14 @@
     document.getElementById("runModel").addEventListener("click", calculate);
     document.getElementById("randomize").addEventListener("click", randomFixture);
     document.getElementById("refreshFixtures").addEventListener("click", loadLiveFixtures);
+    document.getElementById("fixtureDate").addEventListener("change", loadLiveFixtures);
+    document.getElementById("fixtureCompetition").addEventListener("change", renderTodayFixtures);
     document.getElementById("todayFixtures").addEventListener("click", (event) => {
       const card = event.target.closest("[data-fixture]");
       if (!card) return;
       applyFeaturedFixture(Number(card.dataset.fixture));
     });
+    document.getElementById("fixtureDate").value = localDateValue();
     loadLeague("England", "Premier League", "Arsenal", "Liverpool");
     loadLiveFixtures();
 
