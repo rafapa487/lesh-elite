@@ -1,4 +1,4 @@
-const CACHE_NAME = "lesh-elite-v10";
+const CACHE_NAME = "lesh-elite-v11";
 const APP_ASSETS = [
   "./",
   "./index.html",
