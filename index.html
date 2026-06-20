@@ -581,6 +581,76 @@
       font-weight: 800;
     }
 
+    .context-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .context-head h3 {
+      margin-bottom: 0;
+    }
+
+    .context-status {
+      color: var(--muted);
+      font-size: .74rem;
+      text-align: right;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-team + .form-team {
+      border-left: 1px solid var(--line);
+      padding-left: 16px;
+    }
+
+    .form-team-name {
+      display: block;
+      margin-bottom: 9px;
+      font-weight: 850;
+    }
+
+    .form-chips {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 11px;
+    }
+
+    .form-chip {
+      display: grid;
+      place-items: center;
+      width: 25px;
+      height: 25px;
+      border-radius: 4px;
+      background: #e5e1d7;
+      color: var(--muted);
+      font-size: .7rem;
+      font-weight: 900;
+    }
+
+    .form-chip.win { background: var(--green); color: white; }
+    .form-chip.draw { background: var(--gold); color: #1c1608; }
+    .form-chip.loss { background: var(--red); color: white; }
+
+    .table-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-size: .76rem;
+      line-height: 1.55;
+    }
+
+    .table-line strong {
+      color: var(--ink);
+    }
+
     @media (max-width: 1040px) {
       .app {
         grid-template-columns: 1fr;
@@ -615,6 +685,16 @@
 
       .fixture-controls {
         grid-template-columns: 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-team + .form-team {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+        padding: 14px 0 0;
       }
 
       .match-title {
@@ -761,6 +841,29 @@
               <div class="metric"><span class="small">Next goal home</span><strong id="nextHome">52%</strong></div>
               <div class="metric"><span class="small">No more goals</span><strong id="noMore">21%</strong></div>
               <div class="metric"><span class="small">Next goal away</span><strong id="nextAway">27%</strong></div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="context-head">
+              <h3>Form &amp; Standings</h3>
+              <span class="context-status" id="contextStatus">Select a live fixture</span>
+            </div>
+            <div class="form-grid">
+              <div class="form-team">
+                <span class="form-team-name" id="formHomeName">Home team</span>
+                <div class="form-chips" id="homeForm"></div>
+                <div class="table-line"><span>Table position</span><strong id="homeRank">--</strong></div>
+                <div class="table-line"><span>Points</span><strong id="homePoints">--</strong></div>
+                <div class="table-line"><span>Season record</span><strong id="homeRecord">--</strong></div>
+              </div>
+              <div class="form-team">
+                <span class="form-team-name" id="formAwayName">Away team</span>
+                <div class="form-chips" id="awayForm"></div>
+                <div class="table-line"><span>Table position</span><strong id="awayRank">--</strong></div>
+                <div class="table-line"><span>Points</span><strong id="awayPoints">--</strong></div>
+                <div class="table-line"><span>Season record</span><strong id="awayRecord">--</strong></div>
+              </div>
             </div>
           </section>
 
@@ -1057,12 +1160,14 @@
     }
 
     function loadCountryLeagues() {
+      resetMatchContext();
       const leagues = Object.keys(WORLD_LEAGUES[state.countrySelect.value]);
       setOptions(state.leagueSelect, leagues, leagues[0]);
       loadLeague(state.countrySelect.value, state.leagueSelect.value);
     }
 
     function loadLeagueTeams() {
+      resetMatchContext();
       const teams = selectedLeagueTeams().map((item) => item.name);
       setOptions(state.homeSelect, teams, teams[0]);
       setOptions(state.awaySelect, teams, teams[1] || teams[0]);
@@ -1071,7 +1176,7 @@
     }
 
     const FALLBACK_FIXTURES = [
-      { time: "12:00", country: "International", league: "FIFA World Cup", competitionKey: "International::FIFA World Cup", home: "Argentina", away: "France", tag: "World Cup example" }
+      { time: "12:00", country: "International", league: "FIFA World Cup", slug: "fifa.world", competitionKey: "International::FIFA World Cup", home: "Argentina", away: "France", homeForm: "", awayForm: "", tag: "World Cup example" }
     ];
     const ESPN_SCOREBOARD_ROOT = "https://site.api.espn.com/apis/site/v2/sports/soccer";
     const LIVE_COMPETITIONS = [
@@ -1115,6 +1220,96 @@
       const teams = WORLD_LEAGUES[country]?.[league];
       if (!teams) return;
       if (!teams.some((item) => item.name === name)) teams.push(team(name, 1.32, 1625));
+    }
+
+    let contextRequestId = 0;
+    let predictionContext = { formEdge: 0, tableEdge: 0 };
+
+    function formStrength(form) {
+      const results = String(form || "").toUpperCase().replace(/[^WDL]/g, "").slice(-5);
+      if (!results.length) return 0.5;
+      return [...results].reduce((sum, result) => sum + (result === "W" ? 1 : result === "D" ? 0.5 : 0), 0) / results.length;
+    }
+
+    function renderFormChips(elementId, form) {
+      const results = String(form || "").toUpperCase().replace(/[^WDL]/g, "").slice(-5).padStart(5, "-");
+      output(elementId).innerHTML = [...results].map((result) => {
+        const className = result === "W" ? "win" : result === "D" ? "draw" : result === "L" ? "loss" : "";
+        return `<span class="form-chip ${className}">${result}</span>`;
+      }).join("");
+    }
+
+    function standingStat(entry, name) {
+      return entry?.stats?.find((stat) => stat.name === name)?.value;
+    }
+
+    function renderMatchContext(fixture, homeStanding, awayStanding, status) {
+      output("formHomeName").textContent = fixture?.home || "Home team";
+      output("formAwayName").textContent = fixture?.away || "Away team";
+      renderFormChips("homeForm", fixture?.homeForm);
+      renderFormChips("awayForm", fixture?.awayForm);
+
+      const setStanding = (side, standing, fallbackRecord) => {
+        const rank = standingStat(standing, "rank");
+        const points = standingStat(standing, "points");
+        const wins = standingStat(standing, "wins");
+        const draws = standingStat(standing, "ties");
+        const losses = standingStat(standing, "losses");
+        output(`${side}Rank`).textContent = Number.isFinite(rank) ? `#${rank}` : "--";
+        output(`${side}Points`).textContent = Number.isFinite(points) ? points : "--";
+        output(`${side}Record`).textContent = [wins, draws, losses].every(Number.isFinite)
+          ? `${wins}-${draws}-${losses}`
+          : (fallbackRecord || "--");
+      };
+
+      setStanding("home", homeStanding, fixture?.homeRecord);
+      setStanding("away", awayStanding, fixture?.awayRecord);
+      output("contextStatus").textContent = status;
+    }
+
+    function resetMatchContext() {
+      contextRequestId += 1;
+      predictionContext = { formEdge: 0, tableEdge: 0 };
+      renderMatchContext(null, null, null, "Select a live fixture");
+    }
+
+    async function loadMatchContext(fixture) {
+      const requestId = ++contextRequestId;
+      predictionContext = {
+        formEdge: formStrength(fixture.homeForm) - formStrength(fixture.awayForm),
+        tableEdge: 0
+      };
+      renderMatchContext(fixture, null, null, "Loading table positions...");
+      calculate();
+
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 10000);
+        const response = await fetch(`${ESPN_SCOREBOARD_ROOT.replace("site.api.espn.com/apis/site/v2", "site.api.espn.com/apis/v2")}/${fixture.slug}/standings`, {
+          cache: "no-store",
+          signal: controller.signal
+        });
+        clearTimeout(timeout);
+        if (!response.ok) throw new Error(`Standings request failed: ${response.status}`);
+        const data = await response.json();
+        if (requestId !== contextRequestId) return;
+
+        const entries = (data.children || []).flatMap((group) => group.standings?.entries || []);
+        const findTeam = (id, name) => entries.find((entry) => String(entry.team?.id) === String(id))
+          || entries.find((entry) => entry.team?.displayName === name);
+        const homeStanding = findTeam(fixture.homeId, fixture.home);
+        const awayStanding = findTeam(fixture.awayId, fixture.away);
+        const homeRank = standingStat(homeStanding, "rank");
+        const awayRank = standingStat(awayStanding, "rank");
+        predictionContext.tableEdge = Number.isFinite(homeRank) && Number.isFinite(awayRank)
+          ? clamp((awayRank - homeRank) / Math.max(entries.length, 2), -1, 1)
+          : 0;
+        renderMatchContext(fixture, homeStanding, awayStanding, "Live form and table loaded");
+        calculate();
+      } catch (error) {
+        if (requestId !== contextRequestId) return;
+        renderMatchContext(fixture, null, null, "Recent form loaded");
+      }
     }
 
     function renderTodayFixtures() {
@@ -1207,9 +1402,16 @@
               time: new Date(event.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
               country: source.country,
               league: source.league,
+              slug: source.slug,
               competitionKey: `${source.country}::${source.league}`,
               home: homeName,
               away: awayName,
+              homeId: home.team.id,
+              awayId: away.team.id,
+              homeForm: home.form || "",
+              awayForm: away.form || "",
+              homeRecord: home.records?.[0]?.summary || "--",
+              awayRecord: away.records?.[0]?.summary || "--",
               tag,
               matchState,
               minute: matchState === "post" ? 96 : Number.parseInt(clock, 10) || 0,
@@ -1253,6 +1455,7 @@
         pill.textContent = input.value;
       });
       calculate();
+      loadMatchContext(fixture);
     }
 
     function calculate() {
@@ -1274,7 +1477,9 @@
       const remaining = live ? clamp((96 - minute) / 96, 0, 1) : 1;
 
       const eloHomeWin = 1 / (1 + Math.pow(10, ((awayElo - (homeElo + 65)) / 400)));
-      const eloSwing = (eloHomeWin - 0.5) * 0.58;
+      const baseEloSwing = (eloHomeWin - 0.5) * 0.58;
+      const contextSwing = predictionContext.formEdge * 0.16 + predictionContext.tableEdge * 0.20;
+      const eloSwing = clamp(baseEloSwing + contextSwing, -0.45, 0.45);
       const tempoBoost = 0.82 + tempo * 0.36;
       const pressureBoost = 0.9 + pressure * 0.28;
       const weaknessBoost = 0.9 + weakness * 0.34;
@@ -1391,6 +1596,7 @@
     }
 
     function randomFixture() {
+      resetMatchContext();
       const countries = Object.keys(WORLD_LEAGUES);
       const country = countries[Math.floor(Math.random() * countries.length)];
       const leagues = Object.keys(WORLD_LEAGUES[country]);
@@ -1415,10 +1621,12 @@
     state.countrySelect.addEventListener("change", loadCountryLeagues);
     state.leagueSelect.addEventListener("change", loadLeagueTeams);
     state.homeSelect.addEventListener("change", () => {
+      resetMatchContext();
       syncTeamProfiles();
       calculate();
     });
     state.awaySelect.addEventListener("change", () => {
+      resetMatchContext();
       syncTeamProfiles();
       calculate();
     });
@@ -1445,6 +1653,7 @@
       applyFeaturedFixture(Number(card.dataset.fixture));
     });
     document.getElementById("fixtureDate").value = localDateValue();
+    resetMatchContext();
     loadLeague("England", "Premier League", "Arsenal", "Liverpool");
     loadLiveFixtures();
 
