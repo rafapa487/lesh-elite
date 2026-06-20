@@ -2082,9 +2082,10 @@
       const eloHomeWin = 1 / (1 + Math.pow(10, ((away.strength - (home.strength + 65)) / 400)));
       const eloSwing = clamp((eloHomeWin - 0.5) * 0.58 + formEdge * 0.16, -0.45, 0.45);
       const disciplineDrag = 1 - aggression * referee * 0.08;
-      const remaining = fixture.matchState === "pre" ? 1 : clamp((96 - fixture.minute) / 96, 0, 1);
-      const homeGoals = fixture.matchState === "pre" ? 0 : fixture.homeScore;
-      const awayGoals = fixture.matchState === "pre" ? 0 : fixture.awayScore;
+      const isLive = fixture.matchState === "in";
+      const remaining = isLive ? clamp((96 - fixture.minute) / 96, 0, 1) : 1;
+      const homeGoals = isLive ? fixture.homeScore : 0;
+      const awayGoals = isLive ? fixture.awayScore : 0;
       const homeLambda = clamp(home.attack * (0.82 + tempo * 0.36) * (0.9 + pressure * 0.28) * (1 + eloSwing) * (0.96 + weakness * 0.14) * disciplineDrag, 0.05, 5.8) * remaining;
       const awayLambda = clamp(away.attack * (0.82 + tempo * 0.36) * (0.9 + weakness * 0.34) * (1 - eloSwing * 0.82) * (1.03 - pressure * 0.11) * disciplineDrag, 0.05, 5.8) * remaining;
       const rho = -0.09 + (tempo - 0.5) * 0.05;
