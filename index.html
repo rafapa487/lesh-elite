@@ -5,7 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0f6f50">
   <meta name="description" content="Lesh Elite Prediction System forecasts football outcomes, goals, corners, bookings and live match probabilities.">
+  <meta name="application-name" content="Lesh Elite">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Lesh Elite Prediction System">
+  <meta property="og:description" content="Live football fixtures with outcome, goals, corners, bookings and match probability forecasts.">
+  <meta property="og:url" content="https://rafapa487.github.io/lesh-elite/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Lesh Elite Prediction System">
+  <meta name="twitter:description" content="Live football fixture forecasts and match intelligence.">
   <title>Lesh Elite Prediction System</title>
+  <link rel="canonical" href="https://rafapa487.github.io/lesh-elite/">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
   <style>
     :root {
@@ -63,7 +75,31 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 18px;
+      margin-bottom: 12px;
+    }
+
+    .brand-copy {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .brand-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .beta-badge {
+      flex: 0 0 auto;
+      border: 1px solid rgba(15,111,80,.25);
+      border-radius: 4px;
+      background: rgba(15,111,80,.08);
+      color: var(--green);
+      padding: 3px 5px;
+      font-size: .58rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .06em;
     }
 
     .crest {
@@ -90,6 +126,74 @@
       margin: 3px 0 0;
       color: var(--muted);
       font-size: .82rem;
+    }
+
+    .site-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: white;
+      padding: 8px 9px;
+    }
+
+    .live-status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      min-width: 0;
+      color: var(--muted);
+      font-size: .7rem;
+      line-height: 1.25;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      flex: 0 0 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 3px rgba(199,154,34,.14);
+    }
+
+    .live-status.connected .status-dot {
+      background: var(--green);
+      box-shadow: 0 0 0 3px rgba(15,111,80,.14);
+    }
+
+    .live-status.error .status-dot {
+      background: var(--red);
+      box-shadow: 0 0 0 3px rgba(166,61,53,.14);
+    }
+
+    .toolbar-actions {
+      display: flex;
+      gap: 5px;
+    }
+
+    .toolbar-action {
+      min-height: 30px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #f8f5ed;
+      color: var(--ink);
+      padding: 0 8px;
+      cursor: pointer;
+      font-size: .68rem;
+      font-weight: 800;
+    }
+
+    .toolbar-action[hidden] { display: none; }
+
+    .sidebar-footer {
+      border-top: 1px solid var(--line);
+      margin-top: 18px;
+      padding-top: 13px;
+      color: var(--muted);
+      font-size: .68rem;
+      line-height: 1.45;
     }
 
     .section {
@@ -831,9 +935,23 @@
     <aside>
       <div class="brand">
         <div class="crest" aria-hidden="true">LE</div>
-        <div>
-          <h1>Lesh Elite Prediction System</h1>
+        <div class="brand-copy">
+          <div class="brand-title-row">
+            <h1>Lesh Elite Prediction System</h1>
+            <span class="beta-badge">Private beta</span>
+          </div>
           <p class="subhead">Outcome, goals, corners, bookings and live match probabilities.</p>
+        </div>
+      </div>
+
+      <div class="site-toolbar">
+        <div class="live-status" id="dataStatus" aria-live="polite">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span id="dataStatusText">Connecting live data</span>
+        </div>
+        <div class="toolbar-actions">
+          <button class="toolbar-action" id="installApp" type="button" hidden>Install</button>
+          <button class="toolbar-action" id="shareApp" type="button">Share</button>
         </div>
       </div>
 
@@ -895,9 +1013,11 @@
         </div>
         <div class="actions">
           <button class="primary" id="runModel">Update Prediction</button>
-          <button class="icon-button" id="randomize" title="Load sample fixture" aria-label="Load sample fixture">R</button>
+          <button class="icon-button" id="randomize" title="Load another fixture" aria-label="Load another fixture">&#8635;</button>
         </div>
       </div>
+
+      <div class="sidebar-footer">Private testing build · Live football data · Predictions are informational.</div>
     </aside>
 
     <main>
@@ -1211,6 +1331,36 @@
     const output = (id) => document.getElementById(id);
     const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
     const pct = (value) => `${Math.round(value * 100)}%`;
+    const SHARE_URL = "https://rafapa487.github.io/lesh-elite/";
+    let installPrompt = null;
+
+    function setDataStatus(status, text) {
+      const container = output("dataStatus");
+      container.className = `live-status ${status}`;
+      output("dataStatusText").textContent = text;
+    }
+
+    async function shareApp() {
+      const button = output("shareApp");
+      try {
+        if (navigator.share) {
+          await navigator.share({
+            title: "Lesh Elite Prediction System",
+            text: "Test today's football predictions on Lesh Elite.",
+            url: SHARE_URL
+          });
+        } else {
+          await navigator.clipboard.writeText(SHARE_URL);
+          button.textContent = "Copied";
+          setTimeout(() => button.textContent = "Share", 1400);
+        }
+      } catch (error) {
+        if (error?.name !== "AbortError") {
+          button.textContent = "Copy link";
+          setTimeout(() => button.textContent = "Share", 1600);
+        }
+      }
+    }
 
     function poisson(lambda, k) {
       let factorial = 1;
@@ -1672,6 +1822,7 @@
         ? "Today's Games"
         : `Games - ${new Date(`${dateValue}T12:00:00`).toLocaleDateString([], { day: "numeric", month: "short" })}`;
       refreshButton.disabled = true;
+      setDataStatus("", "Updating live data");
       output("fixtureStatus").textContent = "Updating current schedule...";
       output("todayFixtures").innerHTML = '<p class="fixture-empty">Loading current fixtures...</p>';
 
@@ -1749,9 +1900,11 @@
         output("fixtureStatus").textContent = activeFixtures.length
           ? `Live schedule - ${activeFixtures.length} match${activeFixtures.length === 1 ? "" : "es"} across ${competitionCount} competition${competitionCount === 1 ? "" : "s"}`
           : "Live schedule - no matches on this date";
+        setDataStatus("connected", `Live data - ${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`);
       } catch (error) {
         activeFixtures = [];
         output("fixtureStatus").textContent = "Live games unavailable - tap refresh to retry";
+        setDataStatus("error", navigator.onLine ? "Data connection unavailable" : "Offline");
       } finally {
         refreshButton.disabled = false;
         gradeHistoryFromFixtures(activeFixtures);
@@ -1970,6 +2123,13 @@
 
     document.getElementById("runModel").addEventListener("click", calculate);
     document.getElementById("randomize").addEventListener("click", randomFixture);
+    document.getElementById("shareApp").addEventListener("click", shareApp);
+    document.getElementById("installApp").addEventListener("click", async () => {
+      if (!installPrompt) return;
+      await installPrompt.prompt();
+      installPrompt = null;
+      output("installApp").hidden = true;
+    });
     document.getElementById("savePrediction").addEventListener("click", saveCurrentPrediction);
     document.getElementById("clearHistory").addEventListener("click", () => {
       if (!window.confirm("Clear all saved prediction history?")) return;
@@ -1991,6 +2151,18 @@
     loadLeague("England", "Premier League", "Arsenal", "Liverpool");
     loadLiveFixtures();
     syncPendingPredictionResults();
+
+    window.addEventListener("beforeinstallprompt", (event) => {
+      event.preventDefault();
+      installPrompt = event;
+      output("installApp").hidden = false;
+    });
+    window.addEventListener("appinstalled", () => {
+      installPrompt = null;
+      output("installApp").hidden = true;
+    });
+    window.addEventListener("offline", () => setDataStatus("error", "Offline"));
+    window.addEventListener("online", loadLiveFixtures);
 
     if ("serviceWorker" in navigator && location.protocol !== "file:") {
       window.addEventListener("load", () => {
