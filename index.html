@@ -187,6 +187,103 @@
 
     .toolbar-action[hidden] { display: none; }
 
+    .feedback-dialog {
+      width: min(520px, calc(100vw - 28px));
+      max-height: calc(100vh - 28px);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+      box-shadow: 0 24px 70px rgba(21,21,21,.28);
+      padding: 0;
+    }
+
+    .feedback-dialog::backdrop {
+      background: rgba(21,21,21,.55);
+    }
+
+    .feedback-form {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+    }
+
+    .feedback-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .feedback-head h2 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .dialog-close {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: white;
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 1.15rem;
+    }
+
+    .feedback-form label {
+      margin: 0;
+    }
+
+    .feedback-form input,
+    .feedback-form select,
+    .feedback-form textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: white;
+      color: var(--ink);
+      padding: 9px 10px;
+      outline: none;
+      resize: vertical;
+    }
+
+    .feedback-form textarea {
+      min-height: 130px;
+    }
+
+    .feedback-meta,
+    .feedback-status {
+      margin: 0;
+      color: var(--muted);
+      font-size: .7rem;
+      line-height: 1.45;
+    }
+
+    .feedback-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .feedback-action {
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: white;
+      color: var(--ink);
+      padding: 0 12px;
+      cursor: pointer;
+      font-size: .76rem;
+      font-weight: 800;
+    }
+
+    .feedback-action.primary-feedback {
+      border-color: var(--green);
+      background: var(--green);
+      color: white;
+    }
+
     .sidebar-footer {
       border-top: 1px solid var(--line);
       margin-top: 18px;
@@ -927,6 +1024,15 @@
       .score-grid {
         grid-template-columns: repeat(3, 1fr);
       }
+
+      .feedback-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .feedback-action.primary-feedback {
+        grid-column: 1 / -1;
+      }
     }
   </style>
 </head>
@@ -938,7 +1044,7 @@
         <div class="brand-copy">
           <div class="brand-title-row">
             <h1>Lesh Elite Prediction System</h1>
-            <span class="beta-badge">Private beta</span>
+            <span class="beta-badge">Beta v0.8</span>
           </div>
           <p class="subhead">Outcome, goals, corners, bookings and live match probabilities.</p>
         </div>
@@ -951,6 +1057,7 @@
         </div>
         <div class="toolbar-actions">
           <button class="toolbar-action" id="installApp" type="button" hidden>Install</button>
+          <button class="toolbar-action" id="openFeedback" type="button">Feedback</button>
           <button class="toolbar-action" id="shareApp" type="button">Share</button>
         </div>
       </div>
@@ -1017,7 +1124,7 @@
         </div>
       </div>
 
-      <div class="sidebar-footer">Private testing build · Live football data · Predictions are informational.</div>
+      <div class="sidebar-footer">Private testing build v0.8 · Live football data · Predictions are informational.</div>
     </aside>
 
     <main>
@@ -1146,6 +1253,37 @@
       </div>
     </main>
   </div>
+
+  <dialog class="feedback-dialog" id="feedbackDialog">
+    <form class="feedback-form" id="feedbackForm">
+      <div class="feedback-head">
+        <h2>Beta Feedback</h2>
+        <button class="dialog-close" id="closeFeedback" type="button" aria-label="Close feedback">&times;</button>
+      </div>
+      <label>Feedback type
+        <select id="feedbackType">
+          <option value="Bug report">Bug report</option>
+          <option value="Prediction issue">Prediction issue</option>
+          <option value="Fixture data issue">Fixture data issue</option>
+          <option value="Feature request">Feature request</option>
+          <option value="General feedback">General feedback</option>
+        </select>
+      </label>
+      <label>Your name (optional)
+        <input id="feedbackName" type="text" maxlength="80" autocomplete="name">
+      </label>
+      <label>What happened or what should improve?
+        <textarea id="feedbackMessage" maxlength="1500" required></textarea>
+      </label>
+      <p class="feedback-meta" id="feedbackMeta"></p>
+      <p class="feedback-status" id="feedbackStatus" aria-live="polite"></p>
+      <div class="feedback-actions">
+        <button class="feedback-action" id="cancelFeedback" type="button">Cancel</button>
+        <button class="feedback-action" id="copyFeedback" type="button">Copy report</button>
+        <button class="feedback-action primary-feedback" type="submit">Submit feedback</button>
+      </div>
+    </form>
+  </dialog>
 
   <script>
     const team = (name, attack, strength) => ({ name, attack, strength });
@@ -1332,6 +1470,8 @@
     const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
     const pct = (value) => `${Math.round(value * 100)}%`;
     const SHARE_URL = "https://rafapa487.github.io/lesh-elite/";
+    const FEEDBACK_ISSUES_URL = "https://github.com/rafapa487/lesh-elite/issues/new";
+    const BETA_VERSION = "0.8.0";
     let installPrompt = null;
 
     function setDataStatus(status, text) {
@@ -1360,6 +1500,66 @@
           setTimeout(() => button.textContent = "Share", 1600);
         }
       }
+    }
+
+    function feedbackReport() {
+      const type = output("feedbackType").value;
+      const name = output("feedbackName").value.trim() || "Anonymous tester";
+      const message = output("feedbackMessage").value.trim();
+      return {
+        type,
+        message,
+        body: [
+          `## ${type}`,
+          "",
+          message,
+          "",
+          "## Tester details",
+          `- Name: ${name}`,
+          `- Beta version: ${BETA_VERSION}`,
+          `- Page: ${location.href}`,
+          `- Viewport: ${window.innerWidth} x ${window.innerHeight}`,
+          `- Device: ${navigator.userAgent}`,
+          `- Submitted: ${new Date().toISOString()}`
+        ].join("\n")
+      };
+    }
+
+    function openFeedbackDialog() {
+      output("feedbackStatus").textContent = "";
+      output("feedbackMeta").textContent = `Beta v${BETA_VERSION} - ${window.innerWidth} x ${window.innerHeight}`;
+      const dialog = output("feedbackDialog");
+      if (typeof dialog.showModal === "function") dialog.showModal();
+      else dialog.setAttribute("open", "");
+      output("feedbackMessage").focus();
+    }
+
+    function closeFeedbackDialog() {
+      const dialog = output("feedbackDialog");
+      if (typeof dialog.close === "function") dialog.close();
+      else dialog.removeAttribute("open");
+    }
+
+    async function copyFeedbackReport() {
+      if (!output("feedbackMessage").reportValidity()) return;
+      try {
+        await navigator.clipboard.writeText(feedbackReport().body);
+        output("feedbackStatus").textContent = "Report copied.";
+      } catch (error) {
+        output("feedbackStatus").textContent = "Copy unavailable on this browser.";
+      }
+    }
+
+    function submitFeedback(event) {
+      event.preventDefault();
+      if (!output("feedbackForm").reportValidity()) return;
+      const report = feedbackReport();
+      const title = `[Beta ${BETA_VERSION}] ${report.type}`;
+      const issueUrl = `${FEEDBACK_ISSUES_URL}?title=${encodeURIComponent(title)}&body=${encodeURIComponent(report.body)}`;
+      const opened = window.open(issueUrl, "_blank");
+      if (opened) opened.opener = null;
+      output("feedbackStatus").textContent = opened ? "Opening the project feedback tracker..." : "Pop-up blocked. Use Copy report instead.";
+      if (opened) setTimeout(closeFeedbackDialog, 600);
     }
 
     function poisson(lambda, k) {
@@ -2124,6 +2324,14 @@
     document.getElementById("runModel").addEventListener("click", calculate);
     document.getElementById("randomize").addEventListener("click", randomFixture);
     document.getElementById("shareApp").addEventListener("click", shareApp);
+    document.getElementById("openFeedback").addEventListener("click", openFeedbackDialog);
+    document.getElementById("closeFeedback").addEventListener("click", closeFeedbackDialog);
+    document.getElementById("cancelFeedback").addEventListener("click", closeFeedbackDialog);
+    document.getElementById("copyFeedback").addEventListener("click", copyFeedbackReport);
+    document.getElementById("feedbackForm").addEventListener("submit", submitFeedback);
+    document.getElementById("feedbackDialog").addEventListener("click", (event) => {
+      if (event.target === event.currentTarget) closeFeedbackDialog();
+    });
     document.getElementById("installApp").addEventListener("click", async () => {
       if (!installPrompt) return;
       await installPrompt.prompt();
