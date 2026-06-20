@@ -2353,9 +2353,30 @@
     }
 
     async function loadPublishedFixtureResults(dateKey) {
-      const response = await fetch(`./fixtures.json?v=${Date.now()}`, { cache: "no-store" });
-      if (!response.ok) throw new Error(`Published fixture feed: ${response.status}`);
-      const payload = await response.json();
+      const cacheKey = Date.now();
+      const feedUrls = [
+        new URL(`fixtures.json?v=${cacheKey}`, location.href).href,
+        `https://raw.githubusercontent.com/rafapa487/lesh-elite/main/fixtures.json?v=${cacheKey}`
+      ];
+      let payload = null;
+      let lastError = null;
+
+      for (const url of feedUrls) {
+        try {
+          const response = await fetch(url, { cache: "no-store" });
+          if (!response.ok) throw new Error(`Published fixture feed: ${response.status}`);
+          const candidate = await response.json();
+          if (!Number.isFinite(candidate.successfulRequests) || candidate.successfulRequests <= 0) {
+            throw new Error("Published fixture feed has no successful sources");
+          }
+          payload = candidate;
+          break;
+        } catch (error) {
+          lastError = error;
+        }
+      }
+
+      if (!payload) throw lastError || new Error("Published fixture feed unavailable");
       if (!Number.isFinite(payload.successfulRequests) || payload.successfulRequests <= 0) {
         throw new Error("Published fixture feed has no successful sources");
       }
@@ -2375,7 +2396,7 @@
     async function loadLiveFixtures() {
       const refreshButton = document.getElementById("refreshFixtures");
       const dateValue = document.getElementById("fixtureDate").value || localDateValue();
-      const dateKey = dateValue.replaceAll("-", "");
+      const dateKey = dateValue.replace(/-/g, "");
       const isToday = dateValue === localDateValue();
       output("fixtureHeading").textContent = isToday
         ? "Today's Games"
