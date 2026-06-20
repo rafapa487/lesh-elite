@@ -1,4 +1,4 @@
-const CACHE_NAME = "lesh-elite-v12";
+const CACHE_NAME = "lesh-elite-v13";
 const APP_ASSETS = [
   "./",
   "./index.html",
@@ -24,7 +24,13 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
-  if (new URL(event.request.url).origin !== self.location.origin) return;
+  const requestUrl = new URL(event.request.url);
+  if (requestUrl.origin !== self.location.origin) return;
+
+  if (requestUrl.pathname.endsWith("/fixtures.json")) {
+    event.respondWith(fetch(event.request, { cache: "no-store" }));
+    return;
+  }
 
   if (event.request.mode === "navigate") {
     event.respondWith(
