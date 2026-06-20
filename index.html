@@ -2013,6 +2013,26 @@
       select.value = competitions.some(([value]) => value === previousValue) ? previousValue : "all";
     }
 
+    async function loadPublishedFixtureResults(dateKey) {
+      const response = await fetch(`./fixtures.json?v=${Date.now()}`, { cache: "no-store" });
+      if (!response.ok) throw new Error(`Published fixture feed: ${response.status}`);
+      const payload = await response.json();
+      if (!Number.isFinite(payload.successfulRequests) || payload.successfulRequests <= 0) {
+        throw new Error("Published fixture feed has no successful sources");
+      }
+      if (!Array.isArray(payload.dates) || !payload.dates.includes(dateKey)) {
+        throw new Error("Selected date is outside the published fixture window");
+      }
+      const results = (payload.sources || []).map((source) => ({
+        status: "fulfilled",
+        value: {
+          source: { country: source.country, league: source.league, slug: source.slug },
+          data: { events: source.events || [] }
+        }
+      }));
+      return { results, updatedAt: payload.updatedAt };
+    }
+
     async function loadLiveFixtures() {
       const refreshButton = document.getElementById("refreshFixtures");
       const dateValue = document.getElementById("fixtureDate").value || localDateValue();
@@ -2027,17 +2047,25 @@
       output("todayFixtures").innerHTML = '<p class="fixture-empty">Loading current fixtures...</p>';
 
       try {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 14000);
-        const results = await Promise.allSettled(LIVE_COMPETITIONS.map(async (source) => {
-          const response = await fetch(`${ESPN_SCOREBOARD_ROOT}/${source.slug}/scoreboard?dates=${dateKey}`, {
-            cache: "no-store",
-            signal: controller.signal
-          });
-          if (!response.ok) throw new Error(`${source.slug}: ${response.status}`);
-          return { source, data: await response.json() };
-        }));
-        clearTimeout(timeout);
+        let results;
+        let publishedAt = null;
+        try {
+          const published = await loadPublishedFixtureResults(dateKey);
+          results = published.results;
+          publishedAt = published.updatedAt;
+        } catch (publishedError) {
+          const controller = new AbortController();
+          const timeout = setTimeout(() => controller.abort(), 14000);
+          results = await Promise.allSettled(LIVE_COMPETITIONS.map(async (source) => {
+            const response = await fetch(`${ESPN_SCOREBOARD_ROOT}/${source.slug}/scoreboard?dates=${dateKey}`, {
+              cache: "no-store",
+              signal: controller.signal
+            });
+            if (!response.ok) throw new Error(`${source.slug}: ${response.status}`);
+            return { source, data: await response.json() };
+          }));
+          clearTimeout(timeout);
+        }
         const successfulResults = results.filter((result) => result.status === "fulfilled");
         if (!successfulResults.length) throw new Error("All fixture feeds failed");
 
@@ -2100,7 +2128,8 @@
         output("fixtureStatus").textContent = activeFixtures.length
           ? `Live schedule - ${activeFixtures.length} match${activeFixtures.length === 1 ? "" : "es"} across ${competitionCount} competition${competitionCount === 1 ? "" : "s"}`
           : "Live schedule - no matches on this date";
-        setDataStatus("connected", `Live data - ${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`);
+        const sourceTime = publishedAt ? new Date(publishedAt) : new Date();
+        setDataStatus("connected", `Fixture feed - ${sourceTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`);
       } catch (error) {
         activeFixtures = [];
         output("fixtureStatus").textContent = "Live games unavailable - tap refresh to retry";
