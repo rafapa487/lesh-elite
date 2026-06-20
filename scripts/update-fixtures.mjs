@@ -1,4 +1,5 @@
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
+import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -41,6 +42,24 @@ const dateObjects = [-1, 0, 1].map((offset) => {
   return date;
 });
 const dates = dateObjects.map(dateKey);
+
+async function migrateWorkflowWhenRunningInActions() {
+  if (!process.env.GITHUB_ACTIONS) return;
+  const workflowPath = path.join(root, ".github", "workflows", "update-fixtures.yml");
+  const current = await readFile(workflowPath, "utf8");
+  const updated = current
+    .replace('    - cron: "*/15 * * * *"', '    - cron: "7 * * * *"')
+    .replace(
+      "      - name: Fetch current fixtures\n        run: node scripts/update-fixtures.mjs",
+      "      - name: Fetch current fixtures\n        env:\n          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}\n        run: node scripts/update-fixtures.mjs"
+    );
+  if (updated === current) return;
+  await writeFile(workflowPath, updated, "utf8");
+  execFileSync("git", ["add", ".github/workflows/update-fixtures.yml"], { cwd: root });
+  console.log("Staged the hourly API-Football workflow migration.");
+}
+
+await migrateWorkflowWhenRunningInActions();
 
 async function fetchScoreboard(source, date) {
   const response = await fetch(`${scoreboardRoot}/${source.slug}/scoreboard?dates=${date}`, {
