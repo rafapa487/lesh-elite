@@ -36,6 +36,8 @@
 
     * { box-sizing: border-box; }
 
+    [id] { scroll-margin-top: 96px; }
+
     body {
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -53,9 +55,51 @@
     }
 
     .app {
-      min-height: 100vh;
+      min-height: calc(100vh - 78px);
       display: grid;
       grid-template-columns: minmax(320px, 400px) 1fr;
+    }
+
+    .site-header {
+      min-height: 78px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: minmax(280px, 1fr) auto minmax(280px, 1fr);
+      align-items: center;
+      gap: 24px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,253,247,.96);
+      padding: 12px 22px;
+      box-shadow: 0 8px 24px rgba(38,34,26,.06);
+    }
+
+    .site-header .brand { margin: 0; }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+    }
+
+    .site-nav a {
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .site-nav a:hover,
+    .site-nav a:focus {
+      color: var(--green);
+      outline: none;
+    }
+
+    .site-header .site-toolbar {
+      justify-self: end;
+      width: min(100%, 390px);
     }
 
     aside {
@@ -63,7 +107,7 @@
       border-right: 1px solid var(--line);
       padding: 22px;
       overflow-y: auto;
-      max-height: 100vh;
+      max-height: calc(100vh - 78px);
     }
 
     main {
@@ -99,7 +143,7 @@
       font-size: .58rem;
       font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: .06em;
+      letter-spacing: 0;
     }
 
     .crest {
@@ -1018,7 +1062,103 @@
     .history-status.correct { background: var(--green); color: white; }
     .history-status.incorrect { background: var(--red); color: white; }
 
+    .about-band {
+      border-top: 1px solid #2d2d2d;
+      background: #151515;
+      color: white;
+      padding: 52px 22px;
+    }
+
+    .about-inner {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .about-intro {
+      display: grid;
+      grid-template-columns: minmax(220px, .65fr) minmax(300px, 1.35fr);
+      gap: 48px;
+      align-items: start;
+      margin-bottom: 40px;
+    }
+
+    .about-eyebrow {
+      margin: 0 0 8px;
+      color: #7fd8b4;
+      font-size: .72rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .about-intro h2 {
+      margin: 0;
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .about-intro p:last-child {
+      max-width: 680px;
+      margin: 0;
+      color: #c9c8c3;
+      font-size: .96rem;
+      line-height: 1.7;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid #383838;
+    }
+
+    .about-item {
+      min-width: 0;
+      padding: 24px 26px 0 0;
+    }
+
+    .about-item + .about-item {
+      border-left: 1px solid #383838;
+      padding-left: 26px;
+    }
+
+    .about-item strong {
+      display: block;
+      margin-bottom: 7px;
+      color: white;
+      font-size: .9rem;
+    }
+
+    .about-item span {
+      color: #a9a8a3;
+      font-size: .78rem;
+      line-height: 1.55;
+    }
+
+    .site-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid var(--line);
+      background: #fffdf7;
+      color: var(--muted);
+      padding: 18px 22px;
+      font-size: .7rem;
+    }
+
     @media (max-width: 1040px) {
+      .site-header {
+        position: relative;
+        grid-template-columns: 1fr auto;
+      }
+
+      .site-nav {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-content: flex-start;
+        border-top: 1px solid var(--line);
+        padding-top: 10px;
+      }
+
       .app {
         grid-template-columns: 1fr;
       }
@@ -1037,6 +1177,25 @@
     }
 
     @media (max-width: 680px) {
+      .site-header {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 12px 14px;
+      }
+
+      .site-header .site-toolbar {
+        justify-self: stretch;
+        width: 100%;
+      }
+
+      .site-nav {
+        grid-column: 1;
+        grid-row: auto;
+        justify-content: space-between;
+        gap: 12px;
+        overflow-x: auto;
+      }
+
       aside,
       main {
         padding: 14px;
@@ -1088,35 +1247,60 @@
       .feedback-action.primary-feedback {
         grid-column: 1 / -1;
       }
+
+      .about-band { padding: 38px 14px; }
+
+      .about-intro,
+      .about-grid { grid-template-columns: 1fr; }
+
+      .about-intro { gap: 18px; }
+
+      .about-item,
+      .about-item + .about-item {
+        border-left: 0;
+        border-top: 1px solid #383838;
+        padding: 20px 0;
+      }
+
+      .site-footer {
+        display: grid;
+        padding: 16px 14px;
+      }
     }
   </style>
 </head>
 <body>
+  <header class="site-header">
+    <div class="brand">
+      <div class="crest" aria-hidden="true">LE</div>
+      <div class="brand-copy">
+        <div class="brand-title-row">
+          <h1>Lesh Elite Prediction System</h1>
+          <span class="beta-badge">Beta v0.8</span>
+        </div>
+        <p class="subhead">Live football forecasts and match intelligence.</p>
+      </div>
+    </div>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="#predictions">Predictions</a>
+      <a href="#today">Today's Games</a>
+      <a href="#accuracy">Accuracy</a>
+      <a href="#about">About</a>
+    </nav>
+    <div class="site-toolbar">
+      <div class="live-status" id="dataStatus" aria-live="polite">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span id="dataStatusText">Connecting live data</span>
+      </div>
+      <div class="toolbar-actions">
+        <button class="toolbar-action" id="installApp" type="button" hidden>Install</button>
+        <button class="toolbar-action" id="openFeedback" type="button">Feedback</button>
+        <button class="toolbar-action" id="shareApp" type="button">Share</button>
+      </div>
+    </div>
+  </header>
   <div class="app">
     <aside>
-      <div class="brand">
-        <div class="crest" aria-hidden="true">LE</div>
-        <div class="brand-copy">
-          <div class="brand-title-row">
-            <h1>Lesh Elite Prediction System</h1>
-            <span class="beta-badge">Beta v0.8</span>
-          </div>
-          <p class="subhead">Outcome, goals, corners, bookings and live match probabilities.</p>
-        </div>
-      </div>
-
-      <div class="site-toolbar">
-        <div class="live-status" id="dataStatus" aria-live="polite">
-          <span class="status-dot" aria-hidden="true"></span>
-          <span id="dataStatusText">Connecting live data</span>
-        </div>
-        <div class="toolbar-actions">
-          <button class="toolbar-action" id="installApp" type="button" hidden>Install</button>
-          <button class="toolbar-action" id="openFeedback" type="button">Feedback</button>
-          <button class="toolbar-action" id="shareApp" type="button">Share</button>
-        </div>
-      </div>
-
       <div class="section">
         <h2>Fixture</h2>
         <div class="team-row">
@@ -1182,7 +1366,7 @@
       <div class="sidebar-footer">Private testing build v0.8 · Live football data · Predictions are informational.</div>
     </aside>
 
-    <main>
+    <main id="predictions">
       <div class="dashboard">
         <div class="left-stack">
           <section class="hero-panel">
@@ -1267,7 +1451,7 @@
             </div>
           </section>
 
-          <section class="panel">
+          <section class="panel" id="accuracy">
             <div class="context-head">
               <h3>Prediction Performance</h3>
               <button class="history-clear" id="clearHistory" type="button" disabled>Clear</button>
@@ -1283,7 +1467,7 @@
             <div class="history-list" id="predictionHistory"></div>
           </section>
 
-          <section class="panel">
+          <section class="panel" id="today">
             <div class="fixture-panel-head">
               <div>
                 <h3 id="fixtureHeading">Today's Games</h3>
@@ -1308,6 +1492,28 @@
       </div>
     </main>
   </div>
+
+  <section class="about-band" id="about">
+    <div class="about-inner">
+      <div class="about-intro">
+        <div>
+          <p class="about-eyebrow">About Lesh Elite</p>
+          <h2>Football intelligence built around the match.</h2>
+        </div>
+        <p>Lesh Elite brings live fixtures, team strength, recent form and match conditions into one focused forecast. It presents clear probabilities for outcomes, goals, corners and bookings, then tracks completed predictions to measure performance over time.</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-item"><strong>Global coverage</strong><span>Club and international competitions presented through one consistent match workflow.</span></div>
+        <div class="about-item"><strong>Live context</strong><span>Probabilities respond to the current score, match minute and available fixture information.</span></div>
+        <div class="about-item"><strong>Measured performance</strong><span>Saved forecasts are graded after full-time so accuracy can be evaluated honestly.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <span>&copy; 2026 Lesh Elite Prediction System</span>
+    <span>Private beta &middot; Predictions are informational</span>
+  </footer>
 
   <dialog class="feedback-dialog" id="feedbackDialog">
     <form class="feedback-form" id="feedbackForm">
