@@ -1,4 +1,4 @@
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -58,7 +58,7 @@ function apiMatchState(shortStatus) {
   return "pre";
 }
 
-function normalizeApiFootballFixture(item) {
+function normalizeApiFootballFixture(item, h2h = []) {
   const state = apiMatchState(item.fixture?.status?.short);
   const elapsed = item.fixture?.status?.elapsed;
   const shortDetail = item.fixture?.status?.short || "Scheduled";
@@ -86,6 +86,7 @@ function normalizeApiFootballFixture(item) {
     date: item.fixture?.date,
     name: `${item.teams?.away?.name || "Away"} at ${item.teams?.home?.name || "Home"}`,
     shortName: `${item.teams?.away?.name || "Away"} @ ${item.teams?.home?.name || "Home"}`,
+    h2h,
     competitions: [{
       id: String(item.fixture?.id || ""),
       date: item.fixture?.date,
@@ -106,6 +107,38 @@ function normalizeApiFootballFixture(item) {
       ]
     }]
   };
+}
+
+function normalizeH2HFixture(item) {
+  return {
+    id: String(item.fixture?.id || ""),
+    date: item.fixture?.date || "",
+    homeId: String(item.teams?.home?.id || ""),
+    awayId: String(item.teams?.away?.id || ""),
+    home: item.teams?.home?.name || "Home",
+    away: item.teams?.away?.name || "Away",
+    homeGoals: Number(item.goals?.home) || 0,
+    awayGoals: Number(item.goals?.away) || 0
+  };
+}
+
+async function fetchApiFootballH2H(item) {
+  const homeId = item.teams?.home?.id;
+  const awayId = item.teams?.away?.id;
+  if (!homeId || !awayId) return [];
+  const response = await fetch(`${apiFootballRoot}/fixtures/headtohead?h2h=${homeId}-${awayId}&last=8`, {
+    headers: { "x-apisports-key": apiFootballKey },
+    signal: AbortSignal.timeout(20000)
+  });
+  if (!response.ok) throw new Error(`API-Football H2H ${homeId}-${awayId}: ${response.status}`);
+  const data = await response.json();
+  const errors = data.errors && (Array.isArray(data.errors) ? data.errors.length : Object.keys(data.errors).length);
+  if (errors) throw new Error(`API-Football H2H ${homeId}-${awayId} returned an API error`);
+  return (Array.isArray(data.response) ? data.response : [])
+    .filter((match) => apiMatchState(match.fixture?.status?.short) === "post" && String(match.fixture?.id) !== String(item.fixture?.id))
+    .sort((a, b) => new Date(b.fixture?.date) - new Date(a.fixture?.date))
+    .slice(0, 5)
+    .map(normalizeH2HFixture);
 }
 
 async function fetchApiFootballDate(date) {
@@ -148,15 +181,40 @@ espnRequests.forEach((request, index) => {
 
 let apiFootballResults = [];
 const apiEventsByLeague = new Map();
+let h2hRequests = 0;
+let h2hSuccessful = 0;
 if (apiFootballKey) {
   apiFootballResults = await mapConcurrent(dateObjects, 2, fetchApiFootballDate);
+  let previousH2H = new Map();
+  try {
+    const previousPayload = JSON.parse(await readFile(path.join(root, "fixtures.json"), "utf8"));
+    previousH2H = new Map((previousPayload.sources || []).flatMap((source) => source.events || [])
+      .filter((event) => Array.isArray(event.h2h) && event.h2h.length)
+      .map((event) => [String(event.id), event.h2h]));
+  } catch {}
+
+  const apiItems = apiFootballResults
+    .filter((result) => result.status === "fulfilled")
+    .flatMap((result) => result.value)
+    .filter((item) => competitions.some((source) => source.apiLeagueId === Number(item.league?.id)));
+  const todayItemsMissingH2H = apiItems.filter((item) =>
+    isoDate(new Date(item.fixture?.date)) === isoDate(now) && !previousH2H.has(String(item.fixture?.id))
+  );
+  h2hRequests = todayItemsMissingH2H.length;
+  const h2hResults = await mapConcurrent(todayItemsMissingH2H, 2, fetchApiFootballH2H);
+  h2hResults.forEach((result, index) => {
+    if (result.status !== "fulfilled") return;
+    h2hSuccessful += 1;
+    previousH2H.set(String(todayItemsMissingH2H[index].fixture?.id), result.value);
+  });
+
   apiFootballResults.forEach((result) => {
     if (result.status !== "fulfilled") return;
     result.value.forEach((item) => {
       const leagueId = Number(item.league?.id);
       if (!competitions.some((source) => source.apiLeagueId === leagueId)) return;
       if (!apiEventsByLeague.has(leagueId)) apiEventsByLeague.set(leagueId, []);
-      apiEventsByLeague.get(leagueId).push(normalizeApiFootballFixture(item));
+      apiEventsByLeague.get(leagueId).push(normalizeApiFootballFixture(item, previousH2H.get(String(item.fixture?.id)) || []));
     });
   });
 }
@@ -190,14 +248,16 @@ const payload = {
   updatedAt: new Date().toISOString(),
   dates,
   provider: apiFixtureCount > 0 ? "api-football+espn" : "espn",
-  successfulRequests: espnSuccessful + apiSuccessful,
-  totalRequests: espnResults.length + apiFootballResults.length,
+  successfulRequests: espnSuccessful + apiSuccessful + h2hSuccessful,
+  totalRequests: espnResults.length + apiFootballResults.length + h2hRequests,
   providers: {
     apiFootball: {
       configured: Boolean(apiFootballKey),
       successfulRequests: apiSuccessful,
-      totalRequests: apiFootballResults.length,
-      fixtureCount: apiFixtureCount
+      totalRequests: apiFootballResults.length + h2hRequests,
+      fixtureCount: apiFixtureCount,
+      h2hSuccessfulRequests: h2hSuccessful,
+      h2hTotalRequests: h2hRequests
     },
     espn: {
       successfulRequests: espnSuccessful,
