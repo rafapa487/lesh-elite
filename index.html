@@ -608,6 +608,61 @@
       font-size: .98rem;
     }
 
+    .totals-markets {
+      display: grid;
+      gap: 14px;
+    }
+
+    .totals-group {
+      min-width: 0;
+    }
+
+    .totals-group-title {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--muted);
+      font-size: .7rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .totals-row {
+      display: grid;
+      grid-template-columns: 58px 1fr 1fr;
+      gap: 7px;
+      margin-top: 6px;
+    }
+
+    .totals-line,
+    .totals-side {
+      display: flex;
+      min-width: 0;
+      min-height: 40px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #f8f5ed;
+      padding: 8px;
+      font-size: .73rem;
+    }
+
+    .totals-line {
+      justify-content: center;
+      background: transparent;
+      color: var(--muted);
+      font-weight: 850;
+    }
+
+    .totals-side strong { font-size: .82rem; }
+
+    .totals-side.predicted {
+      border-color: rgba(23,107,73,.45);
+      background: #e8f4ee;
+      color: #0d5a3c;
+    }
+
     .prob-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -1431,6 +1486,11 @@
           </section>
 
           <section class="panel">
+            <h3>Over / Under Predictions</h3>
+            <div class="totals-markets" id="totalsMarkets"></div>
+          </section>
+
+          <section class="panel">
             <h3>Live Football Probabilities</h3>
             <div class="live-grid">
               <div class="metric"><span class="small">Next goal home</span><strong id="nextHome">52%</strong></div>
@@ -1838,6 +1898,30 @@
       let factorial = 1;
       for (let i = 2; i <= k; i++) factorial *= i;
       return Math.exp(-lambda) * Math.pow(lambda, k) / factorial;
+    }
+
+    function probabilityOver(lambda, line) {
+      if (line < 0) return 1;
+      let underOrEqual = 0;
+      for (let k = 0; k <= Math.floor(line); k++) underOrEqual += poisson(lambda, k);
+      return clamp(1 - underOrEqual, 0, 1);
+    }
+
+    function renderTotalsMarkets(groups) {
+      output("totalsMarkets").innerHTML = groups.map((group) => `
+        <div class="totals-group">
+          <span class="totals-group-title">${escapeHtml(group.label)}</span>
+          ${group.lines.map((market) => {
+            const over = clamp(market.over, 0, 1);
+            const under = 1 - over;
+            return `<div class="totals-row">
+              <span class="totals-line">${market.line.toFixed(1)}</span>
+              <span class="totals-side ${over >= under ? "predicted" : ""}"><span>Over</span><strong>${pct(over)}</strong></span>
+              <span class="totals-side ${under > over ? "predicted" : ""}"><span>Under</span><strong>${pct(under)}</strong></span>
+            </div>`;
+          }).join("")}
+        </div>
+      `).join("");
     }
 
     function dixonColesAdjust(homeGoals, awayGoals, homeLambda, awayLambda, rho) {
@@ -2664,6 +2748,20 @@
       output("btts").textContent = pct(btts);
       output("corners").textContent = expectedCorners.toFixed(1);
       output("bookings").textContent = expectedBookings.toFixed(1);
+      renderTotalsMarkets([
+        {
+          label: "Total goals",
+          lines: [1.5, 2.5, 3.5].map((line) => ({ line, over: probabilityOver(homeLambda + awayLambda, line - homeGoals - awayGoals) }))
+        },
+        {
+          label: "Total corners",
+          lines: [8.5, 9.5, 10.5].map((line) => ({ line, over: probabilityOver(expectedCorners, line) }))
+        },
+        {
+          label: "Total bookings",
+          lines: [3.5, 4.5, 5.5].map((line) => ({ line, over: probabilityOver(expectedBookings, line) }))
+        }
+      ]);
       output("nextHome").textContent = pct(nextHome);
       output("nextAway").textContent = pct(nextAway);
       output("noMore").textContent = pct(noMore);
