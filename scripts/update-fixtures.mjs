@@ -203,7 +203,10 @@ if (apiFootballKey) {
   h2hRequests = todayItemsMissingH2H.length;
   const h2hResults = await mapConcurrent(todayItemsMissingH2H, 2, fetchApiFootballH2H);
   h2hResults.forEach((result, index) => {
-    if (result.status !== "fulfilled") return;
+    if (result.status !== "fulfilled") {
+      console.warn(`H2H unavailable for fixture ${todayItemsMissingH2H[index].fixture?.id}: ${result.reason}`);
+      return;
+    }
     h2hSuccessful += 1;
     previousH2H.set(String(todayItemsMissingH2H[index].fixture?.id), result.value);
   });
