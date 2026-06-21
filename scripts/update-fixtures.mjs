@@ -126,16 +126,21 @@ async function fetchApiFootballH2H(item) {
   const homeId = item.teams?.home?.id;
   const awayId = item.teams?.away?.id;
   if (!homeId || !awayId) return [];
-  const response = await fetch(`${apiFootballRoot}/fixtures/headtohead?h2h=${homeId}-${awayId}&last=8`, {
+  const response = await fetch(`${apiFootballRoot}/fixtures?team=${homeId}&last=50`, {
     headers: { "x-apisports-key": apiFootballKey },
     signal: AbortSignal.timeout(20000)
   });
-  if (!response.ok) throw new Error(`API-Football H2H ${homeId}-${awayId}: ${response.status}`);
+  if (!response.ok) throw new Error(`API-Football team history ${homeId}: ${response.status}`);
   const data = await response.json();
   const errors = data.errors && (Array.isArray(data.errors) ? data.errors.length : Object.keys(data.errors).length);
-  if (errors) throw new Error(`API-Football H2H ${homeId}-${awayId} returned an API error`);
+  if (errors) throw new Error(`API-Football team history ${homeId} error: ${JSON.stringify(data.errors)}`);
   return (Array.isArray(data.response) ? data.response : [])
-    .filter((match) => apiMatchState(match.fixture?.status?.short) === "post" && String(match.fixture?.id) !== String(item.fixture?.id))
+    .filter((match) => {
+      const teamIds = [String(match.teams?.home?.id || ""), String(match.teams?.away?.id || "")];
+      return apiMatchState(match.fixture?.status?.short) === "post"
+        && teamIds.includes(String(awayId))
+        && String(match.fixture?.id) !== String(item.fixture?.id);
+    })
     .sort((a, b) => new Date(b.fixture?.date) - new Date(a.fixture?.date))
     .slice(0, 5)
     .map(normalizeH2HFixture);
