@@ -126,7 +126,10 @@ async function fetchApiFootballH2H(item) {
   const homeId = item.teams?.home?.id;
   const awayId = item.teams?.away?.id;
   if (!homeId || !awayId) return [];
-  const response = await fetch(`${apiFootballRoot}/fixtures?team=${homeId}&last=50`, {
+  const to = isoDate(now);
+  const fromDate = new Date(now);
+  fromDate.setUTCFullYear(fromDate.getUTCFullYear() - 2);
+  const response = await fetch(`${apiFootballRoot}/fixtures?team=${homeId}&from=${isoDate(fromDate)}&to=${to}`, {
     headers: { "x-apisports-key": apiFootballKey },
     signal: AbortSignal.timeout(20000)
   });
