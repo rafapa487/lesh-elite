@@ -2,7 +2,7 @@ name: Update live fixtures
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "7 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -20,6 +20,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Fetch current fixtures
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
         run: node scripts/update-fixtures.mjs
 
       - name: Publish changed fixture data
