@@ -24,14 +24,17 @@ jobs:
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
         run: node scripts/update-fixtures.mjs
 
+      - name: Update shared predictions
+        run: node scripts/update-predictions.mjs
+
       - name: Publish changed fixture data
         run: |
-          if [ -z "$(git status --porcelain -- fixtures.json)" ]; then
-            echo "Fixture data is unchanged."
+          if [ -z "$(git status --porcelain -- fixtures.json predictions.json)" ]; then
+            echo "Fixture and prediction data are unchanged."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add fixtures.json
-          git commit -m "Update live fixtures"
+          git add fixtures.json predictions.json
+          git commit -m "Update live fixtures and predictions"
           git push
