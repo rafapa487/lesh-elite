@@ -32,6 +32,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const scoreboardRoot = "https://site.api.espn.com/apis/site/v2/sports/soccer";
 const apiFootballRoot = (process.env.API_FOOTBALL_URL || "https://v3.football.api-sports.io").replace(/\/$/, "");
 const apiFootballKey = String(process.env.API_FOOTBALL_KEY || "").trim();
+const fastLiveRefresh = process.env.FAST_LIVE_REFRESH === "true";
 const isoDate = (date) => date.toISOString().slice(0, 10);
 const dateKey = (date) => isoDate(date).replace(/-/g, "");
 const now = new Date();
@@ -41,6 +42,11 @@ const dateObjects = [-1, 0, 1].map((offset) => {
   return date;
 });
 const dates = dateObjects.map(dateKey);
+const requestDates = (fastLiveRefresh ? [dateObjects[1]] : dateObjects).map(dateKey);
+let previousPayload = null;
+try {
+  previousPayload = JSON.parse(await readFile(path.join(root, "fixtures.json"), "utf8"));
+} catch {}
 
 async function fetchScoreboard(source, date) {
   const response = await fetch(`${scoreboardRoot}/${source.slug}/scoreboard?dates=${date}`, {
@@ -224,7 +230,7 @@ async function mapConcurrent(items, limit, mapper) {
   return results;
 }
 
-const espnRequests = competitions.flatMap((source) => dates.map((date) => ({ source, date })));
+const espnRequests = competitions.flatMap((source) => requestDates.map((date) => ({ source, date })));
 const espnResults = await mapConcurrent(espnRequests, 8, ({ source, date }) => fetchScoreboard(source, date));
 const espnEventsBySlug = new Map(competitions.map((source) => [source.slug, []]));
 
@@ -233,7 +239,7 @@ espnRequests.forEach((request, index) => {
   espnEventsBySlug.get(request.source.slug).push(...espnResults[index].value);
 });
 
-const espnH2HTargets = competitions.flatMap((source) =>
+const espnH2HTargets = fastLiveRefresh ? [] : competitions.flatMap((source) =>
   (espnEventsBySlug.get(source.slug) || [])
     .filter((event) => isoDate(new Date(event.date)) === isoDate(now))
     .map((event) => ({ source, event }))
@@ -248,11 +254,10 @@ let apiFootballResults = [];
 const apiEventsByLeague = new Map();
 let h2hRequests = 0;
 let h2hSuccessful = 0;
-if (apiFootballKey) {
+if (apiFootballKey && !fastLiveRefresh) {
   apiFootballResults = await mapConcurrent(dateObjects, 2, fetchApiFootballDate);
   let previousH2H = new Map();
   try {
-    const previousPayload = JSON.parse(await readFile(path.join(root, "fixtures.json"), "utf8"));
     previousH2H = new Map((previousPayload.sources || []).flatMap((source) => source.events || [])
       .filter((event) => Array.isArray(event.h2h) && event.h2h.length)
       .map((event) => [String(event.id), event.h2h]));
@@ -299,12 +304,31 @@ function uniqueEvents(events) {
 const sources = competitions.map((source) => {
   const apiEvents = uniqueEvents(apiEventsByLeague.get(source.apiLeagueId) || []);
   const espnEvents = uniqueEvents(espnEventsBySlug.get(source.slug) || []);
+  const freshEvents = apiEvents.length ? apiEvents : espnEvents;
+  const previousSource = previousPayload?.sources?.find((item) => item.slug === source.slug);
+  const previousEvents = previousSource?.events || [];
+  if (fastLiveRefresh) {
+    const today = isoDate(now);
+    const previousById = new Map(previousEvents.map((event) => [String(event.id), event]));
+    freshEvents.forEach((event) => {
+      const previous = previousById.get(String(event.id));
+      if (!event.h2h?.length && previous?.h2h?.length) event.h2h = previous.h2h;
+    });
+    const preservedEvents = previousEvents.filter((event) => isoDate(new Date(event.date)) !== today);
+    return {
+      country: source.country,
+      league: source.league,
+      slug: source.slug,
+      provider: "espn",
+      events: uniqueEvents([...preservedEvents, ...freshEvents])
+    };
+  }
   return {
     country: source.country,
     league: source.league,
     slug: source.slug,
     provider: apiEvents.length ? "api-football" : "espn",
-    events: apiEvents.length ? apiEvents : espnEvents
+    events: freshEvents
   };
 });
 
@@ -316,6 +340,7 @@ const payload = {
   updatedAt: new Date().toISOString(),
   dates,
   provider: apiFixtureCount > 0 ? "api-football+espn" : "espn",
+  refreshMode: fastLiveRefresh ? "live" : "full",
   successfulRequests: espnSuccessful + apiSuccessful + h2hSuccessful,
   totalRequests: espnResults.length + apiFootballResults.length + h2hRequests,
   providers: {
