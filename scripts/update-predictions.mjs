@@ -3,6 +3,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const apiFootballRoot = (process.env.API_FOOTBALL_URL || "https://v3.football.api-sports.io").replace(/\/$/, "");
+const apiFootballKey = String(process.env.API_FOOTBALL_KEY || "").trim();
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const team = (name, attack, strength) => ({ name, attack, strength });
 
@@ -10,6 +12,12 @@ function poisson(lambda, k) {
   let factorial = 1;
   for (let i = 2; i <= k; i++) factorial *= i;
   return Math.exp(-lambda) * Math.pow(lambda, k) / factorial;
+}
+
+function probabilityOver(lambda, line) {
+  let underOrEqual = 0;
+  for (let k = 0; k <= Math.floor(line); k++) underOrEqual += poisson(lambda, k);
+  return clamp(1 - underOrEqual, 0, 1);
 }
 
 function dixonColesAdjust(homeGoals, awayGoals, homeLambda, awayLambda, rho) {
@@ -79,6 +87,7 @@ function normalizeFixture(source, event) {
   const eventDate = event.date || competition.date || "";
   return {
     sourceId: `${source.slug}:${event.id}`,
+    provider: source.provider || "espn",
     trackingKey: [source.country, source.league, home.team.displayName, away.team.displayName, eventDate.slice(0, 10)].join("|"),
     eventId: String(event.id),
     eventDate,
@@ -131,6 +140,12 @@ function predict(fixture, leagues) {
   homeWin /= total; draw /= total; awayWin /= total; over25 /= total; btts /= total;
   const outcomes = [homeWin, draw, awayWin];
   const best = outcomes.indexOf(Math.max(...outcomes));
+  const expectedCorners = 7.1 + tempo * 2.2 + pressure * 1.7 + weakness * 1.15 + Math.abs(homeLambda - awayLambda) * 0.55;
+  const expectedBookings = 2.2 + aggression * 2.15 + referee * 1.7 + (1 - tempo) * 0.4;
+  const marketPredictions = (expected, lines) => lines.map((line) => {
+    const overProbability = probabilityOver(expected, line);
+    return { line, over: overProbability >= 0.5, probability: Math.max(overProbability, 1 - overProbability) };
+  });
   return {
     pick: best === 0 ? "H" : best === 2 ? "A" : "D",
     pickProbability: outcomes[best],
@@ -140,8 +155,10 @@ function predict(fixture, leagues) {
     bttsYes: btts >= 0.5,
     bttsProbability: btts,
     expectedGoals: homeLambda + awayLambda,
-    expectedCorners: 7.1 + tempo * 2.2 + pressure * 1.7 + weakness * 1.15 + Math.abs(homeLambda - awayLambda) * 0.55,
-    expectedBookings: 2.2 + aggression * 2.15 + referee * 1.7 + (1 - tempo) * 0.4
+    expectedCorners,
+    expectedBookings,
+    cornerPredictions: marketPredictions(expectedCorners, [8.5, 9.5, 10.5]),
+    bookingPredictions: marketPredictions(expectedBookings, [3.5, 4.5, 5.5])
   };
 }
 
@@ -153,6 +170,86 @@ function grade(record, fixture) {
   record.bttsCorrect = record.bttsYes === (fixture.homeScore > 0 && fixture.awayScore > 0);
   record.finalScore = `${fixture.homeScore}-${fixture.awayScore}`;
   record.gradedAt = new Date().toISOString();
+}
+
+function numericStat(stat) {
+  const value = stat?.value ?? stat?.displayValue;
+  const number = Number.parseFloat(String(value ?? "").replace(/[^0-9.-]/g, ""));
+  return Number.isFinite(number) ? number : null;
+}
+
+async function fetchEspnMarketStats(fixture) {
+  const response = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/${fixture.slug}/summary?event=${fixture.eventId}`, {
+    headers: { "user-agent": "Lesh-Elite-Prediction-Grader/1.0" },
+    signal: AbortSignal.timeout(15000)
+  });
+  if (!response.ok) throw new Error(`ESPN summary ${fixture.eventId}: ${response.status}`);
+  const data = await response.json();
+  const statistics = (data.boxscore?.teams || []).flatMap((team) => team.statistics || []);
+  const totalFor = (names) => {
+    const matches = statistics.filter((stat) => names.includes(String(stat.name || stat.label || "").toLowerCase()));
+    return matches.length ? matches.reduce((sum, stat) => sum + (numericStat(stat) || 0), 0) : null;
+  };
+  const corners = totalFor(["cornerkicks", "corner kicks", "corners"]);
+  const yellow = totalFor(["yellowcards", "yellow cards"]);
+  const red = totalFor(["redcards", "red cards"]);
+  return corners === null && yellow === null && red === null ? null : {
+    corners,
+    bookings: yellow === null && red === null ? null : (yellow || 0) + (red || 0)
+  };
+}
+
+async function fetchApiFootballMarketStats(fixture) {
+  if (!apiFootballKey) return null;
+  const response = await fetch(`${apiFootballRoot}/fixtures/statistics?fixture=${fixture.eventId}`, {
+    headers: { "x-apisports-key": apiFootballKey },
+    signal: AbortSignal.timeout(20000)
+  });
+  if (!response.ok) throw new Error(`API-Football statistics ${fixture.eventId}: ${response.status}`);
+  const data = await response.json();
+  const errors = data.errors && (Array.isArray(data.errors) ? data.errors.length : Object.keys(data.errors).length);
+  if (errors) throw new Error(`API-Football statistics ${fixture.eventId} returned an API error`);
+  const statistics = (data.response || []).flatMap((team) => team.statistics || []);
+  const totalFor = (type) => {
+    const matches = statistics.filter((stat) => stat.type === type);
+    return matches.length ? matches.reduce((sum, stat) => sum + (numericStat(stat) || 0), 0) : null;
+  };
+  const corners = totalFor("Corner Kicks");
+  const yellow = totalFor("Yellow Cards");
+  const red = totalFor("Red Cards");
+  return corners === null && yellow === null && red === null ? null : {
+    corners,
+    bookings: yellow === null && red === null ? null : (yellow || 0) + (red || 0)
+  };
+}
+
+async function gradeMarkets(record, fixture) {
+  const lastAttempt = Date.parse(record.marketStatsAttemptedAt || "") || 0;
+  if (Date.now() - lastAttempt < 12 * 60 * 60 * 1000) return;
+  record.marketStatsAttemptedAt = new Date().toISOString();
+  try {
+    const stats = fixture.provider === "api-football"
+      ? await fetchApiFootballMarketStats(fixture)
+      : await fetchEspnMarketStats(fixture);
+    if (!stats) return;
+    record.actualCorners = stats.corners;
+    record.actualBookings = stats.bookings;
+    if (Number.isFinite(stats.corners)) {
+      record.cornerResults = (record.cornerPredictions || []).map((prediction) => ({
+        ...prediction,
+        correct: prediction.over === (stats.corners > prediction.line)
+      }));
+    }
+    if (Number.isFinite(stats.bookings)) {
+      record.bookingResults = (record.bookingPredictions || []).map((prediction) => ({
+        ...prediction,
+        correct: prediction.over === (stats.bookings > prediction.line)
+      }));
+    }
+    record.marketGradedAt = new Date().toISOString();
+  } catch (error) {
+    console.warn(`Market statistics unavailable for ${fixture.trackingKey}: ${error}`);
+  }
 }
 
 const fixturesPayload = JSON.parse(await readFile(path.join(root, "fixtures.json"), "utf8"));
@@ -171,10 +268,27 @@ fixtures.filter((fixture) => fixture.matchState === "pre").forEach((fixture) => 
   records.unshift({ ...fixture, ...predict(fixture, leagues), automatic: true, savedAt: new Date().toISOString(), status: "pending" });
 });
 
+records.forEach((record) => {
+  if (record.cornerPredictions?.length && record.bookingPredictions?.length) return;
+  const fixture = fixtures.find((item) => item.trackingKey === record.trackingKey);
+  if (!fixture) return;
+  const markets = predict(fixture, leagues);
+  record.expectedCorners = markets.expectedCorners;
+  record.expectedBookings = markets.expectedBookings;
+  record.cornerPredictions = markets.cornerPredictions;
+  record.bookingPredictions = markets.bookingPredictions;
+});
+
 records.filter((record) => record.status === "pending").forEach((record) => {
   const fixture = fixtures.find((item) => item.trackingKey === record.trackingKey && item.matchState === "post");
   if (fixture) grade(record, fixture);
 });
+
+for (const record of records) {
+  if (record.cornerResults?.length && record.bookingResults?.length) continue;
+  const fixture = fixtures.find((item) => item.trackingKey === record.trackingKey && item.matchState === "post");
+  if (fixture) await gradeMarkets(record, fixture);
+}
 
 records = records.sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate)).slice(0, 500);
 const payload = { updatedAt: new Date().toISOString(), version: 1, predictions: records };
