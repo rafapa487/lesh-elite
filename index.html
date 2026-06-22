@@ -1563,7 +1563,7 @@
 
           <section class="panel" id="accuracy">
             <div class="context-head">
-              <h3>Prediction Performance</h3>
+              <h3>Shared Prediction Performance</h3>
               <button class="history-clear" id="clearHistory" type="button" disabled>Clear</button>
             </div>
             <div class="performance-grid">
@@ -2134,6 +2134,7 @@
     let selectedFixture = null;
     let latestPrediction = null;
     let predictionHistory = [];
+    let sharedPredictionHistory = null;
 
     try {
       const storedHistory = JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
@@ -2153,7 +2154,8 @@
     }
 
     function renderPredictionHistory() {
-      const graded = predictionHistory.filter((prediction) => prediction.status !== "pending");
+      const displayHistory = Array.isArray(sharedPredictionHistory) ? sharedPredictionHistory : predictionHistory;
+      const graded = displayHistory.filter((prediction) => prediction.status !== "pending");
       const outcomeCorrect = graded.filter((prediction) => prediction.outcomeCorrect).length;
       const goalsCorrect = graded.filter((prediction) => prediction.goalsCorrect).length;
       const bttsCorrect = graded.filter((prediction) => prediction.bttsCorrect).length;
@@ -2174,16 +2176,17 @@
       output("goalsAccuracy").textContent = accuracyValue(goalsCorrect, graded.length);
       output("bttsAccuracy").textContent = accuracyValue(bttsCorrect, graded.length);
       output("gradedPredictions").textContent = graded.length;
-      output("savedPredictions").textContent = predictionHistory.length;
+      output("savedPredictions").textContent = displayHistory.length;
       output("bestLeague").textContent = bestLeague ? bestLeague[0] : "--";
+      document.getElementById("clearHistory").hidden = Array.isArray(sharedPredictionHistory);
       document.getElementById("clearHistory").disabled = predictionHistory.length === 0;
 
-      if (!predictionHistory.length) {
+      if (!displayHistory.length) {
         output("predictionHistory").innerHTML = '<p class="fixture-empty">Predictions will be tracked automatically when fixtures load.</p>';
         return;
       }
 
-      output("predictionHistory").innerHTML = predictionHistory.slice(0, 8).map((prediction) => {
+      output("predictionHistory").innerHTML = displayHistory.slice(0, 8).map((prediction) => {
         const pickText = prediction.pick === "H" ? `${prediction.home} win` : prediction.pick === "A" ? `${prediction.away} win` : "Draw";
         const resultText = prediction.status === "pending" ? "Pending" : prediction.outcomeCorrect ? "Correct" : "Incorrect";
         return `
@@ -2196,6 +2199,25 @@
           </div>
         `;
       }).join("");
+    }
+
+    async function loadSharedPredictionHistory() {
+      const cacheKey = Date.now();
+      const urls = [
+        new URL(`predictions.json?v=${cacheKey}`, location.href).href,
+        `https://raw.githubusercontent.com/rafapa487/lesh-elite/main/predictions.json?v=${cacheKey}`
+      ];
+      for (const url of urls) {
+        try {
+          const response = await fetch(url, { cache: "no-store" });
+          if (!response.ok) continue;
+          const payload = await response.json();
+          if (!Array.isArray(payload.predictions)) continue;
+          sharedPredictionHistory = payload.predictions;
+          renderPredictionHistory();
+          return;
+        } catch (error) {}
+      }
     }
 
     function gradePrediction(prediction, homeScore, awayScore) {
@@ -3008,6 +3030,7 @@
     loadLeague("England", "Premier League", "Arsenal", "Liverpool");
     loadLiveFixtures();
     syncPendingPredictionResults();
+    loadSharedPredictionHistory();
 
     window.addEventListener("beforeinstallprompt", (event) => {
       event.preventDefault();
