@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://raw.githubusercontent.com https://site.api.espn.com; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="theme-color" content="#0f6f50">
   <meta name="description" content="Lesh Elite Prediction System forecasts football outcomes, goals, corners, bookings and live match probabilities.">
   <meta name="application-name" content="Lesh Elite">
@@ -199,6 +201,16 @@
       color: var(--muted);
       font-size: .7rem;
       line-height: 1.25;
+    }
+
+    .current-clock {
+      border-left: 1px solid var(--line);
+      margin-left: 2px;
+      padding-left: 8px;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+      font-weight: 800;
+      white-space: nowrap;
     }
 
     .status-dot {
@@ -1391,6 +1403,7 @@
       <div class="live-status" id="dataStatus" aria-live="polite">
         <span class="status-dot" aria-hidden="true"></span>
         <span id="dataStatusText">Connecting live data</span>
+        <time class="current-clock" id="currentClock">--:--:-- SAST</time>
       </div>
       <div class="toolbar-actions">
         <button class="toolbar-action" id="installApp" type="button" hidden>Install</button>
@@ -2127,6 +2140,18 @@
       return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, "0"), String(date.getDate()).padStart(2, "0")].join("-");
     }
 
+    function updateCurrentClock() {
+      const time = new Intl.DateTimeFormat("en-ZA", {
+        timeZone: "Africa/Johannesburg",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+      }).format(new Date());
+      output("currentClock").textContent = `${time} SAST`;
+      output("currentClock").dateTime = new Date().toISOString();
+    }
+
     function ensureCompetitionTeam(country, league, name) {
       const teams = WORLD_LEAGUES[country]?.[league];
       if (!teams) return;
@@ -2679,6 +2704,7 @@
 
     async function loadLiveFixtures() {
       const refreshButton = document.getElementById("refreshFixtures");
+      if (refreshButton.disabled) return;
       const dateValue = document.getElementById("fixtureDate").value || localDateValue();
       const dateKey = dateValue.replace(/-/g, "");
       const isToday = dateValue === localDateValue();
@@ -3052,6 +3078,14 @@
     loadLiveFixtures();
     syncPendingPredictionResults();
     loadSharedPredictionHistory();
+    updateCurrentClock();
+    setInterval(updateCurrentClock, 1000);
+    setInterval(() => {
+      if (document.visibilityState === "visible" && document.getElementById("fixtureDate").value === localDateValue()) {
+        loadLiveFixtures();
+        loadSharedPredictionHistory();
+      }
+    }, 5 * 60 * 1000);
 
     window.addEventListener("beforeinstallprompt", (event) => {
       event.preventDefault();
