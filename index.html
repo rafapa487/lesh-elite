@@ -1376,7 +1376,7 @@
       <div class="brand-copy">
         <div class="brand-title-row">
           <h1>Lesh Elite Prediction System</h1>
-          <span class="beta-badge">Beta v0.8</span>
+          <span class="beta-badge">Live v1.0</span>
         </div>
         <p class="subhead">Live football forecasts and match intelligence.</p>
       </div>
@@ -1463,7 +1463,7 @@
         </div>
       </div>
 
-      <div class="sidebar-footer">Private testing build v0.8 · Live football data · Predictions are informational.</div>
+      <div class="sidebar-footer">Lesh Elite v1.0 &middot; Live football data &middot; Probabilities are informational.</div>
     </aside>
 
     <main id="predictions">
@@ -1625,13 +1625,13 @@
 
   <footer class="site-footer">
     <span>&copy; 2026 Lesh Elite Prediction System</span>
-    <span>Private beta &middot; Predictions are informational</span>
+    <span>Public release v1.0 &middot; Probabilities are not betting advice</span>
   </footer>
 
   <dialog class="feedback-dialog" id="feedbackDialog">
     <form class="feedback-form" id="feedbackForm">
       <div class="feedback-head">
-        <h2>Beta Feedback</h2>
+        <h2>Product Feedback</h2>
         <button class="dialog-close" id="closeFeedback" type="button" aria-label="Close feedback">&times;</button>
       </div>
       <label>Feedback type
@@ -1845,7 +1845,7 @@
     const pct = (value) => `${Math.round(value * 100)}%`;
     const SHARE_URL = "https://rafapa487.github.io/lesh-elite/";
     const FEEDBACK_ISSUES_URL = "https://github.com/rafapa487/lesh-elite/issues/new";
-    const BETA_VERSION = "0.8.0";
+    const APP_VERSION = "1.0.0";
     let installPrompt = null;
 
     function setDataStatus(status, text) {
@@ -1860,7 +1860,7 @@
         if (navigator.share) {
           await navigator.share({
             title: "Lesh Elite Prediction System",
-            text: "Test today's football predictions on Lesh Elite.",
+            text: "Explore today's football probabilities on Lesh Elite.",
             url: SHARE_URL
           });
         } else {
@@ -1878,7 +1878,7 @@
 
     function feedbackReport() {
       const type = output("feedbackType").value;
-      const name = output("feedbackName").value.trim() || "Anonymous tester";
+      const name = output("feedbackName").value.trim() || "Anonymous user";
       const message = output("feedbackMessage").value.trim();
       return {
         type,
@@ -1888,9 +1888,9 @@
           "",
           message,
           "",
-          "## Tester details",
+          "## User details",
           `- Name: ${name}`,
-          `- Beta version: ${BETA_VERSION}`,
+          `- App version: ${APP_VERSION}`,
           `- Page: ${location.href}`,
           `- Viewport: ${window.innerWidth} x ${window.innerHeight}`,
           `- Device: ${navigator.userAgent}`,
@@ -1901,7 +1901,7 @@
 
     function openFeedbackDialog() {
       output("feedbackStatus").textContent = "";
-      output("feedbackMeta").textContent = `Beta v${BETA_VERSION} - ${window.innerWidth} x ${window.innerHeight}`;
+      output("feedbackMeta").textContent = `Lesh Elite v${APP_VERSION} - ${window.innerWidth} x ${window.innerHeight}`;
       const dialog = output("feedbackDialog");
       if (typeof dialog.showModal === "function") dialog.showModal();
       else dialog.setAttribute("open", "");
@@ -1928,7 +1928,7 @@
       event.preventDefault();
       if (!output("feedbackForm").reportValidity()) return;
       const report = feedbackReport();
-      const title = `[Beta ${BETA_VERSION}] ${report.type}`;
+      const title = `[Lesh Elite ${APP_VERSION}] ${report.type}`;
       const issueUrl = `${FEEDBACK_ISSUES_URL}?title=${encodeURIComponent(title)}&body=${encodeURIComponent(report.body)}`;
       const opened = window.open(issueUrl, "_blank");
       if (opened) opened.opener = null;
