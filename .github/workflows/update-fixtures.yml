@@ -25,6 +25,8 @@ jobs:
         run: node scripts/update-fixtures.mjs
 
       - name: Update shared predictions
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
         run: node scripts/update-predictions.mjs
 
       - name: Publish changed fixture data
