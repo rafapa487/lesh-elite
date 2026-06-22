@@ -1570,9 +1570,12 @@
               <div class="performance-stat"><span>Outcome accuracy</span><strong id="outcomeAccuracy">--</strong></div>
               <div class="performance-stat"><span>Goals accuracy</span><strong id="goalsAccuracy">--</strong></div>
               <div class="performance-stat"><span>BTTS accuracy</span><strong id="bttsAccuracy">--</strong></div>
+              <div class="performance-stat"><span>Corners accuracy</span><strong id="cornersAccuracy">--</strong></div>
+              <div class="performance-stat"><span>Bookings accuracy</span><strong id="bookingsAccuracy">--</strong></div>
               <div class="performance-stat"><span>Predictions graded</span><strong id="gradedPredictions">0</strong></div>
               <div class="performance-stat"><span>Predictions tracked</span><strong id="savedPredictions">0</strong></div>
               <div class="performance-stat"><span>Best league</span><strong id="bestLeague">--</strong></div>
+              <div class="performance-stat"><span>Strongest market</span><strong id="strongestMarket">--</strong></div>
             </div>
             <div class="history-list" id="predictionHistory"></div>
           </section>
@@ -2159,6 +2162,10 @@
       const outcomeCorrect = graded.filter((prediction) => prediction.outcomeCorrect).length;
       const goalsCorrect = graded.filter((prediction) => prediction.goalsCorrect).length;
       const bttsCorrect = graded.filter((prediction) => prediction.bttsCorrect).length;
+      const cornerResults = displayHistory.flatMap((prediction) => prediction.cornerResults || []);
+      const bookingResults = displayHistory.flatMap((prediction) => prediction.bookingResults || []);
+      const cornersCorrect = cornerResults.filter((result) => result.correct).length;
+      const bookingsCorrect = bookingResults.filter((result) => result.correct).length;
       const leagueScores = new Map();
 
       graded.forEach((prediction) => {
@@ -2171,13 +2178,23 @@
       const bestLeague = [...leagueScores.entries()].sort((a, b) =>
         (b[1].correct / b[1].total) - (a[1].correct / a[1].total)
       )[0];
+      const marketScores = [
+        { label: "Match outcome", correct: outcomeCorrect, total: graded.length },
+        { label: "Goals O/U", correct: goalsCorrect, total: graded.length },
+        { label: "BTTS", correct: bttsCorrect, total: graded.length },
+        { label: "Corners O/U", correct: cornersCorrect, total: cornerResults.length },
+        { label: "Bookings O/U", correct: bookingsCorrect, total: bookingResults.length }
+      ].filter((market) => market.total > 0).sort((a, b) => (b.correct / b.total) - (a.correct / a.total));
 
       output("outcomeAccuracy").textContent = accuracyValue(outcomeCorrect, graded.length);
       output("goalsAccuracy").textContent = accuracyValue(goalsCorrect, graded.length);
       output("bttsAccuracy").textContent = accuracyValue(bttsCorrect, graded.length);
+      output("cornersAccuracy").textContent = accuracyValue(cornersCorrect, cornerResults.length);
+      output("bookingsAccuracy").textContent = accuracyValue(bookingsCorrect, bookingResults.length);
       output("gradedPredictions").textContent = graded.length;
       output("savedPredictions").textContent = displayHistory.length;
       output("bestLeague").textContent = bestLeague ? bestLeague[0] : "--";
+      output("strongestMarket").textContent = marketScores[0]?.label || "--";
       document.getElementById("clearHistory").hidden = Array.isArray(sharedPredictionHistory);
       document.getElementById("clearHistory").disabled = predictionHistory.length === 0;
 
@@ -2189,11 +2206,15 @@
       output("predictionHistory").innerHTML = displayHistory.slice(0, 8).map((prediction) => {
         const pickText = prediction.pick === "H" ? `${prediction.home} win` : prediction.pick === "A" ? `${prediction.away} win` : "Draw";
         const resultText = prediction.status === "pending" ? "Pending" : prediction.outcomeCorrect ? "Correct" : "Incorrect";
+        const marketTotals = [
+          Number.isFinite(prediction.actualCorners) ? `Corners ${prediction.actualCorners}` : "",
+          Number.isFinite(prediction.actualBookings) ? `Bookings ${prediction.actualBookings}` : ""
+        ].filter(Boolean).join(" | ");
         return `
           <div class="history-row">
             <div>
               <span class="history-fixture">${escapeHtml(prediction.home)} vs ${escapeHtml(prediction.away)}</span>
-              <span class="history-pick">${escapeHtml(prediction.league)} - ${escapeHtml(pickText)} at ${Math.round(prediction.pickProbability * 100)}%</span>
+              <span class="history-pick">${escapeHtml(prediction.league)} - ${escapeHtml(pickText)} at ${Math.round(prediction.pickProbability * 100)}%${marketTotals ? ` | ${marketTotals}` : ""}</span>
             </div>
             <span class="history-status ${prediction.status}">${resultText}</span>
           </div>
