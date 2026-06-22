@@ -52,6 +52,52 @@ async function fetchScoreboard(source, date) {
   return data.events || [];
 }
 
+function normalizeEspnH2HEvent(event) {
+  const competition = event.competitions?.[0] || {};
+  const competitors = competition.competitors || [];
+  const home = competitors.find((team) => team.homeAway === "home");
+  const away = competitors.find((team) => team.homeAway === "away");
+  if (!home?.team || !away?.team) return null;
+  return {
+    id: String(event.id || ""),
+    date: event.date || competition.date || "",
+    homeId: String(home.team.id || ""),
+    awayId: String(away.team.id || ""),
+    home: home.team.displayName || home.team.name || "Home",
+    away: away.team.displayName || away.team.name || "Away",
+    homeGoals: Number(home.score) || 0,
+    awayGoals: Number(away.score) || 0
+  };
+}
+
+async function fetchEspnH2H({ source, event }) {
+  const competition = event.competitions?.[0] || {};
+  const competitors = competition.competitors || [];
+  const home = competitors.find((team) => team.homeAway === "home");
+  const away = competitors.find((team) => team.homeAway === "away");
+  const homeId = String(home?.team?.id || "");
+  const awayId = String(away?.team?.id || "");
+  if (!homeId || !awayId) return [];
+  const response = await fetch(`${scoreboardRoot}/${source.slug}/teams/${homeId}/schedule`, {
+    headers: { "user-agent": "Lesh-Elite-Fixture-Updater/2.0" },
+    signal: AbortSignal.timeout(15000)
+  });
+  if (!response.ok) throw new Error(`ESPN team schedule ${source.slug}:${homeId}: ${response.status}`);
+  const data = await response.json();
+  return (data.events || [])
+    .filter((match) => {
+      const matchCompetition = match.competitions?.[0] || {};
+      const ids = (matchCompetition.competitors || []).map((team) => String(team.team?.id || ""));
+      return matchCompetition.status?.type?.state === "post"
+        && ids.includes(awayId)
+        && String(match.id) !== String(event.id);
+    })
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 5)
+    .map(normalizeEspnH2HEvent)
+    .filter(Boolean);
+}
+
 function apiMatchState(shortStatus) {
   if (["FT", "AET", "PEN", "AWD", "WO"].includes(shortStatus)) return "post";
   if (["1H", "HT", "2H", "ET", "BT", "P", "SUSP", "INT", "LIVE"].includes(shortStatus)) return "in";
@@ -185,6 +231,17 @@ const espnEventsBySlug = new Map(competitions.map((source) => [source.slug, []])
 espnRequests.forEach((request, index) => {
   if (espnResults[index].status !== "fulfilled") return;
   espnEventsBySlug.get(request.source.slug).push(...espnResults[index].value);
+});
+
+const espnH2HTargets = competitions.flatMap((source) =>
+  (espnEventsBySlug.get(source.slug) || [])
+    .filter((event) => isoDate(new Date(event.date)) === isoDate(now))
+    .map((event) => ({ source, event }))
+);
+const espnH2HResults = await mapConcurrent(espnH2HTargets, 5, fetchEspnH2H);
+espnH2HResults.forEach((result, index) => {
+  if (result.status === "fulfilled") espnH2HTargets[index].event.h2h = result.value;
+  else console.warn(`ESPN H2H unavailable for ${espnH2HTargets[index].event.id}: ${result.reason}`);
 });
 
 let apiFootballResults = [];
