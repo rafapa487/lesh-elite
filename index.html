@@ -1571,7 +1571,7 @@
               <div class="performance-stat"><span>Goals accuracy</span><strong id="goalsAccuracy">--</strong></div>
               <div class="performance-stat"><span>BTTS accuracy</span><strong id="bttsAccuracy">--</strong></div>
               <div class="performance-stat"><span>Predictions graded</span><strong id="gradedPredictions">0</strong></div>
-              <div class="performance-stat"><span>Predictions saved</span><strong id="savedPredictions">0</strong></div>
+              <div class="performance-stat"><span>Predictions tracked</span><strong id="savedPredictions">0</strong></div>
               <div class="performance-stat"><span>Best league</span><strong id="bestLeague">--</strong></div>
             </div>
             <div class="history-list" id="predictionHistory"></div>
@@ -2179,7 +2179,7 @@
       document.getElementById("clearHistory").disabled = predictionHistory.length === 0;
 
       if (!predictionHistory.length) {
-        output("predictionHistory").innerHTML = '<p class="fixture-empty">No saved predictions yet.</p>';
+        output("predictionHistory").innerHTML = '<p class="fixture-empty">Predictions will be tracked automatically when fixtures load.</p>';
         return;
       }
 
@@ -2224,8 +2224,31 @@
     }
 
     async function syncPendingPredictionResults() {
-      const pending = predictionHistory.filter((prediction) => prediction.status === "pending" && prediction.eventId && prediction.slug).slice(0, 20);
+      let pending = predictionHistory.filter((prediction) => prediction.status === "pending" && prediction.eventId && prediction.slug).slice(0, 40);
       if (!pending.length) return;
+
+      try {
+        const response = await fetch(new URL(`fixtures.json?v=${Date.now()}`, location.href).href, { cache: "no-store" });
+        if (response.ok) {
+          const payload = await response.json();
+          pending.forEach((prediction) => {
+            const source = (payload.sources || []).find((item) => item.slug === prediction.slug);
+            const event = (source?.events || []).find((item) => String(item.id) === String(prediction.eventId));
+            const competition = event?.competitions?.[0];
+            if (competition?.status?.type?.state !== "post") return;
+            const home = competition.competitors?.find((item) => item.homeAway === "home");
+            const away = competition.competitors?.find((item) => item.homeAway === "away");
+            if (home && away) gradePrediction(prediction, Number(home.score) || 0, Number(away.score) || 0);
+          });
+          saveHistory();
+          pending = pending.filter((prediction) => prediction.status === "pending");
+        }
+      } catch (error) {}
+
+      if (!pending.length) {
+        renderPredictionHistory();
+        return;
+      }
 
       const results = await Promise.allSettled(pending.map(async (prediction) => {
         const response = await fetch(`${ESPN_SCOREBOARD_ROOT}/${prediction.slug}/summary?event=${prediction.eventId}`, { cache: "no-store" });
@@ -2246,6 +2269,43 @@
       });
       if (changed) saveHistory();
       renderPredictionHistory();
+    }
+
+    function trackFixturePredictions(fixtures) {
+      let changed = false;
+      fixtures.forEach((fixture) => {
+        if (fixture.matchState !== "pre" || predictionHistory.some((item) => item.sourceId === fixture.sourceId)) return;
+        const summary = predictFixtureSummary(fixture);
+        const outcomeValues = [summary.homeWin, summary.draw, summary.awayWin];
+        const bestOutcome = outcomeValues.indexOf(Math.max(...outcomeValues));
+        predictionHistory.unshift({
+          sourceId: fixture.sourceId,
+          eventId: fixture.eventId,
+          eventDate: fixture.eventDate,
+          slug: fixture.slug,
+          country: fixture.country,
+          league: fixture.league,
+          home: fixture.home,
+          away: fixture.away,
+          pick: bestOutcome === 0 ? "H" : bestOutcome === 2 ? "A" : "D",
+          pickProbability: outcomeValues[bestOutcome],
+          confidence: summary.confidence,
+          goalsOver25: summary.goalsProbability >= 0.52,
+          goalsProbability: summary.goalsProbability,
+          bttsYes: summary.bttsProbability >= 0.5,
+          bttsProbability: summary.bttsProbability,
+          expectedCorners: summary.corners,
+          expectedBookings: summary.bookings,
+          automatic: true,
+          savedAt: new Date().toISOString(),
+          status: "pending"
+        });
+        changed = true;
+      });
+      if (changed) {
+        predictionHistory = predictionHistory.slice(0, 100);
+        saveHistory();
+      }
     }
 
     function updateSaveButton() {
@@ -2475,6 +2535,7 @@
       let draw = 0;
       let awayWin = 0;
       let over25 = 0;
+      let btts = 0;
 
       for (let h = 0; h <= 8; h++) {
         for (let a = 0; a <= 8; a++) {
@@ -2486,6 +2547,7 @@
           else if (finalHome === finalAway) draw += probability;
           else awayWin += probability;
           if (finalHome + finalAway > 2.5) over25 += probability;
+          if (finalHome > 0 && finalAway > 0) btts += probability;
         }
       }
 
@@ -2494,6 +2556,7 @@
       draw /= total;
       awayWin /= total;
       over25 = clamp(over25 / total, 0, 1);
+      btts = clamp(btts / total, 0, 1);
       const outcomes = [
         { label: `${fixture.home} win`, value: homeWin },
         { label: "Draw", value: draw },
@@ -2509,6 +2572,8 @@
         pick: pick.label,
         confidence: Math.round(confidence),
         goalsLine: over25 >= 0.52 ? "Over 2.5" : "Under 2.5",
+        goalsProbability: over25,
+        bttsProbability: btts,
         corners: 7.1 + tempo * 2.2 + pressure * 1.7 + weakness * 1.15 + Math.abs(homeLambda - awayLambda) * 0.55,
         bookings: 2.2 + aggression * 2.15 + referee * 1.7 + (1 - tempo) * 0.4
       };
@@ -2676,6 +2741,7 @@
         setDataStatus("error", navigator.onLine ? "Data connection unavailable" : "Offline");
       } finally {
         refreshButton.disabled = false;
+        trackFixturePredictions(activeFixtures);
         gradeHistoryFromFixtures(activeFixtures);
         renderCompetitionFilter();
         renderTodayFixtures();
@@ -2923,7 +2989,7 @@
     });
     document.getElementById("savePrediction").addEventListener("click", saveCurrentPrediction);
     document.getElementById("clearHistory").addEventListener("click", () => {
-      if (!window.confirm("Clear all saved prediction history?")) return;
+      if (!window.confirm("Clear all tracked prediction history?")) return;
       predictionHistory = [];
       saveHistory();
       renderPredictionHistory();
