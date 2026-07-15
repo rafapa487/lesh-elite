@@ -1,26 +1,26 @@
 {
-  "updatedAt": "2026-07-15T20:17:10.224Z",
+  "updatedAt": "2026-07-15T21:11:55.156Z",
   "dates": [
     "20260714",
     "20260715",
     "20260716"
   ],
   "provider": "espn",
-  "refreshMode": "live",
-  "successfulRequests": 20,
-  "totalRequests": 23,
+  "refreshMode": "full",
+  "successfulRequests": 60,
+  "totalRequests": 72,
   "providers": {
     "apiFootball": {
       "configured": true,
       "successfulRequests": 0,
-      "totalRequests": 0,
+      "totalRequests": 3,
       "fixtureCount": 0,
       "h2hSuccessfulRequests": 0,
       "h2hTotalRequests": 0
     },
     "espn": {
-      "successfulRequests": 20,
-      "totalRequests": 23
+      "successfulRequests": 60,
+      "totalRequests": 69
     }
   },
   "sources": [
@@ -807,21 +807,21 @@
               "uid": "s:600~l:606~e:760515~c:760515",
               "date": "2026-07-15T19:00Z",
               "startDate": "2026-07-15T19:00Z",
-              "attendance": 0,
+              "attendance": 68239,
               "timeValid": true,
               "recent": true,
               "status": {
-                "clock": 3360,
-                "displayClock": "56'",
+                "clock": 5400,
+                "displayClock": "90'+12'",
                 "period": 2,
                 "type": {
-                  "id": "26",
-                  "name": "STATUS_SECOND_HALF",
-                  "state": "in",
-                  "completed": false,
-                  "description": "Second Half",
-                  "detail": "56'",
-                  "shortDetail": "56'"
+                  "id": "28",
+                  "name": "STATUS_FULL_TIME",
+                  "state": "post",
+                  "completed": true,
+                  "description": "Full Time",
+                  "detail": "FT",
+                  "shortDetail": "FT"
                 }
               },
               "venue": {
@@ -832,20 +832,6 @@
                   "country": "USA"
                 }
               },
-              "tickets": [
-                {
-                  "summary": "Tickets as low as $7,320",
-                  "numberAvailable": 1,
-                  "links": [
-                    {
-                      "href": "https://www.vividseats.com/world-cup-soccer-tickets-mercedes-benz-stadium-7-15-2026--sports-soccer/production/5080871?wsUser=717"
-                    },
-                    {
-                      "href": "https://www.vividseats.com/mercedesbenz-stadium-tickets/venue/14188?wsUser=717"
-                    }
-                  ]
-                }
-              ],
               "format": {
                 "regulation": {
                   "periods": 2
@@ -919,7 +905,8 @@
                   "order": 0,
                   "homeAway": "home",
                   "winner": false,
-                  "form": "WWWWD",
+                  "advance": false,
+                  "form": "LWWWW",
                   "score": "1",
                   "team": {
                     "id": "448",
@@ -1035,7 +1022,7 @@
                     {
                       "name": "foulsCommitted",
                       "abbreviation": "FC",
-                      "displayValue": "8"
+                      "displayValue": "11"
                     },
                     {
                       "name": "wonCorners",
@@ -1050,17 +1037,17 @@
                     {
                       "name": "possessionPct",
                       "abbreviation": "PP",
-                      "displayValue": "45"
+                      "displayValue": "35.7"
                     },
                     {
                       "name": "shotAssists",
                       "abbreviation": "SHAST",
-                      "displayValue": "2"
+                      "displayValue": "4"
                     },
                     {
                       "name": "shotsOnTarget",
                       "abbreviation": "SOG",
-                      "displayValue": "1"
+                      "displayValue": "2"
                     },
                     {
                       "name": "totalGoals",
@@ -1070,7 +1057,7 @@
                     {
                       "name": "totalShots",
                       "abbreviation": "SHOT",
-                      "displayValue": "2"
+                      "displayValue": "5"
                     }
                   ]
                 },
@@ -1080,9 +1067,10 @@
                   "type": "team",
                   "order": 1,
                   "homeAway": "away",
-                  "winner": false,
+                  "winner": true,
+                  "advance": true,
                   "form": "WWWWW",
-                  "score": "0",
+                  "score": "2",
                   "team": {
                     "id": "202",
                     "uid": "s:600~t:202",
@@ -1197,42 +1185,42 @@
                     {
                       "name": "foulsCommitted",
                       "abbreviation": "FC",
-                      "displayValue": "13"
+                      "displayValue": "15"
                     },
                     {
                       "name": "wonCorners",
                       "abbreviation": "CW",
-                      "displayValue": "2"
+                      "displayValue": "6"
                     },
                     {
                       "name": "goalAssists",
                       "abbreviation": "A",
-                      "displayValue": "0"
+                      "displayValue": "2"
                     },
                     {
                       "name": "possessionPct",
                       "abbreviation": "PP",
-                      "displayValue": "55"
+                      "displayValue": "64.3"
                     },
                     {
                       "name": "shotAssists",
                       "abbreviation": "SHAST",
-                      "displayValue": "4"
+                      "displayValue": "13"
                     },
                     {
                       "name": "shotsOnTarget",
                       "abbreviation": "SOG",
-                      "displayValue": "1"
+                      "displayValue": "5"
                     },
                     {
                       "name": "totalGoals",
                       "abbreviation": "G",
-                      "displayValue": "0"
+                      "displayValue": "2"
                     },
                     {
                       "name": "totalShots",
                       "abbreviation": "SHOT",
-                      "displayValue": "5"
+                      "displayValue": "15"
                     }
                   ]
                 }
@@ -1377,7 +1365,7 @@
                     "text": "Goal"
                   },
                   "clock": {
-                    "value": 3265,
+                    "value": 3264,
                     "displayValue": "55'"
                   },
                   "team": {
@@ -1414,141 +1402,142 @@
                       "position": "AM-L"
                     }
                   ]
+                },
+                {
+                  "type": {
+                    "id": "70",
+                    "text": "Goal"
+                  },
+                  "clock": {
+                    "value": 5094,
+                    "displayValue": "85'"
+                  },
+                  "team": {
+                    "id": "202"
+                  },
+                  "scoreValue": 1,
+                  "scoringPlay": true,
+                  "redCard": false,
+                  "yellowCard": false,
+                  "penaltyKick": false,
+                  "ownGoal": false,
+                  "shootout": false,
+                  "athletesInvolved": [
+                    {
+                      "id": "285450",
+                      "displayName": "Enzo Fernández",
+                      "shortName": "E. Fernández",
+                      "fullName": "Enzo Fernández",
+                      "jersey": "24",
+                      "team": {
+                        "id": "202"
+                      },
+                      "links": [
+                        {
+                          "rel": [
+                            "playercard",
+                            "desktop",
+                            "athlete"
+                          ],
+                          "href": "https://www.espn.com/soccer/player/_/id/285450/enzo-fernandez",
+                          "isHidden": false
+                        }
+                      ],
+                      "position": "CM-R"
+                    }
+                  ]
+                },
+                {
+                  "type": {
+                    "id": "137",
+                    "text": "Goal - Header"
+                  },
+                  "clock": {
+                    "value": 5400,
+                    "displayValue": "90'+2'"
+                  },
+                  "team": {
+                    "id": "202"
+                  },
+                  "scoreValue": 1,
+                  "scoringPlay": true,
+                  "redCard": false,
+                  "yellowCard": false,
+                  "penaltyKick": false,
+                  "ownGoal": false,
+                  "shootout": false,
+                  "athletesInvolved": [
+                    {
+                      "id": "219713",
+                      "displayName": "Lautaro Martínez",
+                      "shortName": "L. Martínez",
+                      "fullName": "Lautaro Martínez",
+                      "jersey": "22",
+                      "team": {
+                        "id": "202"
+                      },
+                      "links": [
+                        {
+                          "rel": [
+                            "playercard",
+                            "desktop",
+                            "athlete"
+                          ],
+                          "href": "https://www.espn.com/soccer/player/_/id/219713/lautaro-martinez",
+                          "isHidden": false
+                        }
+                      ],
+                      "position": "SUB"
+                    }
+                  ]
+                },
+                {
+                  "type": {
+                    "id": "94",
+                    "text": "Yellow Card"
+                  },
+                  "clock": {
+                    "value": 5400,
+                    "displayValue": "90'+4'"
+                  },
+                  "team": {
+                    "id": "202"
+                  },
+                  "scoreValue": 0,
+                  "scoringPlay": false,
+                  "redCard": false,
+                  "yellowCard": true,
+                  "penaltyKick": false,
+                  "ownGoal": false,
+                  "shootout": false,
+                  "athletesInvolved": [
+                    {
+                      "id": "174466",
+                      "displayName": "Rodrigo De Paul",
+                      "shortName": "R. De Paul",
+                      "fullName": "Rodrigo De Paul",
+                      "jersey": "7",
+                      "team": {
+                        "id": "202"
+                      },
+                      "links": [
+                        {
+                          "rel": [
+                            "playercard",
+                            "desktop",
+                            "athlete"
+                          ],
+                          "href": "https://www.espn.com/soccer/player/_/id/174466/rodrigo-de-paul",
+                          "isHidden": false
+                        }
+                      ],
+                      "position": "SUB"
+                    }
+                  ]
                 }
               ],
               "odds": [
-                {
-                  "overUnder": 2.5,
-                  "link": {
-                    "language": "en-US",
-                    "rel": [
-                      "game",
-                      "desktop",
-                      "bets"
-                    ],
-                    "href": "https://sportsbook.draftkings.com/gateway?s=__s__&wpcid=__wpcid__&wpsrc=413&wpcn=ESPN&wpscn=Widget&wpcrn=BetSlipDeepLink&wpscid=__wpscid__&wpcrid=xx&preurl=https%3A%2F%2Fsportsbook.draftkings.com%2Fevent%2F34384863",
-                    "text": "Game",
-                    "shortText": "Game",
-                    "isExternal": true,
-                    "isPremium": false,
-                    "isHidden": false
-                  },
-                  "provider": {
-                    "id": "100",
-                    "name": "DraftKings",
-                    "priority": 1,
-                    "displayName": "DraftKings",
-                    "logos": [
-                      {
-                        "href": "https://a.espncdn.com/i/betting/Draftkings_Light.svg",
-                        "rel": [
-                          "light"
-                        ]
-                      },
-                      {
-                        "href": "https://a.espncdn.com/i/betting/Draftkings_Dark.svg",
-                        "rel": [
-                          "dark"
-                        ]
-                      }
-                    ]
-                  },
-                  "drawOdds": {
-                    "moneyLine": 180,
-                    "link": {
-                      "language": "en-US",
-                      "rel": [
-                        "draw",
-                        "desktop",
-                        "bets",
-                        "draftkings"
-                      ],
-                      "href": "https://sportsbook.draftkings.com/gateway?s=__s__&wpcid=__wpcid__&wpsrc=413&wpcn=ESPN&wpscn=Widget&wpcrn=BetSlipDeepLink&wpscid=__wpscid__&wpcrid=xx&preurl=https%3A%2F%2Fsportsbook.draftkings.com%2Fevent%2F34384863%3Foutcomes%3D0ML85467783_2",
-                      "text": "Draw Bet",
-                      "shortText": "Draw Bet",
-                      "isExternal": true,
-                      "isPremium": false,
-                      "isHidden": false
-                    }
-                  },
-                  "total": {
-                    "displayName": "Total",
-                    "shortDisplayName": "Total",
-                    "over": {
-                      "open": {
-                        "line": "o2.5",
-                        "odds": "+125"
-                      },
-                      "close": {
-                        "line": "o2.5",
-                        "odds": "+140"
-                      }
-                    },
-                    "under": {
-                      "open": {
-                        "line": "u2.5",
-                        "odds": "-155"
-                      },
-                      "close": {
-                        "line": "u2.5",
-                        "odds": "-175"
-                      }
-                    }
-                  },
-                  "pointSpread": {
-                    "displayName": "Spread",
-                    "shortDisplayName": "Spread",
-                    "home": {
-                      "open": {
-                        "line": "+0.5",
-                        "odds": "-210"
-                      },
-                      "close": {
-                        "line": "-0.5",
-                        "odds": "+165"
-                      }
-                    },
-                    "away": {
-                      "open": {
-                        "line": "-0.5",
-                        "odds": "+165"
-                      },
-                      "close": {
-                        "line": "+0.5",
-                        "odds": "-210"
-                      }
-                    }
-                  },
-                  "moneyline": {
-                    "displayName": "Moneyline",
-                    "shortDisplayName": "ML",
-                    "home": {
-                      "open": {
-                        "odds": "+180"
-                      },
-                      "close": {
-                        "odds": "+170"
-                      }
-                    },
-                    "away": {
-                      "open": {
-                        "odds": "+175"
-                      },
-                      "close": {
-                        "odds": "+205"
-                      }
-                    },
-                    "draw": {
-                      "open": {
-                        "odds": "+205"
-                      },
-                      "close": {
-                        "odds": "+180"
-                      }
-                    }
-                  },
-                  "details": "ENG +170"
-                }
+                null
               ],
               "wasSuspended": false,
               "playByPlayAvailable": true,
@@ -1556,17 +1545,17 @@
             }
           ],
           "status": {
-            "clock": 3360,
-            "displayClock": "56'",
+            "clock": 5400,
+            "displayClock": "90'+12'",
             "period": 2,
             "type": {
-              "id": "26",
-              "name": "STATUS_SECOND_HALF",
-              "state": "in",
-              "completed": false,
-              "description": "Second Half",
-              "detail": "56'",
-              "shortDetail": "56'"
+              "id": "28",
+              "name": "STATUS_FULL_TIME",
+              "state": "post",
+              "completed": true,
+              "description": "Full Time",
+              "detail": "FT",
+              "shortDetail": "FT"
             }
           },
           "venue": {
@@ -1576,16 +1565,28 @@
             {
               "language": "en-US",
               "rel": [
-                "live",
+                "summary",
                 "desktop",
                 "event"
               ],
-              "href": "https://www.espn.com/soccer/match/_/gameId/760515",
-              "text": "Gamecast",
-              "shortText": "Live",
+              "href": "https://www.espn.com/soccer/match/_/gameId/760515/argentina-england",
+              "text": "Summary",
+              "shortText": "Summary",
               "isExternal": false,
               "isPremium": false,
               "isHidden": false
+            },
+            {
+              "language": "en-US",
+              "rel": [
+                "highlights",
+                "desktop"
+              ],
+              "href": "https://www.espn.com/soccer/video/_/gameId/760515",
+              "text": "Highlights",
+              "shortText": "Highlights",
+              "isExternal": false,
+              "isPremium": false
             },
             {
               "language": "en-US",
@@ -1600,22 +1601,9 @@
               "isExternal": false,
               "isPremium": false,
               "isHidden": false
-            },
-            {
-              "language": "en-US",
-              "rel": [
-                "bracket",
-                "desktop",
-                "event"
-              ],
-              "href": "https://www.espn.com/soccer/bracket/_/season/2026/league/fifa.world",
-              "text": "Bracket",
-              "shortText": "Bracket",
-              "isExternal": false,
-              "isPremium": false,
-              "isHidden": false
             }
-          ]
+          ],
+          "h2h": []
         }
       ]
     },
@@ -3056,8 +3044,8 @@
               },
               "tickets": [
                 {
-                  "summary": "Tickets as low as $10",
-                  "numberAvailable": 1980,
+                  "summary": "Tickets as low as $11",
+                  "numberAvailable": 1936,
                   "links": [
                     {
                       "href": "https://www.vividseats.com/cf-montreal-tickets-stade-saputo-7-16-2026/production/6325062?wsUser=717"
@@ -3870,8 +3858,8 @@
               },
               "tickets": [
                 {
-                  "summary": "Tickets as low as $35",
-                  "numberAvailable": 1268,
+                  "summary": "Tickets as low as $31",
+                  "numberAvailable": 1247,
                   "links": [
                     {
                       "href": "https://www.vividseats.com/chicago-fire-tickets-soldier-field-7-16-2026--sports-mls/production/6324760?wsUser=717"
@@ -4670,7 +4658,7 @@
               "tickets": [
                 {
                   "summary": "Tickets as low as $43",
-                  "numberAvailable": 443,
+                  "numberAvailable": 428,
                   "links": [
                     {
                       "href": "https://www.vividseats.com/st-louis-city-sc-tickets-energizer-park-7-16-2026--sports-mls/production/6325038?wsUser=717"
@@ -5209,7 +5197,7 @@
                       },
                       "close": {
                         "line": "u3.5",
-                        "odds": "-125",
+                        "odds": "-120",
                         "link": {
                           "rel": [
                             "under",
@@ -5468,8 +5456,8 @@
               },
               "tickets": [
                 {
-                  "summary": "Tickets as low as $52",
-                  "numberAvailable": 596,
+                  "summary": "Tickets as low as $62",
+                  "numberAvailable": 579,
                   "links": [
                     {
                       "href": "https://www.vividseats.com/seattle-sounders-fc-tickets-lumen-field-7-16-2026--sports-mls/production/6324668?wsUser=717"
@@ -7193,7 +7181,7 @@
                       },
                       "close": {
                         "line": "o2.5",
-                        "odds": "-135",
+                        "odds": "-140",
                         "link": {
                           "rel": [
                             "over",
