@@ -7,6 +7,53 @@ const apiFootballRoot = (process.env.API_FOOTBALL_URL || "https://v3.football.ap
 const apiFootballKey = String(process.env.API_FOOTBALL_KEY || "").trim();
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const team = (name, attack, strength) => ({ name, attack, strength });
+const RECENT_FORM_WEIGHTS = Object.freeze([0.35, 0.25, 0.18, 0.12, 0.10]);
+const RECENT_FORM_FIELDS = Object.freeze([
+  "goalsScored", "goalsConceded", "shots", "shotsOnTarget", "corners", "yellowCards"
+]);
+
+function weightedFormMetrics(matches) {
+  const recent = [...(Array.isArray(matches) ? matches : [])]
+    .filter((match) => match && match.date)
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, RECENT_FORM_WEIGHTS.length);
+  if (!recent.length) return null;
+  return Object.fromEntries(RECENT_FORM_FIELDS.map((field) => {
+    let total = 0, appliedWeight = 0;
+    recent.forEach((match, index) => {
+      const value = Number(match[field]);
+      if (!Number.isFinite(value)) return;
+      total += value * RECENT_FORM_WEIGHTS[index];
+      appliedWeight += RECENT_FORM_WEIGHTS[index];
+    });
+    return [field, appliedWeight ? total / appliedWeight : null];
+  }));
+}
+
+function recentFormInputs(fixture, fallbackHome, fallbackAway) {
+  const home = weightedFormMetrics(fixture.recentLeagueMatches?.home);
+  const away = weightedFormMetrics(fixture.recentLeagueMatches?.away);
+  const hasCore = (metrics) => metrics
+    && ["goalsScored", "goalsConceded", "shots", "shotsOnTarget"].every((field) => Number.isFinite(metrics[field]));
+  const complete = hasCore(home) && hasCore(away);
+  const attackingRate = (metrics, fallback) => hasCore(metrics)
+    ? 0.58 * metrics.goalsScored + 0.25 * metrics.shotsOnTarget * 0.31 + 0.17 * metrics.shots * 0.095
+    : fallback;
+  const homeRecentXg = complete ? attackingRate(home, fallbackHome) * 0.62 + away.goalsConceded * 0.38 : fallbackHome;
+  const awayRecentXg = complete ? attackingRate(away, fallbackAway) * 0.62 + home.goalsConceded * 0.38 : fallbackAway;
+  return {
+    home: complete ? home : null,
+    away: complete ? away : null,
+    homeXg: complete ? fallbackHome * 0.45 + homeRecentXg * 0.55 : fallbackHome,
+    awayXg: complete ? fallbackAway * 0.45 + awayRecentXg * 0.55 : fallbackAway,
+    pace: complete && [home.corners, away.corners].every(Number.isFinite)
+      ? clamp(((home.corners + away.corners) / 10 + (home.shots + away.shots) / 25) / 2, 0.82, 1.18)
+      : 1,
+    discipline: complete && [home.yellowCards, away.yellowCards].every(Number.isFinite)
+      ? clamp(1 - Math.max(0, home.yellowCards + away.yellowCards - 4) * 0.008, 0.92, 1.02)
+      : 1
+  };
+}
 
 function poisson(lambda, k) {
   let factorial = 1;
@@ -101,6 +148,7 @@ function normalizeFixture(source, event) {
     homeForm: home.form || "",
     awayForm: away.form || "",
     h2h: Array.isArray(event.h2h) ? event.h2h : [],
+    recentLeagueMatches: event.recentLeagueMatches || null,
     matchState: competition.status?.type?.state || "pre",
     homeScore: Number(home.score) || 0,
     awayScore: Number(away.score) || 0
@@ -122,8 +170,9 @@ function predict(fixture, leagues) {
   const eloHomeWin = 1 / (1 + Math.pow(10, ((away.strength - (home.strength + 65)) / 400)));
   const eloSwing = clamp((eloHomeWin - 0.5) * 0.58 + formEdge * 0.16 + h2hEdge * 0.08, -0.45, 0.45);
   const disciplineDrag = 1 - aggression * referee * 0.08;
-  const homeLambda = clamp(home.attack * (0.82 + tempo * 0.36) * (0.9 + pressure * 0.28) * (1 + eloSwing) * (0.96 + weakness * 0.14) * disciplineDrag, 0.05, 5.8);
-  const awayLambda = clamp(away.attack * (0.82 + tempo * 0.36) * (0.9 + weakness * 0.34) * (1 - eloSwing * 0.82) * (1.03 - pressure * 0.11) * disciplineDrag, 0.05, 5.8);
+  const recent = recentFormInputs(fixture, home.attack, away.attack);
+  const homeLambda = clamp(recent.homeXg * recent.pace * recent.discipline * (0.82 + tempo * 0.36) * (0.9 + pressure * 0.28) * (1 + eloSwing) * (0.96 + weakness * 0.14) * disciplineDrag, 0.05, 5.8);
+  const awayLambda = clamp(recent.awayXg * recent.pace * recent.discipline * (0.82 + tempo * 0.36) * (0.9 + weakness * 0.34) * (1 - eloSwing * 0.82) * (1.03 - pressure * 0.11) * disciplineDrag, 0.05, 5.8);
   const rho = -0.09 + (tempo - 0.5) * 0.05;
   let homeWin = 0, draw = 0, awayWin = 0, over25 = 0, btts = 0;
   for (let h = 0; h <= 8; h++) {
@@ -140,8 +189,14 @@ function predict(fixture, leagues) {
   homeWin /= total; draw /= total; awayWin /= total; over25 /= total; btts /= total;
   const outcomes = [homeWin, draw, awayWin];
   const best = outcomes.indexOf(Math.max(...outcomes));
-  const expectedCorners = 7.1 + tempo * 2.2 + pressure * 1.7 + weakness * 1.15 + Math.abs(homeLambda - awayLambda) * 0.55;
-  const expectedBookings = 2.2 + aggression * 2.15 + referee * 1.7 + (1 - tempo) * 0.4;
+  const baselineCorners = 7.1 + tempo * 2.2 + pressure * 1.7 + weakness * 1.15 + Math.abs(homeLambda - awayLambda) * 0.55;
+  const baselineBookings = 2.2 + aggression * 2.15 + referee * 1.7 + (1 - tempo) * 0.4;
+  const expectedCorners = recent.home && recent.away && [recent.home.corners, recent.away.corners].every(Number.isFinite)
+    ? (recent.home.corners + recent.away.corners) * 0.72 + baselineCorners * 0.28
+    : baselineCorners;
+  const expectedBookings = recent.home && recent.away && [recent.home.yellowCards, recent.away.yellowCards].every(Number.isFinite)
+    ? (recent.home.yellowCards + recent.away.yellowCards) * 0.72 + baselineBookings * 0.28
+    : baselineBookings;
   const marketPredictions = (expected, lines) => lines.map((line) => {
     const overProbability = probabilityOver(expected, line);
     return { line, over: overProbability >= 0.5, probability: Math.max(overProbability, 1 - overProbability) };
