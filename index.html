@@ -2409,7 +2409,65 @@
     }
 
     let contextRequestId = 0;
-    let predictionContext = { formEdge: 0, tableEdge: 0, h2hEdge: 0 };
+    const RECENT_FORM_WEIGHTS = Object.freeze([0.35, 0.25, 0.18, 0.12, 0.10]);
+    const RECENT_FORM_FIELDS = Object.freeze([
+      "goalsScored", "goalsConceded", "shots", "shotsOnTarget", "corners", "yellowCards"
+    ]);
+    let predictionContext = { formEdge: 0, tableEdge: 0, h2hEdge: 0, homeMetrics: null, awayMetrics: null };
+
+    function weightedFormMetrics(matches) {
+      const recent = [...(Array.isArray(matches) ? matches : [])]
+        .filter((match) => match && match.date)
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0, RECENT_FORM_WEIGHTS.length);
+      if (!recent.length) return null;
+      return Object.fromEntries(RECENT_FORM_FIELDS.map((field) => {
+        let total = 0;
+        let appliedWeight = 0;
+        recent.forEach((match, index) => {
+          const value = Number(match[field]);
+          if (!Number.isFinite(value)) return;
+          total += value * RECENT_FORM_WEIGHTS[index];
+          appliedWeight += RECENT_FORM_WEIGHTS[index];
+        });
+        return [field, appliedWeight ? total / appliedWeight : null];
+      }));
+    }
+
+    function recentFormInputs(fixture, fallbackHome, fallbackAway) {
+      const home = weightedFormMetrics(fixture?.recentLeagueMatches?.home);
+      const away = weightedFormMetrics(fixture?.recentLeagueMatches?.away);
+      const hasCore = (metrics) => metrics
+        && ["goalsScored", "goalsConceded", "shots", "shotsOnTarget"].every((field) => Number.isFinite(metrics[field]));
+      const attackingRate = (metrics, fallback) => hasCore(metrics)
+        ? 0.58 * metrics.goalsScored + 0.25 * metrics.shotsOnTarget * 0.31 + 0.17 * metrics.shots * 0.095
+        : fallback;
+      const homeAttack = attackingRate(home, fallbackHome);
+      const awayAttack = attackingRate(away, fallbackAway);
+      const complete = hasCore(home) && hasCore(away);
+      const homeRecentXg = complete
+        ? homeAttack * 0.62 + away.goalsConceded * 0.38
+        : fallbackHome;
+      const awayRecentXg = complete
+        ? awayAttack * 0.62 + home.goalsConceded * 0.38
+        : fallbackAway;
+      const hasPace = complete && [home.corners, away.corners].every(Number.isFinite);
+      const pace = hasPace
+        ? clamp(((home.corners + away.corners) / 10 + (home.shots + away.shots) / 25) / 2, 0.82, 1.18)
+        : 1;
+      const hasDiscipline = complete && [home.yellowCards, away.yellowCards].every(Number.isFinite);
+      const discipline = hasDiscipline
+        ? clamp(1 - Math.max(0, home.yellowCards + away.yellowCards - 4) * 0.008, 0.92, 1.02)
+        : 1;
+      return {
+        home: complete ? home : null,
+        away: complete ? away : null,
+        homeXg: complete ? fallbackHome * 0.45 + homeRecentXg * 0.55 : fallbackHome,
+        awayXg: complete ? fallbackAway * 0.45 + awayRecentXg * 0.55 : fallbackAway,
+        pace,
+        discipline
+      };
+    }
 
     function formStrength(form) {
       const results = String(form || "").toUpperCase().replace(/[^WDL]/g, "").slice(-5);
@@ -2495,7 +2553,7 @@
 
     function resetMatchContext() {
       contextRequestId += 1;
-      predictionContext = { formEdge: 0, tableEdge: 0, h2hEdge: 0 };
+      predictionContext = { formEdge: 0, tableEdge: 0, h2hEdge: 0, homeMetrics: null, awayMetrics: null };
       selectedFixture = null;
       renderMatchContext(null, null, null, "Select a live fixture");
       updateSaveButton();
@@ -2506,7 +2564,9 @@
       predictionContext = {
         formEdge: formStrength(fixture.homeForm) - formStrength(fixture.awayForm),
         tableEdge: 0,
-        h2hEdge: headToHeadStrength(fixture)
+        h2hEdge: headToHeadStrength(fixture),
+        homeMetrics: weightedFormMetrics(fixture.recentLeagueMatches?.home),
+        awayMetrics: weightedFormMetrics(fixture.recentLeagueMatches?.away)
       };
       applyAutomaticMatchIntelligence(fixture);
       renderMatchContext(fixture, null, null, "Loading table positions...");
@@ -2592,12 +2652,13 @@
       const eloHomeWin = 1 / (1 + Math.pow(10, ((away.strength - (home.strength + 65)) / 400)));
       const eloSwing = clamp((eloHomeWin - 0.5) * 0.58 + formEdge * 0.16 + h2hEdge * 0.08, -0.45, 0.45);
       const disciplineDrag = 1 - aggression * referee * 0.08;
+      const recent = recentFormInputs(fixture, home.attack, away.attack);
       const isLive = fixture.matchState === "in";
       const remaining = isLive ? clamp((96 - fixture.minute) / 96, 0, 1) : 1;
       const homeGoals = isLive ? fixture.homeScore : 0;
       const awayGoals = isLive ? fixture.awayScore : 0;
-      const homeLambda = clamp(home.attack * (0.82 + tempo * 0.36) * (0.9 + pressure * 0.28) * (1 + eloSwing) * (0.96 + weakness * 0.14) * disciplineDrag, 0.05, 5.8) * remaining;
-      const awayLambda = clamp(away.attack * (0.82 + tempo * 0.36) * (0.9 + weakness * 0.34) * (1 - eloSwing * 0.82) * (1.03 - pressure * 0.11) * disciplineDrag, 0.05, 5.8) * remaining;
+      const homeLambda = clamp(recent.homeXg * recent.pace * recent.discipline * (0.82 + tempo * 0.36) * (0.9 + pressure * 0.28) * (1 + eloSwing) * (0.96 + weakness * 0.14) * disciplineDrag, 0.05, 5.8) * remaining;
+      const awayLambda = clamp(recent.awayXg * recent.pace * recent.discipline * (0.82 + tempo * 0.36) * (0.9 + weakness * 0.34) * (1 - eloSwing * 0.82) * (1.03 - pressure * 0.11) * disciplineDrag, 0.05, 5.8) * remaining;
       const rho = -0.09 + (tempo - 0.5) * 0.05;
       let homeWin = 0;
       let draw = 0;
@@ -2642,8 +2703,12 @@
         goalsLine: over25 >= 0.52 ? "Over 2.5" : "Under 2.5",
         goalsProbability: over25,
         bttsProbability: btts,
-        corners: 7.1 + tempo * 2.2 + pressure * 1.7 + weakness * 1.15 + Math.abs(homeLambda - awayLambda) * 0.55,
-        bookings: 2.2 + aggression * 2.15 + referee * 1.7 + (1 - tempo) * 0.4
+        corners: recent.home && recent.away && [recent.home.corners, recent.away.corners].every(Number.isFinite)
+          ? (recent.home.corners + recent.away.corners) * 0.72 + (7.1 + tempo * 2.2 + pressure * 1.7 + weakness * 1.15 + Math.abs(homeLambda - awayLambda) * 0.55) * 0.28
+          : 7.1 + tempo * 2.2 + pressure * 1.7 + weakness * 1.15 + Math.abs(homeLambda - awayLambda) * 0.55,
+        bookings: recent.home && recent.away && [recent.home.yellowCards, recent.away.yellowCards].every(Number.isFinite)
+          ? (recent.home.yellowCards + recent.away.yellowCards) * 0.72 + (2.2 + aggression * 2.15 + referee * 1.7 + (1 - tempo) * 0.4) * 0.28
+          : 2.2 + aggression * 2.15 + referee * 1.7 + (1 - tempo) * 0.4
       };
     }
 
@@ -2788,6 +2853,7 @@
               homeRecord: home.records?.[0]?.summary || "--",
               awayRecord: away.records?.[0]?.summary || "--",
               h2h: Array.isArray(event.h2h) ? event.h2h : [],
+              recentLeagueMatches: event.recentLeagueMatches || null,
               tag,
               matchState,
               minute: matchState === "post" ? 96 : Number.parseInt(clock, 10) || 0,
@@ -2858,8 +2924,9 @@
       const pressureBoost = 0.9 + pressure * 0.28;
       const weaknessBoost = 0.9 + weakness * 0.34;
       const disciplineDrag = 1 - aggression * referee * 0.08;
-      const baseHomeLambda = clamp(homeXg * tempoBoost * pressureBoost * (1 + eloSwing) * (0.96 + weakness * 0.14) * disciplineDrag, 0.05, 5.8);
-      const baseAwayLambda = clamp(awayXg * tempoBoost * weaknessBoost * (1 - eloSwing * 0.82) * (1.03 - pressure * 0.11) * disciplineDrag, 0.05, 5.8);
+      const recent = recentFormInputs(selectedFixture, homeXg, awayXg);
+      const baseHomeLambda = clamp(recent.homeXg * recent.pace * recent.discipline * tempoBoost * pressureBoost * (1 + eloSwing) * (0.96 + weakness * 0.14) * disciplineDrag, 0.05, 5.8);
+      const baseAwayLambda = clamp(recent.awayXg * recent.pace * recent.discipline * tempoBoost * weaknessBoost * (1 - eloSwing * 0.82) * (1.03 - pressure * 0.11) * disciplineDrag, 0.05, 5.8);
       const homeLambda = baseHomeLambda * remaining;
       const awayLambda = baseAwayLambda * remaining;
       const rho = -0.09 + (tempo - 0.5) * 0.05;
@@ -2917,8 +2984,14 @@
       btts = btts * 0.72 + mcBtts * 0.28;
 
       const expectedGoals = homeGoals + awayGoals + homeLambda + awayLambda;
-      const expectedCorners = 7.1 + tempo * 2.2 + pressure * 1.7 + weakness * 1.15 + Math.abs(homeLambda - awayLambda) * 0.55;
-      const expectedBookings = 2.2 + aggression * 2.15 + referee * 1.7 + (1 - tempo) * 0.4 + (live && Math.abs(homeGoals - awayGoals) <= 1 ? 0.35 : 0);
+      const baselineCorners = 7.1 + tempo * 2.2 + pressure * 1.7 + weakness * 1.15 + Math.abs(homeLambda - awayLambda) * 0.55;
+      const baselineBookings = 2.2 + aggression * 2.15 + referee * 1.7 + (1 - tempo) * 0.4 + (live && Math.abs(homeGoals - awayGoals) <= 1 ? 0.35 : 0);
+      const expectedCorners = recent.home && recent.away && [recent.home.corners, recent.away.corners].every(Number.isFinite)
+        ? (recent.home.corners + recent.away.corners) * 0.72 + baselineCorners * 0.28
+        : baselineCorners;
+      const expectedBookings = recent.home && recent.away && [recent.home.yellowCards, recent.away.yellowCards].every(Number.isFinite)
+        ? (recent.home.yellowCards + recent.away.yellowCards) * 0.72 + baselineBookings * 0.28
+        : baselineBookings;
       const nextHome = remaining <= 0 ? 0 : homeLambda / (homeLambda + awayLambda + 0.0001) * (1 - Math.exp(-(homeLambda + awayLambda)));
       const nextAway = remaining <= 0 ? 0 : awayLambda / (homeLambda + awayLambda + 0.0001) * (1 - Math.exp(-(homeLambda + awayLambda)));
       const noMore = clamp(Math.exp(-(homeLambda + awayLambda)), 0, 1);
