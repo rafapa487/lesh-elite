@@ -58,6 +58,68 @@ async function fetchScoreboard(source, date) {
   return data.events || [];
 }
 
+const statisticAliases = {
+  shots: ["totalshots", "total shots", "shots"],
+  shotsOnTarget: ["shotsontarget", "shots on target"],
+  corners: ["cornerkicks", "corner kicks", "corners"],
+  yellowCards: ["yellowcards", "yellow cards"]
+};
+
+function numericStat(stat) {
+  const value = stat?.value ?? stat?.displayValue;
+  const number = Number.parseFloat(String(value ?? "").replace(/[^0-9.-]/g, ""));
+  return Number.isFinite(number) ? number : null;
+}
+
+function teamBoxscoreStats(data, teamId) {
+  const entry = (data.boxscore?.teams || []).find((item) =>
+    String(item.team?.id || item.team?.uid || "") === String(teamId)
+  );
+  const statistics = entry?.statistics || [];
+  const valueFor = (aliases) => {
+    const statistic = statistics.find((stat) =>
+      aliases.includes(String(stat.name || stat.label || "").toLowerCase())
+    );
+    return numericStat(statistic);
+  };
+  return Object.fromEntries(Object.entries(statisticAliases).map(([key, aliases]) => [key, valueFor(aliases)]));
+}
+
+async function fetchEspnRecentLeagueMatches(source, teamId) {
+  const scheduleResponse = await fetch(`${scoreboardRoot}/${source.slug}/teams/${teamId}/schedule`, {
+    headers: { "user-agent": "Lesh-Elite-Fixture-Updater/2.0" },
+    signal: AbortSignal.timeout(15000)
+  });
+  if (!scheduleResponse.ok) throw new Error(`ESPN team schedule ${source.slug}:${teamId}: ${scheduleResponse.status}`);
+  const schedule = await scheduleResponse.json();
+  const matches = (schedule.events || [])
+    .filter((match) => match.competitions?.[0]?.status?.type?.state === "post")
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 5);
+
+  const details = await mapConcurrent(matches, 3, async (match) => {
+    const competition = match.competitions?.[0] || {};
+    const competitors = competition.competitors || [];
+    const teamEntry = competitors.find((item) => String(item.team?.id || "") === String(teamId));
+    const opponent = competitors.find((item) => String(item.team?.id || "") !== String(teamId));
+    if (!teamEntry || !opponent) return null;
+    const summaryResponse = await fetch(`${scoreboardRoot}/${source.slug}/summary?event=${match.id}`, {
+      headers: { "user-agent": "Lesh-Elite-Fixture-Updater/2.0" },
+      signal: AbortSignal.timeout(15000)
+    });
+    if (!summaryResponse.ok) throw new Error(`ESPN summary ${match.id}: ${summaryResponse.status}`);
+    const summary = await summaryResponse.json();
+    const stats = teamBoxscoreStats(summary, teamId);
+    return {
+      date: match.date || competition.date || "",
+      goalsScored: Number(teamEntry.score) || 0,
+      goalsConceded: Number(opponent.score) || 0,
+      ...stats
+    };
+  });
+  return details.filter((result) => result.status === "fulfilled" && result.value).map((result) => result.value);
+}
+
 function normalizeEspnH2HEvent(event) {
   const competition = event.competitions?.[0] || {};
   const competitors = competition.competitors || [];
@@ -250,6 +312,38 @@ espnH2HResults.forEach((result, index) => {
   else console.warn(`ESPN H2H unavailable for ${espnH2HTargets[index].event.id}: ${result.reason}`);
 });
 
+const espnFormTargets = fastLiveRefresh ? [] : competitions.flatMap((source) =>
+  (espnEventsBySlug.get(source.slug) || [])
+    .filter((event) => isoDate(new Date(event.date)) === isoDate(now))
+    .flatMap((event) => {
+      const competitors = event.competitions?.[0]?.competitors || [];
+      return competitors.map((competitor) => ({
+        source,
+        event,
+        side: competitor.homeAway,
+        teamId: String(competitor.team?.id || "")
+      }));
+    })
+    .filter((target) => target.teamId)
+);
+const espnFormCache = new Map();
+const espnFormResults = await mapConcurrent(espnFormTargets, 4, async (target) => {
+  const cacheKey = `${target.source.slug}:${target.teamId}`;
+  if (!espnFormCache.has(cacheKey)) {
+    espnFormCache.set(cacheKey, fetchEspnRecentLeagueMatches(target.source, target.teamId));
+  }
+  return espnFormCache.get(cacheKey);
+});
+espnFormResults.forEach((result, index) => {
+  const target = espnFormTargets[index];
+  if (result.status !== "fulfilled") {
+    console.warn(`Recent form unavailable for ${target.source.slug}:${target.teamId}: ${result.reason}`);
+    return;
+  }
+  target.event.recentLeagueMatches ||= {};
+  target.event.recentLeagueMatches[target.side] = result.value;
+});
+
 let apiFootballResults = [];
 const apiEventsByLeague = new Map();
 let h2hRequests = 0;
@@ -304,6 +398,19 @@ function uniqueEvents(events) {
 const sources = competitions.map((source) => {
   const apiEvents = uniqueEvents(apiEventsByLeague.get(source.apiLeagueId) || []);
   const espnEvents = uniqueEvents(espnEventsBySlug.get(source.slug) || []);
+  apiEvents.forEach((apiEvent) => {
+    const apiTeams = (apiEvent.competitions?.[0]?.competitors || [])
+      .map((item) => item.team?.displayName).filter(Boolean).sort().join("|");
+    const matchingEspnEvent = espnEvents.find((espnEvent) => {
+      const espnTeams = (espnEvent.competitions?.[0]?.competitors || [])
+        .map((item) => item.team?.displayName).filter(Boolean).sort().join("|");
+      return apiTeams && apiTeams === espnTeams
+        && isoDate(new Date(apiEvent.date)) === isoDate(new Date(espnEvent.date));
+    });
+    if (matchingEspnEvent?.recentLeagueMatches) {
+      apiEvent.recentLeagueMatches = matchingEspnEvent.recentLeagueMatches;
+    }
+  });
   const freshEvents = apiEvents.length ? apiEvents : espnEvents;
   const previousSource = previousPayload?.sources?.find((item) => item.slug === source.slug);
   const previousEvents = previousSource?.events || [];
@@ -313,6 +420,9 @@ const sources = competitions.map((source) => {
     freshEvents.forEach((event) => {
       const previous = previousById.get(String(event.id));
       if (!event.h2h?.length && previous?.h2h?.length) event.h2h = previous.h2h;
+      if (!event.recentLeagueMatches && previous?.recentLeagueMatches) {
+        event.recentLeagueMatches = previous.recentLeagueMatches;
+      }
     });
     const preservedEvents = previousEvents.filter((event) => isoDate(new Date(event.date)) !== today);
     return {
@@ -341,8 +451,8 @@ const payload = {
   dates,
   provider: apiFixtureCount > 0 ? "api-football+espn" : "espn",
   refreshMode: fastLiveRefresh ? "live" : "full",
-  successfulRequests: espnSuccessful + apiSuccessful + h2hSuccessful,
-  totalRequests: espnResults.length + apiFootballResults.length + h2hRequests,
+  successfulRequests: espnSuccessful + apiSuccessful + h2hSuccessful + espnFormResults.filter((result) => result.status === "fulfilled").length,
+  totalRequests: espnResults.length + apiFootballResults.length + h2hRequests + espnFormResults.length,
   providers: {
     apiFootball: {
       configured: Boolean(apiFootballKey),
