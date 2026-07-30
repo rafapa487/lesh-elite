@@ -148,12 +148,15 @@ async function fetchEspnH2H({ source, event }) {
   if (!homeId || !awayId) return [];
   const eventYear = new Date(event.date || now).getUTCFullYear();
   const seasons = Array.from({ length: 6 }, (_, index) => eventYear - index);
-  const scheduleResults = await mapConcurrent(seasons, 3, async (season) => {
-    const response = await fetch(`${scoreboardRoot}/${source.slug}/teams/${homeId}/schedule?season=${season}`, {
+  const scheduleTargets = [homeId, awayId].flatMap((teamId) =>
+    seasons.map((season) => ({ teamId, season }))
+  );
+  const scheduleResults = await mapConcurrent(scheduleTargets, 4, async ({ teamId, season }) => {
+    const response = await fetch(`${scoreboardRoot}/${source.slug}/teams/${teamId}/schedule?season=${season}`, {
       headers: { "user-agent": "Lesh-Elite-Fixture-Updater/2.0" },
       signal: AbortSignal.timeout(15000)
     });
-    if (!response.ok) throw new Error(`ESPN team schedule ${source.slug}:${homeId}:${season}: ${response.status}`);
+    if (!response.ok) throw new Error(`ESPN team schedule ${source.slug}:${teamId}:${season}: ${response.status}`);
     return response.json();
   });
   const historicalEvents = scheduleResults
