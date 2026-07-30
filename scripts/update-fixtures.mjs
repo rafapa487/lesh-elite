@@ -146,13 +146,23 @@ async function fetchEspnH2H({ source, event }) {
   const homeId = String(home?.team?.id || "");
   const awayId = String(away?.team?.id || "");
   if (!homeId || !awayId) return [];
-  const response = await fetch(`${scoreboardRoot}/${source.slug}/teams/${homeId}/schedule`, {
-    headers: { "user-agent": "Lesh-Elite-Fixture-Updater/2.0" },
-    signal: AbortSignal.timeout(15000)
+  const eventYear = new Date(event.date || now).getUTCFullYear();
+  const seasons = Array.from({ length: 6 }, (_, index) => eventYear - index);
+  const scheduleResults = await mapConcurrent(seasons, 3, async (season) => {
+    const response = await fetch(`${scoreboardRoot}/${source.slug}/teams/${homeId}/schedule?season=${season}`, {
+      headers: { "user-agent": "Lesh-Elite-Fixture-Updater/2.0" },
+      signal: AbortSignal.timeout(15000)
+    });
+    if (!response.ok) throw new Error(`ESPN team schedule ${source.slug}:${homeId}:${season}: ${response.status}`);
+    return response.json();
   });
-  if (!response.ok) throw new Error(`ESPN team schedule ${source.slug}:${homeId}: ${response.status}`);
-  const data = await response.json();
-  return (data.events || [])
+  const historicalEvents = scheduleResults
+    .filter((result) => result.status === "fulfilled")
+    .flatMap((result) => result.value.events || []);
+  if (!historicalEvents.length) {
+    throw new Error(`ESPN team history unavailable ${source.slug}:${homeId}`);
+  }
+  return uniqueEvents(historicalEvents)
     .filter((match) => {
       const matchCompetition = match.competitions?.[0] || {};
       const ids = (matchCompetition.competitors || []).map((team) => String(team.team?.id || ""));
