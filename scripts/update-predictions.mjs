@@ -100,14 +100,20 @@ function formStrength(form) {
 }
 
 function headToHeadStrength(fixture) {
-  if (!fixture.h2h.length) return 0;
-  const points = fixture.h2h.reduce((sum, match) => {
+  const meetings = [...(Array.isArray(fixture.h2h) ? fixture.h2h : [])]
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, RECENT_FORM_WEIGHTS.length);
+  if (!meetings.length) return 0;
+  let appliedWeight = 0;
+  const points = meetings.reduce((sum, match, index) => {
     const currentHomeWasHome = String(match.homeId) === String(fixture.homeId);
     const homeGoals = currentHomeWasHome ? Number(match.homeGoals) : Number(match.awayGoals);
     const awayGoals = currentHomeWasHome ? Number(match.awayGoals) : Number(match.homeGoals);
-    return sum + (homeGoals > awayGoals ? 1 : homeGoals === awayGoals ? 0.5 : 0);
+    const weight = RECENT_FORM_WEIGHTS[index];
+    appliedWeight += weight;
+    return sum + (homeGoals > awayGoals ? 1 : homeGoals === awayGoals ? 0.5 : 0) * weight;
   }, 0);
-  return clamp((points / fixture.h2h.length - 0.5) * 2, -1, 1);
+  return clamp((points / appliedWeight - 0.5) * 2, -1, 1);
 }
 
 async function loadTeamDatabase() {
