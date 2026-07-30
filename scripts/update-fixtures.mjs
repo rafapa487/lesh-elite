@@ -138,6 +138,48 @@ function normalizeEspnH2HEvent(event) {
   };
 }
 
+function h2hDedupeKey(match) {
+  return [
+    isoDate(new Date(match.date)),
+    [String(match.home || "").toLowerCase(), String(match.away || "").toLowerCase()].sort().join("|"),
+    Number(match.homeGoals) || 0,
+    Number(match.awayGoals) || 0
+  ].join(":");
+}
+
+async function fetchApiFootballTeamId(name) {
+  const response = await fetch(`${apiFootballRoot}/teams?search=${encodeURIComponent(name)}`, {
+    headers: { "x-apisports-key": apiFootballKey },
+    signal: AbortSignal.timeout(20000)
+  });
+  if (!response.ok) throw new Error(`API-Football team search ${name}: ${response.status}`);
+  const data = await response.json();
+  const normalizedName = String(name).toLowerCase().replace(/[^a-z0-9]/g, "");
+  const candidates = Array.isArray(data.response) ? data.response : [];
+  const exact = candidates.find((item) =>
+    String(item.team?.name || "").toLowerCase().replace(/[^a-z0-9]/g, "") === normalizedName
+  );
+  return exact?.team?.id || candidates[0]?.team?.id || null;
+}
+
+async function fetchApiFootballH2HByNames(homeName, awayName) {
+  if (!apiFootballKey) return [];
+  const [homeApiId, awayApiId] = await Promise.all([
+    fetchApiFootballTeamId(homeName),
+    fetchApiFootballTeamId(awayName)
+  ]);
+  if (!homeApiId || !awayApiId) return [];
+  const response = await fetch(`${apiFootballRoot}/fixtures/headtohead?h2h=${homeApiId}-${awayApiId}&last=5`, {
+    headers: { "x-apisports-key": apiFootballKey },
+    signal: AbortSignal.timeout(20000)
+  });
+  if (!response.ok) throw new Error(`API-Football H2H ${homeApiId}-${awayApiId}: ${response.status}`);
+  const data = await response.json();
+  return (Array.isArray(data.response) ? data.response : [])
+    .filter((match) => apiMatchState(match.fixture?.status?.short) === "post")
+    .map(normalizeH2HFixture);
+}
+
 async function fetchEspnH2H({ source, event }) {
   const competition = event.competitions?.[0] || {};
   const competitors = competition.competitors || [];
@@ -165,7 +207,7 @@ async function fetchEspnH2H({ source, event }) {
   if (!historicalEvents.length) {
     throw new Error(`ESPN team history unavailable ${source.slug}:${homeId}`);
   }
-  return uniqueEvents(historicalEvents)
+  const espnMeetings = uniqueEvents(historicalEvents)
     .filter((match) => {
       const matchCompetition = match.competitions?.[0] || {};
       const ids = (matchCompetition.competitors || []).map((team) => String(team.team?.id || ""));
@@ -177,6 +219,25 @@ async function fetchEspnH2H({ source, event }) {
     .slice(0, 5)
     .map(normalizeEspnH2HEvent)
     .filter(Boolean);
+  if (espnMeetings.length >= 5 || !apiFootballKey) return espnMeetings;
+  const homeName = home?.team?.displayName || home?.team?.name || "";
+  const awayName = away?.team?.displayName || away?.team?.name || "";
+  try {
+    const apiMeetings = await fetchApiFootballH2HByNames(homeName, awayName);
+    const seen = new Set();
+    return [...espnMeetings, ...apiMeetings]
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .filter((match) => {
+        const key = h2hDedupeKey(match);
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
+      .slice(0, 5);
+  } catch (error) {
+    console.warn(`API-Football H2H fallback unavailable for ${homeName} vs ${awayName}: ${error}`);
+    return espnMeetings;
+  }
 }
 
 function apiMatchState(shortStatus) {
