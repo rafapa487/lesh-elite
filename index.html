@@ -2476,20 +2476,27 @@
     }
 
     function headToHeadStrength(fixture) {
-      const meetings = Array.isArray(fixture?.h2h) ? fixture.h2h : [];
+      const meetings = [...(Array.isArray(fixture?.h2h) ? fixture.h2h : [])]
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0, RECENT_FORM_WEIGHTS.length);
       if (!meetings.length) return 0;
       const currentHomeId = String(fixture.homeId || "");
-      const points = meetings.reduce((sum, match) => {
+      let appliedWeight = 0;
+      const points = meetings.reduce((sum, match, index) => {
         const currentHomeWasHome = String(match.homeId || "") === currentHomeId;
         const currentHomeGoals = currentHomeWasHome ? Number(match.homeGoals) : Number(match.awayGoals);
         const opponentGoals = currentHomeWasHome ? Number(match.awayGoals) : Number(match.homeGoals);
-        return sum + (currentHomeGoals > opponentGoals ? 1 : currentHomeGoals === opponentGoals ? 0.5 : 0);
+        const weight = RECENT_FORM_WEIGHTS[index];
+        appliedWeight += weight;
+        return sum + (currentHomeGoals > opponentGoals ? 1 : currentHomeGoals === opponentGoals ? 0.5 : 0) * weight;
       }, 0);
-      return clamp((points / meetings.length - 0.5) * 2, -1, 1);
+      return clamp((points / appliedWeight - 0.5) * 2, -1, 1);
     }
 
     function renderHeadToHead(fixture) {
-      const meetings = Array.isArray(fixture?.h2h) ? fixture.h2h : [];
+      const meetings = [...(Array.isArray(fixture?.h2h) ? fixture.h2h : [])]
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0, RECENT_FORM_WEIGHTS.length);
       if (!meetings.length) {
         output("h2hSummary").textContent = fixture ? "No recent completed meetings available." : "Select a fixture to view recent meetings.";
         output("h2hList").innerHTML = "";
