@@ -7,7 +7,13 @@ const apiFootballRoot = (process.env.API_FOOTBALL_URL || "https://v3.football.ap
 const apiFootballKey = String(process.env.API_FOOTBALL_KEY || "").trim();
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const team = (name, attack, strength) => ({ name, attack, strength });
-const RECENT_FORM_WEIGHTS = Object.freeze([0.35, 0.25, 0.18, 0.12, 0.10]);
+const MODEL_CONFIG = Object.freeze({
+  recentFormWeights: Object.freeze([0.40, 0.25, 0.17, 0.11, 0.07]),
+  recentFormBlend: 0.70,
+  minimumPublishConfidence: clamp(Number(process.env.MIN_PREDICTION_CONFIDENCE) || 62, 50, 95),
+  retrainingPriorMatches: 12
+});
+const RECENT_FORM_WEIGHTS = MODEL_CONFIG.recentFormWeights;
 const RECENT_FORM_FIELDS = Object.freeze([
   "goalsScored", "goalsConceded", "shots", "shotsOnTarget", "corners", "yellowCards"
 ]);
@@ -44,8 +50,8 @@ function recentFormInputs(fixture, fallbackHome, fallbackAway) {
   return {
     home: complete ? home : null,
     away: complete ? away : null,
-    homeXg: complete ? fallbackHome * 0.45 + homeRecentXg * 0.55 : fallbackHome,
-    awayXg: complete ? fallbackAway * 0.45 + awayRecentXg * 0.55 : fallbackAway,
+    homeXg: complete ? fallbackHome * (1 - MODEL_CONFIG.recentFormBlend) + homeRecentXg * MODEL_CONFIG.recentFormBlend : fallbackHome,
+    awayXg: complete ? fallbackAway * (1 - MODEL_CONFIG.recentFormBlend) + awayRecentXg * MODEL_CONFIG.recentFormBlend : fallbackAway,
     pace: complete && [home.corners, away.corners].every(Number.isFinite)
       ? clamp(((home.corners + away.corners) / 10 + (home.shots + away.shots) / 25) / 2, 0.82, 1.18)
       : 1,
@@ -161,7 +167,51 @@ function normalizeFixture(source, event) {
   };
 }
 
-function predict(fixture, leagues) {
+const DEFAULT_CALIBRATION = Object.freeze({ homeGoals: 1, awayGoals: 1, corners: 1, bookings: 1 });
+
+function retrainModel(records, previousTraining = {}) {
+  const completed = records.filter((record) => record.status !== "pending" && /^\d+-\d+$/.test(record.finalScore || ""));
+  const prior = MODEL_CONFIG.retrainingPriorMatches;
+  const ratio = (actual, expected) => clamp((actual + prior) / (expected + prior), 0.85, 1.15);
+  let actualHome = 0, expectedHome = 0, actualAway = 0, expectedAway = 0;
+  let actualCorners = 0, expectedCorners = 0, cornerSamples = 0;
+  let actualBookings = 0, expectedBookings = 0, bookingSamples = 0;
+  completed.forEach((record) => {
+    const [homeGoals, awayGoals] = record.finalScore.split("-").map(Number);
+    if (Number.isFinite(record.expectedHomeGoals) && Number.isFinite(record.expectedAwayGoals)) {
+      actualHome += homeGoals;
+      expectedHome += record.expectedHomeGoals;
+      actualAway += awayGoals;
+      expectedAway += record.expectedAwayGoals;
+    }
+    if (Number.isFinite(record.actualCorners) && Number.isFinite(record.expectedCorners)) {
+      actualCorners += record.actualCorners;
+      expectedCorners += record.expectedCorners;
+      cornerSamples += 1;
+    }
+    if (Number.isFinite(record.actualBookings) && Number.isFinite(record.expectedBookings)) {
+      actualBookings += record.actualBookings;
+      expectedBookings += record.expectedBookings;
+      bookingSamples += 1;
+    }
+  });
+  const calibration = {
+    homeGoals: ratio(actualHome, expectedHome),
+    awayGoals: ratio(actualAway, expectedAway),
+    corners: ratio(actualCorners, expectedCorners),
+    bookings: ratio(actualBookings, expectedBookings)
+  };
+  const priorCompleted = Number(previousTraining.completedMatches) || 0;
+  return {
+    strategy: "post-match shrinkage calibration",
+    completedMatches: completed.length,
+    marketSamples: { corners: cornerSamples, bookings: bookingSamples },
+    calibration,
+    lastTrainedAt: completed.length > priorCompleted ? new Date().toISOString() : previousTraining.lastTrainedAt || null
+  };
+}
+
+function predict(fixture, leagues, calibration = DEFAULT_CALIBRATION) {
   const profiles = leagues[fixture.country]?.[fixture.league] || [];
   const home = profiles.find((item) => item.name === fixture.home) || team(fixture.home, 1.32, 1625);
   const away = profiles.find((item) => item.name === fixture.away) || team(fixture.away, 1.32, 1625);
@@ -177,10 +227,11 @@ function predict(fixture, leagues) {
   const eloSwing = clamp((eloHomeWin - 0.5) * 0.58 + formEdge * 0.16 + h2hEdge * 0.08, -0.45, 0.45);
   const disciplineDrag = 1 - aggression * referee * 0.08;
   const recent = recentFormInputs(fixture, home.attack, away.attack);
-  const homeLambda = clamp(recent.homeXg * recent.pace * recent.discipline * (0.82 + tempo * 0.36) * (0.9 + pressure * 0.28) * (1 + eloSwing) * (0.96 + weakness * 0.14) * disciplineDrag, 0.05, 5.8);
-  const awayLambda = clamp(recent.awayXg * recent.pace * recent.discipline * (0.82 + tempo * 0.36) * (0.9 + weakness * 0.34) * (1 - eloSwing * 0.82) * (1.03 - pressure * 0.11) * disciplineDrag, 0.05, 5.8);
+  const homeLambda = clamp(recent.homeXg * recent.pace * recent.discipline * (0.82 + tempo * 0.36) * (0.9 + pressure * 0.28) * (1 + eloSwing) * (0.96 + weakness * 0.14) * disciplineDrag * calibration.homeGoals, 0.05, 5.8);
+  const awayLambda = clamp(recent.awayXg * recent.pace * recent.discipline * (0.82 + tempo * 0.36) * (0.9 + weakness * 0.34) * (1 - eloSwing * 0.82) * (1.03 - pressure * 0.11) * disciplineDrag * calibration.awayGoals, 0.05, 5.8);
   const rho = -0.09 + (tempo - 0.5) * 0.05;
   let homeWin = 0, draw = 0, awayWin = 0, over25 = 0, btts = 0;
+  let bestScore = { home: 0, away: 0, probability: 0 };
   for (let h = 0; h <= 8; h++) {
     for (let a = 0; a <= 8; a++) {
       const probability = poisson(homeLambda, h) * poisson(awayLambda, a) * Math.max(0.01, dixonColesAdjust(h, a, homeLambda, awayLambda, rho));
@@ -189,6 +240,7 @@ function predict(fixture, leagues) {
       else awayWin += probability;
       if (h + a > 2.5) over25 += probability;
       if (h > 0 && a > 0) btts += probability;
+      if (probability > bestScore.probability) bestScore = { home: h, away: a, probability };
     }
   }
   const total = homeWin + draw + awayWin || 1;
@@ -197,12 +249,14 @@ function predict(fixture, leagues) {
   const best = outcomes.indexOf(Math.max(...outcomes));
   const baselineCorners = 7.1 + tempo * 2.2 + pressure * 1.7 + weakness * 1.15 + Math.abs(homeLambda - awayLambda) * 0.55;
   const baselineBookings = 2.2 + aggression * 2.15 + referee * 1.7 + (1 - tempo) * 0.4;
-  const expectedCorners = recent.home && recent.away && [recent.home.corners, recent.away.corners].every(Number.isFinite)
+  const uncalibratedCorners = recent.home && recent.away && [recent.home.corners, recent.away.corners].every(Number.isFinite)
     ? (recent.home.corners + recent.away.corners) * 0.72 + baselineCorners * 0.28
     : baselineCorners;
-  const expectedBookings = recent.home && recent.away && [recent.home.yellowCards, recent.away.yellowCards].every(Number.isFinite)
+  const uncalibratedBookings = recent.home && recent.away && [recent.home.yellowCards, recent.away.yellowCards].every(Number.isFinite)
     ? (recent.home.yellowCards + recent.away.yellowCards) * 0.72 + baselineBookings * 0.28
     : baselineBookings;
+  const expectedCorners = uncalibratedCorners * calibration.corners;
+  const expectedBookings = uncalibratedBookings * calibration.bookings;
   const marketPredictions = (expected, lines) => lines.map((line) => {
     const overProbability = probabilityOver(expected, line);
     return { line, over: overProbability >= 0.5, probability: Math.max(overProbability, 1 - overProbability) };
@@ -215,6 +269,10 @@ function predict(fixture, leagues) {
     goalsProbability: over25,
     bttsYes: btts >= 0.5,
     bttsProbability: btts,
+    correctScore: `${bestScore.home}-${bestScore.away}`,
+    correctScoreProbability: bestScore.probability / total,
+    expectedHomeGoals: homeLambda,
+    expectedAwayGoals: awayLambda,
     expectedGoals: homeLambda + awayLambda,
     expectedCorners,
     expectedBookings,
@@ -230,7 +288,30 @@ function grade(record, fixture) {
   record.goalsCorrect = record.goalsOver25 === (fixture.homeScore + fixture.awayScore > 2.5);
   record.bttsCorrect = record.bttsYes === (fixture.homeScore > 0 && fixture.awayScore > 0);
   record.finalScore = `${fixture.homeScore}-${fixture.awayScore}`;
+  if (typeof record.correctScore === "string") record.correctScoreCorrect = record.correctScore === record.finalScore;
   record.gradedAt = new Date().toISOString();
+}
+
+function evaluationMetrics(records) {
+  const binaryMetric = (field) => {
+    const samples = records.filter((record) => typeof record[field] === "boolean");
+    const correct = samples.filter((record) => record[field]).length;
+    return { samples: samples.length, correct, accuracy: samples.length ? correct / samples.length : null };
+  };
+  const lineMetric = (field) => {
+    const samples = records.flatMap((record) => Array.isArray(record[field]) ? record[field] : [])
+      .filter((result) => typeof result.correct === "boolean");
+    const correct = samples.filter((result) => result.correct).length;
+    return { samples: samples.length, correct, accuracy: samples.length ? correct / samples.length : null };
+  };
+  return {
+    outcome: binaryMetric("outcomeCorrect"),
+    goals: binaryMetric("goalsCorrect"),
+    btts: binaryMetric("bttsCorrect"),
+    correctScore: binaryMetric("correctScoreCorrect"),
+    corners: lineMetric("cornerResults"),
+    bookings: lineMetric("bookingResults")
+  };
 }
 
 function numericStat(stat) {
@@ -319,26 +400,11 @@ const fixtures = (fixturesPayload.sources || []).flatMap((source) =>
   (source.events || []).map((event) => normalizeFixture(source, event)).filter(Boolean)
 );
 let records = [];
+let existingPayload = {};
 try {
-  const existing = JSON.parse(await readFile(path.join(root, "predictions.json"), "utf8"));
-  records = Array.isArray(existing.predictions) ? existing.predictions : [];
+  existingPayload = JSON.parse(await readFile(path.join(root, "predictions.json"), "utf8"));
+  records = Array.isArray(existingPayload.predictions) ? existingPayload.predictions : [];
 } catch {}
-
-fixtures.filter((fixture) => fixture.matchState === "pre").forEach((fixture) => {
-  if (records.some((record) => record.trackingKey === fixture.trackingKey)) return;
-  records.unshift({ ...fixture, ...predict(fixture, leagues), automatic: true, savedAt: new Date().toISOString(), status: "pending" });
-});
-
-records.forEach((record) => {
-  if (record.cornerPredictions?.length && record.bookingPredictions?.length) return;
-  const fixture = fixtures.find((item) => item.trackingKey === record.trackingKey);
-  if (!fixture) return;
-  const markets = predict(fixture, leagues);
-  record.expectedCorners = markets.expectedCorners;
-  record.expectedBookings = markets.expectedBookings;
-  record.cornerPredictions = markets.cornerPredictions;
-  record.bookingPredictions = markets.bookingPredictions;
-});
 
 records.filter((record) => record.status === "pending").forEach((record) => {
   const fixture = fixtures.find((item) => item.trackingKey === record.trackingKey && item.matchState === "post");
@@ -351,7 +417,47 @@ for (const record of records) {
   if (fixture) await gradeMarkets(record, fixture);
 }
 
+const training = retrainModel(records, existingPayload.training);
+const calibration = training.calibration;
+
+fixtures.filter((fixture) => fixture.matchState === "pre").forEach((fixture) => {
+  if (records.some((record) => record.trackingKey === fixture.trackingKey)) return;
+  const prediction = predict(fixture, leagues, calibration);
+  if (prediction.confidence < MODEL_CONFIG.minimumPublishConfidence) return;
+  records.unshift({ ...fixture, ...prediction, automatic: true, savedAt: new Date().toISOString(), status: "pending" });
+});
+
+records.forEach((record) => {
+  if (record.cornerPredictions?.length && record.bookingPredictions?.length && record.correctScore) return;
+  const fixture = fixtures.find((item) => item.trackingKey === record.trackingKey);
+  if (!fixture) return;
+  const markets = predict(fixture, leagues, calibration);
+  record.expectedCorners = markets.expectedCorners;
+  record.expectedBookings = markets.expectedBookings;
+  record.cornerPredictions = markets.cornerPredictions;
+  record.bookingPredictions = markets.bookingPredictions;
+  if (record.status === "pending") {
+    record.correctScore = record.correctScore || markets.correctScore;
+    record.correctScoreProbability = record.correctScoreProbability ?? markets.correctScoreProbability;
+    record.expectedHomeGoals = record.expectedHomeGoals ?? markets.expectedHomeGoals;
+    record.expectedAwayGoals = record.expectedAwayGoals ?? markets.expectedAwayGoals;
+  }
+});
+
 records = records.sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate)).slice(0, 500);
-const payload = { updatedAt: new Date().toISOString(), version: 1, predictions: records };
+records = records.filter((record) => Number(record.confidence) >= MODEL_CONFIG.minimumPublishConfidence);
+const evaluation = evaluationMetrics(records);
+const payload = {
+  updatedAt: new Date().toISOString(),
+  version: 2,
+  modelConfig: {
+    recentFormWeights: MODEL_CONFIG.recentFormWeights,
+    recentFormBlend: MODEL_CONFIG.recentFormBlend,
+    minimumPublishConfidence: MODEL_CONFIG.minimumPublishConfidence
+  },
+  training,
+  evaluation,
+  predictions: records
+};
 await writeFile(path.join(root, "predictions.json"), `${JSON.stringify(payload, null, 2)}\n`, "utf8");
-console.log(`Published ${records.length} shared predictions; ${records.filter((item) => item.status !== "pending").length} graded.`);
+console.log(`Published ${records.length} predictions at ${MODEL_CONFIG.minimumPublishConfidence}%+ confidence; ${training.completedMatches} completed matches used for retraining.`);
