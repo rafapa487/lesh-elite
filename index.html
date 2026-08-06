@@ -2344,6 +2344,7 @@
       fixtures.forEach((fixture) => {
         if (fixture.matchState !== "pre" || predictionHistory.some((item) => item.sourceId === fixture.sourceId)) return;
         const summary = predictFixtureSummary(fixture);
+        if (summary.confidence < MODEL_CONFIG.minimumPublishConfidence) return;
         const outcomeValues = [summary.homeWin, summary.draw, summary.awayWin];
         const bestOutcome = outcomeValues.indexOf(Math.max(...outcomeValues));
         predictionHistory.unshift({
@@ -2409,7 +2410,12 @@
     }
 
     let contextRequestId = 0;
-    const RECENT_FORM_WEIGHTS = Object.freeze([0.35, 0.25, 0.18, 0.12, 0.10]);
+    const MODEL_CONFIG = Object.freeze({
+      recentFormWeights: Object.freeze([0.40, 0.25, 0.17, 0.11, 0.07]),
+      recentFormBlend: 0.70,
+      minimumPublishConfidence: 62
+    });
+    const RECENT_FORM_WEIGHTS = MODEL_CONFIG.recentFormWeights;
     const RECENT_FORM_FIELDS = Object.freeze([
       "goalsScored", "goalsConceded", "shots", "shotsOnTarget", "corners", "yellowCards"
     ]);
@@ -2462,8 +2468,8 @@
       return {
         home: complete ? home : null,
         away: complete ? away : null,
-        homeXg: complete ? fallbackHome * 0.45 + homeRecentXg * 0.55 : fallbackHome,
-        awayXg: complete ? fallbackAway * 0.45 + awayRecentXg * 0.55 : fallbackAway,
+        homeXg: complete ? fallbackHome * (1 - MODEL_CONFIG.recentFormBlend) + homeRecentXg * MODEL_CONFIG.recentFormBlend : fallbackHome,
+        awayXg: complete ? fallbackAway * (1 - MODEL_CONFIG.recentFormBlend) + awayRecentXg * MODEL_CONFIG.recentFormBlend : fallbackAway,
         pace,
         discipline
       };
