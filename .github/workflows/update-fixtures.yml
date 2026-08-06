@@ -29,6 +29,7 @@ jobs:
       - name: Update shared predictions
         env:
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          MIN_PREDICTION_CONFIDENCE: ${{ vars.MIN_PREDICTION_CONFIDENCE || '62' }}
         run: node scripts/update-predictions.mjs
 
       - name: Publish changed fixture data
