@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-07T12:25:36.734Z",
+  "updatedAt": "2026-08-07T13:31:40.349Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,39 +14,39 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 134,
+    "completedMatches": 136,
     "marketSamples": {
       "corners": 0,
-      "bookings": 134
+      "bookings": 136
     },
     "calibration": {
-      "homeGoals": 1,
-      "awayGoals": 1,
+      "homeGoals": 1.15,
+      "awayGoals": 1.15,
       "corners": 1,
       "bookings": 0.85
     },
-    "lastTrainedAt": "2026-08-06T19:55:56.278Z"
+    "lastTrainedAt": "2026-08-07T13:31:40.345Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 134,
-      "correct": 84,
-      "accuracy": 0.6268656716417911
+      "samples": 136,
+      "correct": 85,
+      "accuracy": 0.625
     },
     "goals": {
-      "samples": 134,
-      "correct": 82,
-      "accuracy": 0.6119402985074627
+      "samples": 136,
+      "correct": 84,
+      "accuracy": 0.6176470588235294
     },
     "btts": {
-      "samples": 134,
-      "correct": 71,
-      "accuracy": 0.5298507462686567
+      "samples": 136,
+      "correct": 73,
+      "accuracy": 0.5367647058823529
     },
     "correctScore": {
-      "samples": 0,
+      "samples": 2,
       "correct": 0,
-      "accuracy": null
+      "accuracy": 0
     },
     "corners": {
       "samples": 0,
@@ -54,9 +54,9 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 402,
-      "correct": 257,
-      "accuracy": 0.6393034825870647
+      "samples": 408,
+      "correct": 261,
+      "accuracy": 0.6397058823529411
     }
   },
   "predictions": [
@@ -202,6 +202,78 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-07T00:11:22.337Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "bra.1:401841184",
+      "provider": "espn",
+      "trackingKey": "Brazil|Serie A|Coritiba|Chapecoense|2026-08-08",
+      "eventId": "401841184",
+      "eventDate": "2026-08-08T23:30Z",
+      "slug": "bra.1",
+      "country": "Brazil",
+      "league": "Serie A",
+      "home": "Coritiba",
+      "away": "Chapecoense",
+      "homeId": "3456",
+      "awayId": "9318",
+      "homeForm": "LDLLW",
+      "awayForm": "LDDLL",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.4310265150367991,
+      "confidence": 62,
+      "goalsOver25": true,
+      "goalsProbability": 0.6110059944952456,
+      "bttsYes": true,
+      "bttsProbability": 0.635827643967404,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.11486111007983787,
+      "expectedHomeGoals": 1.712795392753149,
+      "expectedAwayGoals": 1.4441748319477772,
+      "expectedGoals": 3.156970224700926,
+      "expectedCorners": 9.816010475109621,
+      "expectedBookings": 3.7679361278502865,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6460870865503454
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5188502385132348
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6060455848019863
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5199333131793793
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6740699427834094
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8202683181959649
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-07T13:31:40.347Z",
       "status": "pending"
     },
     {
@@ -1280,11 +1352,41 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-06T03:29:52.285Z",
-      "status": "pending",
+      "status": "correct",
       "correctScore": "1-1",
       "correctScoreProbability": 0.1267398699434196,
       "expectedHomeGoals": 1.5607404904754008,
-      "expectedAwayGoals": 1.2931944858696196
+      "expectedAwayGoals": 1.2931944858696196,
+      "outcomeCorrect": true,
+      "goalsCorrect": true,
+      "bttsCorrect": true,
+      "finalScore": "4-3",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-08-07T13:31:40.234Z",
+      "marketStatsAttemptedAt": "2026-08-07T13:31:40.234Z",
+      "actualCorners": null,
+      "actualBookings": 4,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": false,
+          "probability": 0.5259060753362488,
+          "correct": false
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.7159923713803468,
+          "correct": true
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8509495321581797,
+          "correct": true
+        }
+      ],
+      "marketGradedAt": "2026-08-07T13:31:40.313Z"
     },
     {
       "sourceId": "jpn.1:401877182",
@@ -1352,11 +1454,41 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-06T03:29:52.285Z",
-      "status": "pending",
+      "status": "incorrect",
       "correctScore": "1-1",
       "correctScoreProbability": 0.11479770555142739,
       "expectedHomeGoals": 1.8156604015576037,
-      "expectedAwayGoals": 1.2680671898693043
+      "expectedAwayGoals": 1.2680671898693043,
+      "outcomeCorrect": false,
+      "goalsCorrect": true,
+      "bttsCorrect": true,
+      "finalScore": "3-4",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-08-07T13:31:40.234Z",
+      "marketStatsAttemptedAt": "2026-08-07T13:31:40.313Z",
+      "actualCorners": null,
+      "actualBookings": 1,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5189085072460045,
+          "correct": false
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6750346564005015,
+          "correct": true
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8209948342849086,
+          "correct": true
+        }
+      ],
+      "marketGradedAt": "2026-08-07T13:31:40.343Z"
     },
     {
       "sourceId": "arg.1:401841460",
