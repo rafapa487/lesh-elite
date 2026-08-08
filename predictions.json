@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-08T21:55:01.420Z",
+  "updatedAt": "2026-08-08T22:23:54.197Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,37 +14,37 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 150,
+    "completedMatches": 151,
     "marketSamples": {
       "corners": 0,
-      "bookings": 150
+      "bookings": 151
     },
     "calibration": {
       "homeGoals": 1.15,
-      "awayGoals": 1.0581759374007453,
+      "awayGoals": 0.9980041722903811,
       "corners": 1,
       "bookings": 0.85
     },
-    "lastTrainedAt": "2026-08-08T21:26:12.958Z"
+    "lastTrainedAt": "2026-08-08T22:23:54.192Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 150,
+      "samples": 151,
       "correct": 91,
-      "accuracy": 0.6066666666666667
+      "accuracy": 0.6026490066225165
     },
     "goals": {
-      "samples": 150,
+      "samples": 151,
       "correct": 94,
-      "accuracy": 0.6266666666666667
+      "accuracy": 0.6225165562913907
     },
     "btts": {
-      "samples": 150,
+      "samples": 151,
       "correct": 81,
-      "accuracy": 0.54
+      "accuracy": 0.5364238410596026
     },
     "correctScore": {
-      "samples": 16,
+      "samples": 17,
       "correct": 0,
       "accuracy": 0
     },
@@ -54,9 +54,9 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 450,
-      "correct": 291,
-      "accuracy": 0.6466666666666666
+      "samples": 453,
+      "correct": 293,
+      "accuracy": 0.6467991169977925
     }
   },
   "predictions": [
@@ -133,6 +133,78 @@
       "status": "pending"
     },
     {
+      "sourceId": "bra.1:401841182",
+      "provider": "espn",
+      "trackingKey": "Brazil|Serie A|Santos|Athletico-PR|2026-08-09",
+      "eventId": "401841182",
+      "eventDate": "2026-08-09T21:30Z",
+      "slug": "bra.1",
+      "country": "Brazil",
+      "league": "Serie A",
+      "home": "Santos",
+      "away": "Athletico-PR",
+      "homeId": "2674",
+      "awayId": "3458",
+      "homeForm": "WDWDW",
+      "awayForm": "LWDWW",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.4247241935744345,
+      "confidence": 62,
+      "goalsOver25": true,
+      "goalsProbability": 0.5292479586667342,
+      "bttsYes": true,
+      "bttsProbability": 0.5729876589224637,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.12912020652636869,
+      "expectedHomeGoals": 1.531739196075289,
+      "expectedAwayGoals": 1.2628968842848078,
+      "expectedGoals": 2.794636080360097,
+      "expectedCorners": 9.765247181741175,
+      "expectedBookings": 4.066500892834667,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.640137379930819
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5123778901265633
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6123824096486065
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5794127868019944
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6158472414589052
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7746522573104794
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-08T22:23:54.194Z",
+      "status": "pending"
+    },
+    {
       "sourceId": "bra.1:401841179",
       "provider": "espn",
       "trackingKey": "Brazil|Serie A|Red Bull Bragantino|Corinthians|2026-08-09",
@@ -202,6 +274,150 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-08T02:16:52.250Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "arg.1:401841479",
+      "provider": "espn",
+      "trackingKey": "Argentina|Primera Division|Gimnasia La Plata|Barracas Central|2026-08-09",
+      "eventId": "401841479",
+      "eventDate": "2026-08-09T20:45Z",
+      "slug": "arg.1",
+      "country": "Argentina",
+      "league": "Primera Division",
+      "home": "Gimnasia La Plata",
+      "away": "Barracas Central",
+      "homeId": "9",
+      "awayId": "10060",
+      "homeForm": "WWLLW",
+      "awayForm": "WWWWL",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.43775660049440335,
+      "confidence": 63,
+      "goalsOver25": true,
+      "goalsProbability": 0.5630872484001388,
+      "bttsYes": true,
+      "bttsProbability": 0.5975046704852931,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.12321972942243807,
+      "expectedHomeGoals": 1.6265036477646955,
+      "expectedAwayGoals": 1.3129715796144967,
+      "expectedGoals": 2.939475227379192,
+      "expectedCorners": 9.802911804149277,
+      "expectedBookings": 3.7242025901561107,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6445571517549425
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5171827016369444
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6076813484239304
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5108866686888532
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6825422104259146
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8266158769479568
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-08T22:23:54.194Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "arg.1:401841481",
+      "provider": "espn",
+      "trackingKey": "Argentina|Primera Division|Defensa y Justicia|Newell's Old Boys|2026-08-09",
+      "eventId": "401841481",
+      "eventDate": "2026-08-09T20:45Z",
+      "slug": "arg.1",
+      "country": "Argentina",
+      "league": "Primera Division",
+      "home": "Defensa y Justicia",
+      "away": "Newell's Old Boys",
+      "homeId": "8950",
+      "awayId": "14",
+      "homeForm": "LWDLL",
+      "awayForm": "DLWDD",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.43749681592180073,
+      "confidence": 63,
+      "goalsOver25": true,
+      "goalsProbability": 0.5616209172545202,
+      "bttsYes": true,
+      "bttsProbability": 0.5963956507606863,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.12347178396175384,
+      "expectedHomeGoals": 1.6229557950977773,
+      "expectedAwayGoals": 1.310107626787385,
+      "expectedGoals": 2.933063421885162,
+      "expectedCorners": 9.802535659237384,
+      "expectedBookings": 3.816008643470474,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6445131631743031
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.517134789647693
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6077283152233325
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5297847939360552
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6647309060919601
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8131856246114832
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-08T22:23:54.194Z",
       "status": "pending"
     },
     {
@@ -1644,7 +1860,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-07T00:11:22.337Z",
-      "status": "pending"
+      "status": "incorrect",
+      "outcomeCorrect": false,
+      "goalsCorrect": false,
+      "bttsCorrect": false,
+      "finalScore": "1-0",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-08-08T22:23:54.085Z",
+      "marketStatsAttemptedAt": "2026-08-08T22:23:54.086Z",
+      "actualCorners": null,
+      "actualBookings": 5,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5192919738539254,
+          "correct": true
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6746738245963025,
+          "correct": false
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8207232078311151,
+          "correct": true
+        }
+      ],
+      "marketGradedAt": "2026-08-08T22:23:54.190Z"
     },
     {
       "sourceId": "por.1:401885492",
