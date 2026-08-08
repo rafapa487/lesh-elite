@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-08T00:34:31.560Z",
+  "updatedAt": "2026-08-08T02:16:52.253Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,10 +14,10 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 136,
+    "completedMatches": 137,
     "marketSamples": {
       "corners": 0,
-      "bookings": 136
+      "bookings": 137
     },
     "calibration": {
       "homeGoals": 1.15,
@@ -25,26 +25,26 @@
       "corners": 1,
       "bookings": 0.85
     },
-    "lastTrainedAt": "2026-08-07T13:31:40.345Z"
+    "lastTrainedAt": "2026-08-08T02:16:52.246Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 136,
+      "samples": 137,
       "correct": 85,
-      "accuracy": 0.625
+      "accuracy": 0.6204379562043796
     },
     "goals": {
-      "samples": 136,
+      "samples": 137,
       "correct": 84,
-      "accuracy": 0.6176470588235294
+      "accuracy": 0.6131386861313869
     },
     "btts": {
-      "samples": 136,
+      "samples": 137,
       "correct": 73,
-      "accuracy": 0.5367647058823529
+      "accuracy": 0.5328467153284672
     },
     "correctScore": {
-      "samples": 2,
+      "samples": 3,
       "correct": 0,
       "accuracy": 0
     },
@@ -54,12 +54,876 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 408,
-      "correct": 261,
-      "accuracy": 0.6397058823529411
+      "samples": 411,
+      "correct": 263,
+      "accuracy": 0.6399026763990268
     }
   },
   "predictions": [
+    {
+      "sourceId": "bra.1:401841187",
+      "provider": "espn",
+      "trackingKey": "Brazil|Serie A|Flamengo|Vitória|2026-08-09",
+      "eventId": "401841187",
+      "eventDate": "2026-08-09T22:30Z",
+      "slug": "bra.1",
+      "country": "Brazil",
+      "league": "Serie A",
+      "home": "Flamengo",
+      "away": "Vitória",
+      "homeId": "819",
+      "awayId": "3457",
+      "homeForm": "DDWWW",
+      "awayForm": "WLLLD",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.7185356059994256,
+      "confidence": 91,
+      "goalsOver25": true,
+      "goalsProbability": 0.7735946207089887,
+      "bttsYes": true,
+      "bttsProbability": 0.6617027936417383,
+      "correctScore": "2-1",
+      "correctScoreProbability": 0.08408309336553368,
+      "expectedHomeGoals": 2.898720700074701,
+      "expectedAwayGoals": 1.1876860185579814,
+      "expectedGoals": 4.0864067186326825,
+      "expectedCorners": 11.057708177398299,
+      "expectedBookings": 4.042430968652117,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.7730986857439694
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.6657191697042504
+        },
+        {
+          "line": 10.5,
+          "over": true,
+          "probability": 0.546982034444503
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5747752106584791
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.620547950519936
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.778464029648467
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-08T02:16:52.250Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "bra.1:401841179",
+      "provider": "espn",
+      "trackingKey": "Brazil|Serie A|Red Bull Bragantino|Corinthians|2026-08-09",
+      "eventId": "401841179",
+      "eventDate": "2026-08-09T21:30Z",
+      "slug": "bra.1",
+      "country": "Brazil",
+      "league": "Serie A",
+      "home": "Red Bull Bragantino",
+      "away": "Corinthians",
+      "homeId": "6079",
+      "awayId": "874",
+      "homeForm": "WDDDW",
+      "awayForm": "WLDDW",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.45935636044626926,
+      "confidence": 65,
+      "goalsOver25": true,
+      "goalsProbability": 0.5740265045517728,
+      "bttsYes": true,
+      "bttsProbability": 0.6022994009255052,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.12056471412967149,
+      "expectedHomeGoals": 1.696322940086434,
+      "expectedAwayGoals": 1.2914289600841167,
+      "expectedGoals": 2.987751900170551,
+      "expectedCorners": 9.887240855667942,
+      "expectedBookings": 4.065636030963462,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.654341704245992
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5278858771338455
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.5971440448922042
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5792466566496817
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6160161156014488
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7747895880754504
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-08T02:16:52.250Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "por.1:401885488",
+      "provider": "espn",
+      "trackingKey": "Portugal|Primeira Liga|Moreirense|Braga|2026-08-09",
+      "eventId": "401885488",
+      "eventDate": "2026-08-09T19:30Z",
+      "slug": "por.1",
+      "country": "Portugal",
+      "league": "Primeira Liga",
+      "home": "Moreirense",
+      "away": "Braga",
+      "homeId": "3696",
+      "awayId": "2994",
+      "homeForm": "DLWLW",
+      "awayForm": "WWWDD",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "A",
+      "pickProbability": 0.4964155520001632,
+      "confidence": 68,
+      "goalsOver25": true,
+      "goalsProbability": 0.6651877381223034,
+      "bttsYes": true,
+      "bttsProbability": 0.6662377380805906,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.10121726707184747,
+      "expectedHomeGoals": 1.436373760737243,
+      "expectedAwayGoals": 1.9897435382599806,
+      "expectedGoals": 3.426117298997224,
+      "expectedCorners": 9.861858153278533,
+      "expectedBookings": 3.643774954259235,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6514128836617677
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5246724600230455
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6003171479981054
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": false,
+          "probability": 0.5059498040215233
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6980481333378384
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8380407495614047
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-08T02:16:52.249Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "por.1:401885485",
+      "provider": "espn",
+      "trackingKey": "Portugal|Primeira Liga|Benfica|Académico de Viseu|2026-08-09",
+      "eventId": "401885485",
+      "eventDate": "2026-08-09T19:30Z",
+      "slug": "por.1",
+      "country": "Portugal",
+      "league": "Primeira Liga",
+      "home": "Benfica",
+      "away": "Académico de Viseu",
+      "homeId": "1929",
+      "awayId": "21607",
+      "homeForm": "WWLWD",
+      "awayForm": "LWLLW",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.741674915211157,
+      "confidence": 93,
+      "goalsOver25": true,
+      "goalsProbability": 0.7996203092842366,
+      "bttsYes": true,
+      "bttsProbability": 0.6719129969992456,
+      "correctScore": "3-1",
+      "correctScoreProbability": 0.08121347747558742,
+      "expectedHomeGoals": 3.079952105138748,
+      "expectedAwayGoals": 1.2031976192155824,
+      "expectedGoals": 4.28314972435433,
+      "expectedCorners": 11.169944582642355,
+      "expectedBookings": 3.9660059910815364,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.782755897354584
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.6776442511472343
+        },
+        {
+          "line": 10.5,
+          "over": true,
+          "probability": 0.5602351248345937
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5598605201068815
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6354779152965946
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7904205963163305
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-08T02:16:52.249Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "bra.1:401841180",
+      "provider": "espn",
+      "trackingKey": "Brazil|Serie A|Palmeiras|Internacional|2026-08-09",
+      "eventId": "401841180",
+      "eventDate": "2026-08-09T19:00Z",
+      "slug": "bra.1",
+      "country": "Brazil",
+      "league": "Serie A",
+      "home": "Palmeiras",
+      "away": "Internacional",
+      "homeId": "2029",
+      "awayId": "1936",
+      "homeForm": "LWWLW",
+      "awayForm": "LWDLL",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.6660312911131978,
+      "confidence": 85,
+      "goalsOver25": true,
+      "goalsProbability": 0.7433731645794647,
+      "bttsYes": true,
+      "bttsProbability": 0.6659865975314209,
+      "correctScore": "2-1",
+      "correctScoreProbability": 0.089384651460532,
+      "expectedHomeGoals": 2.639185459283972,
+      "expectedAwayGoals": 1.2409148173727982,
+      "expectedGoals": 3.88010027665677,
+      "expectedCorners": 10.756795295358838,
+      "expectedBookings": 3.871597540771375,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.745702513647938
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.6325234066186696
+        },
+        {
+          "line": 10.5,
+          "over": true,
+          "probability": 0.5107789580161346
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5410507764327677
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6539050107081372
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8048630799189123
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-08T02:16:52.250Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "bra.1:401841186",
+      "provider": "espn",
+      "trackingKey": "Brazil|Serie A|Bahia|Vasco da Gama|2026-08-09",
+      "eventId": "401841186",
+      "eventDate": "2026-08-09T19:00Z",
+      "slug": "bra.1",
+      "country": "Brazil",
+      "league": "Serie A",
+      "home": "Bahia",
+      "away": "Vasco da Gama",
+      "homeId": "9967",
+      "awayId": "3454",
+      "homeForm": "DDDWW",
+      "awayForm": "WDWDD",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.5111318590802494,
+      "confidence": 70,
+      "goalsOver25": true,
+      "goalsProbability": 0.5607554872642092,
+      "bttsYes": true,
+      "bttsProbability": 0.57812178040271,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.1194789546411156,
+      "expectedHomeGoals": 1.7797992335129653,
+      "expectedAwayGoals": 1.149571752951789,
+      "expectedGoals": 2.9293709864647544,
+      "expectedCorners": 10.04041434507788,
+      "expectedBookings": 3.6915167338967954,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6717124975214254
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5471161989526332
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.5779836473967377
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5040747104630537
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6888566277627948
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8312984804735593
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-08T02:16:52.250Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "por.1:401885487",
+      "provider": "espn",
+      "trackingKey": "Portugal|Primeira Liga|FC Porto|Alverca|2026-08-09",
+      "eventId": "401885487",
+      "eventDate": "2026-08-09T17:00Z",
+      "slug": "por.1",
+      "country": "Portugal",
+      "league": "Primeira Liga",
+      "home": "FC Porto",
+      "away": "Alverca",
+      "homeId": "437",
+      "awayId": "21613",
+      "homeForm": "WLWWD",
+      "awayForm": "LDLWL",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.46710822025488036,
+      "confidence": 66,
+      "goalsOver25": true,
+      "goalsProbability": 0.6211868908583035,
+      "bttsYes": true,
+      "bttsProbability": 0.6378144825860563,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.11152252468252075,
+      "expectedHomeGoals": 1.8165993400612506,
+      "expectedAwayGoals": 1.3888730396267142,
+      "expectedGoals": 3.205472379687965,
+      "expectedCorners": 9.994118631905662,
+      "expectedBookings": 3.702957926507768,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6665176955615979
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5413342513145385
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.5837755679410275
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5064639617480429
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6866482217310255
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8296654798348332
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-08T02:16:52.248Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "sco.1:401878405",
+      "provider": "espn",
+      "trackingKey": "Scotland|Premiership|Rangers|Hibernian|2026-08-09",
+      "eventId": "401878405",
+      "eventDate": "2026-08-09T15:00Z",
+      "slug": "sco.1",
+      "country": "Scotland",
+      "league": "Premiership",
+      "home": "Rangers",
+      "away": "Hibernian",
+      "homeId": "257",
+      "awayId": "258",
+      "homeForm": "LDWLL",
+      "awayForm": "WLWLL",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.7034004199880592,
+      "confidence": 89,
+      "goalsOver25": true,
+      "goalsProbability": 0.7480118142362948,
+      "bttsYes": true,
+      "bttsProbability": 0.64666611613078,
+      "correctScore": "2-1",
+      "correctScoreProbability": 0.08799583190294323,
+      "expectedHomeGoals": 2.7572920812847794,
+      "expectedAwayGoals": 1.1537282046187087,
+      "expectedGoals": 3.911020285903488,
+      "expectedCorners": 10.906744266781722,
+      "expectedBookings": 3.770346267079475,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.7596289677599541
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.6492835536880504
+        },
+        {
+          "line": 10.5,
+          "over": true,
+          "probability": 0.5289326324586112
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5204295635693444
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6736023333483954
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8199158209960253
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-08T02:16:52.250Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "sco.1:401878408",
+      "provider": "espn",
+      "trackingKey": "Scotland|Premiership|Motherwell|Falkirk|2026-08-09",
+      "eventId": "401878408",
+      "eventDate": "2026-08-09T14:00Z",
+      "slug": "sco.1",
+      "country": "Scotland",
+      "league": "Premiership",
+      "home": "Motherwell",
+      "away": "Falkirk",
+      "homeId": "266",
+      "awayId": "254",
+      "homeForm": "DWWWW",
+      "awayForm": "LWLLW",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.47958516391414996,
+      "confidence": 67,
+      "goalsOver25": true,
+      "goalsProbability": 0.6263897435702183,
+      "bttsYes": true,
+      "bttsProbability": 0.6392814164040245,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.1099302499967097,
+      "expectedHomeGoals": 1.8566538018505416,
+      "expectedAwayGoals": 1.3739495317593968,
+      "expectedGoals": 3.2306033336099382,
+      "expectedCorners": 10.054556515216795,
+      "expectedBookings": 3.5904941777342962,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6732896983598109
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5488769652956722
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.5762145202849243
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": false,
+          "probability": 0.5172373992351392
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.7082552071519088
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8454248725856547
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-08T02:16:52.250Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "sco.1:401878409",
+      "provider": "espn",
+      "trackingKey": "Scotland|Premiership|Heart of Midlothian|Dundee United|2026-08-09",
+      "eventId": "401878409",
+      "eventDate": "2026-08-09T14:00Z",
+      "slug": "sco.1",
+      "country": "Scotland",
+      "league": "Premiership",
+      "home": "Heart of Midlothian",
+      "away": "Dundee United",
+      "homeId": "262",
+      "awayId": "264",
+      "homeForm": "LLLLL",
+      "awayForm": "DWWLW",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.47488329820025965,
+      "confidence": 66,
+      "goalsOver25": true,
+      "goalsProbability": 0.5383410257830333,
+      "bttsYes": true,
+      "bttsProbability": 0.5702090671275213,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.1251453494469218,
+      "expectedHomeGoals": 1.655654469167313,
+      "expectedAwayGoals": 1.1773230907844316,
+      "expectedGoals": 2.8329775599517446,
+      "expectedCorners": 9.977550110674686,
+      "expectedBookings": 3.930467984000444,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6646468190362911
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5392584452479079
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.5858484330290523
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.552828973813593
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6424184236528829
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7959011525931615
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-08T02:16:52.250Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "sco.1:401878406",
+      "provider": "espn",
+      "trackingKey": "Scotland|Premiership|Kilmarnock|Celtic|2026-08-09",
+      "eventId": "401878406",
+      "eventDate": "2026-08-09T12:30Z",
+      "slug": "sco.1",
+      "country": "Scotland",
+      "league": "Premiership",
+      "home": "Kilmarnock",
+      "away": "Celtic",
+      "homeId": "260",
+      "awayId": "256",
+      "homeForm": "LLWWW",
+      "awayForm": "WWWWW",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "A",
+      "pickProbability": 0.6694119279208449,
+      "confidence": 86,
+      "goalsOver25": true,
+      "goalsProbability": 0.7685017729333563,
+      "bttsYes": true,
+      "bttsProbability": 0.6879710868496233,
+      "correctScore": "1-2",
+      "correctScoreProbability": 0.08587446117427479,
+      "expectedHomeGoals": 1.3084982078451985,
+      "expectedAwayGoals": 2.740530607762263,
+      "expectedGoals": 4.049028815607461,
+      "expectedCorners": 10.33271538405695,
+      "expectedBookings": 3.7674187156120587,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.7033727934728795
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.582945231439731
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.5414891408487076
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5198267456077598
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6741703208416582
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8203439566247328
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-08T02:16:52.249Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "jpn.1:401877173",
+      "provider": "espn",
+      "trackingKey": "Japan|J1 League|V-Varen Nagasaki|Kyoto Sanga|2026-08-09",
+      "eventId": "401877173",
+      "eventDate": "2026-08-09T10:00Z",
+      "slug": "jpn.1",
+      "country": "Japan",
+      "league": "J1 League",
+      "home": "V-Varen Nagasaki",
+      "away": "Kyoto Sanga",
+      "homeId": "19001",
+      "awayId": "21361",
+      "homeForm": "WWLWL",
+      "awayForm": "WLWLL",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.4426668785809178,
+      "confidence": 63,
+      "goalsOver25": true,
+      "goalsProbability": 0.6124752012175297,
+      "bttsYes": true,
+      "bttsProbability": 0.6353182421988567,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.11418981328873982,
+      "expectedHomeGoals": 1.7421658146787797,
+      "expectedAwayGoals": 1.421755356518337,
+      "expectedGoals": 3.1639211711971167,
+      "expectedCorners": 9.87469491865491,
+      "expectedBookings": 3.860032409345326,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6528958366562141
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5262984807323507
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.5987125459933011
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.538718285102993
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6561592542304265
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8066059777665202
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-08T02:16:52.251Z",
+      "status": "pending"
+    },
     {
       "sourceId": "arg.1:401841492",
       "provider": "espn",
@@ -349,6 +1213,224 @@
       "status": "pending"
     },
     {
+      "sourceId": "bra.1:401841178",
+      "provider": "espn",
+      "trackingKey": "Brazil|Serie A|Remo|Atlético-MG|2026-08-08",
+      "eventId": "401841178",
+      "eventDate": "2026-08-08T21:30Z",
+      "slug": "bra.1",
+      "country": "Brazil",
+      "league": "Serie A",
+      "home": "Remo",
+      "away": "Atlético-MG",
+      "homeId": "4936",
+      "awayId": "7632",
+      "homeForm": "LDLWL",
+      "awayForm": "WDWDW",
+      "h2h": [
+        {
+          "id": "401841164",
+          "date": "2026-07-26T22:30Z",
+          "homeId": "2029",
+          "awayId": "7632",
+          "home": "Palmeiras",
+          "away": "Atlético-MG",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401841148",
+          "date": "2026-07-21T22:30Z",
+          "homeId": "7632",
+          "awayId": "9967",
+          "home": "Atlético-MG",
+          "away": "Bahia",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401841142",
+          "date": "2026-05-31T19:00Z",
+          "homeId": "3454",
+          "awayId": "7632",
+          "home": "Vasco da Gama",
+          "away": "Atlético-MG",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401841128",
+          "date": "2026-05-24T21:30Z",
+          "homeId": "874",
+          "awayId": "7632",
+          "home": "Corinthians",
+          "away": "Atlético-MG",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401841120",
+          "date": "2026-05-16T21:30Z",
+          "homeId": "7632",
+          "awayId": "9169",
+          "home": "Atlético-MG",
+          "away": "Mirassol",
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "recentLeagueMatches": {
+        "home": [
+          {
+            "date": "2026-07-29T22:30Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 13,
+            "shotsOnTarget": 2,
+            "corners": null,
+            "yellowCards": 2
+          },
+          {
+            "date": "2026-07-26T22:30Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 15,
+            "shotsOnTarget": 9,
+            "corners": null,
+            "yellowCards": 3
+          },
+          {
+            "date": "2026-07-23T22:30Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 3,
+            "shotsOnTarget": 0,
+            "corners": null,
+            "yellowCards": 1
+          },
+          {
+            "date": "2026-05-31T23:30Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 9,
+            "shotsOnTarget": 2,
+            "corners": null,
+            "yellowCards": 1
+          },
+          {
+            "date": "2026-05-24T19:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 3,
+            "shotsOnTarget": 2,
+            "corners": null,
+            "yellowCards": 1
+          }
+        ],
+        "away": [
+          {
+            "date": "2026-07-26T22:30Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 9,
+            "shotsOnTarget": 4,
+            "corners": null,
+            "yellowCards": 3
+          },
+          {
+            "date": "2026-07-21T22:30Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 16,
+            "shotsOnTarget": 4,
+            "corners": null,
+            "yellowCards": 0
+          },
+          {
+            "date": "2026-05-31T19:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 10,
+            "shotsOnTarget": 4,
+            "corners": null,
+            "yellowCards": 1
+          },
+          {
+            "date": "2026-05-24T21:30Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 11,
+            "shotsOnTarget": 1,
+            "corners": null,
+            "yellowCards": 2
+          },
+          {
+            "date": "2026-05-16T21:30Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 14,
+            "shotsOnTarget": 5,
+            "corners": null,
+            "yellowCards": 0
+          }
+        ]
+      },
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "D",
+      "pickProbability": 0.4489715626514275,
+      "confidence": 62,
+      "goalsOver25": false,
+      "goalsProbability": 0.10990101308359312,
+      "bttsYes": false,
+      "bttsProbability": 0.2005455679404982,
+      "correctScore": "0-0",
+      "correctScoreProbability": 0.32597182864076557,
+      "expectedHomeGoals": 0.5593064886864396,
+      "expectedAwayGoals": 0.5909139179419893,
+      "expectedGoals": 1.150220406628429,
+      "expectedCorners": 2.6982069107720217,
+      "expectedBookings": 3.239918004453202,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": false,
+          "probability": 0.9980947987082813
+        },
+        {
+          "line": 9.5,
+          "over": false,
+          "probability": 0.9995011630531571
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.9998806292525978
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": false,
+          "probability": 0.5936451003844666
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.7734685498129488
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8899911960981925
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-08T02:16:52.250Z",
+      "status": "pending"
+    },
+    {
       "sourceId": "arg.1:401841488",
       "provider": "espn",
       "trackingKey": "Argentina|Primera Division|Tigre|River Plate|2026-08-08",
@@ -490,6 +1572,224 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-07T00:11:22.336Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "bra.1:401841181",
+      "provider": "espn",
+      "trackingKey": "Brazil|Serie A|Grêmio|São Paulo|2026-08-08",
+      "eventId": "401841181",
+      "eventDate": "2026-08-08T19:00Z",
+      "slug": "bra.1",
+      "country": "Brazil",
+      "league": "Serie A",
+      "home": "Grêmio",
+      "away": "São Paulo",
+      "homeId": "6273",
+      "awayId": "2026",
+      "homeForm": "WDLDL",
+      "awayForm": "DLLWD",
+      "h2h": [
+        {
+          "id": "401841166",
+          "date": "2026-07-26T21:30Z",
+          "homeId": "819",
+          "awayId": "2026",
+          "home": "Flamengo",
+          "away": "São Paulo",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401841156",
+          "date": "2026-07-23T00:30Z",
+          "homeId": "2026",
+          "awayId": "3458",
+          "home": "São Paulo",
+          "away": "Athletico Paranaense",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401841147",
+          "date": "2026-05-31T23:30Z",
+          "homeId": "4936",
+          "awayId": "2026",
+          "home": "Remo",
+          "away": "São Paulo",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401841132",
+          "date": "2026-05-23T20:00Z",
+          "homeId": "2026",
+          "awayId": "6086",
+          "home": "São Paulo",
+          "away": "Botafogo",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401841127",
+          "date": "2026-05-16T22:00Z",
+          "homeId": "3445",
+          "awayId": "2026",
+          "home": "Fluminense",
+          "away": "São Paulo",
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "recentLeagueMatches": {
+        "home": [
+          {
+            "date": "2026-07-26T21:30Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 12,
+            "shotsOnTarget": 5,
+            "corners": null,
+            "yellowCards": 2
+          },
+          {
+            "date": "2026-07-17T23:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 9,
+            "shotsOnTarget": 4,
+            "corners": null,
+            "yellowCards": 3
+          },
+          {
+            "date": "2026-05-30T20:30Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 10,
+            "shotsOnTarget": 3,
+            "corners": null,
+            "yellowCards": 3
+          },
+          {
+            "date": "2026-05-23T22:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 14,
+            "shotsOnTarget": 5,
+            "corners": null,
+            "yellowCards": 1
+          },
+          {
+            "date": "2026-05-17T19:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 3,
+            "shotsOnTarget": 1,
+            "corners": null,
+            "yellowCards": 5
+          }
+        ],
+        "away": [
+          {
+            "date": "2026-07-26T21:30Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 4,
+            "shotsOnTarget": 1,
+            "corners": null,
+            "yellowCards": 3
+          },
+          {
+            "date": "2026-07-23T00:30Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 18,
+            "shotsOnTarget": 3,
+            "corners": null,
+            "yellowCards": 0
+          },
+          {
+            "date": "2026-05-31T23:30Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 9,
+            "shotsOnTarget": 4,
+            "corners": null,
+            "yellowCards": 2
+          },
+          {
+            "date": "2026-05-23T20:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 14,
+            "shotsOnTarget": 4,
+            "corners": null,
+            "yellowCards": 4
+          },
+          {
+            "date": "2026-05-16T22:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 14,
+            "shotsOnTarget": 7,
+            "corners": null,
+            "yellowCards": 5
+          }
+        ]
+      },
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "D",
+      "pickProbability": 0.4517448905758859,
+      "confidence": 63,
+      "goalsOver25": false,
+      "goalsProbability": 0.10579545069981562,
+      "bttsYes": false,
+      "bttsProbability": 0.1935416385007558,
+      "correctScore": "0-0",
+      "correctScoreProbability": 0.33219492927884897,
+      "expectedHomeGoals": 0.6274466944637408,
+      "expectedAwayGoals": 0.5030230303238671,
+      "expectedGoals": 1.1304697247876079,
+      "expectedCorners": 2.7178206109442073,
+      "expectedBookings": 4.06058141846922,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": false,
+          "probability": 0.998001001589
+        },
+        {
+          "line": 9.5,
+          "over": false,
+          "probability": 0.9994729397458548
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.9998729861319283
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5782749700878846
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.617003132502855
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7755916594656318
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-08T02:16:52.250Z",
       "status": "pending"
     },
     {
@@ -709,6 +2009,152 @@
       "status": "pending"
     },
     {
+      "sourceId": "sco.1:401878410",
+      "provider": "espn",
+      "trackingKey": "Scotland|Premiership|Dundee|Aberdeen|2026-08-08",
+      "eventId": "401878410",
+      "eventDate": "2026-08-08T14:00Z",
+      "slug": "sco.1",
+      "country": "Scotland",
+      "league": "Premiership",
+      "home": "Dundee",
+      "away": "Aberdeen",
+      "homeId": "261",
+      "awayId": "263",
+      "homeForm": "LWLWW",
+      "awayForm": "WWWWW",
+      "h2h": [
+        {
+          "id": "401878414",
+          "date": "2026-08-01T16:30Z",
+          "homeId": "263",
+          "awayId": "262",
+          "home": "Aberdeen",
+          "away": "Heart of Midlothian",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401867722",
+          "date": "2026-05-17T13:00Z",
+          "homeId": "261",
+          "awayId": "263",
+          "home": "Dundee",
+          "away": "Aberdeen",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401867713",
+          "date": "2026-05-12T18:45Z",
+          "homeId": "263",
+          "awayId": "250",
+          "home": "Aberdeen",
+          "away": "St Mirren",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401867708",
+          "date": "2026-05-09T14:00Z",
+          "homeId": "263",
+          "awayId": "264",
+          "home": "Aberdeen",
+          "away": "Dundee United",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401867701",
+          "date": "2026-05-01T18:45Z",
+          "homeId": "259",
+          "awayId": "263",
+          "home": "Livingston",
+          "away": "Aberdeen",
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "recentLeagueMatches": {
+        "home": [
+          {
+            "date": "2026-08-03T18:30Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 11,
+            "shotsOnTarget": 3,
+            "corners": null,
+            "yellowCards": 1
+          }
+        ],
+        "away": [
+          {
+            "date": "2026-08-01T16:30Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 11,
+            "shotsOnTarget": 3,
+            "corners": null,
+            "yellowCards": 3
+          }
+        ]
+      },
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "D",
+      "pickProbability": 0.45816566490150157,
+      "confidence": 63,
+      "goalsOver25": false,
+      "goalsProbability": 0.10087259823813062,
+      "bttsYes": false,
+      "bttsProbability": 0.18951239623361274,
+      "correctScore": "0-0",
+      "correctScoreProbability": 0.3398995390488805,
+      "expectedHomeGoals": 0.5701080152438897,
+      "expectedAwayGoals": 0.5362754462961203,
+      "expectedGoals": 1.1063834615400099,
+      "expectedCorners": 2.704269587412828,
+      "expectedBookings": 3.536266827890649,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": false,
+          "probability": 0.998066188832571
+        },
+        {
+          "line": 9.5,
+          "over": false,
+          "probability": 0.999492576135105
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.9998783097153164
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": false,
+          "probability": 0.5288274675756941
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.7185800507903263
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.852783203896019
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-08T02:16:52.249Z",
+      "status": "pending"
+    },
+    {
       "sourceId": "sco.1:401878407",
       "provider": "espn",
       "trackingKey": "Scotland|Premiership|St Mirren|St Johnstone|2026-08-08",
@@ -850,6 +2296,224 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-07T00:11:22.338Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "jpn.1:401877178",
+      "provider": "espn",
+      "trackingKey": "Japan|J1 League|Nagoya Grampus|Shimizu S-Pulse|2026-08-08",
+      "eventId": "401877178",
+      "eventDate": "2026-08-08T10:00Z",
+      "slug": "jpn.1",
+      "country": "Japan",
+      "league": "J1 League",
+      "home": "Nagoya Grampus",
+      "away": "Shimizu S-Pulse",
+      "homeId": "7108",
+      "awayId": "7104",
+      "homeForm": "LDLLW",
+      "awayForm": "LDLLW",
+      "h2h": [
+        {
+          "id": "401873699",
+          "date": "2026-06-06T08:00Z",
+          "homeId": "7116",
+          "awayId": "7104",
+          "home": "Yokohama F. Marinos",
+          "away": "Shimizu S-Pulse",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401873670",
+          "date": "2026-05-31T05:00Z",
+          "homeId": "7104",
+          "awayId": "7116",
+          "home": "Shimizu S-Pulse",
+          "away": "Yokohama F. Marinos",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401859407",
+          "date": "2026-05-24T08:00Z",
+          "homeId": "7104",
+          "awayId": "7102",
+          "home": "Shimizu S-Pulse",
+          "away": "Gamba Osaka",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401859395",
+          "date": "2026-05-17T05:00Z",
+          "homeId": "22522",
+          "awayId": "7104",
+          "home": "Fagiano Okayama",
+          "away": "Shimizu S-Pulse",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401859385",
+          "date": "2026-05-10T05:00Z",
+          "homeId": "7104",
+          "awayId": "7107",
+          "home": "Shimizu S-Pulse",
+          "away": "Avispa Fukuoka",
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "recentLeagueMatches": {
+        "home": [
+          {
+            "date": "2026-06-06T06:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 16,
+            "shotsOnTarget": 5,
+            "corners": null,
+            "yellowCards": 1
+          },
+          {
+            "date": "2026-05-30T05:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 12,
+            "shotsOnTarget": 7,
+            "corners": null,
+            "yellowCards": 0
+          },
+          {
+            "date": "2026-05-23T05:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 13,
+            "shotsOnTarget": 4,
+            "corners": null,
+            "yellowCards": 0
+          },
+          {
+            "date": "2026-05-17T06:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 12,
+            "shotsOnTarget": 4,
+            "corners": null,
+            "yellowCards": 0
+          },
+          {
+            "date": "2026-05-10T07:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 14,
+            "shotsOnTarget": 6,
+            "corners": null,
+            "yellowCards": 1
+          }
+        ],
+        "away": [
+          {
+            "date": "2026-06-06T08:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 13,
+            "shotsOnTarget": 3,
+            "corners": null,
+            "yellowCards": 2
+          },
+          {
+            "date": "2026-05-31T05:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 10,
+            "shotsOnTarget": 1,
+            "corners": null,
+            "yellowCards": 1
+          },
+          {
+            "date": "2026-05-24T08:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 12,
+            "shotsOnTarget": 2,
+            "corners": null,
+            "yellowCards": 1
+          },
+          {
+            "date": "2026-05-17T05:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 11,
+            "shotsOnTarget": 2,
+            "corners": null,
+            "yellowCards": 1
+          },
+          {
+            "date": "2026-05-10T05:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 8,
+            "shotsOnTarget": 1,
+            "corners": null,
+            "yellowCards": 2
+          }
+        ]
+      },
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "D",
+      "pickProbability": 0.4355130724307253,
+      "confidence": 62,
+      "goalsOver25": false,
+      "goalsProbability": 0.12027644899166744,
+      "bttsYes": false,
+      "bttsProbability": 0.20720284402239986,
+      "correctScore": "0-0",
+      "correctScoreProbability": 0.3111385706543655,
+      "expectedHomeGoals": 0.7014180681633535,
+      "expectedAwayGoals": 0.4974914475901573,
+      "expectedGoals": 1.1989095157535108,
+      "expectedCorners": 2.7300640662349394,
+      "expectedBookings": 2.2143859809180584,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": false,
+          "probability": 0.9979406093846722
+        },
+        {
+          "line": 9.5,
+          "over": false,
+          "probability": 0.9994546612632434
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.9998680071260537
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": false,
+          "probability": 0.8165162299165498
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.9259386810919504
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.97439938946805
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-08T02:16:52.251Z",
       "status": "pending"
     },
     {
@@ -1284,7 +2948,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-07T00:11:22.337Z",
-      "status": "pending"
+      "status": "incorrect",
+      "outcomeCorrect": false,
+      "goalsCorrect": false,
+      "bttsCorrect": false,
+      "finalScore": "2-1",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-08-08T02:16:51.628Z",
+      "marketStatsAttemptedAt": "2026-08-08T02:16:51.629Z",
+      "actualCorners": null,
+      "actualBookings": 1,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5915838880627928,
+          "correct": false
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.603376839457935,
+          "correct": true
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7644303998859943,
+          "correct": true
+        }
+      ],
+      "marketGradedAt": "2026-08-08T02:16:51.884Z"
     },
     {
       "sourceId": "jpn.1:401877177",
@@ -1363,7 +3057,7 @@
       "finalScore": "4-3",
       "correctScoreCorrect": false,
       "gradedAt": "2026-08-07T13:31:40.234Z",
-      "marketStatsAttemptedAt": "2026-08-07T13:31:40.234Z",
+      "marketStatsAttemptedAt": "2026-08-08T02:16:51.884Z",
       "actualCorners": null,
       "actualBookings": 4,
       "bookingResults": [
@@ -1386,7 +3080,7 @@
           "correct": true
         }
       ],
-      "marketGradedAt": "2026-08-07T13:31:40.313Z"
+      "marketGradedAt": "2026-08-08T02:16:52.048Z"
     },
     {
       "sourceId": "jpn.1:401877182",
@@ -1465,7 +3159,7 @@
       "finalScore": "3-4",
       "correctScoreCorrect": false,
       "gradedAt": "2026-08-07T13:31:40.234Z",
-      "marketStatsAttemptedAt": "2026-08-07T13:31:40.313Z",
+      "marketStatsAttemptedAt": "2026-08-08T02:16:52.048Z",
       "actualCorners": null,
       "actualBookings": 1,
       "bookingResults": [
@@ -1488,7 +3182,7 @@
           "correct": true
         }
       ],
-      "marketGradedAt": "2026-08-07T13:31:40.343Z"
+      "marketGradedAt": "2026-08-08T02:16:52.244Z"
     },
     {
       "sourceId": "arg.1:401841460",
