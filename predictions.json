@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-10T02:04:41.121Z",
+  "updatedAt": "2026-08-10T02:28:39.490Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,39 +14,39 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 175,
+    "completedMatches": 177,
     "marketSamples": {
       "corners": 0,
-      "bookings": 175
+      "bookings": 177
     },
     "calibration": {
-      "homeGoals": 0.9838559354345732,
-      "awayGoals": 0.9483306023970626,
+      "homeGoals": 0.9901519298691185,
+      "awayGoals": 0.938326539917538,
       "corners": 1,
       "bookings": 0.85
     },
-    "lastTrainedAt": "2026-08-09T23:31:10.342Z"
+    "lastTrainedAt": "2026-08-10T02:28:39.487Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 175,
-      "correct": 102,
-      "accuracy": 0.5828571428571429
+      "samples": 177,
+      "correct": 103,
+      "accuracy": 0.5819209039548022
     },
     "goals": {
-      "samples": 175,
+      "samples": 177,
       "correct": 105,
-      "accuracy": 0.6
+      "accuracy": 0.5932203389830508
     },
     "btts": {
-      "samples": 175,
+      "samples": 177,
       "correct": 91,
-      "accuracy": 0.52
+      "accuracy": 0.5141242937853108
     },
     "correctScore": {
-      "samples": 41,
+      "samples": 43,
       "correct": 2,
-      "accuracy": 0.04878048780487805
+      "accuracy": 0.046511627906976744
     },
     "corners": {
       "samples": 0,
@@ -54,12 +54,228 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 525,
-      "correct": 338,
-      "accuracy": 0.6438095238095238
+      "samples": 531,
+      "correct": 341,
+      "accuracy": 0.6421845574387948
     }
   },
   "predictions": [
+    {
+      "sourceId": "rsa.1:401902077",
+      "provider": "espn",
+      "trackingKey": "South Africa|Premier Division|TS Galaxy FC|Mamelodi Sundowns|2026-08-11",
+      "eventId": "401902077",
+      "eventDate": "2026-08-11T17:30Z",
+      "slug": "rsa.1",
+      "country": "South Africa",
+      "league": "Premier Division",
+      "home": "TS Galaxy FC",
+      "away": "Mamelodi Sundowns",
+      "homeId": "19298",
+      "awayId": "7084",
+      "homeForm": "DDWDD",
+      "awayForm": "DWLWD",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "A",
+      "pickProbability": 0.46931493019224996,
+      "confidence": 66,
+      "goalsOver25": true,
+      "goalsProbability": 0.5815006341924753,
+      "bttsYes": true,
+      "bttsProbability": 0.6058520173155678,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.11848477144019917,
+      "expectedHomeGoals": 1.288016719463746,
+      "expectedAwayGoals": 1.7331655958129386,
+      "expectedGoals": 3.0211823152766843,
+      "expectedCorners": 9.834089510197185,
+      "expectedBookings": 4.028299727985667,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6481926464108958
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.521148818539827
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6037872189603906
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5720390582004337
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6233082913035852
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7806918262775373
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-10T02:28:39.489Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "rsa.1:401902078",
+      "provider": "espn",
+      "trackingKey": "South Africa|Premier Division|Polokwane City FC|Stellenbosch|2026-08-11",
+      "eventId": "401902078",
+      "eventDate": "2026-08-11T17:30Z",
+      "slug": "rsa.1",
+      "country": "South Africa",
+      "league": "Premier Division",
+      "home": "Polokwane City FC",
+      "away": "Stellenbosch",
+      "homeId": "7099",
+      "awayId": "18615",
+      "homeForm": "WDDDL",
+      "awayForm": "LDWDL",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.44645993827855956,
+      "confidence": 64,
+      "goalsOver25": false,
+      "goalsProbability": 0.48284482683083285,
+      "bttsYes": true,
+      "bttsProbability": 0.5319622530903256,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.13402568331740894,
+      "expectedHomeGoals": 1.4890418567038117,
+      "expectedAwayGoals": 1.1160972204635784,
+      "expectedGoals": 2.60513907716739,
+      "expectedCorners": 9.890017306342383,
+      "expectedBookings": 3.996046159308504,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6546612117663976
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5282369317248102
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.5967969000305073
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5657570488554593
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6296093839386517
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7857480406235938
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-10T02:28:39.489Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "rsa.1:401902080",
+      "provider": "espn",
+      "trackingKey": "South Africa|Premier Division|Chippa United|Richards Bay FC|2026-08-11",
+      "eventId": "401902080",
+      "eventDate": "2026-08-11T17:30Z",
+      "slug": "rsa.1",
+      "country": "South Africa",
+      "league": "Premier Division",
+      "home": "Chippa United",
+      "away": "Richards Bay FC",
+      "homeId": "11913",
+      "awayId": "18825",
+      "homeForm": "DWLDL",
+      "awayForm": "LLDDD",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.42860128011610515,
+      "confidence": 62,
+      "goalsOver25": false,
+      "goalsProbability": 0.4944104250147047,
+      "bttsYes": true,
+      "bttsProbability": 0.5446538715266016,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.13360090422779414,
+      "expectedHomeGoals": 1.4738531316360082,
+      "expectedAwayGoals": 1.1776619859289725,
+      "expectedGoals": 2.6515151175649807,
+      "expectedCorners": 9.831174296805536,
+      "expectedBookings": 3.7918402582189303,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.647853606917655
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5207784129294899
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6041514251603127
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5248443393044885
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6694291724290721
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8167599970084485
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-10T02:28:39.489Z",
+      "status": "pending"
+    },
     {
       "sourceId": "arg.1:401841487",
       "provider": "espn",
@@ -492,7 +708,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-09T02:23:57.282Z",
-      "status": "pending"
+      "status": "incorrect",
+      "outcomeCorrect": false,
+      "goalsCorrect": false,
+      "bttsCorrect": false,
+      "finalScore": "2-1",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-08-10T02:28:38.988Z",
+      "marketStatsAttemptedAt": "2026-08-10T02:28:38.989Z",
+      "actualCorners": null,
+      "actualBookings": 9,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.6004732077770822,
+          "correct": true
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.594145161256015,
+          "correct": false
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7567605390214247,
+          "correct": false
+        }
+      ],
+      "marketGradedAt": "2026-08-10T02:28:39.402Z"
     },
     {
       "sourceId": "bra.1:401841187",
@@ -564,7 +810,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-08T02:16:52.250Z",
-      "status": "pending"
+      "status": "correct",
+      "outcomeCorrect": true,
+      "goalsCorrect": false,
+      "bttsCorrect": false,
+      "finalScore": "2-0",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-08-10T02:28:38.989Z",
+      "marketStatsAttemptedAt": "2026-08-10T02:28:39.402Z",
+      "actualCorners": null,
+      "actualBookings": 2,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5747752106584791,
+          "correct": false
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.620547950519936,
+          "correct": true
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.778464029648467,
+          "correct": true
+        }
+      ],
+      "marketGradedAt": "2026-08-10T02:28:39.486Z"
     },
     {
       "sourceId": "bra.1:401841182",
