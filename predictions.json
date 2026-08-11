@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-11T02:19:21.214Z",
+  "updatedAt": "2026-08-11T02:22:25.862Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,39 +14,39 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 178,
+    "completedMatches": 180,
     "marketSamples": {
       "corners": 0,
-      "bookings": 178
+      "bookings": 180
     },
     "calibration": {
-      "homeGoals": 0.9943627220154347,
-      "awayGoals": 0.9506555200946203,
+      "homeGoals": 0.966226191011194,
+      "awayGoals": 0.9740596430622044,
       "corners": 1,
       "bookings": 0.85
     },
-    "lastTrainedAt": "2026-08-10T21:26:26.010Z"
+    "lastTrainedAt": "2026-08-11T02:22:25.860Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 178,
+      "samples": 180,
       "correct": 103,
-      "accuracy": 0.5786516853932584
+      "accuracy": 0.5722222222222222
     },
     "goals": {
-      "samples": 178,
-      "correct": 106,
-      "accuracy": 0.5955056179775281
+      "samples": 180,
+      "correct": 107,
+      "accuracy": 0.5944444444444444
     },
     "btts": {
-      "samples": 178,
-      "correct": 92,
-      "accuracy": 0.5168539325842697
+      "samples": 180,
+      "correct": 93,
+      "accuracy": 0.5166666666666667
     },
     "correctScore": {
-      "samples": 44,
+      "samples": 46,
       "correct": 2,
-      "accuracy": 0.045454545454545456
+      "accuracy": 0.043478260869565216
     },
     "corners": {
       "samples": 0,
@@ -54,12 +54,84 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 534,
-      "correct": 343,
-      "accuracy": 0.6423220973782772
+      "samples": 540,
+      "correct": 346,
+      "accuracy": 0.6407407407407407
     }
   },
   "predictions": [
+    {
+      "sourceId": "rsa.1:401902076",
+      "provider": "espn",
+      "trackingKey": "South Africa|Premier Division|AmaZulu|Orlando Pirates|2026-08-12",
+      "eventId": "401902076",
+      "eventDate": "2026-08-12T17:30Z",
+      "slug": "rsa.1",
+      "country": "South Africa",
+      "league": "Premier Division",
+      "home": "AmaZulu",
+      "away": "Orlando Pirates",
+      "homeId": "7079",
+      "awayId": "7085",
+      "homeForm": "WWLDD",
+      "awayForm": "WWDWW",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "A",
+      "pickProbability": 0.5073229662376965,
+      "confidence": 69,
+      "goalsOver25": false,
+      "goalsProbability": 0.45992417467600066,
+      "bttsYes": false,
+      "bttsProbability": 0.49541750328675277,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.13106522809052326,
+      "expectedHomeGoals": 0.9469434271973616,
+      "expectedAwayGoals": 1.567731055718853,
+      "expectedGoals": 2.514674482916215,
+      "expectedCorners": 9.80809056748169,
+      "expectedBookings": 3.7425225516577294,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6451624770634659
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5178422036126579
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6070346736955481
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5146858846164641
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6789962530083377
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.823968206591157
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-11T02:22:25.861Z",
+      "status": "pending"
+    },
     {
       "sourceId": "rsa.1:401902077",
       "provider": "espn",
@@ -346,7 +418,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-09T02:23:57.282Z",
-      "status": "pending"
+      "status": "incorrect",
+      "outcomeCorrect": false,
+      "goalsCorrect": true,
+      "bttsCorrect": true,
+      "finalScore": "1-2",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-08-11T02:22:25.419Z",
+      "marketStatsAttemptedAt": "2026-08-11T02:22:25.420Z",
+      "actualCorners": null,
+      "actualBookings": 7,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5809274132875842,
+          "correct": true
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6143059399077829,
+          "correct": false
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7733974997904269,
+          "correct": false
+        }
+      ],
+      "marketGradedAt": "2026-08-11T02:22:25.604Z"
     },
     {
       "sourceId": "arg.1:401841483",
@@ -418,7 +520,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-09T02:23:57.282Z",
-      "status": "pending"
+      "status": "incorrect",
+      "outcomeCorrect": false,
+      "goalsCorrect": false,
+      "bttsCorrect": false,
+      "finalScore": "0-2",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-08-11T02:22:25.419Z",
+      "marketStatsAttemptedAt": "2026-08-11T02:22:25.604Z",
+      "actualCorners": null,
+      "actualBookings": 4,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": false,
+          "probability": 0.5218236063343036,
+          "correct": false
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.712359554226759,
+          "correct": true
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8483633732245088,
+          "correct": true
+        }
+      ],
+      "marketGradedAt": "2026-08-11T02:22:25.860Z"
     },
     {
       "sourceId": "por.1:401885486",
