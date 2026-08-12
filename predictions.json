@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-12T19:36:04.670Z",
+  "updatedAt": "2026-08-12T20:19:34.182Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,39 +14,39 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 186,
+    "completedMatches": 187,
     "marketSamples": {
       "corners": 0,
-      "bookings": 186
+      "bookings": 187
     },
     "calibration": {
-      "homeGoals": 1.0096135607610968,
-      "awayGoals": 0.9955039161358221,
+      "homeGoals": 1.0043020834036134,
+      "awayGoals": 0.9874344822300608,
       "corners": 1,
       "bookings": 0.85
     },
-    "lastTrainedAt": "2026-08-12T19:36:04.668Z"
+    "lastTrainedAt": "2026-08-12T20:19:34.180Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 186,
-      "correct": 104,
-      "accuracy": 0.5591397849462365
+      "samples": 187,
+      "correct": 105,
+      "accuracy": 0.5614973262032086
     },
     "goals": {
-      "samples": 186,
-      "correct": 112,
-      "accuracy": 0.6021505376344086
+      "samples": 187,
+      "correct": 113,
+      "accuracy": 0.6042780748663101
     },
     "btts": {
-      "samples": 186,
-      "correct": 98,
-      "accuracy": 0.5268817204301075
+      "samples": 187,
+      "correct": 99,
+      "accuracy": 0.5294117647058824
     },
     "correctScore": {
-      "samples": 52,
-      "correct": 4,
-      "accuracy": 0.07692307692307693
+      "samples": 53,
+      "correct": 5,
+      "accuracy": 0.09433962264150944
     },
     "corners": {
       "samples": 0,
@@ -54,9 +54,9 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 558,
-      "correct": 359,
-      "accuracy": 0.6433691756272402
+      "samples": 561,
+      "correct": 360,
+      "accuracy": 0.6417112299465241
     }
   },
   "predictions": [
@@ -628,7 +628,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-12T02:38:16.356Z",
-      "status": "pending"
+      "status": "correct",
+      "outcomeCorrect": true,
+      "goalsCorrect": true,
+      "bttsCorrect": true,
+      "finalScore": "0-0",
+      "correctScoreCorrect": true,
+      "gradedAt": "2026-08-12T20:19:33.958Z",
+      "marketStatsAttemptedAt": "2026-08-12T20:19:33.958Z",
+      "actualCorners": null,
+      "actualBookings": 5,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": false,
+          "probability": 0.9085099191882983,
+          "correct": false
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.971104998554633,
+          "correct": false
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.9922444815316003,
+          "correct": true
+        }
+      ],
+      "marketGradedAt": "2026-08-12T20:19:34.179Z"
     },
     {
       "sourceId": "rsa.1:401902076",
