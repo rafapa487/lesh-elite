@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-15T23:43:25.763Z",
+  "updatedAt": "2026-08-15T23:58:36.694Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,39 +14,39 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 231,
+    "completedMatches": 233,
     "marketSamples": {
       "corners": 0,
-      "bookings": 231
+      "bookings": 233
     },
     "calibration": {
-      "homeGoals": 1.106904200550408,
-      "awayGoals": 1.1125295827888289,
+      "homeGoals": 1.126160399090873,
+      "awayGoals": 1.1026125704992549,
       "corners": 1,
       "bookings": 0.85
     },
-    "lastTrainedAt": "2026-08-15T23:30:17.857Z"
+    "lastTrainedAt": "2026-08-15T23:58:36.689Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 231,
+      "samples": 233,
       "correct": 122,
-      "accuracy": 0.5281385281385281
+      "accuracy": 0.5236051502145923
     },
     "goals": {
-      "samples": 231,
-      "correct": 138,
-      "accuracy": 0.5974025974025974
+      "samples": 233,
+      "correct": 140,
+      "accuracy": 0.6008583690987125
     },
     "btts": {
-      "samples": 231,
-      "correct": 129,
-      "accuracy": 0.5584415584415584
+      "samples": 233,
+      "correct": 131,
+      "accuracy": 0.5622317596566524
     },
     "correctScore": {
-      "samples": 97,
+      "samples": 99,
       "correct": 11,
-      "accuracy": 0.1134020618556701
+      "accuracy": 0.1111111111111111
     },
     "corners": {
       "samples": 0,
@@ -54,9 +54,9 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 693,
-      "correct": 449,
-      "accuracy": 0.6479076479076479
+      "samples": 699,
+      "correct": 452,
+      "accuracy": 0.6466380543633763
     }
   },
   "predictions": [
@@ -922,6 +922,78 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-15T01:45:51.312Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "mex.1:401877015",
+      "provider": "espn",
+      "trackingKey": "Mexico|Liga MX|Pumas UNAM|Querétaro|2026-08-16",
+      "eventId": "401877015",
+      "eventDate": "2026-08-16T18:00Z",
+      "slug": "mex.1",
+      "country": "Mexico",
+      "league": "Liga MX",
+      "home": "Pumas UNAM",
+      "away": "Querétaro",
+      "homeId": "233",
+      "awayId": "222",
+      "homeForm": "LLLWW",
+      "awayForm": "LLLWW",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.4264590091345633,
+      "confidence": 62,
+      "goalsOver25": true,
+      "goalsProbability": 0.5903938752589466,
+      "bttsYes": true,
+      "bttsProbability": 0.6204670433780662,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.11890805050254023,
+      "expectedHomeGoals": 1.6583835923965005,
+      "expectedAwayGoals": 1.4030192806938195,
+      "expectedGoals": 3.06140287309032,
+      "expectedCorners": 9.780590852205703,
+      "expectedBookings": 3.5593069813177083,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6419415526911633
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.514337004333033
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.610467783504104
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": false,
+          "probability": 0.5238909537323563
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.7142016344277857
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8496764613114992
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-15T23:58:36.692Z",
       "status": "pending"
     },
     {
@@ -2872,7 +2944,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-15T01:45:51.313Z",
-      "status": "pending"
+      "status": "incorrect",
+      "outcomeCorrect": false,
+      "goalsCorrect": true,
+      "bttsCorrect": true,
+      "finalScore": "2-0",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-08-15T23:58:36.171Z",
+      "marketStatsAttemptedAt": "2026-08-15T23:58:36.172Z",
+      "actualCorners": null,
+      "actualBookings": 3,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.545725869870568,
+          "correct": false
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6493664029311429,
+          "correct": true
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8013381840035085,
+          "correct": true
+        }
+      ],
+      "marketGradedAt": "2026-08-15T23:58:36.571Z"
     },
     {
       "sourceId": "arg.1:401841496",
@@ -3090,7 +3192,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-15T01:45:51.313Z",
-      "status": "pending"
+      "status": "incorrect",
+      "outcomeCorrect": false,
+      "goalsCorrect": true,
+      "bttsCorrect": true,
+      "finalScore": "2-0",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-08-15T23:58:36.172Z",
+      "marketStatsAttemptedAt": "2026-08-15T23:58:36.571Z",
+      "actualCorners": null,
+      "actualBookings": 5,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": false,
+          "probability": 0.7645867009840662,
+          "correct": false
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.8955308197165319,
+          "correct": false
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.9601410864614268,
+          "correct": true
+        }
+      ],
+      "marketGradedAt": "2026-08-15T23:58:36.686Z"
     },
     {
       "sourceId": "bra.1:401841196",
