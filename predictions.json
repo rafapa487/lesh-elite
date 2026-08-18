@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-18T01:41:21.734Z",
+  "updatedAt": "2026-08-18T01:46:23.414Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,39 +14,39 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 284,
+    "completedMatches": 286,
     "marketSamples": {
       "corners": 0,
-      "bookings": 284
+      "bookings": 286
     },
     "calibration": {
-      "homeGoals": 1.1395760065354092,
-      "awayGoals": 1.0845070574564837,
+      "homeGoals": 1.1307465667346972,
+      "awayGoals": 1.07948929583876,
       "corners": 1,
-      "bookings": 0.8773631947532358
+      "bookings": 0.8820500245054208
     },
-    "lastTrainedAt": "2026-08-17T22:19:45.903Z"
+    "lastTrainedAt": "2026-08-18T01:46:23.410Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 284,
+      "samples": 286,
       "correct": 143,
-      "accuracy": 0.5035211267605634
+      "accuracy": 0.5
     },
     "goals": {
-      "samples": 284,
+      "samples": 286,
       "correct": 169,
-      "accuracy": 0.5950704225352113
+      "accuracy": 0.5909090909090909
     },
     "btts": {
-      "samples": 284,
-      "correct": 156,
-      "accuracy": 0.5492957746478874
+      "samples": 286,
+      "correct": 158,
+      "accuracy": 0.5524475524475524
     },
     "correctScore": {
-      "samples": 150,
-      "correct": 16,
-      "accuracy": 0.10666666666666667
+      "samples": 152,
+      "correct": 18,
+      "accuracy": 0.11842105263157894
     },
     "corners": {
       "samples": 0,
@@ -54,12 +54,588 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 852,
-      "correct": 564,
-      "accuracy": 0.6619718309859155
+      "samples": 858,
+      "correct": 566,
+      "accuracy": 0.6596736596736597
     }
   },
   "predictions": [
+    {
+      "sourceId": "usa.1:761738",
+      "provider": "espn",
+      "trackingKey": "United States|MLS|LA Galaxy|San Jose Earthquakes|2026-08-20",
+      "eventId": "761738",
+      "eventDate": "2026-08-20T02:30Z",
+      "slug": "usa.1",
+      "country": "United States",
+      "league": "MLS",
+      "home": "LA Galaxy",
+      "away": "San Jose Earthquakes",
+      "homeId": "187",
+      "awayId": "191",
+      "homeForm": "LDDLL",
+      "awayForm": "LLDLW",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.493706992111382,
+      "confidence": 68,
+      "goalsOver25": true,
+      "goalsProbability": 0.6301550432925944,
+      "bttsYes": true,
+      "bttsProbability": 0.6389638580453816,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.1085204245096522,
+      "expectedHomeGoals": 1.8973988246869287,
+      "expectedAwayGoals": 1.3515570147176816,
+      "expectedGoals": 3.2489558394046103,
+      "expectedCorners": 10.037612674970264,
+      "expectedBookings": 4.09550198730962,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6713995030936291
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5467670705917859
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.578334137827502
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5849616664082948
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6101860207969996
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7700315689506316
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-18T01:46:23.412Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "usa.1:761733",
+      "provider": "espn",
+      "trackingKey": "United States|MLS|Minnesota United FC|Atlanta United FC|2026-08-20",
+      "eventId": "761733",
+      "eventDate": "2026-08-20T00:30Z",
+      "slug": "usa.1",
+      "country": "United States",
+      "league": "MLS",
+      "home": "Minnesota United FC",
+      "away": "Atlanta United FC",
+      "homeId": "17362",
+      "awayId": "18418",
+      "homeForm": "DWLLD",
+      "awayForm": "WLLDL",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.4420770276174823,
+      "confidence": 63,
+      "goalsOver25": true,
+      "goalsProbability": 0.5822596236093585,
+      "bttsYes": true,
+      "bttsProbability": 0.6118582675713935,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.11981348540591982,
+      "expectedHomeGoals": 1.6757100689695896,
+      "expectedAwayGoals": 1.3488579867369126,
+      "expectedGoals": 3.024568055706502,
+      "expectedCorners": 9.848037811894638,
+      "expectedBookings": 4.085040221840049,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6498122820598338
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5229198110527569
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6020443741994868
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5829648983201036
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6122278502868093
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7717018961009596
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-18T01:46:23.412Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "usa.1:761731",
+      "provider": "espn",
+      "trackingKey": "United States|MLS|Toronto FC|Charlotte FC|2026-08-19",
+      "eventId": "761731",
+      "eventDate": "2026-08-19T23:30Z",
+      "slug": "usa.1",
+      "country": "United States",
+      "league": "MLS",
+      "home": "Toronto FC",
+      "away": "Charlotte FC",
+      "homeId": "7318",
+      "awayId": "21300",
+      "homeForm": "WDLDD",
+      "awayForm": "WLWWL",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "A",
+      "pickProbability": 0.4232753447452561,
+      "confidence": 62,
+      "goalsOver25": false,
+      "goalsProbability": 0.5096092623883006,
+      "bttsYes": true,
+      "bttsProbability": 0.5577555381181986,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.13203686664197192,
+      "expectedHomeGoals": 1.221769020744603,
+      "expectedAwayGoals": 1.4915192534294666,
+      "expectedGoals": 2.7132882741740696,
+      "expectedCorners": 9.651628140797188,
+      "expectedBookings": 4.097576758738482,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6266231324446018
+        },
+        {
+          "line": 9.5,
+          "over": false,
+          "probability": 0.5021998511051665
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6265350044262061
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5853570020366565
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.609781143814704
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7696998500514751
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-18T01:46:23.412Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "usa.1:761727",
+      "provider": "espn",
+      "trackingKey": "United States|MLS|Philadelphia Union|Inter Miami CF|2026-08-19",
+      "eventId": "761727",
+      "eventDate": "2026-08-19T23:30Z",
+      "slug": "usa.1",
+      "country": "United States",
+      "league": "MLS",
+      "home": "Philadelphia Union",
+      "away": "Inter Miami CF",
+      "homeId": "10739",
+      "awayId": "20232",
+      "homeForm": "WLWLW",
+      "awayForm": "LLLWD",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.4667641331640062,
+      "confidence": 66,
+      "goalsOver25": true,
+      "goalsProbability": 0.5947818541936509,
+      "bttsYes": true,
+      "bttsProbability": 0.6170696680161525,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.11647376042101544,
+      "expectedHomeGoals": 1.756767746007845,
+      "expectedAwayGoals": 1.3247509643809412,
+      "expectedGoals": 3.081518710388786,
+      "expectedCorners": 9.966278396561464,
+      "expectedBookings": 3.741789176814158,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6633705263051346
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5378443253584108
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.587258581111366
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5145340598117567
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6791382910288183
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8240745122735018
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-18T01:46:23.411Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "usa.1:761730",
+      "provider": "espn",
+      "trackingKey": "United States|MLS|FC Cincinnati|New York City FC|2026-08-19",
+      "eventId": "761730",
+      "eventDate": "2026-08-19T23:30Z",
+      "slug": "usa.1",
+      "country": "United States",
+      "league": "MLS",
+      "home": "FC Cincinnati",
+      "away": "New York City FC",
+      "homeId": "18267",
+      "awayId": "17606",
+      "homeForm": "DLWWW",
+      "awayForm": "LLLWD",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.5417740030846145,
+      "confidence": 73,
+      "goalsOver25": true,
+      "goalsProbability": 0.6505503840128907,
+      "bttsYes": true,
+      "bttsProbability": 0.6412802803245947,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.10165070389466227,
+      "expectedHomeGoals": 2.056872317440989,
+      "expectedAwayGoals": 1.2938341330408314,
+      "expectedGoals": 3.3507064504818205,
+      "expectedCorners": 10.269399366804702,
+      "expectedBookings": 3.812631165782483,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6966839152539485
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.575289451533664
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.5493753713526046
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.529095896670188
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6653878246953677
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8136867641585026
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-18T01:46:23.411Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "usa.1:761725",
+      "provider": "espn",
+      "trackingKey": "United States|MLS|D.C. United|New England Revolution|2026-08-19",
+      "eventId": "761725",
+      "eventDate": "2026-08-19T23:30Z",
+      "slug": "usa.1",
+      "country": "United States",
+      "league": "MLS",
+      "home": "D.C. United",
+      "away": "New England Revolution",
+      "homeId": "193",
+      "awayId": "189",
+      "homeForm": "DDWDD",
+      "awayForm": "LLDWD",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.4545202880285772,
+      "confidence": 64,
+      "goalsOver25": true,
+      "goalsProbability": 0.5892961593853928,
+      "bttsYes": true,
+      "bttsProbability": 0.6151874310573859,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.1180348103768084,
+      "expectedHomeGoals": 1.717971720032949,
+      "expectedAwayGoals": 1.3384571083311803,
+      "expectedGoals": 3.056428828364129,
+      "expectedCorners": 9.90720220310264,
+      "expectedBookings": 3.8571225266524514,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6566350347065112
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5304078310239198
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.5946480120176459
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5381304615584099
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6567262948784252
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8070435718230146
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-18T01:46:23.411Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "usa.1:761726",
+      "provider": "espn",
+      "trackingKey": "United States|MLS|Columbus Crew|CF Montréal|2026-08-19",
+      "eventId": "761726",
+      "eventDate": "2026-08-19T23:30Z",
+      "slug": "usa.1",
+      "country": "United States",
+      "league": "MLS",
+      "home": "Columbus Crew",
+      "away": "CF Montréal",
+      "homeId": "183",
+      "awayId": "9720",
+      "homeForm": "LWWWD",
+      "awayForm": "DDLLD",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.5783069786746353,
+      "confidence": 76,
+      "goalsOver25": true,
+      "goalsProbability": 0.6618092897170232,
+      "bttsYes": true,
+      "bttsProbability": 0.6368574158162045,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.09683915503208355,
+      "expectedHomeGoals": 2.171053482014335,
+      "expectedAwayGoals": 1.2377539658380547,
+      "expectedGoals": 3.4088074478523893,
+      "expectedCorners": 10.405239669794389,
+      "expectedBookings": 4.141494196455939,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.7109177816849672
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5916377934031873
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.5324758931850312
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5936734019954785
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.60121630845804
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.762643229416485
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-18T01:46:23.411Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "rsa.1:401902085",
+      "provider": "espn",
+      "trackingKey": "South Africa|Premier Division|Mamelodi Sundowns|Marumo Gallants|2026-08-19",
+      "eventId": "401902085",
+      "eventDate": "2026-08-19T17:30Z",
+      "slug": "rsa.1",
+      "country": "South Africa",
+      "league": "Premier Division",
+      "home": "Mamelodi Sundowns",
+      "away": "Marumo Gallants",
+      "homeId": "7084",
+      "awayId": "13317",
+      "homeForm": "DWDWL",
+      "awayForm": "LDDDD",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.6458482408064375,
+      "confidence": 83,
+      "goalsOver25": true,
+      "goalsProbability": 0.7179074798487127,
+      "bttsYes": true,
+      "bttsProbability": 0.6536935577419775,
+      "correctScore": "2-1",
+      "correctScoreProbability": 0.09246743395395364,
+      "expectedHomeGoals": 2.5007357136074937,
+      "expectedAwayGoals": 1.2210264073990242,
+      "expectedGoals": 3.7217621210065177,
+      "expectedCorners": 10.668420823542863,
+      "expectedBookings": 4.224521013331272,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.7372391953237717
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.622449760245043
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.5000124397066201
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.6091211283588167
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.5850624466030865
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7491289651771562
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-18T01:46:23.413Z",
+      "status": "pending"
+    },
     {
       "sourceId": "mex.1:401877010",
       "provider": "espn",
@@ -274,7 +850,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-16T01:53:53.038Z",
-      "status": "pending"
+      "status": "incorrect",
+      "outcomeCorrect": false,
+      "goalsCorrect": false,
+      "bttsCorrect": true,
+      "finalScore": "1-1",
+      "correctScoreCorrect": true,
+      "gradedAt": "2026-08-18T01:46:23.128Z",
+      "marketStatsAttemptedAt": "2026-08-18T01:46:23.128Z",
+      "actualCorners": null,
+      "actualBookings": 5,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5373285423224178,
+          "correct": true
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6574991723876906,
+          "correct": false
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8076394819049467,
+          "correct": true
+        }
+      ],
+      "marketGradedAt": "2026-08-18T01:46:23.306Z"
     },
     {
       "sourceId": "arg.1:401841495",
@@ -346,7 +952,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-16T01:53:53.039Z",
-      "status": "pending"
+      "status": "incorrect",
+      "outcomeCorrect": false,
+      "goalsCorrect": false,
+      "bttsCorrect": true,
+      "finalScore": "1-1",
+      "correctScoreCorrect": true,
+      "gradedAt": "2026-08-18T01:46:23.128Z",
+      "marketStatsAttemptedAt": "2026-08-18T01:46:23.306Z",
+      "actualCorners": null,
+      "actualBookings": 7,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": false,
+          "probability": 0.516859683342032,
+          "correct": false
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.7079160766617291,
+          "correct": false
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8451812831708378,
+          "correct": false
+        }
+      ],
+      "marketGradedAt": "2026-08-18T01:46:23.409Z"
     },
     {
       "sourceId": "arg.1:401841507",
