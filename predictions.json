@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-21T20:20:49.412Z",
+  "updatedAt": "2026-08-21T20:35:35.585Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,39 +14,39 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 306,
+    "completedMatches": 307,
     "marketSamples": {
       "corners": 0,
-      "bookings": 306
+      "bookings": 307
     },
     "calibration": {
-      "homeGoals": 1.1096218334110133,
-      "awayGoals": 1.1153589127363868,
+      "homeGoals": 1.1038002960484152,
+      "awayGoals": 1.1215817378675852,
       "corners": 1,
-      "bookings": 0.8825825668187142
+      "bookings": 0.8807111144618175
     },
-    "lastTrainedAt": "2026-08-21T19:55:02.599Z"
+    "lastTrainedAt": "2026-08-21T20:35:35.577Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 306,
-      "correct": 152,
-      "accuracy": 0.49673202614379086
+      "samples": 307,
+      "correct": 153,
+      "accuracy": 0.498371335504886
     },
     "goals": {
-      "samples": 306,
-      "correct": 182,
-      "accuracy": 0.5947712418300654
+      "samples": 307,
+      "correct": 183,
+      "accuracy": 0.5960912052117264
     },
     "btts": {
-      "samples": 306,
+      "samples": 307,
       "correct": 168,
-      "accuracy": 0.5490196078431373
+      "accuracy": 0.5472312703583062
     },
     "correctScore": {
-      "samples": 172,
+      "samples": 173,
       "correct": 18,
-      "accuracy": 0.10465116279069768
+      "accuracy": 0.10404624277456648
     },
     "corners": {
       "samples": 0,
@@ -54,9 +54,9 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 918,
-      "correct": 602,
-      "accuracy": 0.6557734204793029
+      "samples": 921,
+      "correct": 604,
+      "accuracy": 0.6558089033659066
     }
   },
   "predictions": [
@@ -3877,6 +3877,78 @@
       "status": "pending"
     },
     {
+      "sourceId": "mex.1:401877007",
+      "provider": "espn",
+      "trackingKey": "Mexico|Liga MX|Querétaro|Toluca|2026-08-22",
+      "eventId": "401877007",
+      "eventDate": "2026-08-22T03:10Z",
+      "slug": "mex.1",
+      "country": "Mexico",
+      "league": "Liga MX",
+      "home": "Querétaro",
+      "away": "Toluca",
+      "homeId": "222",
+      "awayId": "223",
+      "homeForm": "DLLLW",
+      "awayForm": "DWLWW",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "A",
+      "pickProbability": 0.425652094660655,
+      "confidence": 62,
+      "goalsOver25": true,
+      "goalsProbability": 0.6115407981320607,
+      "bttsYes": true,
+      "bttsProbability": 0.6367512367809401,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.11474223916833287,
+      "expectedHomeGoals": 1.4580268466032813,
+      "expectedAwayGoals": 1.7014624194896684,
+      "expectedGoals": 3.1594892660929497,
+      "expectedCorners": 9.735621552267,
+      "expectedBookings": 3.8187280559427728,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6366397157992425
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5085885902790643
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6160771394615652
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5303391055892348
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6642019031700657
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8127817448061755
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-21T20:35:35.582Z",
+      "status": "pending"
+    },
+    {
       "sourceId": "mex.1:401877004",
       "provider": "espn",
       "trackingKey": "Mexico|Liga MX|Tigres UANL|Atlante|2026-08-22",
@@ -4306,7 +4378,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-20T01:47:22.173Z",
-      "status": "pending"
+      "status": "correct",
+      "outcomeCorrect": true,
+      "goalsCorrect": true,
+      "bttsCorrect": false,
+      "finalScore": "0-4",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-08-21T20:35:35.488Z",
+      "marketStatsAttemptedAt": "2026-08-21T20:35:35.489Z",
+      "actualCorners": null,
+      "actualBookings": 1,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5222145180810961,
+          "correct": false
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6719179233625369,
+          "correct": true
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.818644197217747,
+          "correct": true
+        }
+      ],
+      "marketGradedAt": "2026-08-21T20:35:35.574Z"
     },
     {
       "sourceId": "ksa.1:401900398",
