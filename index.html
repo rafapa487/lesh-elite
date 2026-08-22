@@ -2481,15 +2481,46 @@
       return [...results].reduce((sum, result) => sum + (result === "W" ? 1 : result === "D" ? 0.5 : 0), 0) / results.length;
     }
 
+    function normalizedTeamKey(value) {
+      return String(value || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+    }
+
+    function isSelectedHeadToHead(fixture, match) {
+      const fixtureIds = [String(fixture?.homeId || ""), String(fixture?.awayId || "")];
+      const matchIds = [String(match?.homeId || ""), String(match?.awayId || "")];
+      const idsMatch = fixtureIds.every(Boolean) && matchIds.every(Boolean)
+        && ((matchIds[0] === fixtureIds[0] && matchIds[1] === fixtureIds[1])
+          || (matchIds[0] === fixtureIds[1] && matchIds[1] === fixtureIds[0]));
+      if (idsMatch) return true;
+
+      const fixtureTeams = [normalizedTeamKey(fixture?.home), normalizedTeamKey(fixture?.away)].sort();
+      const matchTeams = [normalizedTeamKey(match?.home), normalizedTeamKey(match?.away)].sort();
+      return fixtureTeams.every(Boolean) && fixtureTeams[0] === matchTeams[0] && fixtureTeams[1] === matchTeams[1];
+    }
+
+    function matchBelongsToFixtureHome(fixture, match) {
+      const fixtureHomeId = String(fixture?.homeId || "");
+      const fixtureAwayId = String(fixture?.awayId || "");
+      const matchHomeId = String(match?.homeId || "");
+      const matchAwayId = String(match?.awayId || "");
+      if (fixtureHomeId && fixtureAwayId && matchHomeId && matchAwayId) {
+        if (matchHomeId === fixtureHomeId && matchAwayId === fixtureAwayId) return true;
+        if (matchHomeId === fixtureAwayId && matchAwayId === fixtureHomeId) return false;
+      }
+      return normalizedTeamKey(match?.home) === normalizedTeamKey(fixture?.home);
+    }
+
+    function validHeadToHeadMeetings(fixture) {
+      return (Array.isArray(fixture?.h2h) ? fixture.h2h : []).filter((match) => isSelectedHeadToHead(fixture, match));
+    }
     function headToHeadStrength(fixture) {
-      const meetings = [...(Array.isArray(fixture?.h2h) ? fixture.h2h : [])]
+      const meetings = [...validHeadToHeadMeetings(fixture)]
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .slice(0, RECENT_FORM_WEIGHTS.length);
       if (!meetings.length) return 0;
-      const currentHomeId = String(fixture.homeId || "");
       let appliedWeight = 0;
       const points = meetings.reduce((sum, match, index) => {
-        const currentHomeWasHome = String(match.homeId || "") === currentHomeId;
+        const currentHomeWasHome = matchBelongsToFixtureHome(fixture, match);
         const currentHomeGoals = currentHomeWasHome ? Number(match.homeGoals) : Number(match.awayGoals);
         const opponentGoals = currentHomeWasHome ? Number(match.awayGoals) : Number(match.homeGoals);
         const weight = RECENT_FORM_WEIGHTS[index];
@@ -2500,7 +2531,7 @@
     }
 
     function renderHeadToHead(fixture) {
-      const meetings = [...(Array.isArray(fixture?.h2h) ? fixture.h2h : [])]
+      const meetings = [...validHeadToHeadMeetings(fixture)]
         .sort((a, b) => new Date(b.date) - new Date(a.date))
         .slice(0, RECENT_FORM_WEIGHTS.length);
       if (!meetings.length) {
@@ -2510,7 +2541,7 @@
       }
       let homeWins = 0, draws = 0, awayWins = 0;
       meetings.forEach((match) => {
-        const currentHomeWasHome = String(match.homeId || "") === String(fixture.homeId || "");
+        const currentHomeWasHome = matchBelongsToFixtureHome(fixture, match);
         const currentHomeGoals = currentHomeWasHome ? Number(match.homeGoals) : Number(match.awayGoals);
         const currentAwayGoals = currentHomeWasHome ? Number(match.awayGoals) : Number(match.homeGoals);
         if (currentHomeGoals > currentAwayGoals) homeWins += 1;
