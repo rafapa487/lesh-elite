@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-22T17:31:54.861Z",
+  "updatedAt": "2026-08-22T17:49:31.886Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,39 +14,39 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 337,
+    "completedMatches": 339,
     "marketSamples": {
       "corners": 0,
-      "bookings": 337
+      "bookings": 339
     },
     "calibration": {
-      "homeGoals": 1.0844567291074638,
-      "awayGoals": 1.0956923500533975,
+      "homeGoals": 1.0763171509257132,
+      "awayGoals": 1.099501823135387,
       "corners": 1,
-      "bookings": 0.8947745527258641
+      "bookings": 0.8906536604651978
     },
-    "lastTrainedAt": "2026-08-22T17:31:01.382Z"
+    "lastTrainedAt": "2026-08-22T17:49:31.877Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 337,
+      "samples": 339,
       "correct": 166,
-      "accuracy": 0.49258160237388726
+      "accuracy": 0.4896755162241888
     },
     "goals": {
-      "samples": 337,
-      "correct": 200,
-      "accuracy": 0.5934718100890207
+      "samples": 339,
+      "correct": 201,
+      "accuracy": 0.5929203539823009
     },
     "btts": {
-      "samples": 337,
-      "correct": 183,
-      "accuracy": 0.543026706231454
+      "samples": 339,
+      "correct": 184,
+      "accuracy": 0.5427728613569321
     },
     "correctScore": {
-      "samples": 203,
+      "samples": 205,
       "correct": 20,
-      "accuracy": 0.09852216748768473
+      "accuracy": 0.0975609756097561
     },
     "corners": {
       "samples": 0,
@@ -54,9 +54,9 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 1011,
-      "correct": 660,
-      "accuracy": 0.6528189910979229
+      "samples": 1017,
+      "correct": 664,
+      "accuracy": 0.6529006882989183
     }
   },
   "predictions": [
@@ -130,6 +130,78 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-22T01:46:07.140Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "arg.1:401841517",
+      "provider": "espn",
+      "trackingKey": "Argentina|Primera Division|Racing Club|Boca Juniors|2026-08-24",
+      "eventId": "401841517",
+      "eventDate": "2026-08-24T00:30Z",
+      "slug": "arg.1",
+      "country": "Argentina",
+      "league": "Primera Division",
+      "home": "Racing Club",
+      "away": "Boca Juniors",
+      "homeId": "15",
+      "awayId": "5",
+      "homeForm": "WLLLD",
+      "awayForm": "WDWDW",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "A",
+      "pickProbability": 0.42570341065470313,
+      "confidence": 62,
+      "goalsOver25": true,
+      "goalsProbability": 0.6348447319462125,
+      "bttsYes": true,
+      "bttsProbability": 0.6545996215582337,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.10992639786567841,
+      "expectedHomeGoals": 1.5185984536491028,
+      "expectedAwayGoals": 1.7532512517488674,
+      "expectedGoals": 3.2718497053979703,
+      "expectedCorners": 9.742089006903589,
+      "expectedBookings": 3.7618113795237154,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6374048630424436
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5094165522560546
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6152707992963694
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5186711246223588
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6752579377256417
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8211628484378561
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-22T17:49:31.882Z",
       "status": "pending"
     },
     {
@@ -5800,7 +5872,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-22T03:03:53.333Z",
-      "status": "pending"
+      "status": "incorrect",
+      "outcomeCorrect": false,
+      "goalsCorrect": true,
+      "bttsCorrect": true,
+      "finalScore": "0-2",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-08-22T17:49:31.626Z",
+      "marketStatsAttemptedAt": "2026-08-22T17:49:31.626Z",
+      "actualCorners": null,
+      "actualBookings": 2,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.6160500840977856,
+          "correct": false
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.5777118066327555,
+          "correct": true
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7428905339820325,
+          "correct": true
+        }
+      ],
+      "marketGradedAt": "2026-08-22T17:49:31.745Z"
     },
     {
       "sourceId": "tur.1:401888390",
@@ -5944,7 +6046,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-21T01:52:53.684Z",
-      "status": "pending"
+      "status": "incorrect",
+      "outcomeCorrect": false,
+      "goalsCorrect": false,
+      "bttsCorrect": false,
+      "finalScore": "0-1",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-08-22T17:49:31.626Z",
+      "marketStatsAttemptedAt": "2026-08-22T17:49:31.745Z",
+      "actualCorners": null,
+      "actualBookings": 0,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.6232064130418873,
+          "correct": false
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.5700506507753205,
+          "correct": true
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7363292115403793,
+          "correct": true
+        }
+      ],
+      "marketGradedAt": "2026-08-22T17:49:31.874Z"
     },
     {
       "sourceId": "fra.1:401876490",
