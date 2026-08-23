@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-23T16:37:31.145Z",
+  "updatedAt": "2026-08-23T16:56:51.177Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,39 +14,39 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 389,
+    "completedMatches": 390,
     "marketSamples": {
       "corners": 0,
-      "bookings": 388
+      "bookings": 389
     },
     "calibration": {
-      "homeGoals": 1.0812020176118688,
-      "awayGoals": 1.0820450963238328,
+      "homeGoals": 1.0820304429137588,
+      "awayGoals": 1.080542338579147,
       "corners": 1,
-      "bookings": 0.8868588318846697
+      "bookings": 0.8899517944723476
     },
-    "lastTrainedAt": "2026-08-23T16:34:38.035Z"
+    "lastTrainedAt": "2026-08-23T16:56:51.172Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 389,
+      "samples": 390,
       "correct": 190,
-      "accuracy": 0.4884318766066838
+      "accuracy": 0.48717948717948717
     },
     "goals": {
-      "samples": 389,
-      "correct": 234,
-      "accuracy": 0.6015424164524421
+      "samples": 390,
+      "correct": 235,
+      "accuracy": 0.6025641025641025
     },
     "btts": {
-      "samples": 389,
-      "correct": 215,
-      "accuracy": 0.5526992287917738
+      "samples": 390,
+      "correct": 216,
+      "accuracy": 0.5538461538461539
     },
     "correctScore": {
-      "samples": 255,
+      "samples": 256,
       "correct": 31,
-      "accuracy": 0.12156862745098039
+      "accuracy": 0.12109375
     },
     "corners": {
       "samples": 0,
@@ -54,9 +54,9 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 1164,
+      "samples": 1167,
       "correct": 773,
-      "accuracy": 0.6640893470790378
+      "accuracy": 0.662382176520994
     }
   },
   "predictions": [
@@ -130,6 +130,78 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-23T01:56:23.350Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "por.1:401885472",
+      "provider": "espn",
+      "trackingKey": "Portugal|Primeira Liga|Gil Vicente|Casa Pia|2026-08-24",
+      "eventId": "401885472",
+      "eventDate": "2026-08-24T19:15Z",
+      "slug": "por.1",
+      "country": "Portugal",
+      "league": "Primeira Liga",
+      "home": "Gil Vicente",
+      "away": "Casa Pia",
+      "homeId": "3699",
+      "awayId": "21581",
+      "homeForm": "WLLDW",
+      "awayForm": "LLWDD",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.4248199646025143,
+      "confidence": 62,
+      "goalsOver25": true,
+      "goalsProbability": 0.570425199858718,
+      "bttsYes": true,
+      "bttsProbability": 0.6051394576070267,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.12247008271215723,
+      "expectedHomeGoals": 1.6133213565399027,
+      "expectedAwayGoals": 1.3584306675324695,
+      "expectedGoals": 2.971752024072372,
+      "expectedCorners": 9.808459045620754,
+      "expectedBookings": 3.8644047369949734,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6452055250240041
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5178891176378501
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6069886591304159
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5396008196732085
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6553071189567575
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8059477512206707
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-23T16:56:51.174Z",
       "status": "pending"
     },
     {
@@ -346,6 +418,78 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-23T01:56:23.351Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "esp.2:401883317",
+      "provider": "espn",
+      "trackingKey": "Spain|Segunda Division|RC Celta Fortuna|FC Andorra|2026-08-24",
+      "eventId": "401883317",
+      "eventDate": "2026-08-24T17:00Z",
+      "slug": "esp.2",
+      "country": "Spain",
+      "league": "Segunda Division",
+      "home": "RC Celta Fortuna",
+      "away": "FC Andorra",
+      "homeId": "131858",
+      "awayId": "20179",
+      "homeForm": "D",
+      "awayForm": "WLLLW",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.42453470818548816,
+      "confidence": 62,
+      "goalsOver25": true,
+      "goalsProbability": 0.5687011326833112,
+      "bttsYes": true,
+      "bttsProbability": 0.6038346165601274,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.1227745164166868,
+      "expectedHomeGoals": 1.6091866462884636,
+      "expectedAwayGoals": 1.3549492054020964,
+      "expectedGoals": 2.96413585169056,
+      "expectedCorners": 9.80809975915417,
+      "expectedBookings": 4.000589495560606,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6451635509286883
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5178433738984682
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6070335258680885
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5666450390161111
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.628721767311519
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.785038245946627
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-08-23T16:56:51.174Z",
       "status": "pending"
     },
     {
@@ -3604,7 +3748,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-23T01:56:23.348Z",
-      "status": "pending"
+      "status": "incorrect",
+      "outcomeCorrect": false,
+      "goalsCorrect": true,
+      "bttsCorrect": true,
+      "finalScore": "1-0",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-08-23T16:56:50.796Z",
+      "marketStatsAttemptedAt": "2026-08-23T16:56:50.797Z",
+      "actualCorners": null,
+      "actualBookings": 7,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": false,
+          "probability": 0.7732095736226633,
+          "correct": false
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.9008052677763537,
+          "correct": false
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.9627221703428603,
+          "correct": false
+        }
+      ],
+      "marketGradedAt": "2026-08-23T16:56:50.957Z"
     },
     {
       "sourceId": "por.1:401885466",
@@ -6491,7 +6665,7 @@
       "finalScore": "5-2",
       "correctScoreCorrect": false,
       "gradedAt": "2026-08-23T04:48:31.214Z",
-      "marketStatsAttemptedAt": "2026-08-23T04:48:31.511Z",
+      "marketStatsAttemptedAt": "2026-08-23T16:56:50.957Z",
       "actualCorners": null,
       "actualBookings": 4,
       "bookingResults": [
@@ -6514,7 +6688,7 @@
           "correct": true
         }
       ],
-      "marketGradedAt": "2026-08-23T04:48:31.595Z"
+      "marketGradedAt": "2026-08-23T16:56:51.016Z"
     },
     {
       "sourceId": "arg.1:401841514",
@@ -10854,7 +11028,7 @@
       "finalScore": "2-2",
       "correctScoreCorrect": false,
       "gradedAt": "2026-08-22T16:36:08.761Z",
-      "marketStatsAttemptedAt": "2026-08-23T04:48:31.596Z",
+      "marketStatsAttemptedAt": "2026-08-23T16:56:51.016Z",
       "actualCorners": null,
       "actualBookings": 8,
       "bookingResults": [
@@ -10877,7 +11051,7 @@
           "correct": false
         }
       ],
-      "marketGradedAt": "2026-08-23T04:48:31.671Z"
+      "marketGradedAt": "2026-08-23T16:56:51.069Z"
     },
     {
       "sourceId": "ned.1:401875637",
@@ -10956,7 +11130,7 @@
       "finalScore": "0-2",
       "correctScoreCorrect": false,
       "gradedAt": "2026-08-22T16:26:45.412Z",
-      "marketStatsAttemptedAt": "2026-08-23T04:48:31.672Z",
+      "marketStatsAttemptedAt": "2026-08-23T16:56:51.069Z",
       "actualCorners": null,
       "actualBookings": 2,
       "bookingResults": [
@@ -10979,7 +11153,7 @@
           "correct": true
         }
       ],
-      "marketGradedAt": "2026-08-23T04:48:31.742Z"
+      "marketGradedAt": "2026-08-23T16:56:51.170Z"
     },
     {
       "sourceId": "eng.2:401880318",
