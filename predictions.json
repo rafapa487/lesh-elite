@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-24T19:59:29.386Z",
+  "updatedAt": "2026-08-24T20:32:25.285Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,39 +14,39 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 421,
+    "completedMatches": 423,
     "marketSamples": {
       "corners": 0,
-      "bookings": 420
+      "bookings": 422
     },
     "calibration": {
-      "homeGoals": 1.0640146084405553,
-      "awayGoals": 1.0481672015681622,
+      "homeGoals": 1.067169598886528,
+      "awayGoals": 1.0455282493302596,
       "corners": 1,
-      "bookings": 0.8943965359394661
+      "bookings": 0.8948592483978828
     },
-    "lastTrainedAt": "2026-08-24T19:02:39.141Z"
+    "lastTrainedAt": "2026-08-24T20:32:25.282Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 421,
-      "correct": 201,
-      "accuracy": 0.47743467933491684
+      "samples": 423,
+      "correct": 202,
+      "accuracy": 0.47754137115839246
     },
     "goals": {
-      "samples": 421,
-      "correct": 254,
-      "accuracy": 0.6033254156769596
+      "samples": 423,
+      "correct": 255,
+      "accuracy": 0.6028368794326241
     },
     "btts": {
-      "samples": 421,
-      "correct": 235,
-      "accuracy": 0.5581947743467933
+      "samples": 423,
+      "correct": 236,
+      "accuracy": 0.557919621749409
     },
     "correctScore": {
-      "samples": 287,
+      "samples": 289,
       "correct": 36,
-      "accuracy": 0.1254355400696864
+      "accuracy": 0.1245674740484429
     },
     "corners": {
       "samples": 0,
@@ -54,9 +54,9 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 1260,
-      "correct": 839,
-      "accuracy": 0.6658730158730158
+      "samples": 1266,
+      "correct": 842,
+      "accuracy": 0.665086887835703
     }
   },
   "predictions": [
@@ -1064,7 +1064,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-23T01:56:23.350Z",
-      "status": "pending"
+      "status": "incorrect",
+      "outcomeCorrect": false,
+      "goalsCorrect": false,
+      "bttsCorrect": false,
+      "finalScore": "2-0",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-08-24T20:32:25.075Z",
+      "marketStatsAttemptedAt": "2026-08-24T20:32:25.076Z",
+      "actualCorners": null,
+      "actualBookings": 2,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5852453212285231,
+          "correct": false
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6098955408015857,
+          "correct": true
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7697935934320874,
+          "correct": true
+        }
+      ],
+      "marketGradedAt": "2026-08-24T20:32:25.160Z"
     },
     {
       "sourceId": "ksa.1:401900391",
@@ -1136,7 +1166,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-08-23T01:56:23.351Z",
-      "status": "pending"
+      "status": "correct",
+      "outcomeCorrect": true,
+      "goalsCorrect": true,
+      "bttsCorrect": true,
+      "finalScore": "3-2",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-08-24T20:32:25.075Z",
+      "marketStatsAttemptedAt": "2026-08-24T20:32:25.160Z",
+      "actualCorners": null,
+      "actualBookings": 6,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5608715793925634,
+          "correct": true
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6344747996417947,
+          "correct": false
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7896244086572666,
+          "correct": false
+        }
+      ],
+      "marketGradedAt": "2026-08-24T20:32:25.197Z"
     },
     {
       "sourceId": "esp.2:401883317",
@@ -4235,7 +4295,7 @@
       "finalScore": "2-0",
       "correctScoreCorrect": false,
       "gradedAt": "2026-08-23T19:53:50.979Z",
-      "marketStatsAttemptedAt": "2026-08-24T08:23:22.504Z",
+      "marketStatsAttemptedAt": "2026-08-24T20:32:25.197Z",
       "actualCorners": null,
       "actualBookings": 6,
       "bookingResults": [
@@ -4258,7 +4318,7 @@
           "correct": false
         }
       ],
-      "marketGradedAt": "2026-08-24T08:23:22.744Z"
+      "marketGradedAt": "2026-08-24T20:32:25.249Z"
     },
     {
       "sourceId": "arg.1:401841509",
@@ -4337,7 +4397,7 @@
       "finalScore": "1-2",
       "correctScoreCorrect": false,
       "gradedAt": "2026-08-23T19:53:50.979Z",
-      "marketStatsAttemptedAt": "2026-08-24T08:23:22.744Z",
+      "marketStatsAttemptedAt": "2026-08-24T20:32:25.249Z",
       "actualCorners": null,
       "actualBookings": 5,
       "bookingResults": [
@@ -4360,7 +4420,7 @@
           "correct": true
         }
       ],
-      "marketGradedAt": "2026-08-24T08:23:22.820Z"
+      "marketGradedAt": "2026-08-24T20:32:25.281Z"
     },
     {
       "sourceId": "esp.1:401882911",
