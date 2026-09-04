@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-04T04:21:57.299Z",
+  "updatedAt": "2026-09-04T04:53:28.861Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,39 +14,39 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 489,
+    "completedMatches": 440,
     "marketSamples": {
       "corners": 0,
-      "bookings": 488
+      "bookings": 439
     },
     "calibration": {
-      "homeGoals": 1.0928333246616577,
-      "awayGoals": 1.1109215929850762,
+      "homeGoals": 1.1076794114222903,
+      "awayGoals": 1.1255573641748755,
       "corners": 1,
-      "bookings": 0.9402151848772902
+      "bookings": 0.9245089206844619
     },
     "lastTrainedAt": "2026-09-03T21:40:07.087Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 440,
+      "samples": 438,
       "correct": 197,
-      "accuracy": 0.44772727272727275
+      "accuracy": 0.4497716894977169
     },
     "goals": {
-      "samples": 440,
-      "correct": 251,
-      "accuracy": 0.5704545454545454
+      "samples": 438,
+      "correct": 250,
+      "accuracy": 0.5707762557077626
     },
     "btts": {
-      "samples": 440,
-      "correct": 240,
-      "accuracy": 0.5454545454545454
+      "samples": 438,
+      "correct": 238,
+      "accuracy": 0.54337899543379
     },
     "correctScore": {
-      "samples": 440,
-      "correct": 49,
-      "accuracy": 0.11136363636363636
+      "samples": 438,
+      "correct": 48,
+      "accuracy": 0.1095890410958904
     },
     "corners": {
       "samples": 0,
@@ -54,9 +54,9 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 1317,
-      "correct": 887,
-      "accuracy": 0.6735003796507213
+      "samples": 1311,
+      "correct": 883,
+      "accuracy": 0.6735316552250191
     }
   },
   "predictions": [
@@ -493,6 +493,78 @@
       "status": "pending"
     },
     {
+      "sourceId": "usa.1:761776",
+      "provider": "espn",
+      "trackingKey": "United States|MLS|Toronto FC|Chicago Fire FC|2026-09-05",
+      "eventId": "761776",
+      "eventDate": "2026-09-05T23:30Z",
+      "slug": "usa.1",
+      "country": "United States",
+      "league": "MLS",
+      "home": "Toronto FC",
+      "away": "Chicago Fire FC",
+      "homeId": "7318",
+      "awayId": "182",
+      "homeForm": "DWDWD",
+      "awayForm": "DLDWW",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "A",
+      "pickProbability": 0.4237932366807789,
+      "confidence": 62,
+      "goalsOver25": false,
+      "goalsProbability": 0.519372776266831,
+      "bttsYes": true,
+      "bttsProbability": 0.5654098364449077,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.1306686919163956,
+      "expectedHomeGoals": 1.2424394529045926,
+      "expectedAwayGoals": 1.5110647606310208,
+      "expectedGoals": 2.7535042135356136,
+      "expectedCorners": 9.685009432070046,
+      "expectedBookings": 4.34450318049668,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6306215825262491
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5020955073362665
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.622382117711926
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.6307936999065928
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.5618502961629958
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7292387868885793
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-09-04T04:53:28.859Z",
+      "status": "pending"
+    },
+    {
       "sourceId": "usa.1:761773",
       "provider": "espn",
       "trackingKey": "United States|MLS|FC Cincinnati|D.C. United|2026-09-05",
@@ -922,6 +994,78 @@
       ],
       "automatic": true,
       "savedAt": "2026-09-04T04:21:57.293Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "fra.1:401876470",
+      "provider": "espn",
+      "trackingKey": "France|Ligue 1|Nice|Le Mans|2026-09-05",
+      "eventId": "401876470",
+      "eventDate": "2026-09-05T18:45Z",
+      "slug": "fra.1",
+      "country": "France",
+      "league": "Ligue 1",
+      "home": "Nice",
+      "away": "Le Mans",
+      "homeId": "2502",
+      "awayId": "2697",
+      "homeForm": "LDWDL",
+      "awayForm": "LDWDD",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.4248861076930226,
+      "confidence": 62,
+      "goalsOver25": true,
+      "goalsProbability": 0.5805550953770628,
+      "bttsYes": true,
+      "bttsProbability": 0.6130162856996494,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.12071124132287564,
+      "expectedHomeGoals": 1.6343102284965616,
+      "expectedAwayGoals": 1.382581249757486,
+      "expectedGoals": 3.0168914782540477,
+      "expectedCorners": 9.789055874203926,
+      "expectedBookings": 4.282713311423401,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6429347525071314
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5154168136310107
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6094112092311561
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.6197298280779326
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.5737813303701087
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7395318932089866
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-09-04T04:53:28.858Z",
       "status": "pending"
     },
     {
@@ -63567,210 +63711,6 @@
         }
       ],
       "marketGradedAt": "2026-08-12T20:57:44.101Z"
-    },
-    {
-      "sourceId": "rsa.1:401902078",
-      "provider": "espn",
-      "trackingKey": "South Africa|Premier Division|Polokwane City FC|Stellenbosch|2026-08-11",
-      "eventId": "401902078",
-      "eventDate": "2026-08-11T17:30Z",
-      "slug": "rsa.1",
-      "country": "South Africa",
-      "league": "Premier Division",
-      "home": "Polokwane City FC",
-      "away": "Stellenbosch",
-      "homeId": "7099",
-      "awayId": "18615",
-      "homeForm": "WDDDL",
-      "awayForm": "LDWDL",
-      "h2h": [],
-      "recentLeagueMatches": null,
-      "matchState": "pre",
-      "homeScore": 0,
-      "awayScore": 0,
-      "pick": "H",
-      "pickProbability": 0.44645993827855956,
-      "confidence": 64,
-      "goalsOver25": false,
-      "goalsProbability": 0.48284482683083285,
-      "bttsYes": true,
-      "bttsProbability": 0.5319622530903256,
-      "correctScore": "1-1",
-      "correctScoreProbability": 0.13402568331740894,
-      "expectedHomeGoals": 1.4890418567038117,
-      "expectedAwayGoals": 1.1160972204635784,
-      "expectedGoals": 2.60513907716739,
-      "expectedCorners": 9.890017306342383,
-      "expectedBookings": 3.996046159308504,
-      "cornerPredictions": [
-        {
-          "line": 8.5,
-          "over": true,
-          "probability": 0.6546612117663976
-        },
-        {
-          "line": 9.5,
-          "over": true,
-          "probability": 0.5282369317248102
-        },
-        {
-          "line": 10.5,
-          "over": false,
-          "probability": 0.5967969000305073
-        }
-      ],
-      "bookingPredictions": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.5657570488554593
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.6296093839386517
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7857480406235938
-        }
-      ],
-      "automatic": true,
-      "savedAt": "2026-08-10T02:28:39.489Z",
-      "status": "incorrect",
-      "outcomeCorrect": false,
-      "goalsCorrect": false,
-      "bttsCorrect": true,
-      "finalScore": "3-3",
-      "correctScoreCorrect": false,
-      "gradedAt": "2026-08-11T20:05:54.123Z",
-      "marketStatsAttemptedAt": "2026-08-12T20:57:44.101Z",
-      "actualCorners": null,
-      "actualBookings": 1,
-      "bookingResults": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.5657570488554593,
-          "correct": false
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.6296093839386517,
-          "correct": true
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7857480406235938,
-          "correct": true
-        }
-      ],
-      "marketGradedAt": "2026-08-12T20:57:44.316Z"
-    },
-    {
-      "sourceId": "rsa.1:401902080",
-      "provider": "espn",
-      "trackingKey": "South Africa|Premier Division|Chippa United|Richards Bay FC|2026-08-11",
-      "eventId": "401902080",
-      "eventDate": "2026-08-11T17:30Z",
-      "slug": "rsa.1",
-      "country": "South Africa",
-      "league": "Premier Division",
-      "home": "Chippa United",
-      "away": "Richards Bay FC",
-      "homeId": "11913",
-      "awayId": "18825",
-      "homeForm": "DWLDL",
-      "awayForm": "LLDDD",
-      "h2h": [],
-      "recentLeagueMatches": null,
-      "matchState": "pre",
-      "homeScore": 0,
-      "awayScore": 0,
-      "pick": "H",
-      "pickProbability": 0.42860128011610515,
-      "confidence": 62,
-      "goalsOver25": false,
-      "goalsProbability": 0.4944104250147047,
-      "bttsYes": true,
-      "bttsProbability": 0.5446538715266016,
-      "correctScore": "1-1",
-      "correctScoreProbability": 0.13360090422779414,
-      "expectedHomeGoals": 1.4738531316360082,
-      "expectedAwayGoals": 1.1776619859289725,
-      "expectedGoals": 2.6515151175649807,
-      "expectedCorners": 9.831174296805536,
-      "expectedBookings": 3.7918402582189303,
-      "cornerPredictions": [
-        {
-          "line": 8.5,
-          "over": true,
-          "probability": 0.647853606917655
-        },
-        {
-          "line": 9.5,
-          "over": true,
-          "probability": 0.5207784129294899
-        },
-        {
-          "line": 10.5,
-          "over": false,
-          "probability": 0.6041514251603127
-        }
-      ],
-      "bookingPredictions": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.5248443393044885
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.6694291724290721
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.8167599970084485
-        }
-      ],
-      "automatic": true,
-      "savedAt": "2026-08-10T02:28:39.489Z",
-      "status": "incorrect",
-      "outcomeCorrect": false,
-      "goalsCorrect": true,
-      "bttsCorrect": true,
-      "finalScore": "1-1",
-      "correctScoreCorrect": true,
-      "gradedAt": "2026-08-11T20:05:54.123Z",
-      "marketStatsAttemptedAt": "2026-08-12T20:57:44.316Z",
-      "actualCorners": null,
-      "actualBookings": 2,
-      "bookingResults": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.5248443393044885,
-          "correct": false
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.6694291724290721,
-          "correct": true
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.8167599970084485,
-          "correct": true
-        }
-      ],
-      "marketGradedAt": "2026-08-12T20:57:44.555Z"
     }
   ]
 }
