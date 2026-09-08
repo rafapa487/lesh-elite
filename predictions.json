@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-08T04:25:54.986Z",
+  "updatedAt": "2026-09-08T06:13:10.228Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,39 +14,39 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 493,
+    "completedMatches": 479,
     "marketSamples": {
       "corners": 0,
-      "bookings": 492
+      "bookings": 478
     },
     "calibration": {
-      "homeGoals": 1.074388433451043,
-      "awayGoals": 1.1217582871609355,
+      "homeGoals": 1.082957301027628,
+      "awayGoals": 1.1148623896011962,
       "corners": 1,
-      "bookings": 0.9570163742281302
+      "bookings": 0.9502413936659342
     },
     "lastTrainedAt": "2026-09-08T04:25:54.981Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 479,
-      "correct": 225,
-      "accuracy": 0.4697286012526096
+      "samples": 478,
+      "correct": 224,
+      "accuracy": 0.4686192468619247
     },
     "goals": {
-      "samples": 479,
+      "samples": 478,
       "correct": 278,
-      "accuracy": 0.5803757828810021
+      "accuracy": 0.5815899581589958
     },
     "btts": {
-      "samples": 479,
+      "samples": 478,
       "correct": 262,
-      "accuracy": 0.5469728601252609
+      "accuracy": 0.5481171548117155
     },
     "correctScore": {
-      "samples": 479,
+      "samples": 478,
       "correct": 56,
-      "accuracy": 0.11691022964509394
+      "accuracy": 0.11715481171548117
     },
     "corners": {
       "samples": 0,
@@ -54,9 +54,9 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 1434,
-      "correct": 949,
-      "accuracy": 0.6617852161785216
+      "samples": 1431,
+      "correct": 947,
+      "accuracy": 0.6617749825296995
     }
   },
   "predictions": [
@@ -634,6 +634,78 @@
       ],
       "automatic": true,
       "savedAt": "2026-09-08T04:25:54.985Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "ned.1:401875612",
+      "provider": "espn",
+      "trackingKey": "Netherlands|Eredivisie|FC Twente|Telstar|2026-09-09",
+      "eventId": "401875612",
+      "eventDate": "2026-09-09T16:45Z",
+      "slug": "ned.1",
+      "country": "Netherlands",
+      "league": "Eredivisie",
+      "home": "FC Twente",
+      "away": "Telstar",
+      "homeId": "152",
+      "awayId": "3735",
+      "homeForm": "DWWLW",
+      "awayForm": "DLLWW",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.42778695536954525,
+      "confidence": 62,
+      "goalsOver25": true,
+      "goalsProbability": 0.5835875932132255,
+      "bttsYes": true,
+      "bttsProbability": 0.6149577980626946,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.12003687845635105,
+      "expectedHomeGoals": 1.6469184880031031,
+      "expectedAwayGoals": 1.3836218809578742,
+      "expectedGoals": 3.0305403689609776,
+      "expectedCorners": 9.843282300541544,
+      "expectedBookings": 4.124420299797666,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6492605610271569
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5223162491040138
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6026386207667364
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5904520136738265
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6045447681481663
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.765394505216535
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-09-08T06:13:10.224Z",
       "status": "pending"
     },
     {
@@ -68088,108 +68160,6 @@
         }
       ],
       "marketGradedAt": "2026-08-20T13:57:07.226Z"
-    },
-    {
-      "sourceId": "rsa.1:401902085",
-      "provider": "espn",
-      "trackingKey": "South Africa|Premier Division|Mamelodi Sundowns|Marumo Gallants|2026-08-19",
-      "eventId": "401902085",
-      "eventDate": "2026-08-19T17:30Z",
-      "slug": "rsa.1",
-      "country": "South Africa",
-      "league": "Premier Division",
-      "home": "Mamelodi Sundowns",
-      "away": "Marumo Gallants",
-      "homeId": "7084",
-      "awayId": "13317",
-      "homeForm": "DWDWL",
-      "awayForm": "LDDDD",
-      "h2h": [],
-      "recentLeagueMatches": null,
-      "matchState": "pre",
-      "homeScore": 0,
-      "awayScore": 0,
-      "pick": "H",
-      "pickProbability": 0.6458482408064375,
-      "confidence": 83,
-      "goalsOver25": true,
-      "goalsProbability": 0.7179074798487127,
-      "bttsYes": true,
-      "bttsProbability": 0.6536935577419775,
-      "correctScore": "2-1",
-      "correctScoreProbability": 0.09246743395395364,
-      "expectedHomeGoals": 2.5007357136074937,
-      "expectedAwayGoals": 1.2210264073990242,
-      "expectedGoals": 3.7217621210065177,
-      "expectedCorners": 10.668420823542863,
-      "expectedBookings": 4.224521013331272,
-      "cornerPredictions": [
-        {
-          "line": 8.5,
-          "over": true,
-          "probability": 0.7372391953237717
-        },
-        {
-          "line": 9.5,
-          "over": true,
-          "probability": 0.622449760245043
-        },
-        {
-          "line": 10.5,
-          "over": false,
-          "probability": 0.5000124397066201
-        }
-      ],
-      "bookingPredictions": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.6091211283588167
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.5850624466030865
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7491289651771562
-        }
-      ],
-      "automatic": true,
-      "savedAt": "2026-08-18T01:46:23.413Z",
-      "status": "correct",
-      "outcomeCorrect": true,
-      "goalsCorrect": false,
-      "bttsCorrect": false,
-      "finalScore": "2-0",
-      "correctScoreCorrect": false,
-      "gradedAt": "2026-08-19T19:34:13.895Z",
-      "marketStatsAttemptedAt": "2026-08-20T20:00:03.167Z",
-      "actualCorners": null,
-      "actualBookings": 1,
-      "bookingResults": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.6091211283588167,
-          "correct": false
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.5850624466030865,
-          "correct": true
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7491289651771562,
-          "correct": true
-        }
-      ],
-      "marketGradedAt": "2026-08-20T20:00:03.252Z"
     }
   ]
 }
