@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-22T01:49:14.625Z",
+  "updatedAt": "2026-09-22T04:45:02.427Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,39 +14,39 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 496,
+    "completedMatches": 498,
     "marketSamples": {
       "corners": 0,
-      "bookings": 496
+      "bookings": 498
     },
     "calibration": {
-      "homeGoals": 1.1253519420531168,
-      "awayGoals": 1.0532878303980528,
+      "homeGoals": 1.124737854211564,
+      "awayGoals": 1.0531725415946795,
       "corners": 1,
-      "bookings": 0.9888011619483354
+      "bookings": 0.9894696082040443
     },
-    "lastTrainedAt": "2026-09-21T20:32:50.295Z"
+    "lastTrainedAt": "2026-09-22T04:45:02.424Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 496,
+      "samples": 497,
       "correct": 224,
-      "accuracy": 0.45161290322580644
+      "accuracy": 0.4507042253521127
     },
     "goals": {
-      "samples": 496,
-      "correct": 290,
-      "accuracy": 0.5846774193548387
+      "samples": 497,
+      "correct": 291,
+      "accuracy": 0.5855130784708249
     },
     "btts": {
-      "samples": 496,
-      "correct": 276,
-      "accuracy": 0.5564516129032258
+      "samples": 497,
+      "correct": 278,
+      "accuracy": 0.5593561368209256
     },
     "correctScore": {
-      "samples": 496,
+      "samples": 497,
       "correct": 59,
-      "accuracy": 0.11895161290322581
+      "accuracy": 0.11871227364185111
     },
     "corners": {
       "samples": 0,
@@ -54,12 +54,84 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 1488,
-      "correct": 942,
-      "accuracy": 0.6330645161290323
+      "samples": 1491,
+      "correct": 944,
+      "accuracy": 0.6331321260898726
     }
   },
   "predictions": [
+    {
+      "sourceId": "usa.1:761543",
+      "provider": "espn",
+      "trackingKey": "United States|MLS|Seattle Sounders FC|Real Salt Lake|2026-09-24",
+      "eventId": "761543",
+      "eventDate": "2026-09-24T01:30Z",
+      "slug": "usa.1",
+      "country": "United States",
+      "league": "MLS",
+      "home": "Seattle Sounders FC",
+      "away": "Real Salt Lake",
+      "homeId": "9726",
+      "awayId": "4771",
+      "homeForm": "DDDDD",
+      "awayForm": "LLLDL",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.4825490710579133,
+      "confidence": 67,
+      "goalsOver25": true,
+      "goalsProbability": 0.5850769344081754,
+      "bttsYes": true,
+      "bttsProbability": 0.6057250068650684,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.11730181466140192,
+      "expectedHomeGoals": 1.7701078706688786,
+      "expectedAwayGoals": 1.2672180324285984,
+      "expectedGoals": 3.037325903097477,
+      "expectedCorners": 10.03545857769882,
+      "expectedBookings": 4.494597841117891,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.671158732530607
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5464985703346021
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.5786036190661201
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.6567917828853566
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.5331292541075688
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7038529906778235
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-09-22T04:45:02.425Z",
+      "status": "pending"
+    },
     {
       "sourceId": "arg.1:401841582",
       "provider": "espn",
@@ -130,7 +202,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-09-20T15:58:42.650Z",
-      "status": "pending"
+      "status": "correct",
+      "outcomeCorrect": true,
+      "goalsCorrect": true,
+      "bttsCorrect": true,
+      "finalScore": "2-1",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-09-22T04:45:02.111Z",
+      "marketStatsAttemptedAt": "2026-09-22T04:45:02.111Z",
+      "actualCorners": null,
+      "actualBookings": 4,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.6391513589239263,
+          "correct": true
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.5527233575349657,
+          "correct": true
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7212650872358057,
+          "correct": true
+        }
+      ],
+      "marketGradedAt": "2026-09-22T04:45:02.195Z"
     },
     {
       "sourceId": "arg.1:401841583",
@@ -348,7 +450,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-09-21T00:10:47.010Z",
-      "status": "pending"
+      "status": "incorrect",
+      "outcomeCorrect": false,
+      "goalsCorrect": true,
+      "bttsCorrect": true,
+      "finalScore": "0-1",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-09-22T04:45:02.111Z",
+      "marketStatsAttemptedAt": "2026-09-22T04:45:02.195Z",
+      "actualCorners": null,
+      "actualBookings": 7,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.7792795097589673,
+          "correct": true
+        },
+        {
+          "line": 4.5,
+          "over": true,
+          "probability": 0.6167171190265011,
+          "correct": true
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.5568401679295053,
+          "correct": false
+        }
+      ],
+      "marketGradedAt": "2026-09-22T04:45:02.422Z"
     },
     {
       "sourceId": "arg.1:401841569",
@@ -72036,218 +72168,6 @@
         }
       ],
       "marketGradedAt": "2026-09-03T21:40:06.601Z"
-    },
-    {
-      "sourceId": "eng.2:401880293",
-      "provider": "espn",
-      "trackingKey": "England|Championship|West Bromwich Albion|Charlton Athletic|2026-09-02",
-      "eventId": "401880293",
-      "eventDate": "2026-09-02T18:45Z",
-      "slug": "eng.2",
-      "country": "England",
-      "league": "Championship",
-      "home": "West Bromwich Albion",
-      "away": "Charlton Athletic",
-      "homeId": "383",
-      "awayId": "372",
-      "homeForm": "LLWWW",
-      "awayForm": "WLWWW",
-      "h2h": [
-        {
-          "id": "401880312",
-          "date": "2026-08-29T14:00Z",
-          "homeId": "372",
-          "awayId": "394",
-          "home": "Charlton Athletic",
-          "away": "Preston North End",
-          "homeGoals": 0,
-          "awayGoals": 0
-        },
-        {
-          "id": "401880318",
-          "date": "2026-08-22T14:00Z",
-          "homeId": "371",
-          "awayId": "372",
-          "home": "West Ham United",
-          "away": "Charlton Athletic",
-          "homeGoals": 0,
-          "awayGoals": 0
-        },
-        {
-          "id": "401880337",
-          "date": "2026-08-15T14:00Z",
-          "homeId": "372",
-          "awayId": "374",
-          "home": "Charlton Athletic",
-          "away": "Derby County",
-          "homeGoals": 0,
-          "awayGoals": 0
-        },
-        {
-          "id": "745151",
-          "date": "2026-05-02T11:30Z",
-          "homeId": "318",
-          "awayId": "372",
-          "home": "Swansea City",
-          "away": "Charlton Athletic",
-          "homeGoals": 0,
-          "awayGoals": 0
-        },
-        {
-          "id": "745138",
-          "date": "2026-04-25T11:30Z",
-          "homeId": "372",
-          "awayId": "306",
-          "home": "Charlton Athletic",
-          "away": "Hull City",
-          "homeGoals": 0,
-          "awayGoals": 0
-        }
-      ],
-      "recentLeagueMatches": {
-        "home": [
-          {
-            "date": "2026-08-29T11:30Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 12,
-            "shotsOnTarget": 4,
-            "corners": null,
-            "yellowCards": 1
-          },
-          {
-            "date": "2026-08-23T11:00Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 11,
-            "shotsOnTarget": 7,
-            "corners": null,
-            "yellowCards": 1
-          },
-          {
-            "date": "2026-08-15T14:00Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 8,
-            "shotsOnTarget": 4,
-            "corners": null,
-            "yellowCards": 2
-          }
-        ],
-        "away": [
-          {
-            "date": "2026-08-29T14:00Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 15,
-            "shotsOnTarget": 2,
-            "corners": null,
-            "yellowCards": 1
-          },
-          {
-            "date": "2026-08-22T14:00Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 7,
-            "shotsOnTarget": 5,
-            "corners": null,
-            "yellowCards": 3
-          },
-          {
-            "date": "2026-08-15T14:00Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 13,
-            "shotsOnTarget": 4,
-            "corners": null,
-            "yellowCards": 0
-          }
-        ]
-      },
-      "matchState": "pre",
-      "homeScore": 0,
-      "awayScore": 0,
-      "pick": "D",
-      "pickProbability": 0.45066206058104635,
-      "confidence": 62,
-      "goalsOver25": false,
-      "goalsProbability": 0.10836430437307903,
-      "bttsYes": false,
-      "bttsProbability": 0.1987644509814201,
-      "correctScore": "0-0",
-      "correctScoreProbability": 0.32836424077048426,
-      "expectedHomeGoals": 0.5885920273682191,
-      "expectedAwayGoals": 0.554270037669547,
-      "expectedGoals": 1.142862065037766,
-      "expectedCorners": 2.6959515453879552,
-      "expectedBookings": 3.0395288765248907,
-      "cornerPredictions": [
-        {
-          "line": 8.5,
-          "over": false,
-          "probability": 0.9981053552009335
-        },
-        {
-          "line": 9.5,
-          "over": false,
-          "probability": 0.9995043265760296
-        },
-        {
-          "line": 10.5,
-          "over": false,
-          "probability": 0.999881482480094
-        }
-      ],
-      "bookingPredictions": [
-        {
-          "line": 3.5,
-          "over": false,
-          "probability": 0.6383765315229833
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.8085779731730999
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.912044412517439
-        }
-      ],
-      "automatic": true,
-      "savedAt": "2026-09-02T00:03:10.488Z",
-      "status": "correct",
-      "outcomeCorrect": true,
-      "goalsCorrect": true,
-      "bttsCorrect": false,
-      "finalScore": "1-1",
-      "correctScoreCorrect": false,
-      "gradedAt": "2026-09-02T20:58:24.786Z",
-      "marketStatsAttemptedAt": "2026-09-03T21:40:06.601Z",
-      "actualCorners": null,
-      "actualBookings": 2,
-      "bookingResults": [
-        {
-          "line": 3.5,
-          "over": false,
-          "probability": 0.6383765315229833,
-          "correct": true
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.8085779731730999,
-          "correct": true
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.912044412517439,
-          "correct": true
-        }
-      ],
-      "marketGradedAt": "2026-09-03T21:40:06.675Z"
     }
   ]
 }
