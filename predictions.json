@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-24T00:19:44.825Z",
+  "updatedAt": "2026-09-24T04:37:46.940Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,39 +14,39 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 497,
+    "completedMatches": 498,
     "marketSamples": {
       "corners": 0,
-      "bookings": 497
+      "bookings": 498
     },
     "calibration": {
-      "homeGoals": 1.1242544129905236,
-      "awayGoals": 1.052499559447002,
+      "homeGoals": 1.1242686067603134,
+      "awayGoals": 1.05034764330275,
       "corners": 1,
-      "bookings": 0.9899587718596984
+      "bookings": 0.9907099351286226
     },
-    "lastTrainedAt": "2026-09-22T04:45:02.424Z"
+    "lastTrainedAt": "2026-09-24T04:37:46.937Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 497,
-      "correct": 224,
-      "accuracy": 0.4507042253521127
+      "samples": 495,
+      "correct": 222,
+      "accuracy": 0.4484848484848485
     },
     "goals": {
-      "samples": 497,
-      "correct": 291,
-      "accuracy": 0.5855130784708249
+      "samples": 495,
+      "correct": 290,
+      "accuracy": 0.5858585858585859
     },
     "btts": {
-      "samples": 497,
-      "correct": 278,
-      "accuracy": 0.5593561368209256
+      "samples": 495,
+      "correct": 277,
+      "accuracy": 0.5595959595959596
     },
     "correctScore": {
-      "samples": 497,
-      "correct": 59,
-      "accuracy": 0.11871227364185111
+      "samples": 495,
+      "correct": 58,
+      "accuracy": 0.11717171717171718
     },
     "corners": {
       "samples": 0,
@@ -54,12 +54,228 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 1491,
-      "correct": 944,
-      "accuracy": 0.6331321260898726
+      "samples": 1485,
+      "correct": 938,
+      "accuracy": 0.6316498316498317
     }
   },
   "predictions": [
+    {
+      "sourceId": "mex.1:401876963",
+      "provider": "espn",
+      "trackingKey": "Mexico|Liga MX|Tijuana|Atlas|2026-09-26",
+      "eventId": "401876963",
+      "eventDate": "2026-09-26T03:00Z",
+      "slug": "mex.1",
+      "country": "Mexico",
+      "league": "Liga MX",
+      "home": "Tijuana",
+      "away": "Atlas",
+      "homeId": "10125",
+      "awayId": "216",
+      "homeForm": "DLWLW",
+      "awayForm": "DLDLW",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.4474221126431224,
+      "confidence": 64,
+      "goalsOver25": true,
+      "goalsProbability": 0.5712952166093549,
+      "bttsYes": true,
+      "bttsProbability": 0.6023466613987544,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.12148551557553265,
+      "expectedHomeGoals": 1.6644684892386288,
+      "expectedAwayGoals": 1.3111514067304069,
+      "expectedGoals": 2.975619895969036,
+      "expectedCorners": 9.86259356204619,
+      "expectedBookings": 4.612853512153604,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6514979382142418
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5247656630459342
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6002252290719076
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.6763850215747067
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.5108256429442491
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.6835407172120243
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-09-24T04:37:46.939Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "mex.1:401876964",
+      "provider": "espn",
+      "trackingKey": "Mexico|Liga MX|Atlante|Monterrey|2026-09-26",
+      "eventId": "401876964",
+      "eventDate": "2026-09-26T01:00Z",
+      "slug": "mex.1",
+      "country": "Mexico",
+      "league": "Liga MX",
+      "home": "Atlante",
+      "away": "Monterrey",
+      "homeId": "226",
+      "awayId": "220",
+      "homeForm": "DLDDL",
+      "awayForm": "WDLWL",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "A",
+      "pickProbability": 0.4695406096875101,
+      "confidence": 66,
+      "goalsOver25": true,
+      "goalsProbability": 0.6384483982092156,
+      "bttsYes": true,
+      "bttsProbability": 0.6508250347237051,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.10788063071493036,
+      "expectedHomeGoals": 1.427661594051256,
+      "expectedAwayGoals": 1.8620652458811509,
+      "expectedGoals": 3.289726839932407,
+      "expectedCorners": 9.814913931583366,
+      "expectedBookings": 4.570560970442301,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6459591512718433
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5187107114145413
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.606182537098227
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.6694686029166852
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.5187650960128194
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.6908318155426555
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-09-24T04:37:46.939Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "esp.2:401883200",
+      "provider": "espn",
+      "trackingKey": "Spain|Segunda Division|Girona|Albacete|2026-09-25",
+      "eventId": "401883200",
+      "eventDate": "2026-09-25T18:30Z",
+      "slug": "esp.2",
+      "country": "Spain",
+      "league": "Segunda Division",
+      "home": "Girona",
+      "away": "Albacete",
+      "homeId": "9812",
+      "awayId": "2737",
+      "homeForm": "WLWWL",
+      "awayForm": "LDLLL",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.49508911557391727,
+      "confidence": 68,
+      "goalsOver25": true,
+      "goalsProbability": 0.588422328999136,
+      "bttsYes": true,
+      "bttsProbability": 0.6051240979616355,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.1159556109769755,
+      "expectedHomeGoals": 1.8047697824053004,
+      "expectedAwayGoals": 1.2477415617548515,
+      "expectedGoals": 3.052511344160152,
+      "expectedCorners": 10.095434688024413,
+      "expectedBookings": 4.492919638750331,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6778229912377918
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5539517181617107
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.5711017165444905
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.6565080512831198
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.5334480094438717
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7041394725918618
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-09-24T04:37:46.938Z",
+      "status": "pending"
+    },
     {
       "sourceId": "usa.1:761543",
       "provider": "espn",
@@ -130,7 +346,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-09-22T04:45:02.425Z",
-      "status": "pending"
+      "status": "correct",
+      "outcomeCorrect": true,
+      "goalsCorrect": false,
+      "bttsCorrect": false,
+      "finalScore": "2-0",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-09-24T04:37:46.771Z",
+      "marketStatsAttemptedAt": "2026-09-24T04:37:46.771Z",
+      "actualCorners": null,
+      "actualBookings": 6,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.6567917828853566,
+          "correct": true
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.5331292541075688,
+          "correct": false
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7038529906778235,
+          "correct": false
+        }
+      ],
+      "marketGradedAt": "2026-09-24T04:37:46.936Z"
     },
     {
       "sourceId": "arg.1:401841582",
@@ -71734,440 +71980,6 @@
         }
       ],
       "marketGradedAt": "2026-09-04T21:23:02.234Z"
-    },
-    {
-      "sourceId": "ksa.1:401900374",
-      "provider": "espn",
-      "trackingKey": "Saudi Arabia|Saudi Pro League|Al Fayha|Al Kholood|2026-09-03",
-      "eventId": "401900374",
-      "eventDate": "2026-09-03T15:55Z",
-      "slug": "ksa.1",
-      "country": "Saudi Arabia",
-      "league": "Saudi Pro League",
-      "home": "Al Fayha",
-      "away": "Al Kholood",
-      "homeId": "21827",
-      "awayId": "22028",
-      "homeForm": "WDLWL",
-      "awayForm": "WDWWD",
-      "h2h": [
-        {
-          "id": "401900380",
-          "date": "2026-08-29T16:05Z",
-          "homeId": "22028",
-          "awayId": "8346",
-          "home": "Al Kholood",
-          "away": "Al Ahli",
-          "homeGoals": 0,
-          "awayGoals": 0
-        },
-        {
-          "id": "401900385",
-          "date": "2026-08-26T18:00Z",
-          "homeId": "131746",
-          "awayId": "22028",
-          "home": "Al Diriyah",
-          "away": "Al Kholood",
-          "homeGoals": 0,
-          "awayGoals": 0
-        },
-        {
-          "id": "401900395",
-          "date": "2026-08-22T16:10Z",
-          "homeId": "22028",
-          "awayId": "18459",
-          "home": "Al Kholood",
-          "away": "Al Taawoun",
-          "homeGoals": 0,
-          "awayGoals": 0
-        },
-        {
-          "id": "401900403",
-          "date": "2026-08-15T18:00Z",
-          "homeId": "2276",
-          "awayId": "22028",
-          "home": "Al Ittihad",
-          "away": "Al Kholood",
-          "homeGoals": 0,
-          "awayGoals": 0
-        },
-        {
-          "id": "756208",
-          "date": "2026-05-21T18:00Z",
-          "homeId": "22028",
-          "awayId": "13033",
-          "home": "Al Kholood",
-          "away": "Al Fateh",
-          "homeGoals": 0,
-          "awayGoals": 0
-        }
-      ],
-      "recentLeagueMatches": {
-        "home": [
-          {
-            "date": "2026-08-28T16:00Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 18,
-            "shotsOnTarget": 6,
-            "corners": null,
-            "yellowCards": 0
-          },
-          {
-            "date": "2026-08-25T16:10Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 12,
-            "shotsOnTarget": 5,
-            "corners": null,
-            "yellowCards": 1
-          },
-          {
-            "date": "2026-08-20T18:00Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 8,
-            "shotsOnTarget": 3,
-            "corners": null,
-            "yellowCards": 1
-          },
-          {
-            "date": "2026-08-14T16:50Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 13,
-            "shotsOnTarget": 5,
-            "corners": null,
-            "yellowCards": 1
-          }
-        ],
-        "away": [
-          {
-            "date": "2026-08-29T16:05Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 4,
-            "shotsOnTarget": 3,
-            "corners": null,
-            "yellowCards": 2
-          },
-          {
-            "date": "2026-08-26T18:00Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 9,
-            "shotsOnTarget": 4,
-            "corners": null,
-            "yellowCards": 3
-          },
-          {
-            "date": "2026-08-22T16:10Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 11,
-            "shotsOnTarget": 6,
-            "corners": null,
-            "yellowCards": 4
-          },
-          {
-            "date": "2026-08-15T18:00Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 11,
-            "shotsOnTarget": 5,
-            "corners": null,
-            "yellowCards": 1
-          }
-        ]
-      },
-      "matchState": "pre",
-      "homeScore": 0,
-      "awayScore": 0,
-      "pick": "D",
-      "pickProbability": 0.44654655099642326,
-      "confidence": 62,
-      "goalsOver25": false,
-      "goalsProbability": 0.11186606695938615,
-      "bttsYes": false,
-      "bttsProbability": 0.2020529645833201,
-      "correctScore": "0-0",
-      "correctScoreProbability": 0.323108569143344,
-      "expectedHomeGoals": 0.6224435389002655,
-      "expectedAwayGoals": 0.5371284725278315,
-      "expectedGoals": 1.159572011428097,
-      "expectedCorners": 2.7086058868880216,
-      "expectedBookings": 3.3845513994080396,
-      "cornerPredictions": [
-        {
-          "line": 8.5,
-          "over": false,
-          "probability": 0.998045516331508
-        },
-        {
-          "line": 9.5,
-          "over": false,
-          "probability": 0.9994863595906209
-        },
-        {
-          "line": 10.5,
-          "over": false,
-          "probability": 0.9998766272439925
-        }
-      ],
-      "bookingPredictions": [
-        {
-          "line": 3.5,
-          "over": false,
-          "probability": 0.5617374205685876
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.7470484281167953
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.8724873541013953
-        }
-      ],
-      "automatic": true,
-      "savedAt": "2026-09-03T00:07:12.903Z",
-      "status": "correct",
-      "outcomeCorrect": true,
-      "goalsCorrect": false,
-      "bttsCorrect": false,
-      "finalScore": "2-2",
-      "correctScoreCorrect": false,
-      "gradedAt": "2026-09-03T17:57:14.517Z",
-      "marketStatsAttemptedAt": "2026-09-04T21:23:02.234Z",
-      "actualCorners": null,
-      "actualBookings": 2,
-      "bookingResults": [
-        {
-          "line": 3.5,
-          "over": false,
-          "probability": 0.5617374205685876,
-          "correct": true
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.7470484281167953,
-          "correct": true
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.8724873541013953,
-          "correct": true
-        }
-      ],
-      "marketGradedAt": "2026-09-04T21:23:02.312Z"
-    },
-    {
-      "sourceId": "bra.1:401913077",
-      "provider": "espn",
-      "trackingKey": "Brazil|Serie A|Flamengo|Mirassol|2026-09-02",
-      "eventId": "401913077",
-      "eventDate": "2026-09-02T22:30Z",
-      "slug": "bra.1",
-      "country": "Brazil",
-      "league": "Serie A",
-      "home": "Flamengo",
-      "away": "Mirassol",
-      "homeId": "819",
-      "awayId": "9169",
-      "homeForm": "WLWWD",
-      "awayForm": "DDDLD",
-      "h2h": [],
-      "recentLeagueMatches": null,
-      "matchState": "pre",
-      "homeScore": 0,
-      "awayScore": 0,
-      "pick": "H",
-      "pickProbability": 0.6846238756826488,
-      "confidence": 87,
-      "goalsOver25": true,
-      "goalsProbability": 0.7511210860412194,
-      "bttsYes": true,
-      "bttsProbability": 0.6621561421089897,
-      "correctScore": "2-1",
-      "correctScoreProbability": 0.08810987994760541,
-      "expectedHomeGoals": 2.7169284018509767,
-      "expectedAwayGoals": 1.2141227921362772,
-      "expectedGoals": 3.931051193987254,
-      "expectedCorners": 10.882782187907189,
-      "expectedBookings": 4.147707052989724,
-      "cornerPredictions": [
-        {
-          "line": 8.5,
-          "over": true,
-          "probability": 0.7574401438597
-        },
-        {
-          "line": 9.5,
-          "over": true,
-          "probability": 0.6466339214311372
-        },
-        {
-          "line": 10.5,
-          "over": true,
-          "probability": 0.5260459230556527
-        }
-      ],
-      "bookingPredictions": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.5948418540306016
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.600005616958849
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.76163966289488
-        }
-      ],
-      "automatic": true,
-      "savedAt": "2026-09-01T04:57:55.378Z",
-      "status": "correct",
-      "outcomeCorrect": true,
-      "goalsCorrect": false,
-      "bttsCorrect": false,
-      "finalScore": "2-0",
-      "correctScoreCorrect": false,
-      "gradedAt": "2026-09-03T04:19:14.034Z",
-      "marketStatsAttemptedAt": "2026-09-03T17:57:14.635Z",
-      "actualCorners": null,
-      "actualBookings": 2,
-      "bookingResults": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.5948418540306016,
-          "correct": false
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.600005616958849,
-          "correct": true
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.76163966289488,
-          "correct": true
-        }
-      ],
-      "marketGradedAt": "2026-09-03T17:57:14.703Z"
-    },
-    {
-      "sourceId": "sco.1:401878390",
-      "provider": "espn",
-      "trackingKey": "Scotland|Premiership|Falkirk|Rangers|2026-09-02",
-      "eventId": "401878390",
-      "eventDate": "2026-09-02T19:00Z",
-      "slug": "sco.1",
-      "country": "Scotland",
-      "league": "Premiership",
-      "home": "Falkirk",
-      "away": "Rangers",
-      "homeId": "254",
-      "awayId": "257",
-      "homeForm": "LDLWL",
-      "awayForm": "WLWWD",
-      "h2h": [],
-      "recentLeagueMatches": null,
-      "matchState": "pre",
-      "homeScore": 0,
-      "awayScore": 0,
-      "pick": "A",
-      "pickProbability": 0.6200842973526073,
-      "confidence": 80,
-      "goalsOver25": true,
-      "goalsProbability": 0.7226807186700932,
-      "bttsYes": true,
-      "bttsProbability": 0.6710505467317713,
-      "correctScore": "1-2",
-      "correctScoreProbability": 0.09184925535970047,
-      "expectedHomeGoals": 1.299440207403962,
-      "expectedAwayGoals": 2.4507272632723573,
-      "expectedGoals": 3.7501674706763195,
-      "expectedCorners": 10.186128329445566,
-      "expectedBookings": 4.068645048611122,
-      "cornerPredictions": [
-        {
-          "line": 8.5,
-          "over": true,
-          "probability": 0.6877435771694792
-        },
-        {
-          "line": 9.5,
-          "over": true,
-          "probability": 0.5651296135959324
-        },
-        {
-          "line": 10.5,
-          "over": false,
-          "probability": 0.5597665431982788
-        }
-      ],
-      "bookingPredictions": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.579824492271835
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.6154285809589992
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7743116708843468
-        }
-      ],
-      "automatic": true,
-      "savedAt": "2026-09-01T04:57:55.378Z",
-      "status": "correct",
-      "outcomeCorrect": true,
-      "goalsCorrect": true,
-      "bttsCorrect": true,
-      "finalScore": "1-2",
-      "correctScoreCorrect": true,
-      "gradedAt": "2026-09-02T20:58:24.785Z",
-      "marketStatsAttemptedAt": "2026-09-03T21:40:06.547Z",
-      "actualCorners": null,
-      "actualBookings": 3,
-      "bookingResults": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.579824492271835,
-          "correct": false
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.6154285809589992,
-          "correct": true
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7743116708843468,
-          "correct": true
-        }
-      ],
-      "marketGradedAt": "2026-09-03T21:40:06.601Z"
     }
   ]
 }
