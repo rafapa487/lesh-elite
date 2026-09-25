@@ -1,26 +1,26 @@
 {
-  "updatedAt": "2026-09-25T21:57:32.933Z",
+  "updatedAt": "2026-09-25T22:14:10.284Z",
   "dates": [
     "20260924",
     "20260925",
     "20260926"
   ],
   "provider": "espn",
-  "refreshMode": "live",
-  "successfulRequests": 20,
-  "totalRequests": 23,
+  "refreshMode": "full",
+  "successfulRequests": 62,
+  "totalRequests": 74,
   "providers": {
     "apiFootball": {
       "configured": true,
       "successfulRequests": 0,
-      "totalRequests": 0,
+      "totalRequests": 3,
       "fixtureCount": 0,
       "h2hSuccessfulRequests": 0,
       "h2hTotalRequests": 0
     },
     "espn": {
-      "successfulRequests": 20,
-      "totalRequests": 23
+      "successfulRequests": 60,
+      "totalRequests": 69
     }
   },
   "sources": [
@@ -58,6 +58,939 @@
       "slug": "esp.2",
       "provider": "espn",
       "events": [
+        {
+          "id": "401883200",
+          "uid": "s:600~l:3921~e:401883200",
+          "date": "2026-09-25T18:30Z",
+          "name": "Albacete at Girona",
+          "shortName": "ALB @ GIR",
+          "season": {
+            "year": 2026,
+            "type": 14356,
+            "slug": "regular-season"
+          },
+          "competitions": [
+            {
+              "id": "401883200",
+              "uid": "s:600~l:3921~e:401883200~c:401883200",
+              "date": "2026-09-25T18:30Z",
+              "startDate": "2026-09-25T18:30Z",
+              "attendance": 10048,
+              "timeValid": true,
+              "recent": true,
+              "status": {
+                "clock": 5400,
+                "displayClock": "90'+3'",
+                "period": 2,
+                "type": {
+                  "id": "28",
+                  "name": "STATUS_FULL_TIME",
+                  "state": "post",
+                  "completed": true,
+                  "description": "Full Time",
+                  "detail": "FT",
+                  "shortDetail": "FT"
+                }
+              },
+              "venue": {
+                "id": "3459",
+                "fullName": "Estadi Montilivi",
+                "address": {
+                  "city": "Girona",
+                  "country": "Spain"
+                }
+              },
+              "format": {
+                "regulation": {
+                  "periods": 2
+                }
+              },
+              "altGameNote": "LALIGA 2",
+              "notes": [],
+              "geoBroadcasts": [
+                {
+                  "type": {
+                    "id": "4",
+                    "shortName": "STREAMING"
+                  },
+                  "market": {
+                    "id": "1",
+                    "type": "National"
+                  },
+                  "media": {
+                    "shortName": "ESPN+",
+                    "logo": "https://a.espncdn.com/guid/322a7e47-3cdb-3b5c-ab1b-678e1f2c27e5/logos/default.png",
+                    "darkLogo": "https://a.espncdn.com/guid/322a7e47-3cdb-3b5c-ab1b-678e1f2c27e5/logos/default-dark.png"
+                  },
+                  "lang": "en",
+                  "region": "us"
+                }
+              ],
+              "broadcasts": [
+                {
+                  "market": "national",
+                  "names": [
+                    "ESPN+"
+                  ]
+                }
+              ],
+              "broadcast": "",
+              "competitors": [
+                {
+                  "id": "9812",
+                  "uid": "s:600~t:9812",
+                  "type": "team",
+                  "order": 0,
+                  "homeAway": "home",
+                  "winner": true,
+                  "form": "WWLWW",
+                  "score": "2",
+                  "records": [
+                    {
+                      "name": "All Splits",
+                      "type": "total",
+                      "summary": "4-1-2",
+                      "abbreviation": "Total"
+                    }
+                  ],
+                  "team": {
+                    "id": "9812",
+                    "uid": "s:600~t:9812",
+                    "abbreviation": "GIR",
+                    "displayName": "Girona",
+                    "shortDisplayName": "Girona",
+                    "name": "Girona",
+                    "location": "Girona",
+                    "color": "C60000",
+                    "alternateColor": "004996",
+                    "isActive": true,
+                    "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9812.png",
+                    "links": [
+                      {
+                        "rel": [
+                          "clubhouse",
+                          "desktop",
+                          "team"
+                        ],
+                        "href": "https://www.espn.com/soccer/club/_/id/9812/girona",
+                        "text": "Clubhouse",
+                        "isExternal": false,
+                        "isPremium": false,
+                        "isHidden": false
+                      },
+                      {
+                        "rel": [
+                          "stats",
+                          "desktop",
+                          "team"
+                        ],
+                        "href": "https://www.espn.com/soccer/team/stats/_/id/9812/girona",
+                        "text": "Stats",
+                        "isExternal": false,
+                        "isPremium": false,
+                        "isHidden": false
+                      },
+                      {
+                        "rel": [
+                          "stats",
+                          "sportscenter",
+                          "app",
+                          "team"
+                        ],
+                        "href": "sportscenter://x-callback-url/showClubhouse?uid=s:600~t:9812&section=stats",
+                        "text": "Stats",
+                        "isExternal": false,
+                        "isPremium": false,
+                        "isHidden": false
+                      },
+                      {
+                        "rel": [
+                          "schedule",
+                          "desktop",
+                          "team"
+                        ],
+                        "href": "https://www.espn.com/soccer/team/fixtures/_/id/9812/girona",
+                        "text": "Fixtures",
+                        "isExternal": false,
+                        "isPremium": false,
+                        "isHidden": false
+                      },
+                      {
+                        "rel": [
+                          "schedule",
+                          "sportscenter",
+                          "app",
+                          "team"
+                        ],
+                        "href": "sportscenter://x-callback-url/showClubhouse?uid=s:600~t:9812&section=scores",
+                        "text": "Fixtures",
+                        "isExternal": false,
+                        "isPremium": false,
+                        "isHidden": false
+                      },
+                      {
+                        "rel": [
+                          "squad",
+                          "desktop",
+                          "team"
+                        ],
+                        "href": "https://www.espn.com/soccer/team/squad/_/id/9812/girona",
+                        "text": "Squad",
+                        "isExternal": false,
+                        "isPremium": false,
+                        "isHidden": false
+                      },
+                      {
+                        "rel": [
+                          "squad",
+                          "sportscenter",
+                          "app",
+                          "team"
+                        ],
+                        "href": "sportscenter://x-callback-url/showClubhouse?uid=s:600~t:9812&section=squad",
+                        "text": "Squad",
+                        "isExternal": false,
+                        "isPremium": false,
+                        "isHidden": false
+                      }
+                    ],
+                    "venue": {
+                      "id": "3459"
+                    }
+                  },
+                  "statistics": [
+                    {
+                      "name": "appearances",
+                      "abbreviation": "APP",
+                      "displayValue": "0"
+                    },
+                    {
+                      "name": "foulsCommitted",
+                      "abbreviation": "FC",
+                      "displayValue": "8"
+                    },
+                    {
+                      "name": "wonCorners",
+                      "abbreviation": "CW",
+                      "displayValue": "3"
+                    },
+                    {
+                      "name": "goalAssists",
+                      "abbreviation": "A",
+                      "displayValue": "2"
+                    },
+                    {
+                      "name": "possessionPct",
+                      "abbreviation": "PP",
+                      "displayValue": "56.5"
+                    },
+                    {
+                      "name": "shotAssists",
+                      "abbreviation": "SHAST",
+                      "displayValue": "0"
+                    },
+                    {
+                      "name": "shotsOnTarget",
+                      "abbreviation": "SOG",
+                      "displayValue": "3"
+                    },
+                    {
+                      "name": "totalGoals",
+                      "abbreviation": "G",
+                      "displayValue": "2"
+                    },
+                    {
+                      "name": "totalShots",
+                      "abbreviation": "SHOT",
+                      "displayValue": "18"
+                    }
+                  ]
+                },
+                {
+                  "id": "2737",
+                  "uid": "s:600~t:2737",
+                  "type": "team",
+                  "order": 1,
+                  "homeAway": "away",
+                  "winner": false,
+                  "form": "LLDLL",
+                  "score": "0",
+                  "records": [
+                    {
+                      "name": "All Splits",
+                      "type": "total",
+                      "summary": "0-1-6",
+                      "abbreviation": "Total"
+                    }
+                  ],
+                  "team": {
+                    "id": "2737",
+                    "uid": "s:600~t:2737",
+                    "abbreviation": "ALB",
+                    "displayName": "Albacete",
+                    "shortDisplayName": "Albacete",
+                    "name": "Albacete",
+                    "location": "Albacete",
+                    "color": "BC0814",
+                    "alternateColor": "C60000",
+                    "isActive": true,
+                    "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2737.png",
+                    "links": [
+                      {
+                        "rel": [
+                          "clubhouse",
+                          "desktop",
+                          "team"
+                        ],
+                        "href": "https://www.espn.com/soccer/club/_/id/2737/albacete",
+                        "text": "Clubhouse",
+                        "isExternal": false,
+                        "isPremium": false,
+                        "isHidden": false
+                      },
+                      {
+                        "rel": [
+                          "stats",
+                          "desktop",
+                          "team"
+                        ],
+                        "href": "https://www.espn.com/soccer/team/stats/_/id/2737/albacete",
+                        "text": "Stats",
+                        "isExternal": false,
+                        "isPremium": false,
+                        "isHidden": false
+                      },
+                      {
+                        "rel": [
+                          "stats",
+                          "sportscenter",
+                          "app",
+                          "team"
+                        ],
+                        "href": "sportscenter://x-callback-url/showClubhouse?uid=s:600~t:2737&section=stats",
+                        "text": "Stats",
+                        "isExternal": false,
+                        "isPremium": false,
+                        "isHidden": false
+                      },
+                      {
+                        "rel": [
+                          "schedule",
+                          "desktop",
+                          "team"
+                        ],
+                        "href": "https://www.espn.com/soccer/team/fixtures/_/id/2737/albacete",
+                        "text": "Fixtures",
+                        "isExternal": false,
+                        "isPremium": false,
+                        "isHidden": false
+                      },
+                      {
+                        "rel": [
+                          "schedule",
+                          "sportscenter",
+                          "app",
+                          "team"
+                        ],
+                        "href": "sportscenter://x-callback-url/showClubhouse?uid=s:600~t:2737&section=scores",
+                        "text": "Fixtures",
+                        "isExternal": false,
+                        "isPremium": false,
+                        "isHidden": false
+                      },
+                      {
+                        "rel": [
+                          "squad",
+                          "desktop",
+                          "team"
+                        ],
+                        "href": "https://www.espn.com/soccer/team/squad/_/id/2737/albacete",
+                        "text": "Squad",
+                        "isExternal": false,
+                        "isPremium": false,
+                        "isHidden": false
+                      },
+                      {
+                        "rel": [
+                          "squad",
+                          "sportscenter",
+                          "app",
+                          "team"
+                        ],
+                        "href": "sportscenter://x-callback-url/showClubhouse?uid=s:600~t:2737&section=squad",
+                        "text": "Squad",
+                        "isExternal": false,
+                        "isPremium": false,
+                        "isHidden": false
+                      }
+                    ],
+                    "venue": {
+                      "id": "1407"
+                    }
+                  },
+                  "statistics": [
+                    {
+                      "name": "appearances",
+                      "abbreviation": "APP",
+                      "displayValue": "0"
+                    },
+                    {
+                      "name": "foulsCommitted",
+                      "abbreviation": "FC",
+                      "displayValue": "13"
+                    },
+                    {
+                      "name": "wonCorners",
+                      "abbreviation": "CW",
+                      "displayValue": "5"
+                    },
+                    {
+                      "name": "goalAssists",
+                      "abbreviation": "A",
+                      "displayValue": "0"
+                    },
+                    {
+                      "name": "possessionPct",
+                      "abbreviation": "PP",
+                      "displayValue": "43.5"
+                    },
+                    {
+                      "name": "shotAssists",
+                      "abbreviation": "SHAST",
+                      "displayValue": "0"
+                    },
+                    {
+                      "name": "shotsOnTarget",
+                      "abbreviation": "SOG",
+                      "displayValue": "5"
+                    },
+                    {
+                      "name": "totalGoals",
+                      "abbreviation": "G",
+                      "displayValue": "0"
+                    },
+                    {
+                      "name": "totalShots",
+                      "abbreviation": "SHOT",
+                      "displayValue": "20"
+                    }
+                  ]
+                }
+              ],
+              "details": [
+                {
+                  "type": {
+                    "id": "70",
+                    "text": "Goal"
+                  },
+                  "clock": {
+                    "value": 349,
+                    "displayValue": "6'"
+                  },
+                  "team": {
+                    "id": "9812"
+                  },
+                  "scoreValue": 1,
+                  "scoringPlay": true,
+                  "redCard": false,
+                  "yellowCard": false,
+                  "penaltyKick": false,
+                  "ownGoal": false,
+                  "shootout": false,
+                  "athletesInvolved": [
+                    {
+                      "id": "261613",
+                      "displayName": "Abel Ruiz",
+                      "shortName": "A. Ruiz",
+                      "fullName": "Abel Ruiz",
+                      "jersey": "9",
+                      "team": {
+                        "id": "9812"
+                      },
+                      "links": [
+                        {
+                          "rel": [
+                            "playercard",
+                            "desktop",
+                            "athlete"
+                          ],
+                          "href": "https://www.espn.com/soccer/player/_/id/261613/abel-ruiz",
+                          "isHidden": false
+                        }
+                      ],
+                      "position": "F"
+                    }
+                  ]
+                },
+                {
+                  "type": {
+                    "id": "70",
+                    "text": "Goal"
+                  },
+                  "clock": {
+                    "value": 2571,
+                    "displayValue": "43'"
+                  },
+                  "team": {
+                    "id": "9812"
+                  },
+                  "scoreValue": 1,
+                  "scoringPlay": true,
+                  "redCard": false,
+                  "yellowCard": false,
+                  "penaltyKick": false,
+                  "ownGoal": false,
+                  "shootout": false,
+                  "athletesInvolved": [
+                    {
+                      "id": "215717",
+                      "displayName": "Donny van de Beek",
+                      "shortName": "D. van de Beek",
+                      "fullName": "Donny van de Beek",
+                      "jersey": "6",
+                      "team": {
+                        "id": "9812"
+                      },
+                      "links": [
+                        {
+                          "rel": [
+                            "playercard",
+                            "desktop",
+                            "athlete"
+                          ],
+                          "href": "https://www.espn.com/soccer/player/_/id/215717/donny-van-de-beek",
+                          "isHidden": false
+                        }
+                      ],
+                      "position": "AM"
+                    }
+                  ]
+                },
+                {
+                  "type": {
+                    "id": "94",
+                    "text": "Yellow Card"
+                  },
+                  "clock": {
+                    "value": 3090,
+                    "displayValue": "52'"
+                  },
+                  "team": {
+                    "id": "2737"
+                  },
+                  "scoreValue": 0,
+                  "scoringPlay": false,
+                  "redCard": false,
+                  "yellowCard": true,
+                  "penaltyKick": false,
+                  "ownGoal": false,
+                  "shootout": false,
+                  "athletesInvolved": [
+                    {
+                      "id": "356770",
+                      "displayName": "Víctor Valverde Da Silva",
+                      "shortName": "V. Valverde Da Silva",
+                      "fullName": "Víctor Valverde Da Silva",
+                      "jersey": "11",
+                      "team": {
+                        "id": "2737"
+                      },
+                      "links": [
+                        {
+                          "rel": [
+                            "playercard",
+                            "desktop",
+                            "athlete"
+                          ],
+                          "href": "https://www.espn.com/soccer/player/_/id/356770/victor-valverde-da-silva",
+                          "isHidden": false
+                        }
+                      ],
+                      "position": "LM"
+                    }
+                  ]
+                },
+                {
+                  "type": {
+                    "id": "94",
+                    "text": "Yellow Card"
+                  },
+                  "clock": {
+                    "value": 3150,
+                    "displayValue": "53'"
+                  },
+                  "team": {
+                    "id": "2737"
+                  },
+                  "scoreValue": 0,
+                  "scoringPlay": false,
+                  "redCard": false,
+                  "yellowCard": true,
+                  "penaltyKick": false,
+                  "ownGoal": false,
+                  "shootout": false,
+                  "athletesInvolved": [
+                    {
+                      "id": "331513",
+                      "displayName": "Ortu",
+                      "shortName": "Ortu",
+                      "fullName": "Ortu",
+                      "jersey": "18",
+                      "team": {
+                        "id": "2737"
+                      },
+                      "links": [
+                        {
+                          "rel": [
+                            "playercard",
+                            "desktop",
+                            "athlete"
+                          ],
+                          "href": "https://www.espn.com/soccer/player/_/id/331513/ortu",
+                          "isHidden": false
+                        }
+                      ],
+                      "position": "SUB"
+                    }
+                  ]
+                },
+                {
+                  "type": {
+                    "id": "94",
+                    "text": "Yellow Card"
+                  },
+                  "clock": {
+                    "value": 3970,
+                    "displayValue": "67'"
+                  },
+                  "team": {
+                    "id": "2737"
+                  },
+                  "scoreValue": 0,
+                  "scoringPlay": false,
+                  "redCard": false,
+                  "yellowCard": true,
+                  "penaltyKick": false,
+                  "ownGoal": false,
+                  "shootout": false,
+                  "athletesInvolved": [
+                    {
+                      "id": "276637",
+                      "displayName": "Fran Gamez",
+                      "shortName": "F. Gamez",
+                      "fullName": "Fran Gamez",
+                      "jersey": "15",
+                      "team": {
+                        "id": "2737"
+                      },
+                      "links": [
+                        {
+                          "rel": [
+                            "playercard",
+                            "desktop",
+                            "athlete"
+                          ],
+                          "href": "https://www.espn.com/soccer/player/_/id/276637/fran-gamez",
+                          "isHidden": false
+                        }
+                      ],
+                      "position": "RB"
+                    }
+                  ]
+                },
+                {
+                  "type": {
+                    "id": "94",
+                    "text": "Yellow Card"
+                  },
+                  "clock": {
+                    "value": 4787,
+                    "displayValue": "80'"
+                  },
+                  "team": {
+                    "id": "2737"
+                  },
+                  "scoreValue": 0,
+                  "scoringPlay": false,
+                  "redCard": false,
+                  "yellowCard": true,
+                  "penaltyKick": false,
+                  "ownGoal": false,
+                  "shootout": false,
+                  "athletesInvolved": [
+                    {
+                      "id": "178547",
+                      "displayName": "Higinio Marín",
+                      "shortName": "H. Marín",
+                      "fullName": "Higinio Marín",
+                      "jersey": "12",
+                      "team": {
+                        "id": "2737"
+                      },
+                      "links": [
+                        {
+                          "rel": [
+                            "playercard",
+                            "desktop",
+                            "athlete"
+                          ],
+                          "href": "https://www.espn.com/soccer/player/_/id/178547/higinio-marin",
+                          "isHidden": false
+                        }
+                      ],
+                      "position": "SUB"
+                    }
+                  ]
+                },
+                {
+                  "type": {
+                    "id": "93",
+                    "text": "Red Card"
+                  },
+                  "clock": {
+                    "value": 5400,
+                    "displayValue": "90'+1'"
+                  },
+                  "team": {
+                    "id": "2737"
+                  },
+                  "scoreValue": 0,
+                  "scoringPlay": false,
+                  "redCard": true,
+                  "yellowCard": false,
+                  "penaltyKick": false,
+                  "ownGoal": false,
+                  "shootout": false,
+                  "athletesInvolved": [
+                    {
+                      "id": "331513",
+                      "displayName": "Ortu",
+                      "shortName": "Ortu",
+                      "fullName": "Ortu",
+                      "jersey": "18",
+                      "team": {
+                        "id": "2737"
+                      },
+                      "links": [
+                        {
+                          "rel": [
+                            "playercard",
+                            "desktop",
+                            "athlete"
+                          ],
+                          "href": "https://www.espn.com/soccer/player/_/id/331513/ortu",
+                          "isHidden": false
+                        }
+                      ],
+                      "position": "SUB"
+                    }
+                  ]
+                }
+              ],
+              "odds": [
+                null
+              ],
+              "wasSuspended": false,
+              "playByPlayAvailable": true,
+              "playByPlayAthletes": true
+            }
+          ],
+          "status": {
+            "clock": 5400,
+            "displayClock": "90'+3'",
+            "period": 2,
+            "type": {
+              "id": "28",
+              "name": "STATUS_FULL_TIME",
+              "state": "post",
+              "completed": true,
+              "description": "Full Time",
+              "detail": "FT",
+              "shortDetail": "FT"
+            }
+          },
+          "venue": {
+            "displayName": "Estadi Montilivi"
+          },
+          "links": [
+            {
+              "language": "en-US",
+              "rel": [
+                "summary",
+                "desktop",
+                "event"
+              ],
+              "href": "https://www.espn.com/soccer/match/_/gameId/401883200/albacete-girona",
+              "text": "Summary",
+              "shortText": "Summary",
+              "isExternal": false,
+              "isPremium": false,
+              "isHidden": false
+            },
+            {
+              "language": "en-US",
+              "rel": [
+                "stats",
+                "desktop",
+                "event"
+              ],
+              "href": "https://www.espn.com/soccer/matchstats/_/gameId/401883200",
+              "text": "Statistics",
+              "shortText": "Statistics",
+              "isExternal": false,
+              "isPremium": false,
+              "isHidden": false
+            }
+          ],
+          "h2h": [
+            {
+              "id": "401883171",
+              "date": "2026-09-18T18:30Z",
+              "homeId": "2737",
+              "awayId": "8447",
+              "home": "Albacete",
+              "away": "Córdoba",
+              "homeGoals": 0,
+              "awayGoals": 0
+            },
+            {
+              "id": "401883211",
+              "date": "2026-09-12T16:30Z",
+              "homeId": "3747",
+              "awayId": "2737",
+              "home": "Granada",
+              "away": "Albacete",
+              "homeGoals": 0,
+              "awayGoals": 0
+            },
+            {
+              "id": "401883240",
+              "date": "2026-09-06T16:30Z",
+              "homeId": "4438",
+              "awayId": "2737",
+              "home": "Castellón",
+              "away": "Albacete",
+              "homeGoals": 0,
+              "awayGoals": 0
+            },
+            {
+              "id": "401883248",
+              "date": "2026-08-29T17:00Z",
+              "homeId": "2737",
+              "awayId": "92",
+              "home": "Albacete",
+              "away": "Real Oviedo",
+              "homeGoals": 0,
+              "awayGoals": 0
+            },
+            {
+              "id": "401883256",
+              "date": "2026-08-22T17:00Z",
+              "homeId": "2737",
+              "awayId": "20983",
+              "home": "Albacete",
+              "away": "Real Sociedad II",
+              "homeGoals": 0,
+              "awayGoals": 0
+            }
+          ],
+          "recentLeagueMatches": {
+            "home": [
+              {
+                "date": "2026-09-25T18:30Z",
+                "goalsScored": 0,
+                "goalsConceded": 0,
+                "shots": 18,
+                "shotsOnTarget": 3,
+                "corners": null,
+                "yellowCards": 0
+              },
+              {
+                "date": "2026-09-19T19:00Z",
+                "goalsScored": 0,
+                "goalsConceded": 0,
+                "shots": 15,
+                "shotsOnTarget": 7,
+                "corners": null,
+                "yellowCards": 3
+              },
+              {
+                "date": "2026-09-12T16:30Z",
+                "goalsScored": 0,
+                "goalsConceded": 0,
+                "shots": 8,
+                "shotsOnTarget": 5,
+                "corners": null,
+                "yellowCards": 3
+              },
+              {
+                "date": "2026-09-05T14:15Z",
+                "goalsScored": 0,
+                "goalsConceded": 0,
+                "shots": 10,
+                "shotsOnTarget": 3,
+                "corners": null,
+                "yellowCards": 3
+              },
+              {
+                "date": "2026-08-29T19:30Z",
+                "goalsScored": 0,
+                "goalsConceded": 0,
+                "shots": 17,
+                "shotsOnTarget": 8,
+                "corners": null,
+                "yellowCards": 2
+              }
+            ],
+            "away": [
+              {
+                "date": "2026-09-25T18:30Z",
+                "goalsScored": 0,
+                "goalsConceded": 0,
+                "shots": 20,
+                "shotsOnTarget": 5,
+                "corners": null,
+                "yellowCards": 3
+              },
+              {
+                "date": "2026-09-18T18:30Z",
+                "goalsScored": 0,
+                "goalsConceded": 0,
+                "shots": 13,
+                "shotsOnTarget": 3,
+                "corners": null,
+                "yellowCards": 1
+              },
+              {
+                "date": "2026-09-12T16:30Z",
+                "goalsScored": 0,
+                "goalsConceded": 0,
+                "shots": 6,
+                "shotsOnTarget": 4,
+                "corners": null,
+                "yellowCards": 1
+              },
+              {
+                "date": "2026-09-06T16:30Z",
+                "goalsScored": 0,
+                "goalsConceded": 0,
+                "shots": 6,
+                "shotsOnTarget": 3,
+                "corners": null,
+                "yellowCards": 1
+              },
+              {
+                "date": "2026-08-29T17:00Z",
+                "goalsScored": 0,
+                "goalsConceded": 0,
+                "shots": 9,
+                "shotsOnTarget": 2,
+                "corners": null,
+                "yellowCards": 3
+              }
+            ]
+          }
+        },
         {
           "id": "401883166",
           "uid": "s:600~l:3921~e:401883166",
@@ -587,7 +1520,7 @@
                     ]
                   },
                   "drawOdds": {
-                    "moneyLine": 255,
+                    "moneyLine": 250,
                     "link": {
                       "language": "en-US",
                       "rel": [
@@ -674,7 +1607,7 @@
                       },
                       "close": {
                         "line": "-0.5",
-                        "odds": "+130",
+                        "odds": "+135",
                         "link": {
                           "rel": [
                             "homeSpread",
@@ -702,7 +1635,7 @@
                       },
                       "close": {
                         "line": "+0.5",
-                        "odds": "-180",
+                        "odds": "-190",
                         "link": {
                           "rel": [
                             "awaySpread",
@@ -732,7 +1665,7 @@
                         "odds": "+125"
                       },
                       "close": {
-                        "odds": "+135",
+                        "odds": "+145",
                         "link": {
                           "rel": [
                             "home",
@@ -757,7 +1690,7 @@
                         "odds": "+190"
                       },
                       "close": {
-                        "odds": "+185",
+                        "odds": "+170",
                         "link": {
                           "rel": [
                             "away",
@@ -782,7 +1715,7 @@
                         "odds": "+240"
                       },
                       "close": {
-                        "odds": "+255",
+                        "odds": "+250",
                         "link": {
                           "rel": [
                             "draw",
@@ -803,7 +1736,7 @@
                       }
                     }
                   },
-                  "details": "CEU +135"
+                  "details": "CEU +145"
                 }
               ],
               "wasSuspended": false,
@@ -2975,939 +3908,6 @@
               "isHidden": false
             }
           ]
-        },
-        {
-          "id": "401883200",
-          "uid": "s:600~l:3921~e:401883200",
-          "date": "2026-09-25T18:30Z",
-          "name": "Albacete at Girona",
-          "shortName": "ALB @ GIR",
-          "season": {
-            "year": 2026,
-            "type": 14356,
-            "slug": "regular-season"
-          },
-          "competitions": [
-            {
-              "id": "401883200",
-              "uid": "s:600~l:3921~e:401883200~c:401883200",
-              "date": "2026-09-25T18:30Z",
-              "startDate": "2026-09-25T18:30Z",
-              "attendance": 10048,
-              "timeValid": true,
-              "recent": true,
-              "status": {
-                "clock": 5400,
-                "displayClock": "90'+3'",
-                "period": 2,
-                "type": {
-                  "id": "28",
-                  "name": "STATUS_FULL_TIME",
-                  "state": "post",
-                  "completed": true,
-                  "description": "Full Time",
-                  "detail": "FT",
-                  "shortDetail": "FT"
-                }
-              },
-              "venue": {
-                "id": "3459",
-                "fullName": "Estadi Montilivi",
-                "address": {
-                  "city": "Girona",
-                  "country": "Spain"
-                }
-              },
-              "format": {
-                "regulation": {
-                  "periods": 2
-                }
-              },
-              "altGameNote": "LALIGA 2",
-              "notes": [],
-              "geoBroadcasts": [
-                {
-                  "type": {
-                    "id": "4",
-                    "shortName": "STREAMING"
-                  },
-                  "market": {
-                    "id": "1",
-                    "type": "National"
-                  },
-                  "media": {
-                    "shortName": "ESPN+",
-                    "logo": "https://a.espncdn.com/guid/322a7e47-3cdb-3b5c-ab1b-678e1f2c27e5/logos/default.png",
-                    "darkLogo": "https://a.espncdn.com/guid/322a7e47-3cdb-3b5c-ab1b-678e1f2c27e5/logos/default-dark.png"
-                  },
-                  "lang": "en",
-                  "region": "us"
-                }
-              ],
-              "broadcasts": [
-                {
-                  "market": "national",
-                  "names": [
-                    "ESPN+"
-                  ]
-                }
-              ],
-              "broadcast": "",
-              "competitors": [
-                {
-                  "id": "9812",
-                  "uid": "s:600~t:9812",
-                  "type": "team",
-                  "order": 0,
-                  "homeAway": "home",
-                  "winner": true,
-                  "form": "WWLWW",
-                  "score": "2",
-                  "records": [
-                    {
-                      "name": "All Splits",
-                      "type": "total",
-                      "summary": "4-1-2",
-                      "abbreviation": "Total"
-                    }
-                  ],
-                  "team": {
-                    "id": "9812",
-                    "uid": "s:600~t:9812",
-                    "abbreviation": "GIR",
-                    "displayName": "Girona",
-                    "shortDisplayName": "Girona",
-                    "name": "Girona",
-                    "location": "Girona",
-                    "color": "C60000",
-                    "alternateColor": "004996",
-                    "isActive": true,
-                    "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/9812.png",
-                    "links": [
-                      {
-                        "rel": [
-                          "clubhouse",
-                          "desktop",
-                          "team"
-                        ],
-                        "href": "https://www.espn.com/soccer/club/_/id/9812/girona",
-                        "text": "Clubhouse",
-                        "isExternal": false,
-                        "isPremium": false,
-                        "isHidden": false
-                      },
-                      {
-                        "rel": [
-                          "stats",
-                          "desktop",
-                          "team"
-                        ],
-                        "href": "https://www.espn.com/soccer/team/stats/_/id/9812/girona",
-                        "text": "Stats",
-                        "isExternal": false,
-                        "isPremium": false,
-                        "isHidden": false
-                      },
-                      {
-                        "rel": [
-                          "stats",
-                          "sportscenter",
-                          "app",
-                          "team"
-                        ],
-                        "href": "sportscenter://x-callback-url/showClubhouse?uid=s:600~t:9812&section=stats",
-                        "text": "Stats",
-                        "isExternal": false,
-                        "isPremium": false,
-                        "isHidden": false
-                      },
-                      {
-                        "rel": [
-                          "schedule",
-                          "desktop",
-                          "team"
-                        ],
-                        "href": "https://www.espn.com/soccer/team/fixtures/_/id/9812/girona",
-                        "text": "Fixtures",
-                        "isExternal": false,
-                        "isPremium": false,
-                        "isHidden": false
-                      },
-                      {
-                        "rel": [
-                          "schedule",
-                          "sportscenter",
-                          "app",
-                          "team"
-                        ],
-                        "href": "sportscenter://x-callback-url/showClubhouse?uid=s:600~t:9812&section=scores",
-                        "text": "Fixtures",
-                        "isExternal": false,
-                        "isPremium": false,
-                        "isHidden": false
-                      },
-                      {
-                        "rel": [
-                          "squad",
-                          "desktop",
-                          "team"
-                        ],
-                        "href": "https://www.espn.com/soccer/team/squad/_/id/9812/girona",
-                        "text": "Squad",
-                        "isExternal": false,
-                        "isPremium": false,
-                        "isHidden": false
-                      },
-                      {
-                        "rel": [
-                          "squad",
-                          "sportscenter",
-                          "app",
-                          "team"
-                        ],
-                        "href": "sportscenter://x-callback-url/showClubhouse?uid=s:600~t:9812&section=squad",
-                        "text": "Squad",
-                        "isExternal": false,
-                        "isPremium": false,
-                        "isHidden": false
-                      }
-                    ],
-                    "venue": {
-                      "id": "3459"
-                    }
-                  },
-                  "statistics": [
-                    {
-                      "name": "appearances",
-                      "abbreviation": "APP",
-                      "displayValue": "0"
-                    },
-                    {
-                      "name": "foulsCommitted",
-                      "abbreviation": "FC",
-                      "displayValue": "8"
-                    },
-                    {
-                      "name": "wonCorners",
-                      "abbreviation": "CW",
-                      "displayValue": "3"
-                    },
-                    {
-                      "name": "goalAssists",
-                      "abbreviation": "A",
-                      "displayValue": "2"
-                    },
-                    {
-                      "name": "possessionPct",
-                      "abbreviation": "PP",
-                      "displayValue": "56.5"
-                    },
-                    {
-                      "name": "shotAssists",
-                      "abbreviation": "SHAST",
-                      "displayValue": "0"
-                    },
-                    {
-                      "name": "shotsOnTarget",
-                      "abbreviation": "SOG",
-                      "displayValue": "3"
-                    },
-                    {
-                      "name": "totalGoals",
-                      "abbreviation": "G",
-                      "displayValue": "2"
-                    },
-                    {
-                      "name": "totalShots",
-                      "abbreviation": "SHOT",
-                      "displayValue": "18"
-                    }
-                  ]
-                },
-                {
-                  "id": "2737",
-                  "uid": "s:600~t:2737",
-                  "type": "team",
-                  "order": 1,
-                  "homeAway": "away",
-                  "winner": false,
-                  "form": "LLDLL",
-                  "score": "0",
-                  "records": [
-                    {
-                      "name": "All Splits",
-                      "type": "total",
-                      "summary": "0-1-6",
-                      "abbreviation": "Total"
-                    }
-                  ],
-                  "team": {
-                    "id": "2737",
-                    "uid": "s:600~t:2737",
-                    "abbreviation": "ALB",
-                    "displayName": "Albacete",
-                    "shortDisplayName": "Albacete",
-                    "name": "Albacete",
-                    "location": "Albacete",
-                    "color": "BC0814",
-                    "alternateColor": "C60000",
-                    "isActive": true,
-                    "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/2737.png",
-                    "links": [
-                      {
-                        "rel": [
-                          "clubhouse",
-                          "desktop",
-                          "team"
-                        ],
-                        "href": "https://www.espn.com/soccer/club/_/id/2737/albacete",
-                        "text": "Clubhouse",
-                        "isExternal": false,
-                        "isPremium": false,
-                        "isHidden": false
-                      },
-                      {
-                        "rel": [
-                          "stats",
-                          "desktop",
-                          "team"
-                        ],
-                        "href": "https://www.espn.com/soccer/team/stats/_/id/2737/albacete",
-                        "text": "Stats",
-                        "isExternal": false,
-                        "isPremium": false,
-                        "isHidden": false
-                      },
-                      {
-                        "rel": [
-                          "stats",
-                          "sportscenter",
-                          "app",
-                          "team"
-                        ],
-                        "href": "sportscenter://x-callback-url/showClubhouse?uid=s:600~t:2737&section=stats",
-                        "text": "Stats",
-                        "isExternal": false,
-                        "isPremium": false,
-                        "isHidden": false
-                      },
-                      {
-                        "rel": [
-                          "schedule",
-                          "desktop",
-                          "team"
-                        ],
-                        "href": "https://www.espn.com/soccer/team/fixtures/_/id/2737/albacete",
-                        "text": "Fixtures",
-                        "isExternal": false,
-                        "isPremium": false,
-                        "isHidden": false
-                      },
-                      {
-                        "rel": [
-                          "schedule",
-                          "sportscenter",
-                          "app",
-                          "team"
-                        ],
-                        "href": "sportscenter://x-callback-url/showClubhouse?uid=s:600~t:2737&section=scores",
-                        "text": "Fixtures",
-                        "isExternal": false,
-                        "isPremium": false,
-                        "isHidden": false
-                      },
-                      {
-                        "rel": [
-                          "squad",
-                          "desktop",
-                          "team"
-                        ],
-                        "href": "https://www.espn.com/soccer/team/squad/_/id/2737/albacete",
-                        "text": "Squad",
-                        "isExternal": false,
-                        "isPremium": false,
-                        "isHidden": false
-                      },
-                      {
-                        "rel": [
-                          "squad",
-                          "sportscenter",
-                          "app",
-                          "team"
-                        ],
-                        "href": "sportscenter://x-callback-url/showClubhouse?uid=s:600~t:2737&section=squad",
-                        "text": "Squad",
-                        "isExternal": false,
-                        "isPremium": false,
-                        "isHidden": false
-                      }
-                    ],
-                    "venue": {
-                      "id": "1407"
-                    }
-                  },
-                  "statistics": [
-                    {
-                      "name": "appearances",
-                      "abbreviation": "APP",
-                      "displayValue": "0"
-                    },
-                    {
-                      "name": "foulsCommitted",
-                      "abbreviation": "FC",
-                      "displayValue": "13"
-                    },
-                    {
-                      "name": "wonCorners",
-                      "abbreviation": "CW",
-                      "displayValue": "5"
-                    },
-                    {
-                      "name": "goalAssists",
-                      "abbreviation": "A",
-                      "displayValue": "0"
-                    },
-                    {
-                      "name": "possessionPct",
-                      "abbreviation": "PP",
-                      "displayValue": "43.5"
-                    },
-                    {
-                      "name": "shotAssists",
-                      "abbreviation": "SHAST",
-                      "displayValue": "0"
-                    },
-                    {
-                      "name": "shotsOnTarget",
-                      "abbreviation": "SOG",
-                      "displayValue": "5"
-                    },
-                    {
-                      "name": "totalGoals",
-                      "abbreviation": "G",
-                      "displayValue": "0"
-                    },
-                    {
-                      "name": "totalShots",
-                      "abbreviation": "SHOT",
-                      "displayValue": "20"
-                    }
-                  ]
-                }
-              ],
-              "details": [
-                {
-                  "type": {
-                    "id": "70",
-                    "text": "Goal"
-                  },
-                  "clock": {
-                    "value": 349,
-                    "displayValue": "6'"
-                  },
-                  "team": {
-                    "id": "9812"
-                  },
-                  "scoreValue": 1,
-                  "scoringPlay": true,
-                  "redCard": false,
-                  "yellowCard": false,
-                  "penaltyKick": false,
-                  "ownGoal": false,
-                  "shootout": false,
-                  "athletesInvolved": [
-                    {
-                      "id": "261613",
-                      "displayName": "Abel Ruiz",
-                      "shortName": "A. Ruiz",
-                      "fullName": "Abel Ruiz",
-                      "jersey": "9",
-                      "team": {
-                        "id": "9812"
-                      },
-                      "links": [
-                        {
-                          "rel": [
-                            "playercard",
-                            "desktop",
-                            "athlete"
-                          ],
-                          "href": "https://www.espn.com/soccer/player/_/id/261613/abel-ruiz",
-                          "isHidden": false
-                        }
-                      ],
-                      "position": "F"
-                    }
-                  ]
-                },
-                {
-                  "type": {
-                    "id": "70",
-                    "text": "Goal"
-                  },
-                  "clock": {
-                    "value": 2571,
-                    "displayValue": "43'"
-                  },
-                  "team": {
-                    "id": "9812"
-                  },
-                  "scoreValue": 1,
-                  "scoringPlay": true,
-                  "redCard": false,
-                  "yellowCard": false,
-                  "penaltyKick": false,
-                  "ownGoal": false,
-                  "shootout": false,
-                  "athletesInvolved": [
-                    {
-                      "id": "215717",
-                      "displayName": "Donny van de Beek",
-                      "shortName": "D. van de Beek",
-                      "fullName": "Donny van de Beek",
-                      "jersey": "6",
-                      "team": {
-                        "id": "9812"
-                      },
-                      "links": [
-                        {
-                          "rel": [
-                            "playercard",
-                            "desktop",
-                            "athlete"
-                          ],
-                          "href": "https://www.espn.com/soccer/player/_/id/215717/donny-van-de-beek",
-                          "isHidden": false
-                        }
-                      ],
-                      "position": "AM"
-                    }
-                  ]
-                },
-                {
-                  "type": {
-                    "id": "94",
-                    "text": "Yellow Card"
-                  },
-                  "clock": {
-                    "value": 3090,
-                    "displayValue": "52'"
-                  },
-                  "team": {
-                    "id": "2737"
-                  },
-                  "scoreValue": 0,
-                  "scoringPlay": false,
-                  "redCard": false,
-                  "yellowCard": true,
-                  "penaltyKick": false,
-                  "ownGoal": false,
-                  "shootout": false,
-                  "athletesInvolved": [
-                    {
-                      "id": "356770",
-                      "displayName": "Víctor Valverde Da Silva",
-                      "shortName": "V. Valverde Da Silva",
-                      "fullName": "Víctor Valverde Da Silva",
-                      "jersey": "11",
-                      "team": {
-                        "id": "2737"
-                      },
-                      "links": [
-                        {
-                          "rel": [
-                            "playercard",
-                            "desktop",
-                            "athlete"
-                          ],
-                          "href": "https://www.espn.com/soccer/player/_/id/356770/victor-valverde-da-silva",
-                          "isHidden": false
-                        }
-                      ],
-                      "position": "LM"
-                    }
-                  ]
-                },
-                {
-                  "type": {
-                    "id": "94",
-                    "text": "Yellow Card"
-                  },
-                  "clock": {
-                    "value": 3150,
-                    "displayValue": "53'"
-                  },
-                  "team": {
-                    "id": "2737"
-                  },
-                  "scoreValue": 0,
-                  "scoringPlay": false,
-                  "redCard": false,
-                  "yellowCard": true,
-                  "penaltyKick": false,
-                  "ownGoal": false,
-                  "shootout": false,
-                  "athletesInvolved": [
-                    {
-                      "id": "331513",
-                      "displayName": "Ortu",
-                      "shortName": "Ortu",
-                      "fullName": "Ortu",
-                      "jersey": "18",
-                      "team": {
-                        "id": "2737"
-                      },
-                      "links": [
-                        {
-                          "rel": [
-                            "playercard",
-                            "desktop",
-                            "athlete"
-                          ],
-                          "href": "https://www.espn.com/soccer/player/_/id/331513/ortu",
-                          "isHidden": false
-                        }
-                      ],
-                      "position": "SUB"
-                    }
-                  ]
-                },
-                {
-                  "type": {
-                    "id": "94",
-                    "text": "Yellow Card"
-                  },
-                  "clock": {
-                    "value": 3970,
-                    "displayValue": "67'"
-                  },
-                  "team": {
-                    "id": "2737"
-                  },
-                  "scoreValue": 0,
-                  "scoringPlay": false,
-                  "redCard": false,
-                  "yellowCard": true,
-                  "penaltyKick": false,
-                  "ownGoal": false,
-                  "shootout": false,
-                  "athletesInvolved": [
-                    {
-                      "id": "276637",
-                      "displayName": "Fran Gamez",
-                      "shortName": "F. Gamez",
-                      "fullName": "Fran Gamez",
-                      "jersey": "15",
-                      "team": {
-                        "id": "2737"
-                      },
-                      "links": [
-                        {
-                          "rel": [
-                            "playercard",
-                            "desktop",
-                            "athlete"
-                          ],
-                          "href": "https://www.espn.com/soccer/player/_/id/276637/fran-gamez",
-                          "isHidden": false
-                        }
-                      ],
-                      "position": "RB"
-                    }
-                  ]
-                },
-                {
-                  "type": {
-                    "id": "94",
-                    "text": "Yellow Card"
-                  },
-                  "clock": {
-                    "value": 4787,
-                    "displayValue": "80'"
-                  },
-                  "team": {
-                    "id": "2737"
-                  },
-                  "scoreValue": 0,
-                  "scoringPlay": false,
-                  "redCard": false,
-                  "yellowCard": true,
-                  "penaltyKick": false,
-                  "ownGoal": false,
-                  "shootout": false,
-                  "athletesInvolved": [
-                    {
-                      "id": "178547",
-                      "displayName": "Higinio Marín",
-                      "shortName": "H. Marín",
-                      "fullName": "Higinio Marín",
-                      "jersey": "12",
-                      "team": {
-                        "id": "2737"
-                      },
-                      "links": [
-                        {
-                          "rel": [
-                            "playercard",
-                            "desktop",
-                            "athlete"
-                          ],
-                          "href": "https://www.espn.com/soccer/player/_/id/178547/higinio-marin",
-                          "isHidden": false
-                        }
-                      ],
-                      "position": "SUB"
-                    }
-                  ]
-                },
-                {
-                  "type": {
-                    "id": "93",
-                    "text": "Red Card"
-                  },
-                  "clock": {
-                    "value": 5400,
-                    "displayValue": "90'+1'"
-                  },
-                  "team": {
-                    "id": "2737"
-                  },
-                  "scoreValue": 0,
-                  "scoringPlay": false,
-                  "redCard": true,
-                  "yellowCard": false,
-                  "penaltyKick": false,
-                  "ownGoal": false,
-                  "shootout": false,
-                  "athletesInvolved": [
-                    {
-                      "id": "331513",
-                      "displayName": "Ortu",
-                      "shortName": "Ortu",
-                      "fullName": "Ortu",
-                      "jersey": "18",
-                      "team": {
-                        "id": "2737"
-                      },
-                      "links": [
-                        {
-                          "rel": [
-                            "playercard",
-                            "desktop",
-                            "athlete"
-                          ],
-                          "href": "https://www.espn.com/soccer/player/_/id/331513/ortu",
-                          "isHidden": false
-                        }
-                      ],
-                      "position": "SUB"
-                    }
-                  ]
-                }
-              ],
-              "odds": [
-                null
-              ],
-              "wasSuspended": false,
-              "playByPlayAvailable": true,
-              "playByPlayAthletes": true
-            }
-          ],
-          "status": {
-            "clock": 5400,
-            "displayClock": "90'+3'",
-            "period": 2,
-            "type": {
-              "id": "28",
-              "name": "STATUS_FULL_TIME",
-              "state": "post",
-              "completed": true,
-              "description": "Full Time",
-              "detail": "FT",
-              "shortDetail": "FT"
-            }
-          },
-          "venue": {
-            "displayName": "Estadi Montilivi"
-          },
-          "links": [
-            {
-              "language": "en-US",
-              "rel": [
-                "summary",
-                "desktop",
-                "event"
-              ],
-              "href": "https://www.espn.com/soccer/match/_/gameId/401883200/albacete-girona",
-              "text": "Summary",
-              "shortText": "Summary",
-              "isExternal": false,
-              "isPremium": false,
-              "isHidden": false
-            },
-            {
-              "language": "en-US",
-              "rel": [
-                "stats",
-                "desktop",
-                "event"
-              ],
-              "href": "https://www.espn.com/soccer/matchstats/_/gameId/401883200",
-              "text": "Statistics",
-              "shortText": "Statistics",
-              "isExternal": false,
-              "isPremium": false,
-              "isHidden": false
-            }
-          ],
-          "h2h": [
-            {
-              "id": "401883171",
-              "date": "2026-09-18T18:30Z",
-              "homeId": "2737",
-              "awayId": "8447",
-              "home": "Albacete",
-              "away": "Córdoba",
-              "homeGoals": 0,
-              "awayGoals": 0
-            },
-            {
-              "id": "401883211",
-              "date": "2026-09-12T16:30Z",
-              "homeId": "3747",
-              "awayId": "2737",
-              "home": "Granada",
-              "away": "Albacete",
-              "homeGoals": 0,
-              "awayGoals": 0
-            },
-            {
-              "id": "401883240",
-              "date": "2026-09-06T16:30Z",
-              "homeId": "4438",
-              "awayId": "2737",
-              "home": "Castellón",
-              "away": "Albacete",
-              "homeGoals": 0,
-              "awayGoals": 0
-            },
-            {
-              "id": "401883248",
-              "date": "2026-08-29T17:00Z",
-              "homeId": "2737",
-              "awayId": "92",
-              "home": "Albacete",
-              "away": "Real Oviedo",
-              "homeGoals": 0,
-              "awayGoals": 0
-            },
-            {
-              "id": "401883256",
-              "date": "2026-08-22T17:00Z",
-              "homeId": "2737",
-              "awayId": "20983",
-              "home": "Albacete",
-              "away": "Real Sociedad II",
-              "homeGoals": 0,
-              "awayGoals": 0
-            }
-          ],
-          "recentLeagueMatches": {
-            "home": [
-              {
-                "date": "2026-09-19T19:00Z",
-                "goalsScored": 0,
-                "goalsConceded": 0,
-                "shots": 15,
-                "shotsOnTarget": 7,
-                "corners": null,
-                "yellowCards": 3
-              },
-              {
-                "date": "2026-09-12T16:30Z",
-                "goalsScored": 0,
-                "goalsConceded": 0,
-                "shots": 8,
-                "shotsOnTarget": 5,
-                "corners": null,
-                "yellowCards": 3
-              },
-              {
-                "date": "2026-09-05T14:15Z",
-                "goalsScored": 0,
-                "goalsConceded": 0,
-                "shots": 10,
-                "shotsOnTarget": 3,
-                "corners": null,
-                "yellowCards": 3
-              },
-              {
-                "date": "2026-08-29T19:30Z",
-                "goalsScored": 0,
-                "goalsConceded": 0,
-                "shots": 17,
-                "shotsOnTarget": 8,
-                "corners": null,
-                "yellowCards": 2
-              },
-              {
-                "date": "2026-08-21T19:00Z",
-                "goalsScored": 0,
-                "goalsConceded": 0,
-                "shots": 10,
-                "shotsOnTarget": 3,
-                "corners": null,
-                "yellowCards": 5
-              }
-            ],
-            "away": [
-              {
-                "date": "2026-09-18T18:30Z",
-                "goalsScored": 0,
-                "goalsConceded": 0,
-                "shots": 13,
-                "shotsOnTarget": 3,
-                "corners": null,
-                "yellowCards": 1
-              },
-              {
-                "date": "2026-09-12T16:30Z",
-                "goalsScored": 0,
-                "goalsConceded": 0,
-                "shots": 6,
-                "shotsOnTarget": 4,
-                "corners": null,
-                "yellowCards": 1
-              },
-              {
-                "date": "2026-09-06T16:30Z",
-                "goalsScored": 0,
-                "goalsConceded": 0,
-                "shots": 6,
-                "shotsOnTarget": 3,
-                "corners": null,
-                "yellowCards": 1
-              },
-              {
-                "date": "2026-08-29T17:00Z",
-                "goalsScored": 0,
-                "goalsConceded": 0,
-                "shots": 9,
-                "shotsOnTarget": 2,
-                "corners": null,
-                "yellowCards": 3
-              },
-              {
-                "date": "2026-08-22T17:00Z",
-                "goalsScored": 0,
-                "goalsConceded": 0,
-                "shots": 17,
-                "shotsOnTarget": 7,
-                "corners": null,
-                "yellowCards": 2
-              }
-            ]
-          }
         }
       ]
     },
@@ -4023,8 +4023,8 @@
               },
               "tickets": [
                 {
-                  "summary": "Tickets as low as $30",
-                  "numberAvailable": 3710,
+                  "summary": "Tickets as low as $28",
+                  "numberAvailable": 3558,
                   "links": [
                     {
                       "href": "https://www.vividseats.com/atlanta-united-tickets-mercedes-benz-stadium-9-26-2026--sports-mls/production/6325010?wsUser=717"
@@ -4841,7 +4841,7 @@
               "tickets": [
                 {
                   "summary": "Tickets as low as $20",
-                  "numberAvailable": 434,
+                  "numberAvailable": 420,
                   "links": [
                     {
                       "href": "https://www.vividseats.com/cf-montreal-tickets-stade-saputo-9-26-2026/production/6325076?wsUser=717"
@@ -5642,8 +5642,8 @@
               },
               "tickets": [
                 {
-                  "summary": "Tickets as low as $36",
-                  "numberAvailable": 4195,
+                  "summary": "Tickets as low as $38",
+                  "numberAvailable": 3892,
                   "links": [
                     {
                       "href": "https://www.vividseats.com/charlotte-fc-tickets-bank-of-america-stadium-9-26-2026--sports-mls/production/6324864?wsUser=717"
@@ -6446,8 +6446,8 @@
               },
               "tickets": [
                 {
-                  "summary": "Tickets as low as $22",
-                  "numberAvailable": 947,
+                  "summary": "Tickets as low as $20",
+                  "numberAvailable": 939,
                   "links": [
                     {
                       "href": "https://www.vividseats.com/philadelphia-union-tickets-subaru-park-9-26-2026--sports-mls/production/6325087?wsUser=717"
@@ -7253,7 +7253,7 @@
               "tickets": [
                 {
                   "summary": "Tickets as low as $9",
-                  "numberAvailable": 1966,
+                  "numberAvailable": 1967,
                   "links": [
                     {
                       "href": "https://www.vividseats.com/new-york-red-bulls-tickets-sports-illustrated-stadium-9-26-2026--sports-mls/production/6324622?wsUser=717"
@@ -8056,8 +8056,8 @@
               },
               "tickets": [
                 {
-                  "summary": "Tickets as low as $24",
-                  "numberAvailable": 1026,
+                  "summary": "Tickets as low as $22",
+                  "numberAvailable": 1009,
                   "links": [
                     {
                       "href": "https://www.vividseats.com/austin-fc-tickets-q2-stadium-9-26-2026--sports-mls/production/6324598?wsUser=717"
@@ -8861,7 +8861,7 @@
               "tickets": [
                 {
                   "summary": "Tickets as low as $53",
-                  "numberAvailable": 180,
+                  "numberAvailable": 161,
                   "links": [
                     {
                       "href": "https://www.vividseats.com/fc-dallas-tickets-toyota-stadium---frisco-9-26-2026--sports-mls/production/6325330?wsUser=717"
@@ -9377,7 +9377,7 @@
                       },
                       "close": {
                         "line": "o2.5",
-                        "odds": "-170",
+                        "odds": "-165",
                         "link": {
                           "rel": [
                             "over",
@@ -9405,7 +9405,7 @@
                       },
                       "close": {
                         "line": "u2.5",
-                        "odds": "+135",
+                        "odds": "+130",
                         "link": {
                           "rel": [
                             "under",
@@ -9665,7 +9665,7 @@
               "tickets": [
                 {
                   "summary": "Tickets as low as $17",
-                  "numberAvailable": 999,
+                  "numberAvailable": 969,
                   "links": [
                     {
                       "href": "https://www.vividseats.com/houston-dynamo-tickets-shell-energy-stadium-9-26-2026--sports-mls/production/6325254?wsUser=717"
@@ -10469,7 +10469,7 @@
               "tickets": [
                 {
                   "summary": "Tickets as low as $18",
-                  "numberAvailable": 1627,
+                  "numberAvailable": 1918,
                   "links": [
                     {
                       "href": "https://www.vividseats.com/nashville-sc-tickets-geodis-park-9-26-2026--sports-mls/production/6325278?wsUser=717"
@@ -11272,8 +11272,8 @@
               },
               "tickets": [
                 {
-                  "summary": "Tickets as low as $21",
-                  "numberAvailable": 4730,
+                  "summary": "Tickets as low as $18",
+                  "numberAvailable": 5104,
                   "links": [
                     {
                       "href": "https://www.vividseats.com/seattle-sounders-fc-tickets-lumen-field-9-26-2026--sports-mls/production/6324908?wsUser=717"
@@ -12075,7 +12075,7 @@
               "tickets": [
                 {
                   "summary": "Tickets as low as $14",
-                  "numberAvailable": 804,
+                  "numberAvailable": 788,
                   "links": [
                     {
                       "href": "https://www.vividseats.com/real-salt-lake-tickets-america-first-field-9-26-2026--sports-mls/production/6325428?wsUser=717"
@@ -12879,7 +12879,7 @@
               "tickets": [
                 {
                   "summary": "Tickets as low as $23",
-                  "numberAvailable": 1692,
+                  "numberAvailable": 1657,
                   "links": [
                     {
                       "href": "https://www.vividseats.com/los-angeles-galaxy-tickets-dignity-health-sports-park-9-26-2026--sports-mls/production/6324936?wsUser=717"
@@ -13682,8 +13682,8 @@
               },
               "tickets": [
                 {
-                  "summary": "Tickets as low as $29",
-                  "numberAvailable": 1010,
+                  "summary": "Tickets as low as $31",
+                  "numberAvailable": 962,
                   "links": [
                     {
                       "href": "https://www.vividseats.com/san-jose-earthquakes-tickets-paypal-park-9-26-2026--sports-mls/production/6324460?wsUser=717"
@@ -14199,7 +14199,7 @@
                       },
                       "close": {
                         "line": "o3.5",
-                        "odds": "+105",
+                        "odds": "+110",
                         "link": {
                           "rel": [
                             "over",
@@ -14259,7 +14259,7 @@
                       },
                       "close": {
                         "line": "-0.5",
-                        "odds": "-105",
+                        "odds": "-110",
                         "link": {
                           "rel": [
                             "homeSpread",
@@ -14287,7 +14287,7 @@
                       },
                       "close": {
                         "line": "+0.5",
-                        "odds": "-130",
+                        "odds": "-125",
                         "link": {
                           "rel": [
                             "awaySpread",
@@ -14317,7 +14317,7 @@
                         "odds": "-110"
                       },
                       "close": {
-                        "odds": "+100",
+                        "odds": "-105",
                         "link": {
                           "rel": [
                             "home",
@@ -14342,7 +14342,7 @@
                         "odds": "+225"
                       },
                       "close": {
-                        "odds": "+220",
+                        "odds": "+230",
                         "link": {
                           "rel": [
                             "away",
@@ -14388,7 +14388,7 @@
                       }
                     }
                   },
-                  "details": "SJ +100"
+                  "details": "SJ -105"
                 }
               ],
               "wasSuspended": false,
@@ -14486,8 +14486,8 @@
               },
               "tickets": [
                 {
-                  "summary": "Tickets as low as $20",
-                  "numberAvailable": 973,
+                  "summary": "Tickets as low as $24",
+                  "numberAvailable": 1121,
                   "links": [
                     {
                       "href": "https://www.vividseats.com/vancouver-whitecaps-fc-tickets-bc-place-stadium-9-26-2026--sports-mls/production/6325396?wsUser=717"
@@ -15063,7 +15063,7 @@
                       },
                       "close": {
                         "line": "-1.5",
-                        "odds": "-155",
+                        "odds": "-150",
                         "link": {
                           "rel": [
                             "homeSpread",
@@ -15091,7 +15091,7 @@
                       },
                       "close": {
                         "line": "+1.5",
-                        "odds": "+110",
+                        "odds": "+105",
                         "link": {
                           "rel": [
                             "awaySpread",
@@ -15846,7 +15846,7 @@
                       },
                       "close": {
                         "line": "+0.5",
-                        "odds": "-145",
+                        "odds": "-150",
                         "link": {
                           "rel": [
                             "homeSpread",
@@ -15904,7 +15904,7 @@
                         "odds": "+255"
                       },
                       "close": {
-                        "odds": "+220",
+                        "odds": "+215",
                         "link": {
                           "rel": [
                             "home",
@@ -16664,7 +16664,7 @@
                         "odds": "-110"
                       },
                       "close": {
-                        "odds": "+100",
+                        "odds": "+105",
                         "link": {
                           "rel": [
                             "home",
@@ -16689,7 +16689,7 @@
                         "odds": "+290"
                       },
                       "close": {
-                        "odds": "+265",
+                        "odds": "+255",
                         "link": {
                           "rel": [
                             "away",
@@ -16735,7 +16735,7 @@
                       }
                     }
                   },
-                  "details": "TIJ +100"
+                  "details": "TIJ +105"
                 }
               ],
               "wasSuspended": false,
