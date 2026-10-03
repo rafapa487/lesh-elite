@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-03T17:30:14.063Z",
+  "updatedAt": "2026-10-03T20:06:54.488Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,39 +14,39 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 487,
+    "completedMatches": 489,
     "marketSamples": {
       "corners": 0,
-      "bookings": 487
+      "bookings": 489
     },
     "calibration": {
-      "homeGoals": 1.142923971374277,
-      "awayGoals": 1.082442552698139,
+      "homeGoals": 1.1491638607055858,
+      "awayGoals": 1.0793505191991863,
       "corners": 1,
-      "bookings": 0.9999565238830881
+      "bookings": 0.9996209769936732
     },
-    "lastTrainedAt": "2026-10-03T17:12:21.723Z"
+    "lastTrainedAt": "2026-10-03T20:06:54.485Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 487,
-      "correct": 214,
-      "accuracy": 0.4394250513347023
+      "samples": 488,
+      "correct": 215,
+      "accuracy": 0.4405737704918033
     },
     "goals": {
-      "samples": 487,
-      "correct": 283,
-      "accuracy": 0.5811088295687885
+      "samples": 488,
+      "correct": 284,
+      "accuracy": 0.5819672131147541
     },
     "btts": {
-      "samples": 487,
-      "correct": 280,
-      "accuracy": 0.5749486652977412
+      "samples": 488,
+      "correct": 281,
+      "accuracy": 0.5758196721311475
     },
     "correctScore": {
-      "samples": 487,
+      "samples": 488,
       "correct": 55,
-      "accuracy": 0.11293634496919917
+      "accuracy": 0.11270491803278689
     },
     "corners": {
       "samples": 0,
@@ -54,9 +54,9 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 1461,
-      "correct": 916,
-      "accuracy": 0.6269678302532512
+      "samples": 1464,
+      "correct": 917,
+      "accuracy": 0.6263661202185792
     }
   },
   "predictions": [
@@ -130,6 +130,78 @@
       ],
       "automatic": true,
       "savedAt": "2026-10-03T01:06:13.967Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "arg.1:401841584",
+      "provider": "espn",
+      "trackingKey": "Argentina|Primera Division|Talleres (Córdoba)|Belgrano (Córdoba)|2026-10-04",
+      "eventId": "401841584",
+      "eventDate": "2026-10-04T20:00Z",
+      "slug": "arg.1",
+      "country": "Argentina",
+      "league": "Primera Division",
+      "home": "Talleres (Córdoba)",
+      "away": "Belgrano (Córdoba)",
+      "homeId": "19",
+      "awayId": "4",
+      "homeForm": "LWLDD",
+      "awayForm": "WDDDL",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.42678321140135195,
+      "confidence": 62,
+      "goalsOver25": true,
+      "goalsProbability": 0.5908580978707106,
+      "bttsYes": true,
+      "bttsProbability": 0.620757594557049,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.11878187378015424,
+      "expectedHomeGoals": 1.6600102446863099,
+      "expectedAwayGoals": 1.403509907345963,
+      "expectedGoals": 3.0635201520322726,
+      "expectedCorners": 9.775344352203858,
+      "expectedBookings": 4.14048122269454,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.64132521247473
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5136673871762386
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6111225329783848
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5934827020114752
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6014137300294101
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7628067334764997
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-10-03T20:06:54.486Z",
       "status": "pending"
     },
     {
@@ -778,7 +850,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-10-02T02:12:17.346Z",
-      "status": "pending"
+      "status": "correct",
+      "outcomeCorrect": true,
+      "goalsCorrect": true,
+      "bttsCorrect": false,
+      "finalScore": "3-0",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-10-03T20:06:54.139Z",
+      "marketStatsAttemptedAt": "2026-10-03T20:06:54.139Z",
+      "actualCorners": null,
+      "actualBookings": 5,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.6697223103722669,
+          "correct": true
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.5184751508141447,
+          "correct": false
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.6905667284364456,
+          "correct": true
+        }
+      ],
+      "marketGradedAt": "2026-10-03T20:06:54.347Z"
     },
     {
       "sourceId": "esp.2:401883194",
@@ -996,7 +1098,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-10-03T01:06:13.966Z",
-      "status": "pending"
+      "status": "incorrect",
+      "outcomeCorrect": false,
+      "goalsCorrect": false,
+      "bttsCorrect": true,
+      "finalScore": "4-0",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-10-03T20:06:54.139Z",
+      "marketStatsAttemptedAt": "2026-10-03T20:06:54.347Z",
+      "actualCorners": null,
+      "actualBookings": 5,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.8588927542266882,
+          "correct": true
+        },
+        {
+          "line": 4.5,
+          "over": true,
+          "probability": 0.7302340404934803,
+          "correct": true
+        },
+        {
+          "line": 5.5,
+          "over": true,
+          "probability": 0.5728459601593658,
+          "correct": false
+        }
+      ],
+      "marketGradedAt": "2026-10-03T20:06:54.484Z"
     },
     {
       "sourceId": "esp.2:401883190",
@@ -71095,108 +71227,6 @@
         }
       ],
       "marketGradedAt": "2026-09-06T22:13:02.713Z"
-    },
-    {
-      "sourceId": "fra.1:401876473",
-      "provider": "espn",
-      "trackingKey": "France|Ligue 1|Lens|Lorient|2026-09-05",
-      "eventId": "401876473",
-      "eventDate": "2026-09-05T15:15Z",
-      "slug": "fra.1",
-      "country": "France",
-      "league": "Ligue 1",
-      "home": "Lens",
-      "away": "Lorient",
-      "homeId": "175",
-      "awayId": "273",
-      "homeForm": "LWWWW",
-      "awayForm": "LDLWD",
-      "h2h": [],
-      "recentLeagueMatches": null,
-      "matchState": "pre",
-      "homeScore": 0,
-      "awayScore": 0,
-      "pick": "H",
-      "pickProbability": 0.46294536818063853,
-      "confidence": 65,
-      "goalsOver25": true,
-      "goalsProbability": 0.5750477148065966,
-      "bttsYes": true,
-      "bttsProbability": 0.6022436053483836,
-      "correctScore": "1-1",
-      "correctScoreProbability": 0.12006831082637083,
-      "expectedHomeGoals": 1.7059385111554681,
-      "expectedAwayGoals": 1.2863613453691418,
-      "expectedGoals": 2.99229985652461,
-      "expectedCorners": 9.989167120669658,
-      "expectedBookings": 4.4639695859303306,
-      "cornerPredictions": [
-        {
-          "line": 8.5,
-          "over": true,
-          "probability": 0.6659592291152023
-        },
-        {
-          "line": 9.5,
-          "over": true,
-          "probability": 0.5407142516408346
-        },
-        {
-          "line": 10.5,
-          "over": false,
-          "probability": 0.5843950494607619
-        }
-      ],
-      "bookingPredictions": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.6515886150681878
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.5389558367409099
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7090727642696257
-        }
-      ],
-      "automatic": true,
-      "savedAt": "2026-09-04T04:21:57.294Z",
-      "status": "incorrect",
-      "outcomeCorrect": false,
-      "goalsCorrect": false,
-      "bttsCorrect": false,
-      "finalScore": "0-1",
-      "correctScoreCorrect": false,
-      "gradedAt": "2026-09-05T17:34:06.590Z",
-      "marketStatsAttemptedAt": "2026-09-06T22:13:02.713Z",
-      "actualCorners": null,
-      "actualBookings": 4,
-      "bookingResults": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.6515886150681878,
-          "correct": true
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.5389558367409099,
-          "correct": true
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7090727642696257,
-          "correct": true
-        }
-      ],
-      "marketGradedAt": "2026-09-06T22:13:02.868Z"
     }
   ]
 }
