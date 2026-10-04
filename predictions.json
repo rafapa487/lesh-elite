@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T13:08:54.598Z",
+  "updatedAt": "2026-10-04T14:15:38.761Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -21,32 +21,32 @@
     },
     "calibration": {
       "homeGoals": 1.15,
-      "awayGoals": 1.0880932949970097,
+      "awayGoals": 1.0914508961747522,
       "corners": 1,
-      "bookings": 0.9976478407574891
+      "bookings": 0.9995498981233077
     },
     "lastTrainedAt": "2026-10-04T00:31:51.515Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 485,
+      "samples": 486,
       "correct": 213,
-      "accuracy": 0.43917525773195876
+      "accuracy": 0.4382716049382716
     },
     "goals": {
-      "samples": 485,
-      "correct": 281,
-      "accuracy": 0.5793814432989691
+      "samples": 486,
+      "correct": 282,
+      "accuracy": 0.5802469135802469
     },
     "btts": {
-      "samples": 485,
-      "correct": 278,
-      "accuracy": 0.5731958762886598
+      "samples": 486,
+      "correct": 279,
+      "accuracy": 0.5740740740740741
     },
     "correctScore": {
-      "samples": 485,
+      "samples": 486,
       "correct": 52,
-      "accuracy": 0.10721649484536082
+      "accuracy": 0.10699588477366255
     },
     "corners": {
       "samples": 0,
@@ -54,9 +54,9 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 1455,
-      "correct": 911,
-      "accuracy": 0.6261168384879725
+      "samples": 1458,
+      "correct": 913,
+      "accuracy": 0.6262002743484225
     }
   },
   "predictions": [
@@ -1286,7 +1286,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-10-03T01:06:13.966Z",
-      "status": "pending"
+      "status": "incorrect",
+      "outcomeCorrect": false,
+      "goalsCorrect": true,
+      "bttsCorrect": true,
+      "finalScore": "2-3",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-10-04T14:15:38.607Z",
+      "marketStatsAttemptedAt": "2026-10-04T14:15:38.607Z",
+      "actualCorners": null,
+      "actualBookings": 5,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.6655212421545694,
+          "correct": true
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.523263718288035,
+          "correct": false
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.6949333202818548,
+          "correct": true
+        }
+      ],
+      "marketGradedAt": "2026-10-04T14:15:38.751Z"
     },
     {
       "sourceId": "bra.1:401841168",
