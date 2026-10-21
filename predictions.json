@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-21T01:39:05.984Z",
+  "updatedAt": "2026-10-21T04:33:42.761Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,39 +14,39 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 488,
+    "completedMatches": 489,
     "marketSamples": {
       "corners": 0,
-      "bookings": 487
+      "bookings": 488
     },
     "calibration": {
-      "homeGoals": 1.0866182534491526,
-      "awayGoals": 1.0729508376860557,
+      "homeGoals": 1.0854547353757698,
+      "awayGoals": 1.0706859190677098,
       "corners": 1,
-      "bookings": 0.964132371728076
+      "bookings": 0.9626046972198432
     },
-    "lastTrainedAt": "2026-10-20T23:12:51.640Z"
+    "lastTrainedAt": "2026-10-21T04:33:42.755Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 488,
-      "correct": 222,
-      "accuracy": 0.45491803278688525
+      "samples": 484,
+      "correct": 220,
+      "accuracy": 0.45454545454545453
     },
     "goals": {
-      "samples": 488,
-      "correct": 283,
-      "accuracy": 0.5799180327868853
+      "samples": 484,
+      "correct": 281,
+      "accuracy": 0.5805785123966942
     },
     "btts": {
-      "samples": 488,
-      "correct": 282,
-      "accuracy": 0.5778688524590164
+      "samples": 484,
+      "correct": 280,
+      "accuracy": 0.5785123966942148
     },
     "correctScore": {
-      "samples": 488,
+      "samples": 484,
       "correct": 49,
-      "accuracy": 0.10040983606557377
+      "accuracy": 0.1012396694214876
     },
     "corners": {
       "samples": 0,
@@ -54,12 +54,156 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 1461,
-      "correct": 929,
-      "accuracy": 0.6358658453114305
+      "samples": 1449,
+      "correct": 918,
+      "accuracy": 0.6335403726708074
     }
   },
   "predictions": [
+    {
+      "sourceId": "ksa.1:401900892",
+      "provider": "espn",
+      "trackingKey": "Saudi Arabia|Saudi Pro League|Al Ahli|Al Khaleej|2026-10-22",
+      "eventId": "401900892",
+      "eventDate": "2026-10-22T18:00Z",
+      "slug": "ksa.1",
+      "country": "Saudi Arabia",
+      "league": "Saudi Pro League",
+      "home": "Al Ahli",
+      "away": "Al Khaleej",
+      "homeId": "8346",
+      "awayId": "21829",
+      "homeForm": "DWWLD",
+      "awayForm": "DWDDD",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.5577914848738884,
+      "confidence": 74,
+      "goalsOver25": true,
+      "goalsProbability": 0.6565307722125076,
+      "bttsYes": true,
+      "bttsProbability": 0.6405589053369364,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.0994446531698705,
+      "expectedHomeGoals": 2.109440087125136,
+      "expectedAwayGoals": 1.2719319445741064,
+      "expectedGoals": 3.3813720316992426,
+      "expectedCorners": 10.282856241223579,
+      "expectedBookings": 3.997593948112891,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6981134475240715
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.576921679481387
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.5476980733588769
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5660596756221795
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6293069977599145
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7855063239949559
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-10-21T04:33:42.759Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "ksa.1:401900891",
+      "provider": "espn",
+      "trackingKey": "Saudi Arabia|Saudi Pro League|Al Hazem|Al Fayha|2026-10-22",
+      "eventId": "401900891",
+      "eventDate": "2026-10-22T13:40Z",
+      "slug": "ksa.1",
+      "country": "Saudi Arabia",
+      "league": "Saudi Pro League",
+      "home": "Al Hazem",
+      "away": "Al Fayha",
+      "homeId": "21964",
+      "awayId": "21827",
+      "homeForm": "DLDLW",
+      "awayForm": "DLDDL",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.4275916535001158,
+      "confidence": 62,
+      "goalsOver25": true,
+      "goalsProbability": 0.5622829149330207,
+      "bttsYes": true,
+      "bttsProbability": 0.5984219047563208,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.12375811376685862,
+      "expectedHomeGoals": 1.6028584949654292,
+      "expectedAwayGoals": 1.333091142615257,
+      "expectedGoals": 2.935949637580686,
+      "expectedCorners": 9.816641210459261,
+      "expectedBookings": 4.590328927413597,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6461606635762837
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5189304891866459
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6059668081260778
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.6727140266291516
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.5150487339664983
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.6874273002571475
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-10-21T04:33:42.759Z",
+      "status": "pending"
+    },
     {
       "sourceId": "mex.1:401876929",
       "provider": "espn",
@@ -493,6 +637,660 @@
       "status": "pending"
     },
     {
+      "sourceId": "jpn.1:401877592",
+      "provider": "espn",
+      "trackingKey": "Japan|J1 League|Shimizu S-Pulse|Machida Zelvia|2026-10-21",
+      "eventId": "401877592",
+      "eventDate": "2026-10-21T10:00Z",
+      "slug": "jpn.1",
+      "country": "Japan",
+      "league": "J1 League",
+      "home": "Shimizu S-Pulse",
+      "away": "Machida Zelvia",
+      "homeId": "7104",
+      "awayId": "22167",
+      "homeForm": "DWWWL",
+      "awayForm": "DWWLW",
+      "h2h": [
+        {
+          "id": "401877601",
+          "date": "2026-10-18T07:00Z",
+          "homeId": "22167",
+          "awayId": "7107",
+          "home": "Machida Zelvia",
+          "away": "Avispa Fukuoka",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401877607",
+          "date": "2026-10-10T10:00Z",
+          "homeId": "21361",
+          "awayId": "22167",
+          "home": "Kyoto Sanga",
+          "away": "Machida Zelvia",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401877614",
+          "date": "2026-09-20T08:00Z",
+          "homeId": "22167",
+          "awayId": "7476",
+          "home": "Machida Zelvia",
+          "away": "Kashiwa Reysol",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401877640",
+          "date": "2026-09-12T10:00Z",
+          "homeId": "22167",
+          "awayId": "7116",
+          "home": "Machida Zelvia",
+          "away": "Yokohama F. Marinos",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401877629",
+          "date": "2026-09-06T09:00Z",
+          "homeId": "7108",
+          "awayId": "22167",
+          "home": "Nagoya Grampus",
+          "away": "Machida Zelvia",
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "recentLeagueMatches": {
+        "home": [
+          {
+            "date": "2026-10-17T04:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 12,
+            "shotsOnTarget": 5,
+            "corners": null,
+            "yellowCards": 1
+          },
+          {
+            "date": "2026-10-11T06:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 9,
+            "shotsOnTarget": 4,
+            "corners": null,
+            "yellowCards": 1
+          },
+          {
+            "date": "2026-09-19T09:30Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 12,
+            "shotsOnTarget": 4,
+            "corners": null,
+            "yellowCards": 2
+          },
+          {
+            "date": "2026-09-12T09:30Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 13,
+            "shotsOnTarget": 3,
+            "corners": null,
+            "yellowCards": 1
+          },
+          {
+            "date": "2026-09-06T10:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 13,
+            "shotsOnTarget": 4,
+            "corners": null,
+            "yellowCards": 3
+          }
+        ],
+        "away": [
+          {
+            "date": "2026-10-18T07:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 8,
+            "shotsOnTarget": 7,
+            "corners": null,
+            "yellowCards": 2
+          },
+          {
+            "date": "2026-10-10T10:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 13,
+            "shotsOnTarget": 5,
+            "corners": null,
+            "yellowCards": 1
+          },
+          {
+            "date": "2026-09-20T08:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 7,
+            "shotsOnTarget": 2,
+            "corners": null,
+            "yellowCards": 0
+          },
+          {
+            "date": "2026-09-12T10:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 10,
+            "shotsOnTarget": 5,
+            "corners": null,
+            "yellowCards": 2
+          },
+          {
+            "date": "2026-09-06T09:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 12,
+            "shotsOnTarget": 5,
+            "corners": null,
+            "yellowCards": 1
+          }
+        ]
+      },
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "D",
+      "pickProbability": 0.4502209356091634,
+      "confidence": 62,
+      "goalsOver25": false,
+      "goalsProbability": 0.10853690356264169,
+      "bttsYes": false,
+      "bttsProbability": 0.198514087072431,
+      "correctScore": "0-0",
+      "correctScoreProbability": 0.32812999262670955,
+      "expectedHomeGoals": 0.605782454771754,
+      "expectedAwayGoals": 0.5379081041068637,
+      "expectedGoals": 1.1436905588786177,
+      "expectedCorners": 2.7091120166690597,
+      "expectedBookings": 3.1150546098359917,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": false,
+          "probability": 0.998043092011061
+        },
+        {
+          "line": 9.5,
+          "over": false,
+          "probability": 0.999485629908149
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.9998764295832993
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": false,
+          "probability": 0.6214734355905571
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.7955740841764325
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.9040406897670059
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-10-21T04:33:42.760Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "jpn.1:401877591",
+      "provider": "espn",
+      "trackingKey": "Japan|J1 League|Kyoto Sanga|Kashima Antlers|2026-10-21",
+      "eventId": "401877591",
+      "eventDate": "2026-10-21T10:00Z",
+      "slug": "jpn.1",
+      "country": "Japan",
+      "league": "J1 League",
+      "home": "Kyoto Sanga",
+      "away": "Kashima Antlers",
+      "homeId": "21361",
+      "awayId": "7115",
+      "homeForm": "DWLWL",
+      "awayForm": "DWWDW",
+      "h2h": [
+        {
+          "id": "401877604",
+          "date": "2026-10-17T06:00Z",
+          "homeId": "7115",
+          "awayId": "19001",
+          "home": "Kashima Antlers",
+          "away": "V-Varen Nagasaki",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401877610",
+          "date": "2026-10-09T10:00Z",
+          "homeId": "7115",
+          "awayId": "7102",
+          "home": "Kashima Antlers",
+          "away": "Gamba Osaka",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401877622",
+          "date": "2026-09-19T09:00Z",
+          "homeId": "7112",
+          "awayId": "7115",
+          "home": "Kawasaki Frontale",
+          "away": "Kashima Antlers",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401877638",
+          "date": "2026-09-11T10:00Z",
+          "homeId": "7477",
+          "awayId": "7115",
+          "home": "Vissel Kobe",
+          "away": "Kashima Antlers",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401877646",
+          "date": "2026-09-06T09:00Z",
+          "homeId": "7115",
+          "awayId": "3385",
+          "home": "Kashima Antlers",
+          "away": "Urawa Red Diamonds",
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "recentLeagueMatches": {
+        "home": [
+          {
+            "date": "2026-10-17T05:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 7,
+            "shotsOnTarget": 2,
+            "corners": null,
+            "yellowCards": 1
+          },
+          {
+            "date": "2026-10-10T10:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 17,
+            "shotsOnTarget": 4,
+            "corners": null,
+            "yellowCards": 1
+          },
+          {
+            "date": "2026-09-19T10:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 13,
+            "shotsOnTarget": 3,
+            "corners": null,
+            "yellowCards": 2
+          },
+          {
+            "date": "2026-09-11T10:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 15,
+            "shotsOnTarget": 5,
+            "corners": null,
+            "yellowCards": 3
+          },
+          {
+            "date": "2026-09-06T10:30Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 9,
+            "shotsOnTarget": 3,
+            "corners": null,
+            "yellowCards": 3
+          }
+        ],
+        "away": [
+          {
+            "date": "2026-10-17T06:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 5,
+            "shotsOnTarget": 3,
+            "corners": null,
+            "yellowCards": 0
+          },
+          {
+            "date": "2026-10-09T10:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 14,
+            "shotsOnTarget": 3,
+            "corners": null,
+            "yellowCards": 2
+          },
+          {
+            "date": "2026-09-19T09:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 14,
+            "shotsOnTarget": 7,
+            "corners": null,
+            "yellowCards": 1
+          },
+          {
+            "date": "2026-09-11T10:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 12,
+            "shotsOnTarget": 2,
+            "corners": null,
+            "yellowCards": 3
+          },
+          {
+            "date": "2026-09-06T09:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 17,
+            "shotsOnTarget": 3,
+            "corners": null,
+            "yellowCards": 1
+          }
+        ]
+      },
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "D",
+      "pickProbability": 0.4688555608354493,
+      "confidence": 64,
+      "goalsOver25": false,
+      "goalsProbability": 0.09126151747440593,
+      "bttsYes": false,
+      "bttsProbability": 0.17747398674442746,
+      "correctScore": "0-0",
+      "correctScoreProbability": 0.35595743572176763,
+      "expectedHomeGoals": 0.5390805789155989,
+      "expectedAwayGoals": 0.5188592192307256,
+      "expectedGoals": 1.0579397981463246,
+      "expectedCorners": 2.698581456058137,
+      "expectedBookings": 3.092662745839799,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": false,
+          "probability": 0.9980930410710176
+        },
+        {
+          "line": 9.5,
+          "over": false,
+          "probability": 0.9995006360755783
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.999880487053273
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": false,
+          "probability": 0.626481308549552
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.7994600149115103
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.9064529751093484
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-10-21T04:33:42.760Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "jpn.1:401877589",
+      "provider": "espn",
+      "trackingKey": "Japan|J1 League|Avispa Fukuoka|Gamba Osaka|2026-10-21",
+      "eventId": "401877589",
+      "eventDate": "2026-10-21T10:00Z",
+      "slug": "jpn.1",
+      "country": "Japan",
+      "league": "J1 League",
+      "home": "Avispa Fukuoka",
+      "away": "Gamba Osaka",
+      "homeId": "7107",
+      "awayId": "7102",
+      "homeForm": "DWLLD",
+      "awayForm": "DWLLW",
+      "h2h": [
+        {
+          "id": "401877600",
+          "date": "2026-10-17T04:00Z",
+          "homeId": "7104",
+          "awayId": "7102",
+          "home": "Shimizu S-Pulse",
+          "away": "Gamba Osaka",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401877610",
+          "date": "2026-10-09T10:00Z",
+          "homeId": "7115",
+          "awayId": "7102",
+          "home": "Kashima Antlers",
+          "away": "Gamba Osaka",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401877612",
+          "date": "2026-09-20T08:00Z",
+          "homeId": "7102",
+          "awayId": "7477",
+          "home": "Gamba Osaka",
+          "away": "Vissel Kobe",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401877624",
+          "date": "2026-09-12T10:00Z",
+          "homeId": "7102",
+          "awayId": "3384",
+          "home": "Gamba Osaka",
+          "away": "FC Tokyo",
+          "homeGoals": 0,
+          "awayGoals": 0
+        },
+        {
+          "id": "401877631",
+          "date": "2026-09-06T09:00Z",
+          "homeId": "7111",
+          "awayId": "7102",
+          "home": "JEF United Ichihara-Chiba",
+          "away": "Gamba Osaka",
+          "homeGoals": 0,
+          "awayGoals": 0
+        }
+      ],
+      "recentLeagueMatches": {
+        "home": [
+          {
+            "date": "2026-10-18T07:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 9,
+            "shotsOnTarget": 1,
+            "corners": null,
+            "yellowCards": 0
+          },
+          {
+            "date": "2026-10-10T06:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 11,
+            "shotsOnTarget": 6,
+            "corners": null,
+            "yellowCards": 4
+          },
+          {
+            "date": "2026-09-19T09:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 3,
+            "shotsOnTarget": 0,
+            "corners": null,
+            "yellowCards": 1
+          },
+          {
+            "date": "2026-09-12T09:30Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 6,
+            "shotsOnTarget": 1,
+            "corners": null,
+            "yellowCards": 1
+          },
+          {
+            "date": "2026-09-05T10:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 16,
+            "shotsOnTarget": 5,
+            "corners": null,
+            "yellowCards": 2
+          }
+        ],
+        "away": [
+          {
+            "date": "2026-10-17T04:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 12,
+            "shotsOnTarget": 4,
+            "corners": null,
+            "yellowCards": 2
+          },
+          {
+            "date": "2026-10-09T10:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 12,
+            "shotsOnTarget": 5,
+            "corners": null,
+            "yellowCards": 1
+          },
+          {
+            "date": "2026-09-20T08:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 16,
+            "shotsOnTarget": 5,
+            "corners": null,
+            "yellowCards": 3
+          },
+          {
+            "date": "2026-09-12T10:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 11,
+            "shotsOnTarget": 2,
+            "corners": null,
+            "yellowCards": 0
+          },
+          {
+            "date": "2026-09-06T09:00Z",
+            "goalsScored": 0,
+            "goalsConceded": 0,
+            "shots": 19,
+            "shotsOnTarget": 1,
+            "corners": null,
+            "yellowCards": 0
+          }
+        ]
+      },
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "D",
+      "pickProbability": 0.47000547154963696,
+      "confidence": 64,
+      "goalsOver25": false,
+      "goalsProbability": 0.09038965887070372,
+      "bttsYes": false,
+      "bttsProbability": 0.1764344641420082,
+      "correctScore": "0-0",
+      "correctScoreProbability": 0.3575460762641304,
+      "expectedHomeGoals": 0.5189169576178808,
+      "expectedAwayGoals": 0.5345262477434529,
+      "expectedGoals": 1.0534432053613338,
+      "expectedCorners": 2.699999197346005,
+      "expectedBookings": 3.2578010287781622,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": false,
+          "probability": 0.9980863762812167
+        },
+        {
+          "line": 9.5,
+          "over": false,
+          "probability": 0.9994986371639304
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.9998799474889074
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": false,
+          "probability": 0.5896775802171408
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.7702460729244651
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.8878973171858338
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-10-21T04:33:42.759Z",
+      "status": "pending"
+    },
+    {
       "sourceId": "jpn.1:401877593",
       "provider": "espn",
       "trackingKey": "Japan|J1 League|Yokohama F. Marinos|Tokyo Verdy 1969|2026-10-21",
@@ -922,7 +1720,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-10-19T01:08:11.729Z",
-      "status": "pending"
+      "status": "correct",
+      "outcomeCorrect": true,
+      "goalsCorrect": false,
+      "bttsCorrect": false,
+      "finalScore": "1-0",
+      "correctScoreCorrect": false,
+      "gradedAt": "2026-10-21T04:33:42.637Z",
+      "marketStatsAttemptedAt": "2026-10-21T04:33:42.637Z",
+      "actualCorners": null,
+      "actualBookings": 1,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.6465626842090678,
+          "correct": false
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.5445463033638118,
+          "correct": true
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7140475131626267,
+          "correct": true
+        }
+      ],
+      "marketGradedAt": "2026-10-21T04:33:42.752Z"
     },
     {
       "sourceId": "eng.2:401880277",
@@ -64208,662 +65036,6 @@
         }
       ],
       "marketGradedAt": "2026-09-20T18:43:15.417Z"
-    },
-    {
-      "sourceId": "usa.1:761824",
-      "provider": "espn",
-      "trackingKey": "United States|MLS|St. Louis CITY SC|Toronto FC|2026-09-20",
-      "eventId": "761824",
-      "eventDate": "2026-09-20T00:30Z",
-      "slug": "usa.1",
-      "country": "United States",
-      "league": "MLS",
-      "home": "St. Louis CITY SC",
-      "away": "Toronto FC",
-      "homeId": "21812",
-      "awayId": "7318",
-      "homeForm": "WWDWD",
-      "awayForm": "LWDDW",
-      "h2h": [],
-      "recentLeagueMatches": null,
-      "matchState": "pre",
-      "homeScore": 0,
-      "awayScore": 0,
-      "pick": "H",
-      "pickProbability": 0.5392471701702661,
-      "confidence": 72,
-      "goalsOver25": true,
-      "goalsProbability": 0.5481371769008244,
-      "bttsYes": true,
-      "bttsProbability": 0.5575690803052836,
-      "correctScore": "1-1",
-      "correctScoreProbability": 0.11868723269074356,
-      "expectedHomeGoals": 1.8123329757623838,
-      "expectedAwayGoals": 1.062495621184885,
-      "expectedGoals": 2.874828596947269,
-      "expectedCorners": 10.184468365530444,
-      "expectedBookings": 4.291429371288828,
-      "cornerPredictions": [
-        {
-          "line": 8.5,
-          "over": true,
-          "probability": 0.6875637110801084
-        },
-        {
-          "line": 9.5,
-          "over": true,
-          "probability": 0.5649260591766017
-        },
-        {
-          "line": 10.5,
-          "over": false,
-          "probability": 0.5599738694468182
-        }
-      ],
-      "bookingPredictions": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.6213030846643953
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.5720951653115526
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7380861513720809
-        }
-      ],
-      "automatic": true,
-      "savedAt": "2026-09-18T04:34:14.223Z",
-      "status": "correct",
-      "outcomeCorrect": true,
-      "goalsCorrect": true,
-      "bttsCorrect": true,
-      "finalScore": "3-1",
-      "correctScoreCorrect": false,
-      "gradedAt": "2026-09-20T06:07:10.123Z",
-      "marketStatsAttemptedAt": "2026-09-20T18:43:15.417Z",
-      "actualCorners": null,
-      "actualBookings": 4,
-      "bookingResults": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.6213030846643953,
-          "correct": true
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.5720951653115526,
-          "correct": true
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7380861513720809,
-          "correct": true
-        }
-      ],
-      "marketGradedAt": "2026-09-20T18:43:15.460Z"
-    },
-    {
-      "sourceId": "usa.1:761822",
-      "provider": "espn",
-      "trackingKey": "United States|MLS|FC Dallas|Austin FC|2026-09-20",
-      "eventId": "761822",
-      "eventDate": "2026-09-20T00:30Z",
-      "slug": "usa.1",
-      "country": "United States",
-      "league": "MLS",
-      "home": "FC Dallas",
-      "away": "Austin FC",
-      "homeId": "185",
-      "awayId": "20906",
-      "homeForm": "WWWDL",
-      "awayForm": "WDDWL",
-      "h2h": [],
-      "recentLeagueMatches": null,
-      "matchState": "pre",
-      "homeScore": 0,
-      "awayScore": 0,
-      "pick": "H",
-      "pickProbability": 0.4283263287790207,
-      "confidence": 62,
-      "goalsOver25": true,
-      "goalsProbability": 0.5859848582129263,
-      "bttsYes": true,
-      "bttsProbability": 0.6167778643628596,
-      "correctScore": "1-1",
-      "correctScoreProbability": 0.11962171573298015,
-      "expectedHomeGoals": 1.6531952099965515,
-      "expectedAwayGoals": 1.3881788264604513,
-      "expectedGoals": 3.041374036457003,
-      "expectedCorners": 9.814028177611522,
-      "expectedBookings": 4.41744125604383,
-      "cornerPredictions": [
-        {
-          "line": 8.5,
-          "over": true,
-          "probability": 0.6458557901651764
-        },
-        {
-          "line": 9.5,
-          "over": true,
-          "probability": 0.5185979964602851
-        },
-        {
-          "line": 10.5,
-          "over": false,
-          "probability": 0.6062931608637625
-        }
-      ],
-      "bookingPredictions": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.6435838901641263
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.5478423759340222
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7169652330044993
-        }
-      ],
-      "automatic": true,
-      "savedAt": "2026-09-18T04:34:14.223Z",
-      "status": "incorrect",
-      "outcomeCorrect": false,
-      "goalsCorrect": false,
-      "bttsCorrect": false,
-      "finalScore": "0-0",
-      "correctScoreCorrect": false,
-      "gradedAt": "2026-09-20T06:07:10.123Z",
-      "marketStatsAttemptedAt": "2026-09-20T18:43:15.460Z",
-      "actualCorners": null,
-      "actualBookings": 4,
-      "bookingResults": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.6435838901641263,
-          "correct": true
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.5478423759340222,
-          "correct": true
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7169652330044993,
-          "correct": true
-        }
-      ],
-      "marketGradedAt": "2026-09-20T18:43:15.512Z"
-    },
-    {
-      "sourceId": "arg.1:401841575",
-      "provider": "espn",
-      "trackingKey": "Argentina|Primera Division|Instituto (Córdoba)|Talleres (Córdoba)|2026-09-20",
-      "eventId": "401841575",
-      "eventDate": "2026-09-20T00:15Z",
-      "slug": "arg.1",
-      "country": "Argentina",
-      "league": "Primera Division",
-      "home": "Instituto (Córdoba)",
-      "away": "Talleres (Córdoba)",
-      "homeId": "2975",
-      "awayId": "19",
-      "homeForm": "WLWLD",
-      "awayForm": "WLDDL",
-      "h2h": [],
-      "recentLeagueMatches": null,
-      "matchState": "pre",
-      "homeScore": 0,
-      "awayScore": 0,
-      "pick": "H",
-      "pickProbability": 0.4286985728919262,
-      "confidence": 62,
-      "goalsOver25": true,
-      "goalsProbability": 0.5882338912598009,
-      "bttsYes": true,
-      "bttsProbability": 0.6184754732315114,
-      "correctScore": "1-1",
-      "correctScoreProbability": 0.1192035367197267,
-      "expectedHomeGoals": 1.6587398117501972,
-      "expectedAwayGoals": 1.392834597726316,
-      "expectedGoals": 3.051574409476513,
-      "expectedCorners": 9.8145170343798,
-      "expectedBookings": 4.2059522979614075,
-      "cornerPredictions": [
-        {
-          "line": 8.5,
-          "over": true,
-          "probability": 0.645912838320776
-        },
-        {
-          "line": 9.5,
-          "over": true,
-          "probability": 0.5186602060325645
-        },
-        {
-          "line": 10.5,
-          "over": false,
-          "probability": 0.6062321066936677
-        }
-      ],
-      "bookingPredictions": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.6056978521558879
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.588669919347068
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7521702343875671
-        }
-      ],
-      "automatic": true,
-      "savedAt": "2026-09-18T04:34:14.223Z",
-      "status": "correct",
-      "outcomeCorrect": true,
-      "goalsCorrect": true,
-      "bttsCorrect": true,
-      "finalScore": "3-1",
-      "correctScoreCorrect": false,
-      "gradedAt": "2026-09-20T06:07:10.123Z",
-      "marketStatsAttemptedAt": "2026-09-20T18:43:15.512Z",
-      "actualCorners": null,
-      "actualBookings": 8,
-      "bookingResults": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.6056978521558879,
-          "correct": true
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.588669919347068,
-          "correct": false
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7521702343875671,
-          "correct": false
-        }
-      ],
-      "marketGradedAt": "2026-09-20T18:43:15.538Z"
-    },
-    {
-      "sourceId": "bra.1:401841243",
-      "provider": "espn",
-      "trackingKey": "Brazil|Serie A|São Paulo|Internacional|2026-09-20",
-      "eventId": "401841243",
-      "eventDate": "2026-09-20T00:00Z",
-      "slug": "bra.1",
-      "country": "Brazil",
-      "league": "Serie A",
-      "home": "São Paulo",
-      "away": "Internacional",
-      "homeId": "2026",
-      "awayId": "1936",
-      "homeForm": "DLLWW",
-      "awayForm": "WLLLD",
-      "h2h": [],
-      "recentLeagueMatches": null,
-      "matchState": "pre",
-      "homeScore": 0,
-      "awayScore": 0,
-      "pick": "H",
-      "pickProbability": 0.4250454165728039,
-      "confidence": 62,
-      "goalsOver25": true,
-      "goalsProbability": 0.5792054080693707,
-      "bttsYes": true,
-      "bttsProbability": 0.6119192468942323,
-      "correctScore": "1-1",
-      "correctScoreProbability": 0.12091358024885253,
-      "expectedHomeGoals": 1.6317966234109464,
-      "expectedAwayGoals": 1.3790412529842373,
-      "expectedGoals": 3.0108378763951835,
-      "expectedCorners": 9.805594588350075,
-      "expectedBookings": 4.408877236115496,
-      "cornerPredictions": [
-        {
-          "line": 8.5,
-          "over": true,
-          "probability": 0.6448708039241353
-        },
-        {
-          "line": 9.5,
-          "over": true,
-          "probability": 0.5175243822200221
-        },
-        {
-          "line": 10.5,
-          "over": false,
-          "probability": 0.607346356130738
-        }
-      ],
-      "bookingPredictions": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.6420973917881192
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.5494824137198016
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7184127824004628
-        }
-      ],
-      "automatic": true,
-      "savedAt": "2026-09-18T04:34:14.222Z",
-      "status": "correct",
-      "outcomeCorrect": true,
-      "goalsCorrect": false,
-      "bttsCorrect": false,
-      "finalScore": "1-0",
-      "correctScoreCorrect": false,
-      "gradedAt": "2026-09-20T06:07:10.123Z",
-      "marketStatsAttemptedAt": "2026-09-20T18:43:15.538Z",
-      "actualCorners": null,
-      "actualBookings": 4,
-      "bookingResults": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.6420973917881192,
-          "correct": true
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.5494824137198016,
-          "correct": true
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7184127824004628,
-          "correct": true
-        }
-      ],
-      "marketGradedAt": "2026-09-20T18:43:15.635Z"
-    },
-    {
-      "sourceId": "usa.1:761819",
-      "provider": "espn",
-      "trackingKey": "United States|MLS|D.C. United|Charlotte FC|2026-09-19",
-      "eventId": "761819",
-      "eventDate": "2026-09-19T23:30Z",
-      "slug": "usa.1",
-      "country": "United States",
-      "league": "MLS",
-      "home": "D.C. United",
-      "away": "Charlotte FC",
-      "homeId": "193",
-      "awayId": "21300",
-      "homeForm": "DWDLL",
-      "awayForm": "DWDWW",
-      "h2h": [
-        {
-          "id": "761802",
-          "date": "2026-09-12T23:30Z",
-          "homeId": "18267",
-          "awayId": "21300",
-          "home": "FC Cincinnati",
-          "away": "Charlotte FC",
-          "homeGoals": 0,
-          "awayGoals": 0
-        },
-        {
-          "id": "761785",
-          "date": "2026-09-09T23:30Z",
-          "homeId": "9720",
-          "awayId": "21300",
-          "home": "CF Montréal",
-          "away": "Charlotte FC",
-          "homeGoals": 0,
-          "awayGoals": 0
-        },
-        {
-          "id": "761774",
-          "date": "2026-09-05T23:30Z",
-          "homeId": "21300",
-          "awayId": "6077",
-          "home": "Charlotte FC",
-          "away": "Houston Dynamo FC",
-          "homeGoals": 0,
-          "awayGoals": 0
-        },
-        {
-          "id": "761759",
-          "date": "2026-08-29T23:30Z",
-          "homeId": "18418",
-          "awayId": "21300",
-          "home": "Atlanta United FC",
-          "away": "Charlotte FC",
-          "homeGoals": 0,
-          "awayGoals": 0
-        },
-        {
-          "id": "761741",
-          "date": "2026-08-22T23:30Z",
-          "homeId": "21300",
-          "awayId": "193",
-          "home": "Charlotte FC",
-          "away": "D.C. United",
-          "homeGoals": 0,
-          "awayGoals": 0
-        }
-      ],
-      "recentLeagueMatches": {
-        "home": [
-          {
-            "date": "2026-09-12T23:30Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 4,
-            "shotsOnTarget": 0,
-            "corners": null,
-            "yellowCards": 3
-          },
-          {
-            "date": "2026-09-09T23:30Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 10,
-            "shotsOnTarget": 5,
-            "corners": null,
-            "yellowCards": 3
-          },
-          {
-            "date": "2026-08-29T23:30Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 14,
-            "shotsOnTarget": 4,
-            "corners": null,
-            "yellowCards": 0
-          },
-          {
-            "date": "2026-08-22T23:30Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 17,
-            "shotsOnTarget": 5,
-            "corners": null,
-            "yellowCards": 3
-          },
-          {
-            "date": "2026-08-19T23:30Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 15,
-            "shotsOnTarget": 3,
-            "corners": null,
-            "yellowCards": 1
-          }
-        ],
-        "away": [
-          {
-            "date": "2026-09-12T23:30Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 8,
-            "shotsOnTarget": 4,
-            "corners": null,
-            "yellowCards": 1
-          },
-          {
-            "date": "2026-09-09T23:30Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 15,
-            "shotsOnTarget": 4,
-            "corners": null,
-            "yellowCards": 1
-          },
-          {
-            "date": "2026-09-05T23:30Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 9,
-            "shotsOnTarget": 3,
-            "corners": null,
-            "yellowCards": 3
-          },
-          {
-            "date": "2026-08-29T23:30Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 13,
-            "shotsOnTarget": 5,
-            "corners": null,
-            "yellowCards": 1
-          },
-          {
-            "date": "2026-08-22T23:30Z",
-            "goalsScored": 0,
-            "goalsConceded": 0,
-            "shots": 11,
-            "shotsOnTarget": 5,
-            "corners": null,
-            "yellowCards": 2
-          }
-        ]
-      },
-      "matchState": "pre",
-      "homeScore": 0,
-      "awayScore": 0,
-      "pick": "D",
-      "pickProbability": 0.46676261239039174,
-      "confidence": 64,
-      "goalsOver25": false,
-      "goalsProbability": 0.0929746665333254,
-      "bttsYes": false,
-      "bttsProbability": 0.17955019788888266,
-      "correctScore": "0-0",
-      "correctScoreProbability": 0.35295589858451454,
-      "expectedHomeGoals": 0.5175578304562821,
-      "expectedAwayGoals": 0.5491655428115937,
-      "expectedGoals": 1.0667233732678758,
-      "expectedCorners": 2.6992709543693847,
-      "expectedBookings": 3.8410264686923115,
-      "cornerPredictions": [
-        {
-          "line": 8.5,
-          "over": false,
-          "probability": 0.9980898020629473
-        },
-        {
-          "line": 9.5,
-          "over": false,
-          "probability": 0.9994996647595769
-        },
-        {
-          "line": 10.5,
-          "over": false,
-          "probability": 0.9998802249022429
-        }
-      ],
-      "bookingPredictions": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.5348720593508957
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.6598617492088255
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.8094572918142555
-        }
-      ],
-      "automatic": true,
-      "savedAt": "2026-09-19T00:13:18.977Z",
-      "status": "incorrect",
-      "outcomeCorrect": false,
-      "goalsCorrect": false,
-      "bttsCorrect": false,
-      "finalScore": "1-2",
-      "correctScoreCorrect": false,
-      "gradedAt": "2026-09-20T06:07:10.123Z",
-      "marketStatsAttemptedAt": "2026-09-20T18:43:15.635Z",
-      "actualCorners": null,
-      "actualBookings": 4,
-      "bookingResults": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.5348720593508957,
-          "correct": true
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.6598617492088255,
-          "correct": true
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.8094572918142555,
-          "correct": true
-        }
-      ],
-      "marketGradedAt": "2026-09-20T18:43:15.709Z"
     }
   ]
 }
