@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-30T00:50:19.812Z",
+  "updatedAt": "2026-10-30T02:47:09.997Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,39 +14,39 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 485,
+    "completedMatches": 437,
     "marketSamples": {
       "corners": 0,
-      "bookings": 484
+      "bookings": 436
     },
     "calibration": {
-      "homeGoals": 1.1327158118875826,
-      "awayGoals": 1.1170952065200028,
+      "homeGoals": 1.1401625411469045,
+      "awayGoals": 1.15,
       "corners": 1,
-      "bookings": 0.941352867097668
+      "bookings": 0.9434013614716691
     },
     "lastTrainedAt": "2026-10-30T00:50:19.781Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 437,
+      "samples": 436,
       "correct": 195,
-      "accuracy": 0.4462242562929062
+      "accuracy": 0.44724770642201833
     },
     "goals": {
-      "samples": 437,
-      "correct": 242,
-      "accuracy": 0.5537757437070938
+      "samples": 436,
+      "correct": 241,
+      "accuracy": 0.5527522935779816
     },
     "btts": {
-      "samples": 437,
-      "correct": 242,
-      "accuracy": 0.5537757437070938
+      "samples": 436,
+      "correct": 241,
+      "accuracy": 0.5527522935779816
     },
     "correctScore": {
-      "samples": 437,
+      "samples": 436,
       "correct": 47,
-      "accuracy": 0.10755148741418764
+      "accuracy": 0.10779816513761468
     },
     "corners": {
       "samples": 0,
@@ -54,9 +54,9 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 1308,
-      "correct": 843,
-      "accuracy": 0.6444954128440367
+      "samples": 1305,
+      "correct": 840,
+      "accuracy": 0.6436781609195402
     }
   },
   "predictions": [
@@ -1786,6 +1786,78 @@
       ],
       "automatic": true,
       "savedAt": "2026-10-30T00:50:19.789Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "rsa.1:401902020",
+      "provider": "espn",
+      "trackingKey": "South Africa|Premier Division|AmaZulu|Golden Arrows|2026-10-31",
+      "eventId": "401902020",
+      "eventDate": "2026-10-31T16:00Z",
+      "slug": "rsa.1",
+      "country": "South Africa",
+      "league": "Premier Division",
+      "home": "AmaZulu",
+      "away": "Golden Arrows",
+      "homeId": "7079",
+      "awayId": "7077",
+      "homeForm": "DWWWL",
+      "awayForm": "DDDLW",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "A",
+      "pickProbability": 0.43023749483290696,
+      "confidence": 62,
+      "goalsOver25": true,
+      "goalsProbability": 0.5313698847222258,
+      "bttsYes": true,
+      "bttsProbability": 0.5738914831771552,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.12865857827089686,
+      "expectedHomeGoals": 1.2558310174516143,
+      "expectedAwayGoals": 1.5477086637396156,
+      "expectedGoals": 2.80353968119123,
+      "expectedCorners": 9.711192961868658,
+      "expectedBookings": 4.447348275315386,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6337416849625551
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5054576226651983
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6191215056250028
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.6487429647975688
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.5421256431505584
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7118974780245488
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-10-30T02:47:09.994Z",
       "status": "pending"
     },
     {
@@ -65326,108 +65398,6 @@
         }
       ],
       "marketGradedAt": "2026-10-12T18:57:35.671Z"
-    },
-    {
-      "sourceId": "ned.1:401875585",
-      "provider": "espn",
-      "trackingKey": "Netherlands|Eredivisie|Telstar|ADO Den Haag|2026-10-11",
-      "eventId": "401875585",
-      "eventDate": "2026-10-11T12:30Z",
-      "slug": "ned.1",
-      "country": "Netherlands",
-      "league": "Eredivisie",
-      "home": "Telstar",
-      "away": "ADO Den Haag",
-      "homeId": "3735",
-      "awayId": "2726",
-      "homeForm": "LDLDL",
-      "awayForm": "DLLDL",
-      "h2h": [],
-      "recentLeagueMatches": null,
-      "matchState": "pre",
-      "homeScore": 0,
-      "awayScore": 0,
-      "pick": "H",
-      "pickProbability": 0.4321575351134591,
-      "confidence": 62,
-      "goalsOver25": true,
-      "goalsProbability": 0.5695404060526172,
-      "bttsYes": true,
-      "bttsProbability": 0.60346981690385,
-      "correctScore": "1-1",
-      "correctScoreProbability": 0.12241030299144992,
-      "expectedHomeGoals": 1.6276440359244753,
-      "expectedAwayGoals": 1.3402020547949196,
-      "expectedGoals": 2.967846090719395,
-      "expectedCorners": 9.796162256287921,
-      "expectedBookings": 4.369923965650301,
-      "cornerPredictions": [
-        {
-          "line": 8.5,
-          "over": true,
-          "probability": 0.6437673579436708
-        },
-        {
-          "line": 9.5,
-          "over": true,
-          "probability": 0.5163227446203672
-        },
-        {
-          "line": 10.5,
-          "over": false,
-          "probability": 0.6085240664601284
-        }
-      ],
-      "bookingPredictions": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.6352847689191553
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.5569581782813255
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7249755907210509
-        }
-      ],
-      "automatic": true,
-      "savedAt": "2026-10-10T01:42:29.663Z",
-      "status": "incorrect",
-      "outcomeCorrect": false,
-      "goalsCorrect": true,
-      "bttsCorrect": true,
-      "finalScore": "2-2",
-      "correctScoreCorrect": false,
-      "gradedAt": "2026-10-11T18:00:51.509Z",
-      "marketStatsAttemptedAt": "2026-10-12T18:57:35.671Z",
-      "actualCorners": null,
-      "actualBookings": 4,
-      "bookingResults": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.6352847689191553,
-          "correct": true
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.5569581782813255,
-          "correct": true
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7249755907210509,
-          "correct": true
-        }
-      ],
-      "marketGradedAt": "2026-10-12T18:57:36.103Z"
     }
   ]
 }
