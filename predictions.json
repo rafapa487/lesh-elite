@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-01T22:44:38.614Z",
+  "updatedAt": "2026-11-01T23:30:51.336Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,29 +14,29 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 479,
+    "completedMatches": 480,
     "marketSamples": {
       "corners": 0,
-      "bookings": 479
+      "bookings": 480
     },
     "calibration": {
       "homeGoals": 1.15,
-      "awayGoals": 1.0997939575078994,
+      "awayGoals": 1.0989179552149344,
       "corners": 1,
-      "bookings": 0.9281610477296472
+      "bookings": 0.9301704210962711
     },
-    "lastTrainedAt": "2026-11-01T22:44:38.611Z"
+    "lastTrainedAt": "2026-11-01T23:30:51.331Z"
   },
   "evaluation": {
     "outcome": {
       "samples": 479,
-      "correct": 223,
-      "accuracy": 0.46555323590814196
+      "correct": 222,
+      "accuracy": 0.46346555323590816
     },
     "goals": {
       "samples": 479,
-      "correct": 262,
-      "accuracy": 0.5469728601252609
+      "correct": 261,
+      "accuracy": 0.5448851774530271
     },
     "btts": {
       "samples": 479,
@@ -45,8 +45,8 @@
     },
     "correctScore": {
       "samples": 479,
-      "correct": 48,
-      "accuracy": 0.10020876826722339
+      "correct": 49,
+      "accuracy": 0.1022964509394572
     },
     "corners": {
       "samples": 0,
@@ -55,8 +55,8 @@
     },
     "bookings": {
       "samples": 1437,
-      "correct": 940,
-      "accuracy": 0.6541405706332637
+      "correct": 939,
+      "accuracy": 0.6534446764091858
     }
   },
   "predictions": [
@@ -925,6 +925,78 @@
       "status": "pending"
     },
     {
+      "sourceId": "esp.2:401883144",
+      "provider": "espn",
+      "trackingKey": "Spain|Segunda Division|Tenerife|FC Andorra|2026-11-02",
+      "eventId": "401883144",
+      "eventDate": "2026-11-02T13:00Z",
+      "slug": "esp.2",
+      "country": "Spain",
+      "league": "Segunda Division",
+      "home": "Tenerife",
+      "away": "FC Andorra",
+      "homeId": "245",
+      "awayId": "20179",
+      "homeForm": "DDDLD",
+      "awayForm": "DLLWD",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "A",
+      "pickProbability": 0.42657734132743613,
+      "confidence": 62,
+      "goalsOver25": true,
+      "goalsProbability": 0.5300545072895366,
+      "bttsYes": true,
+      "bttsProbability": 0.5734468712245218,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.12903776235907874,
+      "expectedHomeGoals": 1.260545836579143,
+      "expectedAwayGoals": 1.537471735958098,
+      "expectedGoals": 2.7980175725372414,
+      "expectedCorners": 9.655466872863554,
+      "expectedBookings": 4.087076113902248,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6270841106091232
+        },
+        {
+          "line": 9.5,
+          "over": false,
+          "probability": 0.5017053983814047
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6260576821444451
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.5833539117636506
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.6118304674061336
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7713771501884665
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-11-01T23:30:51.333Z",
+      "status": "pending"
+    },
+    {
       "sourceId": "mex.1:401876911",
       "provider": "espn",
       "trackingKey": "Mexico|Liga MX|Cruz Azul|León|2026-11-02",
@@ -1426,7 +1498,37 @@
       ],
       "automatic": true,
       "savedAt": "2026-10-31T05:26:33.618Z",
-      "status": "pending"
+      "status": "incorrect",
+      "outcomeCorrect": false,
+      "goalsCorrect": false,
+      "bttsCorrect": true,
+      "finalScore": "1-1",
+      "correctScoreCorrect": true,
+      "gradedAt": "2026-11-01T23:30:51.156Z",
+      "marketStatsAttemptedAt": "2026-11-01T23:30:51.156Z",
+      "actualCorners": null,
+      "actualBookings": 8,
+      "bookingResults": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.6018984799288727,
+          "correct": true
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.5926551715578422,
+          "correct": false
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7555144219661118,
+          "correct": false
+        }
+      ],
+      "marketGradedAt": "2026-11-01T23:30:51.329Z"
     },
     {
       "sourceId": "arg.1:401841645",
@@ -67777,108 +67879,6 @@
         }
       ],
       "marketGradedAt": "2026-10-16T00:33:37.683Z"
-    },
-    {
-      "sourceId": "eng.2:401880221",
-      "provider": "espn",
-      "trackingKey": "England|Championship|Queens Park Rangers|Derby County|2026-10-14",
-      "eventId": "401880221",
-      "eventDate": "2026-10-14T18:45Z",
-      "slug": "eng.2",
-      "country": "England",
-      "league": "Championship",
-      "home": "Queens Park Rangers",
-      "away": "Derby County",
-      "homeId": "334",
-      "awayId": "374",
-      "homeForm": "DDDDL",
-      "awayForm": "DDLLL",
-      "h2h": [],
-      "recentLeagueMatches": null,
-      "matchState": "pre",
-      "homeScore": 0,
-      "awayScore": 0,
-      "pick": "H",
-      "pickProbability": 0.4611248857859755,
-      "confidence": 65,
-      "goalsOver25": true,
-      "goalsProbability": 0.5627091078144092,
-      "bttsYes": true,
-      "bttsProbability": 0.592866785716435,
-      "correctScore": "1-1",
-      "correctScoreProbability": 0.12222019240245806,
-      "expectedHomeGoals": 1.6762331880434598,
-      "expectedAwayGoals": 1.261607760431796,
-      "expectedGoals": 2.9378409484752557,
-      "expectedCorners": 9.926513151853083,
-      "expectedBookings": 4.476840998198421,
-      "cornerPredictions": [
-        {
-          "line": 8.5,
-          "over": true,
-          "probability": 0.6588452718223876
-        },
-        {
-          "line": 9.5,
-          "over": true,
-          "probability": 0.5328432303167245
-        },
-        {
-          "line": 10.5,
-          "over": false,
-          "probability": 0.5922328618999058
-        }
-      ],
-      "bookingPredictions": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.6537816379860572
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.536504913916175
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.70688144130852
-        }
-      ],
-      "automatic": true,
-      "savedAt": "2026-10-13T01:16:37.492Z",
-      "status": "correct",
-      "outcomeCorrect": true,
-      "goalsCorrect": true,
-      "bttsCorrect": true,
-      "finalScore": "4-1",
-      "correctScoreCorrect": false,
-      "gradedAt": "2026-10-14T22:14:21.432Z",
-      "marketStatsAttemptedAt": "2026-10-16T00:33:37.683Z",
-      "actualCorners": null,
-      "actualBookings": 5,
-      "bookingResults": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.6537816379860572,
-          "correct": true
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.536504913916175,
-          "correct": false
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.70688144130852,
-          "correct": true
-        }
-      ],
-      "marketGradedAt": "2026-10-16T00:33:37.768Z"
     }
   ]
 }
