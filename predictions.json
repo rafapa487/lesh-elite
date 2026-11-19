@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T03:15:27.360Z",
+  "updatedAt": "2026-11-19T07:33:12.179Z",
   "version": 2,
   "modelConfig": {
     "recentFormWeights": [
@@ -14,39 +14,39 @@
   },
   "training": {
     "strategy": "post-match shrinkage calibration",
-    "completedMatches": 499,
+    "completedMatches": 486,
     "marketSamples": {
       "corners": 0,
-      "bookings": 499
+      "bookings": 486
     },
     "calibration": {
-      "homeGoals": 1.1227380401954772,
-      "awayGoals": 1.0607570003532911,
+      "homeGoals": 1.1325325160056081,
+      "awayGoals": 1.0606278346130127,
       "corners": 1,
-      "bookings": 0.971272284352739
+      "bookings": 0.9699820494281596
     },
     "lastTrainedAt": "2026-11-19T03:15:27.357Z"
   },
   "evaluation": {
     "outcome": {
-      "samples": 486,
-      "correct": 237,
-      "accuracy": 0.4876543209876543
+      "samples": 485,
+      "correct": 236,
+      "accuracy": 0.4865979381443299
     },
     "goals": {
-      "samples": 486,
-      "correct": 269,
-      "accuracy": 0.5534979423868313
+      "samples": 485,
+      "correct": 268,
+      "accuracy": 0.5525773195876289
     },
     "btts": {
-      "samples": 486,
-      "correct": 252,
-      "accuracy": 0.5185185185185185
+      "samples": 485,
+      "correct": 251,
+      "accuracy": 0.5175257731958763
     },
     "correctScore": {
-      "samples": 486,
+      "samples": 485,
       "correct": 46,
-      "accuracy": 0.09465020576131687
+      "accuracy": 0.09484536082474226
     },
     "corners": {
       "samples": 0,
@@ -54,9 +54,9 @@
       "accuracy": null
     },
     "bookings": {
-      "samples": 1458,
-      "correct": 948,
-      "accuracy": 0.6502057613168725
+      "samples": 1455,
+      "correct": 946,
+      "accuracy": 0.650171821305842
     }
   },
   "predictions": [
@@ -202,6 +202,78 @@
       ],
       "automatic": true,
       "savedAt": "2026-11-19T03:15:27.358Z",
+      "status": "pending"
+    },
+    {
+      "sourceId": "mex.1:401877053",
+      "provider": "espn",
+      "trackingKey": "Mexico|Liga MX|FC Juárez|Atlas|2026-11-21",
+      "eventId": "401877053",
+      "eventDate": "2026-11-21T03:00Z",
+      "slug": "mex.1",
+      "country": "Mexico",
+      "league": "Liga MX",
+      "home": "FC Juárez",
+      "away": "Atlas",
+      "homeId": "17851",
+      "awayId": "216",
+      "homeForm": "WWDLL",
+      "awayForm": "LWWLW",
+      "h2h": [],
+      "recentLeagueMatches": null,
+      "matchState": "pre",
+      "homeScore": 0,
+      "awayScore": 0,
+      "pick": "H",
+      "pickProbability": 0.425407657573618,
+      "confidence": 62,
+      "goalsOver25": true,
+      "goalsProbability": 0.5764298274055828,
+      "bttsYes": true,
+      "bttsProbability": 0.609733251553994,
+      "correctScore": "1-1",
+      "correctScoreProbability": 0.12140965393380905,
+      "expectedHomeGoals": 1.6269122399717144,
+      "expectedAwayGoals": 1.3715152356004452,
+      "expectedGoals": 2.99842747557216,
+      "expectedCorners": 9.774737519070865,
+      "expectedBookings": 4.273062310909596,
+      "cornerPredictions": [
+        {
+          "line": 8.5,
+          "over": true,
+          "probability": 0.6412538859439536
+        },
+        {
+          "line": 9.5,
+          "over": true,
+          "probability": 0.5135899183142676
+        },
+        {
+          "line": 10.5,
+          "over": false,
+          "probability": 0.6111982591080664
+        }
+      ],
+      "bookingPredictions": [
+        {
+          "line": 3.5,
+          "over": true,
+          "probability": 0.6179830164889338
+        },
+        {
+          "line": 4.5,
+          "over": false,
+          "probability": 0.575649495358814
+        },
+        {
+          "line": 5.5,
+          "over": false,
+          "probability": 0.7411302530674875
+        }
+      ],
+      "automatic": true,
+      "savedAt": "2026-11-19T07:33:12.177Z",
       "status": "pending"
     },
     {
@@ -70096,108 +70168,6 @@
         }
       ],
       "marketGradedAt": "2026-10-21T23:14:02.887Z"
-    },
-    {
-      "sourceId": "ksa.1:401900448",
-      "provider": "espn",
-      "trackingKey": "Saudi Arabia|Saudi Pro League|Al Ettifaq|Al Ittihad|2026-10-20",
-      "eventId": "401900448",
-      "eventDate": "2026-10-20T18:00Z",
-      "slug": "ksa.1",
-      "country": "Saudi Arabia",
-      "league": "Saudi Pro League",
-      "home": "Al Ettifaq",
-      "away": "Al Ittihad",
-      "homeId": "8363",
-      "awayId": "2276",
-      "homeForm": "DDDDW",
-      "awayForm": "DLDWW",
-      "h2h": [],
-      "recentLeagueMatches": null,
-      "matchState": "pre",
-      "homeScore": 0,
-      "awayScore": 0,
-      "pick": "A",
-      "pickProbability": 0.5167184728134615,
-      "confidence": 70,
-      "goalsOver25": true,
-      "goalsProbability": 0.6171914084728022,
-      "bttsYes": true,
-      "bttsProbability": 0.6221432428524073,
-      "correctScore": "1-1",
-      "correctScoreProbability": 0.10958920694928438,
-      "expectedHomeGoals": 1.2681220155128545,
-      "expectedAwayGoals": 1.9183291581237063,
-      "expectedGoals": 3.186451173636561,
-      "expectedCorners": 9.873101043820585,
-      "expectedBookings": 4.29595491605495,
-      "cornerPredictions": [
-        {
-          "line": 8.5,
-          "over": true,
-          "probability": 0.65271190208444
-        },
-        {
-          "line": 9.5,
-          "over": true,
-          "probability": 0.5260966861557363
-        },
-        {
-          "line": 10.5,
-          "over": false,
-          "probability": 0.5989117958991889
-        }
-      ],
-      "bookingPredictions": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.6221183246835827
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.5712200679999605
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7373346717021665
-        }
-      ],
-      "automatic": true,
-      "savedAt": "2026-10-19T01:08:11.730Z",
-      "status": "correct",
-      "outcomeCorrect": true,
-      "goalsCorrect": true,
-      "bttsCorrect": true,
-      "finalScore": "1-4",
-      "correctScoreCorrect": false,
-      "gradedAt": "2026-10-20T20:15:58.395Z",
-      "marketStatsAttemptedAt": "2026-10-21T23:14:02.887Z",
-      "actualCorners": null,
-      "actualBookings": 3,
-      "bookingResults": [
-        {
-          "line": 3.5,
-          "over": true,
-          "probability": 0.6221183246835827,
-          "correct": false
-        },
-        {
-          "line": 4.5,
-          "over": false,
-          "probability": 0.5712200679999605,
-          "correct": true
-        },
-        {
-          "line": 5.5,
-          "over": false,
-          "probability": 0.7373346717021665,
-          "correct": true
-        }
-      ],
-      "marketGradedAt": "2026-10-21T23:14:02.988Z"
     }
   ]
 }
